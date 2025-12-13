@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BOSCH Products | Evora Electronics</title>
+<!-- Font Imports -->
+<link href="product.css" rel="stylesheet">
+<script src="js/cart.js" defer></script>
+<script src="js/navigation.js" defer></script>
+<script src="js/dollar-font.js" defer></script>
+<script src="js/app.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <style>
+      @media (min-width: 0px) and (max-width: 769px) {
+  .navbar{
+display: none !important;
+}
+       }
+
+/* --- Animated Search Bar Styles --- */
+/* Define the Angle Property for smooth rotation */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* The Animated RGB Border & Glow */
+.search-container::before,
+.search-container::after {
+  content: '';
+  position: absolute;
+  /* Negative inset controls border thickness */
+  inset: -4px;
+  border-radius: 50px;
+  z-index: -1;
+
+  /* YOUR SPECIFIC COLORS */
+  background: conic-gradient(
+    from var(--angle),
+    #ff2000,
+    #0099ff,
+    #00c11b,
+    #ffb600,
+    #ff2000
+  );
+
+  /* Start Hidden */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Special Blur for the Shadow (::after) */
+.search-container::after {
+  filter: blur(25px);
+  z-index: -2;
+}
+
+/* Animation Triggers (Hover AND Click/Focus) */
+/* When Hovering OR When Input is Focused (Clicked) */
+.search-container:hover::before,
+.search-container:hover::after,
+.search-container:focus-within::before,
+.search-container:focus-within::after {
+  opacity: 1;
+  animation: spin-clockwise 10s linear infinite;
+}
+
+/* The Input Field */
+.search-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: #ffffff; /* White Input */
+  border-radius: 50px;
+  padding: 0 72px 0 30px; /* Padding for text and icon */
+  font-size: 18px;
+  color: #000000;
+
+  /* Default Static Border (Teal) */
+  box-shadow: inset 0 0 0 2px #008080;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: #008080; /* Teal Placeholder */
+  opacity: 0.7;
+}
+
+/* Hide the static Teal border when the animated border is active */
+.search-container:hover .search-input,
+.search-container:focus-within .search-input {
+  box-shadow: inset 0 0 0 0 transparent;
+}
+
+/* Search Icon */
+.search-button {
+  position: absolute;
+  right: 0px;
+  width: 65px;
+  height: 65px;
+  pointer-events: auto;
+  background: #23bfda;
+  border: none;
+  padding: 0;
+}
+
+.search-button i {
+  fill: #008080; /* Teal Icon */
+  transition: color 0.3s ease;
+}
+
+/* Make icon black when typing */
+.search-container:focus-within .search-button i {
+  color: #000000;
+}
+
+/* The Animation Keyframes */
+@keyframes spin-clockwise {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+/* Override existing search-container styles */
+.search-container {
+  position: relative;
+  width: 400px;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  padding: 0; /* Remove existing padding */
+}
+
+.search-container form {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+@media (max-width: 480px) {
+  .search-container{
+    height: 44px !important;
+  }
+  .search-input{
+    padding: 12px !important;
+  }
+}
+    </style>
+<nav>
+  <div class="navbar-container">
+    <a href="index.html" aria-label="Navigate to home page">
+      <div class="navbar-logo">
+        <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo" style="width: 30px; height: auto;">
+        <span>
+          <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+          <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+        </span>
+      </div>
+    </a>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <form id="searchForm">
+        <input type="search" class="search-input" id="searchInput" placeholder="Search products..." aria-label="Search products">
+        <button type="submit" class="search-button" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="cart-icon-cont-0">
+        <div class="cart-link">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-count" id="cart-count">0</span>
+        </div>
+      </div>
+    <!-- Main navigation menu -->
+    <ul class="navbar">
+      <li>
+        <a href="BRANDS.HTML">Brands</a>
+      </li>
+      <li><a href="product2.html">Product</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+      <!-- Cart icon moved OUTSIDE the main navbar list -->
+      <div class="cart-icon-container">
+        <div class="cart-link">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-count">0</span>
+        </div>
+      </div>
+    </ul>
+  </div>
+</nav>
+
+  <!-- Cart Popup Overlay -->
+  <div class="cart-popup-overlay" id="cart-overlay"></div>
+
+  <!-- Cart Popup -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-cart-shopping me-2"></i> Your Shopping Cart <span id="cart-item-count">(0)</span></h3>
+      <button class="cart-close" id="cart-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <!-- Cart items will be populated here dynamically -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" disabled>
+          <span class="payment-icon"></span>Proceed to Checkout</button>
+      <button class="continue-btn" id="continue-btn"><i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Menu - with cart link added -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul style="padding-left: 0px;">
+    <li><a href="index.html">Home</a></li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="BRANDS.HTML" class="split-button-link1">
+        <div class="split-button-left">
+          <i class="fa-solid fa-building"></i>
+          Brands
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="Haier-productpage.html">Haier</a></li>
+        <li><a href="samsung-productpage.html">Samsung</a></li>
+        <li><a href="LG-productpage.html">LG</a></li>
+        <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+        <li><a href="BOSCH-productpage.html">Bosch</a></li>
+        <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+        <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+        <li><a href="Sony-productpage.html">Sony</a></li>
+        <li><a href="Apple-productpage.html">Apple</a></li>
+      </ul>
+    </li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="product2.html" class="split-button-link2">
+        <div class="split-button-left">
+          <i class="fa-solid fa-blender"></i>
+          Appliances
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="product2.html">Washers & Dryers</a></li>
+        <li><a href="product2.html">Refrigerators</a></li>
+        <li><a href="product2.html">Microwaves</a></li>
+        <li><a href="product2.html">Air Conditioners</a></li>
+        <li><a href="product2.html">Dishwashers</a></li>
+        <li><a href="product2.html">Cooktops & Ovens</a></li>
+        <li><a href="product2.html">Vacuum Cleaners</a></li>
+      </ul>
+    </li>
+    <li><a href="product2.html">Product</a></li>
+    <li><a href="compare.html">Compare</a></li>
+    <li><a href="Contact.html">Contact Us</a></li>
+    <!-- Added cart link to mobile menu -->
+    <li>
+      <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        <span class="cart-count" id="mobile-cart-count">0</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<!-- Products Section -->
+<section class="py-5">
+<div class="container">
+<h2 class=" mb-4 fw-bold" style="text-align: center;"><img src="assets/download__5_-removebg-preview.png" width="200px" alt="Bosch Logo"></h2>
+<div class="row g-4">
+
+<!-- Dishwashers -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-dishwasher-01.jpg" class="product-img" alt="Bosch 800 Series Dishwasher">
+<div class="product-title">Bosch 800 Series 24" Built-in Dishwasher with CrystalDry</div>
+<div class="product-desc">Premium dishwasher with CrystalDry technology, InfoLight, and ultra-quiet 38 dBA operation for perfect drying results.</div>
+<div class="product-price mt-2">$1,099.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="241" data-product-name="Bosch 800 Series 24\" Built-in Dishwasher with CrystalDry" data-product-price="1099.99" data-product-image="./assets/bosch-dishwasher-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-dishwasher-02.jpg" class="product-img" alt="Bosch 300 Series Dishwasher">
+<div class="product-title">Bosch 300 Series 24" Built-in Dishwasher with RackMatic</div>
+<div class="product-desc">300 Series dishwasher with RackMatic adjustable upper rack, 3rd rack, and quiet 44 dBA operation for versatile loading options.</div>
+<div class="product-price mt-2">$799.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="242" data-product-name="Bosch 300 Series 24\" Built-in Dishwasher with RackMatic" data-product-price="799.99" data-product-image="./assets/bosch-dishwasher-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-dishwasher-03.jpg" class="product-img" alt="Bosch Benchmark Dishwasher">
+<div class="product-title">Bosch Benchmark 24" Built-in Dishwasher with MyWay 3rd Rack</div>
+<div class="product-desc">Benchmark series with MyWay 3rd rack, Speed60 wash cycle, and advanced filtration system for professional-grade cleaning.</div>
+<div class="product-price mt-2">$1,299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="243" data-product-name="Bosch Benchmark 24\" Built-in Dishwasher with MyWay 3rd Rack" data-product-price="1299.99" data-product-image="./assets/bosch-dishwasher-03.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-dishwasher-04.jpg" class="product-img" alt="Bosch Ascenta Dishwasher">
+<div class="product-title">Bosch Ascenta 24" Built-in Dishwasher with 6 Programs</div>
+<div class="product-desc">Ascenta series with 6 wash programs, sanitize option, and extra quiet 46 dBA operation for budget-conscious homeowners.</div>
+<div class="product-price mt-2">$599.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="244" data-product-name="Bosch Ascenta 24\" Built-in Dishwasher with 6 Programs" data-product-price="599.99" data-product-image="./assets/bosch-dishwasher-04.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Refrigerators -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-refrigerator-01.jpg" class="product-img" alt="BOSCH Refrigerator">
+<div class="product-title">BOSCH B36CL80SNS 36" Counter Depth French Door Refrigerator</div>
+<div class="product-desc">20.5 cu. ft. capacity with Home Connect smart features and dual freezer drawers</div>
+<div class="product-price mt-2">$3,899.00</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="106" data-product-name="BOSCH B36CL80SNS 36\" Counter Depth French Door Refrigerator" data-product-price="3899.00" data-product-image="./assets/bosch-refrigerator-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-refrigerator-02.jpg" class="product-img" alt="BOSCH Refrigerator">
+<div class="product-title">BOSCH B36CL80ENS 36" Counter Depth French Door Refrigerator</div>
+<div class="product-desc">20.5 cu. ft. capacity with black stainless steel finish and VitaFresh Pro system</div>
+<div class="product-price mt-2">$4,199.00</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="107" data-product-name="BOSCH B36CL80ENS 36\" Counter Depth French Door Refrigerator" data-product-price="4199.00" data-product-image="./assets/bosch-refrigerator-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-refrigerator-03.jpg" class="product-img" alt="BOSCH Refrigerator">
+<div class="product-title">BOSCH B33CL80SNS 33" Counter Depth French Door Refrigerator</div>
+<div class="product-desc">17.8 cu. ft. capacity with MultiAirFlow technology and QuickIce Pro system</div>
+<div class="product-price mt-2">$3,499.00</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="108" data-product-name="BOSCH B33CL80SNS 33\" Counter Depth French Door Refrigerator" data-product-price="3499.00" data-product-image="./assets/bosch-refrigerator-03.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-refrigerator-04.jpg" class="product-img" alt="BOSCH Refrigerator">
+<div class="product-title">BOSCH B11CB50SNS 36" Bottom Freezer Refrigerator</div>
+<div class="product-desc">22.4 cu. ft. capacity with dual compressors and FreshSafe Zone drawer</div>
+<div class="product-price mt-2">$3,299.00</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="109" data-product-name="BOSCH B11CB50SNS 36\" Bottom Freezer Refrigerator" data-product-price="3299.00" data-product-image="./assets/bosch-refrigerator-04.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Ranges & Cooktops -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-range-01.jpg" class="product-img" alt="Bosch 800 Series Gas Range">
+<div class="product-title">Bosch 800 Series 30" Freestanding Gas Range with FlexInduction</div>
+<div class="product-desc">30-inch gas range with 5 burners including PowerBurner, FlexInduction cooktop, and convection oven for ultimate cooking flexibility.</div>
+<div class="product-price mt-2">$2,199.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="249" data-product-name="Bosch 800 Series 30\" Freestanding Gas Range with FlexInduction" data-product-price="2199.99" data-product-image="./assets/bosch-range-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-range-02.jpg" class="product-img" alt="Bosch 500 Series Electric Range">
+<div class="product-title">Bosch 500 Series 30" Freestanding Electric Range with True Convection</div>
+<div class="product-desc">30-inch electric range with True Convection cooking, SpeedClean oven, and 5 heating elements for precise temperature control.</div>
+<div class="product-price mt-2">$1,899.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="250" data-product-name="Bosch 500 Series 30\" Freestanding Electric Range with True Convection" data-product-price="1899.99" data-product-image="./assets/bosch-range-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-cooktop-01.jpg" class="product-img" alt="Bosch Induction Cooktop">
+<div class="product-title">Bosch 36" Built-in Induction Cooktop with FlexInduction Zone</div>
+<div class="product-desc">36-inch induction cooktop with FlexInduction zone, PowerMove Plus feature, and AutoChef sensors for precise cooking control.</div>
+<div class="product-price mt-2">$2,599.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="251" data-product-name="Bosch 36\" Built-in Induction Cooktop with FlexInduction Zone" data-product-price="2599.99" data-product-image="./assets/bosch-cooktop-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-cooktop-02.jpg" class="product-img" alt="Bosch Gas Cooktop">
+<div class="product-title">Bosch 30" Built-in Gas Cooktop with 5 Burners and Grates</div>
+<div class="product-desc">30-inch gas cooktop with 5 burners including PowerBurner, cast iron grates, and seamless stainless steel design.</div>
+<div class="product-price mt-2">$1,499.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="252" data-product-name="Bosch 30\" Built-in Gas Cooktop with 5 Burners and Grates" data-product-price="1499.99" data-product-image="./assets/bosch-cooktop-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Ovens & Microwaves -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-oven-01.jpg" class="product-img" alt="Bosch Wall Oven">
+<div class="product-title">Bosch 800 Series 30" Single Electric Wall Oven with True Convection</div>
+<div class="product-desc">30-inch electric wall oven with True Convection heating, SpeedClean technology, and Home Connect smart features.</div>
+<div class="product-price mt-2">$2,299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="253" data-product-name="Bosch 800 Series 30\" Single Electric Wall Oven with True Convection" data-product-price="2299.99" data-product-image="./assets/bosch-oven-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-microwave-01.jpg" class="product-img" alt="Bosch Microwave">
+<div class="product-title">Bosch 30" Built-in Microwave and Convection Oven Combination</div>
+<div class="product-desc">30-inch combination microwave and convection oven with SensorCook technology, 5 cooking modes, and stainless steel finish.</div>
+<div class="product-price mt-2">$1,599.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="254" data-product-name="Bosch 30\" Built-in Microwave and Convection Oven Combination" data-product-price="1599.99" data-product-image="./assets/bosch-microwave-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-oven-02.jpg" class="product-img" alt="Bosch Double Wall Oven">
+<div class="product-title">Bosch 800 Series 30" Double Electric Wall Oven with FlexInduction</div>
+<div class="product-desc">30-inch double wall oven with FlexInduction cooktop, True Convection in both ovens, and premium stainless steel construction.</div>
+<div class="product-price mt-2">$4,999.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="255" data-product-name="Bosch 800 Series 30\" Double Electric Wall Oven with FlexInduction" data-product-price="4999.99" data-product-image="./assets/bosch-oven-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-microwave-02.jpg" class="product-img" alt="Bosch Speed Oven">
+<div class="product-title">Bosch 30" Built-in Speed Oven with Microwave and Convection</div>
+<div class="product-desc">30-inch speed oven combining microwave, convection, and steam cooking for fast, versatile meal preparation with precision.</div>
+<div class="product-price mt-2">$2,499.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="256" data-product-name="Bosch 30\" Built-in Speed Oven with Microwave and Convection" data-product-price="2499.99" data-product-image="./assets/bosch-microwave-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Laundry Appliances -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-washer-01.jpg" class="product-img" alt="Bosch Front Load Washer">
+<div class="product-title">Bosch 300 Series 2.2 cu. ft. Front Load Washer with VarioDrum</div>
+<div class="product-desc">2.2 cu. ft. front load washer with VarioDrum technology, 16 wash programs, and ultra-quiet operation with ActiveWater Plus.</div>
+<div class="product-price mt-2">$999.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="257" data-product-name="Bosch 300 Series 2.2 cu. ft. Front Load Washer with VarioDrum" data-product-price="999.99" data-product-image="./assets/bosch-washer-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-dryer-01.jpg" class="product-img" alt="Bosch Electric Dryer">
+<div class="product-title">Bosch 300 Series 4.0 cu. ft. Electric Dryer with AutoDry</div>
+<div class="product-desc">4.0 cu. ft. electric dryer with AutoDry sensor technology, 15 drying programs, and anti-vibration design for quiet operation.</div>
+<div class="product-price mt-2">$899.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="258" data-product-name="Bosch 300 Series 4.0 cu. ft. Electric Dryer with AutoDry" data-product-price="899.99" data-product-image="./assets/bosch-dryer-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-washer-02.jpg" class="product-img" alt="Bosch 800 Series Washer">
+<div class="product-title">Bosch 800 Series 2.2 cu. ft. Front Load Washer with i-DOS AutoDosing</div>
+<div class="product-desc">Premium front load washer with i-DOS automatic detergent dispensing, SpeedPerfect technology, and Home Connect smart features.</div>
+<div class="product-price mt-2">$1,499.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="259" data-product-name="Bosch 800 Series 2.2 cu. ft. Front Load Washer with i-DOS AutoDosing" data-product-price="1499.99" data-product-image="./assets/bosch-washer-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-dryer-02.jpg" class="product-img" alt="Bosch 800 Series Dryer">
+<div class="product-title">Bosch 800 Series 4.0 cu. ft. Heat Pump Dryer with AutoDry Sensor</div>
+<div class="product-desc">Energy-efficient heat pump dryer with AutoDry sensor technology, EcoSilence Drive motor, and anti-wrinkle care for gentle drying.</div>
+<div class="product-price mt-2">$1,399.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="260" data-product-name="Bosch 800 Series 4.0 cu. ft. Heat Pump Dryer with AutoDry Sensor" data-product-price="1399.99" data-product-image="./assets/bosch-dryer-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Ventilation & Range Hoods -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-range-hood-01.jpg" class="product-img" alt="Bosch Chimney Range Hood">
+<div class="product-title">Bosch 36" Chimney Wall-Mount Range Hood with 600 CFM</div>
+<div class="product-desc">36-inch wall-mounted range hood with 600 CFM power, 4-speed settings, LED lighting, and dishwasher-safe stainless steel filters.</div>
+<div class="product-price mt-2">$899.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="261" data-product-name="Bosch 36\" Chimney Wall-Mount Range Hood with 600 CFM" data-product-price="899.99" data-product-image="./assets/bosch-range-hood-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-range-hood-02.jpg" class="product-img" alt="Bosch Under Cabinet Range Hood">
+<div class="product-title">Bosch 30" Under Cabinet Range Hood with 400 CFM</div>
+<div class="product-desc">30-inch under cabinet range hood with 400 CFM ventilation power, 3-speed settings, and sleek stainless steel design.</div>
+<div class="product-price mt-2">$599.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="262" data-product-name="Bosch 30\" Under Cabinet Range Hood with 400 CFM" data-product-price="599.99" data-product-image="./assets/bosch-range-hood-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-range-hood-03.jpg" class="product-img" alt="Bosch Downdraft Ventilation">
+<div class="product-title">Bosch 36" Downdraft Ventilation System for Cooktops</div>
+<div class="product-desc">36-inch downdraft ventilation system that rises from countertop when needed, with 600 CFM power and quiet operation for island cooktops.</div>
+<div class="product-price mt-2">$1,299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="263" data-product-name="Bosch 36\" Downdraft Ventilation System for Cooktops" data-product-price="1299.99" data-product-image="./assets/bosch-range-hood-03.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-range-hood-04.jpg" class="product-img" alt="Bosch Island Range Hood">
+<div class="product-title">Bosch 42" Island-Mount Range Hood with 900 CFM</div>
+<div class="product-desc">42-inch island-mounted range hood with 900 CFM powerful ventilation, dual LED lighting, and premium stainless steel construction.</div>
+<div class="product-price mt-2">$1,799.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="264" data-product-name="Bosch 42\" Island-Mount Range Hood with 900 CFM" data-product-price="1799.99" data-product-image="./assets/bosch-range-hood-04.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Small Appliances -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-coffee-maker.jpg" class="product-img" alt="Bosch Coffee Maker">
+<div class="product-title">Bosch Tassimo My Way 2 Coffee Maker with 10 Brew Sizes</div>
+<div class="product-desc">Premium coffee maker with 10 brew sizes, OneTouch technology, and integrated milk frother for barista-quality coffee at home.</div>
+<div class="product-price mt-2">$199.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="265" data-product-name="Bosch Tassimo My Way 2 Coffee Maker with 10 Brew Sizes" data-product-price="199.99" data-product-image="./assets/bosch-coffee-maker.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-mixer.jpg" class="product-img" alt="Bosch Universal Mixer">
+<div class="product-title">Bosch Universal Plus 6-Speed Stand Mixer with 6.5-Quart Bowl</div>
+<div class="product-desc">6.5-quart stand mixer with 6 speeds, powerful 800-watt motor, and multiple attachments for baking and food preparation.</div>
+<div class="product-price mt-2">$399.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="266" data-product-name="Bosch Universal Plus 6-Speed Stand Mixer with 6.5-Quart Bowl" data-product-price="399.99" data-product-image="./assets/bosch-mixer.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-vacuum.jpg" class="product-img" alt="Bosch Vacuum Cleaner">
+<div class="product-title">Bosch BCH6ATH25 2-in-1 Cordless Stick Vacuum Cleaner</div>
+<div class="product-desc">Cordless stick vacuum with 2-in-1 functionality, 60-minute runtime, HEPA filtration system, and wall-mountable charging station.</div>
+<div class="product-price mt-2">$299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="267" data-product-name="Bosch BCH6ATH25 2-in-1 Cordless Stick Vacuum Cleaner" data-product-price="299.99" data-product-image="./assets/bosch-vacuum.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-blender.jpg" class="product-img" alt="Bosch Blender">
+<div class="product-title">Bosch MSM67160 1000W Hand Blender with Variable Speed Control</div>
+<div class="product-desc">1000W hand blender with variable speed control, stainless steel blades, and multiple attachments for blending, chopping, and whisking.</div>
+<div class="product-price mt-2">$129.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="268" data-product-name="Bosch MSM67160 1000W Hand Blender with Variable Speed Control" data-product-price="129.99" data-product-image="./assets/bosch-blender.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-toaster.jpg" class="product-img" alt="Bosch Toaster">
+<div class="product-title">Bosch TKA6A044 2-Slice Toaster with 6 Browning Settings</div>
+<div class="product-desc">2-slice toaster with 6 browning settings, defrost function, cancel button, and removable crumb tray for easy cleaning.</div>
+<div class="product-price mt-2">$79.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="269" data-product-name="Bosch TKA6A044 2-Slice Toaster with 6 Browning Settings" data-product-price="79.99" data-product-image="./assets/bosch-toaster.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Built-in Coffee Systems -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-coffee-system.jpg" class="product-img" alt="Bosch Built-in Coffee System">
+<div class="product-title">Bosch 800 Series Built-in Coffee System with Milk Frother</div>
+<div class="product-desc">Premium built-in coffee system with automatic milk frother, 10 coffee specialties, bean-to-cup functionality, and touchscreen interface.</div>
+<div class="product-price mt-2">$3,499.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="270" data-product-name="Bosch 800 Series Built-in Coffee System with Milk Frother" data-product-price="3499.99" data-product-image="./assets/bosch-coffee-system.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/bosch-mini-coffee.jpg" class="product-img" alt="Bosch Mini Coffee System">
+<div class="product-title">Bosch 500 Series Compact Built-in Coffee System</div>
+<div class="product-desc">Space-saving built-in coffee system with 5 coffee specialties, automatic cleaning program, and integrated grinder for fresh coffee beans.</div>
+<div class="product-price mt-2">$1,999.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="271" data-product-name="Bosch 500 Series Compact Built-in Coffee System" data-product-price="1999.99" data-product-image="./assets/bosch-coffee-system-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+ <!-- Toast Container -->
+<div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+<footer class="site-footer">
+<div class="footer-container">
+<!-- Brand Section -->
+<div class="footer-section">
+   <div class="footer-logo"><a href="index.html"><img src="assets/EVORA-LOGO.png" alt="Evora Electronics Logo" class="footer-logo-img" width="125px"></a></div>
+<p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+<div class="social-icons">
+<a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
+<a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
+<a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
+<a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+</div>
+</div>
+
+<!-- Quick Links -->
+<div class="footer-section">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="terms and services.html">Terms & Services</a></li>
+<li><a href="privacy policy.html">Privacy Policy</a></li>
+<li><a href="Contact.html">Contact</a></li>
+<li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+<li><a href="About us .html">About Us</a></li>
+</ul>
+</div>
+
+<!-- Categories -->
+<div class="footer-section">
+          <h4>Appliance Types</h4>
+          <ul>
+            <li><a href="product2.html">Washers & Dryers</a></li>
+            <li><a href="product2.html">Refrigerators</a></li>
+            <li><a href="product2.html">Microwaves</a></li>
+            <li><a href="product2.html">Air Conditioners</a></li>
+            <li><a href="product2.html">Dishwashers</a></li>
+          </ul>
+        </div>
+
+<!-- Contact Info -->
+<div class="footer-section">
+  <h4>Contact Us</h4>
+  <ul>
+    <li>
+  <a><address>
+    <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+      <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+      <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@evora.com">info@evora.com</a>
+</address></a></li></ul>
+</div>
+</div>
+
+<div class="footer-bottom">
+<p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+<div class="footer-legal">
+<a href="privacy policy.html">Privacy Policy</a> •
+<a href="terms and services.html">Terms of Service</a> •
+</div>
+</div>
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = document.getElementById('searchForm');
+
+    // Prevent form submit
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+    });
+
+    // Real-time filtering
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const productCards = document.querySelectorAll('.col-md-3');
+
+      productCards.forEach(card => {
+        const title = card.querySelector('.product-title').textContent.toLowerCase();
+        const desc = card.querySelector('.product-desc').textContent.toLowerCase();
+
+        if (title.includes(query) || desc.includes(query)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

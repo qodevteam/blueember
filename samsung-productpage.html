@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LG Products | Evora Electronics</title>
+<!-- Font Imports -->
+<link href="product.css" rel="stylesheet">
+<script src="js/cart.js" defer></script>
+<script src="js/navigation.js" defer></script>
+<script src="js/dollar-font.js" defer></script>
+<script src="js/app.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<style>
+  @media (min-width: 0px) and (max-width: 769px) {
+  .navbar{
+display: none !important;
+}
+       }
+
+/* --- Animated Search Bar Styles --- */
+/* Define the Angle Property for smooth rotation */
+@property --angle {
+syntax: '<angle>';
+initial-value: 0deg;
+inherits: false;
+}
+
+/* The Animated RGB Border & Glow */
+.search-container::before,
+.search-container::after {
+content: '';
+position: absolute;
+/* Negative inset controls border thickness */
+inset: -4px;
+border-radius: 50px;
+z-index: -1;
+
+/* YOUR SPECIFIC COLORS */
+background: conic-gradient(
+from var(--angle),
+#ff2000,
+#0099ff,
+#00c11b,
+#ffb600,
+#ff2000
+);
+
+/* Start Hidden */
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+/* Special Blur for the Shadow (::after) */
+.search-container::after {
+filter: blur(25px);
+z-index: -2;
+}
+
+/* Animation Triggers (Hover AND Click/Focus) */
+/* When Hovering OR When Input is Focused (Clicked) */
+.search-container:hover::before,
+.search-container:hover::after,
+.search-container:focus-within::before,
+.search-container:focus-within::after {
+opacity: 1;
+animation: spin-clockwise 10s linear infinite;
+}
+
+/* The Input Field */
+.search-input {
+width: 100%;
+height: 100%;
+border: none;
+outline: none;
+background: #ffffff; /* White Input */
+border-radius: 50px;
+padding: 0 72px 0 30px; /* Padding for text and icon */
+font-size: 18px;
+color: #000000;
+
+/* Default Static Border (Teal) */
+box-shadow: inset 0 0 0 2px #008080;
+transition: box-shadow 0.3s ease;
+}
+
+.search-input::placeholder {
+color: #008080; /* Teal Placeholder */
+opacity: 0.7;
+}
+
+/* Hide the static Teal border when the animated border is active */
+.search-container:hover .search-input,
+.search-container:focus-within .search-input {
+box-shadow: inset 0 0 0 0 transparent;
+}
+
+/* Search Icon */
+.search-button {
+position: absolute;
+right: 0px;
+width: 65px;
+height: 65px;
+pointer-events: auto;
+background: #23bfda;
+border: none;
+padding: 0;
+}
+
+.search-button i {
+fill: #008080; /* Teal Icon */
+transition: color 0.3s ease;
+}
+
+/* Make icon black when typing */
+.search-container:focus-within .search-button i {
+color: #000000;
+}
+
+/* The Animation Keyframes */
+@keyframes spin-clockwise {
+0% {
+--angle: 0deg;
+}
+100% {
+--angle: 360deg;
+}
+}
+
+/* Override existing search-container styles */
+.search-container {
+position: relative;
+width: 400px;
+height: 50px;
+border-radius: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1;
+padding: 0; /* Remove existing padding */
+}
+
+.search-container form {
+width: 100%;
+height: 100%;
+position: relative;
+}
+
+@media (max-width: 480px) {
+.search-container{
+height: 44px !important;
+}
+.search-input{
+padding: 12px !important;
+}
+}
+</style>
+<body>
+  <nav>
+    <div class="navbar-container">
+      <a href="index.html" aria-label="Navigate to home page">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo" style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <form id="searchForm">
+          <input type="search" class="search-input" id="searchInput" placeholder="Search products..." aria-label="Search products">
+          <button type="submit" class="search-button" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <div class="cart-icon-cont-0">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+          </div>
+        </div>
+      <!-- Main navigation menu -->
+      <ul class="navbar">
+        <li>
+          <a href="BRANDS.HTML">Brands</a>
+        </li>
+        <li><a href="product2.html">Product</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <!-- Cart icon moved OUTSIDE the main navbar list -->
+        <div class="cart-icon-container">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cart Popup Overlay -->
+  <div class="cart-popup-overlay" id="cart-overlay"></div>
+
+  <!-- Cart Popup -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-cart-shopping me-2"></i> Your Shopping Cart <span id="cart-item-count">(0)</span></h3>
+      <button class="cart-close" id="cart-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <!-- Cart items will be populated here dynamically -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" disabled>
+          <span class="payment-icon"></span>Proceed to Checkout</button>
+      <button class="continue-btn" id="continue-btn"><i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Menu - with cart link added -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul style="padding-left: 0px;">
+    <li><a href="index.html">Home</a></li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="BRANDS.HTML" class="split-button-link1">
+        <div class="split-button-left">
+          <i class="fa-solid fa-building"></i>
+          Brands
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="Haier-productpage.html">Haier</a></li>
+        <li><a href="samsung-productpage.html">Samsung</a></li>
+        <li><a href="LG-productpage.html">LG</a></li>
+        <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+        <li><a href="BOSCH-productpage.html">Bosch</a></li>
+        <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+        <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+        <li><a href="Sony-productpage.html">Sony</a></li>
+        <li><a href="Apple-productpage.html">Apple</a></li>
+      </ul>
+    </li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="product2.html" class="split-button-link2">
+        <div class="split-button-left">
+          <i class="fa-solid fa-blender"></i>
+          Appliances
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="product2.html">Washers & Dryers</a></li>
+        <li><a href="product2.html">Refrigerators</a></li>
+        <li><a href="product2.html">Microwaves</a></li>
+        <li><a href="product2.html">Air Conditioners</a></li>
+        <li><a href="product2.html">Dishwashers</a></li>
+        <li><a href="product2.html">Cooktops & Ovens</a></li>
+        <li><a href="product2.html">Vacuum Cleaners</a></li>
+      </ul>
+    </li>
+    <li><a href="product2.html">Product</a></li>
+    <li><a href="compare.html">Compare</a></li>
+    <li><a href="Contact.html">Contact Us</a></li>
+    <!-- Added cart link to mobile menu -->
+    <li>
+      <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        <span class="cart-count" id="mobile-cart-count">0</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+    <!-- Products Section -->
+    <section class="py-5">
+        <div class="container">
+            <!-- <h2 class="text-center mb-4 fw-bold">Top Electronics for You!</h2> -->
+            <div class="row g-4">
+                
+
+<h2 class=" mb-4 fw-bold" style="text-align: center;"><img src="assets/download__1_-removebg-preview.png"></h2>
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-refrigerator-01.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">RT6300C Top Mount Freezer with Optimal Fresh+, 411L</div>
+                        <div class="product-desc">411L top mount freezer refrigerator with Optimal Fresh+ technology.</div>
+                        <div class="product-price mt-2">$1099.99</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="9" data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99" data-product-image="./assets/samsung-refrigerator-01.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-refrigerator-02.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">RS50N3913BC/EU with Home Bar and All-around Cooling, 501L</div>
+                        <div class="product-desc">Home Bar access and All-around Cooling technology.</div>
+                        <div class="product-price mt-2">$1079.99</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="10" data-product-name="RS50N3913BC/EU with Home Bar and All-around Cooling, 501L" data-product-price="1099.99" data-product-image="./assets/samsung-refrigerator-02.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-refrigerator-03.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">635L SBS No-Frost Refrigerator with Water Dispenser</div>
+                        <div class="product-desc">Side-by-Side No-Frost Refrigerator with Water Dispenser.</div>
+                        <div class="product-price mt-2">$1799.99</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="11" data-product-name="635L SBS No-Frost Refrigerator with Water Dispenser" data-product-price="1799.99" data-product-image="./assets/samsung-refrigerator-03.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-refrigerator-04.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">655L SBS No-Frost Refrigerator with All-around Cooling</div>
+                        <div class="product-desc">Side-by-Side No-Frost Refrigerator with All-around Cooling.</div>
+                        <div class="product-price mt-2">$1687.60</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="12" data-product-name="655L SBS No-Frost Refrigerator with All-around Cooling" data-product-price="1687.60" data-product-image="./assets/samsung-refrigerator-04.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-AC-01.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">AR9500T Wall-mount AC with Fast Cooling</div>
+                        <div class="product-desc">Wall-mount air conditioner with Fast Cooling technology.</div>
+                        <div class="product-price mt-2">$869.99</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="13" data-product-name="AR9500T Wall-mount AC with Fast Cooling" data-product-price="869.99" data-product-image="./assets/samsung-AC-01.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-AC-02.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">18,000 BTU - Wall-mount AC with DIT, Wind-Free™ , T3 Climate Class</div>
+                        <div class="product-desc">Wall-mount AC with Digital Inverter Technology, Wind-Free™ Cooling, and T3 Climate Class.</div>
+                        <div class="product-price mt-2">$819.99</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="14" data-product-name="18,000 BTU - Wall-mount AC with DIT, Wind-Free™ , T3 Climate Class" data-product-price="819.99" data-product-image="./assets/samsung-AC-02.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-AC-03.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">24,000 BTU - Wall-mount AC with DIT , T3 Climate Class</div>
+                        <div class="product-desc">2-ton inverter AC with Digital Inverter Technology for efficient cooling in high-temperature climates up to 45m².</div>
+                        <div class="product-price mt-2">$1238.28</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="15" data-product-name="24,000 BTU - Wall-mount AC with DIT , T3 Climate Class" data-product-price="1238.28" data-product-image="./assets/samsung-AC-03.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-AC-04.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">12,000 BTU - Wall-mount AC with DIT , T3 Climate Class</div>
+                        <div class="product-desc">12,000 BTU wall-mount AC with Digital Inverter Technology and T3 Climate Class for high-temperature environments.</div>
+                        <div class="product-price mt-2">$742.97</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="16" data-product-name="24,000 BTU - Wall-mount AC with DIT , T3 Climate Class" data-product-price="601.45" data-product-image="./assets/samsung-AC-04.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-laundry-04.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">WA80CK4240BWRT with DIT, 8 Kg</div>
+                        <div class="product-desc">8 kg top-load washing machine with Digital Inverter Technology and Eco Bubble™.</div>
+                        <div class="product-price mt-2">$389.17</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="17" data-product-name="WA80CK4240BWRT with DIT, 8 Kg" data-product-price="389.17" data-product-image="./assets/samsung-washing-machine-01.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-laundry-01.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">WW70T4020EE/NQ with Eco Bubble and Hygiene Steam, 7 Kg</div>
+                        <div class="product-desc">7 Kg washing machine with Eco Bubble and Hygiene Steam.</div>
+                        <div class="product-price mt-2">$689.90</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="18" data-product-name="WW70T4020EE/NQ with Eco Bubble and Hygiene Steam, 7 Kg" data-product-price="689.90" data-product-image="./assets/samsung-laundry-01.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-laundry-02.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">WD70TA046BX/FA with Eco Bubble™ and AirWash, 7+5 Kg</div>
+                        <div class="product-desc">7+5 Kg washer-dryer with Eco Bubble™ and AirWash technology.</div>
+                        <div class="product-price mt-2">$1171.06</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="19" data-product-name="WD70TA046BX/FA with Eco Bubble™ and AirWash, 7+5 Kg" data-product-price="1171.06" data-product-image="./assets/samsung-laundry-02.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <div class="product-card text-center p-3">
+                        <img src="assets/samsung-laundry-03.jpg" class="product-img" alt="Espresso Machine">
+                        <div class="product-title">WA17CK6745BDRT with Ecobubble™, 17 Kg</div>
+                        <div class="product-desc">17 Kg washing machine with Ecobubble™ technology.</div>
+                        <div class="product-price mt-2">$742.97</div>
+                        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="20" data-product-name="WA17CK6745BDRT with Ecobubble™, 17 Kg" data-product-price="742.97" data-product-image="./assets/samsung-laundry-03.jpg">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+
+
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-refrigerator-05.jpg" class="product-img" alt="Samsung RF28T5001SR">
+        <div class="product-title">RF28T5001SR 28 cu. ft. French Door Refrigerator with All-Around Cooling</div>
+        <div class="product-desc">28.2 cu. ft. capacity with adjustable tempered glass shelves, internal ice maker, and Sabbath mode.</div>
+        <div class="product-price mt-2">$1,400.00</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="67" data-product-name="RF28T5001SR 28 cu. ft. French Door Refrigerator with All-Around Cooling" data-product-price="1400.00" data-product-image="./assets/samsung-refrigerator-05.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-washing-machine-01.jpg" class="product-img" alt="Samsung WW9800T">
+        <div class="product-title">WW9800T 9kg AI Washing Machine with QuickDrive™ and Eco Bubble™</div>
+        <div class="product-desc">9kg capacity with AI Control, QuickDrive™ technology reducing wash time by up to 50%, and energy usage by 20%.</div>
+        <div class="product-price mt-2">$999.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="68" data-product-name="WW9800T 9kg AI Washing Machine with QuickDrive™ and Eco Bubble™" data-product-price="999.99" data-product-image="./assets/samsung-washing-machine-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-dryer-01.jpg" class="product-img" alt="Samsung DV90T8440">
+        <div class="product-title">DV90T8440 9kg Heat Pump Smart Dryer with AI Personalised Dry</div>
+        <div class="product-desc">9kg heat pump dryer with 9-star energy rating, AI Personalised Dry, and 35-mins Quick Dry cycle.</div>
+        <div class="product-price mt-2">$1,299.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="69" data-product-name="DV90T8440 9kg Heat Pump Smart Dryer with AI Personalised Dry" data-product-price="1299.99" data-product-image="./assets/samsung-dryer-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-dishwasher-01.jpg" class="product-img" alt="Samsung DW80R9950UG">
+        <div class="product-title">DW80R9950UG 24 Inch Built-in Smart Dishwasher with AquaBlast™</div>
+        <div class="product-desc">15 place settings with AquaBlast™ jets, Zone Booster™, and ultra-quiet 39 dBA operation.</div>
+        <div class="product-price mt-2">$1,199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="70" data-product-name="DW80R9950UG 24 Inch Built-in Smart Dishwasher with AquaBlast™" data-product-price="1199.99" data-product-image="./assets/samsung-dishwasher-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-microwave-01.jpg" class="product-img" alt="Samsung ME83M">
+        <div class="product-title">ME83M 23L Stainless Steel Microwave Oven with 800W Power</div>
+        <div class="product-desc">23L capacity with 800W power, push-button controls, and stainless steel finish.</div>
+        <div class="product-price mt-2">$149.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="71" data-product-name="ME83M 23L Stainless Steel Microwave Oven with 800W Power" data-product-price="149.99" data-product-image="./assets/samsung-microwave-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-range-01.jpg" class="product-img" alt="Samsung NX58M6630SS">
+        <div class="product-title">NX58M6630SS 30" Freestanding Gas Range with 5.8 cu. ft. Capacity</div>
+        <div class="product-desc">5.8 cu. ft. true convection oven with blue LED illuminated knobs and powerful 5-burner cooktop.</div>
+        <div class="product-price mt-2">$799.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="72" data-product-name="NX58M6630SS 30\" Freestanding Gas Range with 5.8 cu. ft. Capacity" data-product-price="799.99" data-product-image="./assets/samsung-range-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-refrigerator-06.jpg" class="product-img" alt="Samsung RQ32S7741SR">
+        <div class="product-title">RQ32S7741SR 653L Bespoke AI Refrigerator with Glass Door</div>
+        <div class="product-desc">653L capacity with Bespoke AI technology that personalizes settings based on your preferences and habits.</div>
+        <div class="product-price mt-2">$3,499.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="73" data-product-name="RQ32S7741SR 653L Bespoke AI Refrigerator with Glass Door" data-product-price="3499.99" data-product-image="./assets/samsung-refrigerator-06.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-refrigerator-07.jpg" class="product-img" alt="Samsung RF24BB6600QL">
+        <div class="product-title">RF24BB6600QL 24 cu. ft. Family Hub™ Refrigerator with Wi-Fi</div>
+        <div class="product-desc">24 cu. ft. capacity with Family Hub™ touchscreen, Wi-Fi connectivity, and internal camera system.</div>
+        <div class="product-price mt-2">$2,799.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="74" data-product-name="RF24BB6600QL 24 cu. ft. Family Hub™ Refrigerator with Wi-Fi" data-product-price="2799.99" data-product-image="./assets/samsung-refrigerator-07.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-washing-machine-02.jpg" class="product-img" alt="Samsung WW90T604DLN">
+        <div class="product-title">WW90T604DLN 9kg EcoBubble™ Washing Machine with Hygiene Steam</div>
+        <div class="product-desc">9kg capacity with EcoBubble™ technology, Hygiene Steam function, and energy-saving performance.</div>
+        <div class="product-price mt-2">$749.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="75" data-product-name="WW90T604DLN 9kg EcoBubble™ Washing Machine with Hygiene Steam" data-product-price="749.99" data-product-image="./assets/samsung-washing-machine-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-ac-06.jpg" class="product-img" alt="Samsung AR18CVFAMWK">
+        <div class="product-title">AR18CVFAMWK 1.5 Ton Wind-Free™ Air Conditioner with AI & Digital Inverter</div>
+        <div class="product-desc">1.5 ton capacity with Wind-Free™ cooling, AI Auto Cooling, and R32 refrigerant for energy efficiency.</div>
+        <div class="product-price mt-2">$999.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="76" data-product-name="AR18CVFAMWK 1.5 Ton Wind-Free™ Air Conditioner with AI & Digital Inverter" data-product-price="999.99" data-product-image="./assets/samsung-ac-05.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-dryer-02.jpg" class="product-img" alt="Samsung DV80T5200AE">
+        <div class="product-title">DV80T5200AE 8kg Ventless Condenser Dryer with Sensor Dry</div>
+        <div class="product-desc">8kg capacity ventless condenser dryer with Sensor Dry technology and multiple drying cycles.</div>
+        <div class="product-price mt-2">$699.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="77" data-product-name="DV80T5200AE 8kg Ventless Condenser Dryer with Sensor Dry" data-product-price="699.99" data-product-image="./assets/samsung-dryer-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-dishwasher-02.jpg" class="product-img" alt="Samsung DW80R5060US">
+        <div class="product-title">DW80R5060US 24 Inch Built-in Dishwasher with StormWash™</div>
+        <div class="product-desc">15 place settings with StormWash™ technology for tough food residue and quiet 42 dBA operation.</div>
+        <div class="product-price mt-2">$899.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="78" data-product-name="DW80R5060US 24 Inch Built-in Dishwasher with StormWash™" data-product-price="899.99" data-product-image="./assets/samsung-dishwasher-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-microwave-02.jpg" class="product-img" alt="Samsung MS23F301TQK">
+        <div class="product-title">MS23F301TQK 23L Solo Microwave with Ceramic Enamel Interior</div>
+        <div class="product-desc">23L capacity with ceramic enamel interior for easy cleaning and 6 power levels for versatile cooking.</div>
+        <div class="product-price mt-2">$129.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="79" data-product-name="MS23F301TQK 23L Solo Microwave with Ceramic Enamel Interior" data-product-price="129.99" data-product-image="./assets/samsung-microwave-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-range-02.jpg" class="product-img" alt="Samsung NZ80K8610AK">
+        <div class="product-title">NZ80K8610AK 30" Slide-in Gas Range with Flex Duo™ Oven</div>
+        <div class="product-desc">Flex Duo™ oven with removable divider allows you to cook two different dishes at different temperatures simultaneously.</div>
+        <div class="product-price mt-2">$1,599.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="80" data-product-name="NZ80K8610AK 30\" Slide-in Gas Range with Flex Duo™ Oven" data-product-price="1599.99" data-product-image="./assets/samsung-range-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-refrigerator-08.jpg" class="product-img" alt="Samsung RR20D2825HV">
+        <div class="product-title">RR20D2825HV 183L Single Door Refrigerator with Digital Inverter</div>
+        <div class="product-desc">183L capacity with 5-star energy rating, Digital Inverter technology, and base stand drawer for extra storage.</div>
+        <div class="product-price mt-2">$349.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="81" data-product-name="RR20D2825HV 183L Single Door Refrigerator with Digital Inverter" data-product-price="349.99" data-product-image="./assets/samsung-refrigerator-08.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-washing-machine-03.jpg" class="product-img" alt="Samsung WA80T5262BW">
+        <div class="product-title">WA80T5262BW 8kg Top Load Washing Machine with Wobble Technology</div>
+        <div class="product-desc">8kg capacity top load washer with Wobble technology for powerful cleaning and water-saving features.</div>
+        <div class="product-price mt-2">$499.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="82" data-product-name="WA80T5262BW 8kg Top Load Washing Machine with Wobble Technology" data-product-price="499.99" data-product-image="./assets/samsung-washing-machine-04.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-ac-07.jpg" class="product-img" alt="Samsung AR09TYFYAWK">
+        <div class="product-title">AR09TYFYAWK 9,000 BTU Wall Mount AC with Triple Protector Plus</div>
+        <div class="product-desc">9,000 BTU capacity with Triple Protector Plus technology for durability in harsh conditions and T3 Climate Class.</div>
+        <div class="product-price mt-2">$599.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="83" data-product-name="AR09TYFYAWK 9,000 BTU Wall Mount AC with Triple Protector Plus" data-product-price="599.99" data-product-image="./assets/samsung-ac-06.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-refrigerator-09.jpg" class="product-img" alt="Samsung RS64R5304B4">
+        <div class="product-title">RS64R5304B4 647L Side-by-Side Refrigerator with Water & Ice Dispenser</div>
+        <div class="product-desc">647L capacity side-by-side refrigerator with water and ice dispenser, All-around Cooling, and Metal Cooling technology.</div>
+        <div class="product-price mt-2">$1,899.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="84" data-product-name="RS64R5304B4 647L Side-by-Side Refrigerator with Water & Ice Dispenser" data-product-price="1899.99" data-product-image="./assets/samsung-refrigerator-09.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-washing-machine-04.jpg" class="product-img" alt="Samsung WW70T4040CE">
+        <div class="product-title">WW70T4040CE 7kg Front Load Washing Machine with Eco Bubble</div>
+        <div class="product-desc">7kg capacity with Eco Bubble technology for deep cleaning at lower temperatures and energy efficiency.</div>
+        <div class="product-price mt-2">$549.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="85" data-product-name="WW70T4040CE 7kg Front Load Washing Machine with Eco Bubble" data-product-price="549.99" data-product-image="./assets/samsung-washing-machine-05.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-ac-08.jpg" class="product-img" alt="Samsung AR12TYHYAWK">
+        <div class="product-title">AR12TYHYAWK 12,000 BTU Wall Mount AC with Wind-Free™ Comfort</div>
+        <div class="product-desc">12,000 BTU capacity with Wind-Free™ Comfort mode for energy-efficient cooling without direct airflow.</div>
+        <div class="product-price mt-2">$749.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="86" data-product-name="AR12TYHYAWK 12,000 BTU Wall Mount AC with Wind-Free™ Comfort" data-product-price="749.99" data-product-image="./assets/samsung-ac-07.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-dryer-03.jpg" class="product-img" alt="Samsung DV70T5200AE">
+        <div class="product-title">DV70T5200AE 7kg Ventless Condenser Dryer with Smart Dry</div>
+        <div class="product-desc">7kg capacity with Smart Dry technology that automatically adjusts drying time based on moisture levels.</div>
+        <div class="product-price mt-2">$599.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="87" data-product-name="DV70T5200AE 7kg Ventless Condenser Dryer with Smart Dry" data-product-price="599.99" data-product-image="./assets/samsung-dryer-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-microwave-03.jpg" class="product-img" alt="Samsung ME731K">
+        <div class="product-title">ME731K 20L Solo Microwave with 700W Power</div>
+        <div class="product-desc">20L capacity with 700W power, 6 power levels, and child safety lock for family use.</div>
+        <div class="product-price mt-2">$99.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="88" data-product-name="ME731K 20L Solo Microwave with 700W Power" data-product-price="99.99" data-product-image="./assets/samsung-microwave-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-refrigerator-10.jpg" class="product-img" alt="Samsung RB38A7020SA">
+        <div class="product-title">RB38A7020SA 375L Bottom Mount Freezer Refrigerator with Digital Inverter</div>
+        <div class="product-desc">375L capacity with Digital Inverter technology, Power Freeze function, and adjustable shelves for flexible storage.</div>
+        <div class="product-price mt-2">$799.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="89" data-product-name="RB38A7020SA 375L Bottom Mount Freezer Refrigerator with Digital Inverter" data-product-price="799.99" data-product-image="./assets/samsung-refrigerator-10.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-washing-machine-05.jpg" class="product-img" alt="Samsung WW10T684DLN">
+        <div class="product-title">WW10T684DLN 10kg AI Washing Machine with BubbleStorm</div>
+        <div class="product-desc">10kg capacity with AI Control, BubbleStorm technology for deep cleaning, and Super Speed wash cycle.</div>
+        <div class="product-price mt-2">$899.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="90" data-product-name="WW10T684DLN 10kg AI Washing Machine with BubbleStorm" data-product-price="899.99" data-product-image="./assets/samsung-washing-machine-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-ac-09.jpg" class="product-img" alt="Samsung AR24CVFAMWK">
+        <div class="product-title">AR24CVFAMWK 2 Ton Wind-Free™ Air Conditioner with AI Auto Cooling</div>
+        <div class="product-desc">2 ton capacity with Wind-Free™ technology, AI Auto Cooling, and energy efficiency with Digital Inverter technology.</div>
+        <div class="product-price mt-2">$1,299.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="91" data-product-name="AR24CVFAMWK 2 Ton Wind-Free™ Air Conditioner with AI Auto Cooling" data-product-price="1299.99" data-product-image="./assets/samsung-ac-08.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-dishwasher-03.jpg" class="product-img" alt="Samsung DW60R30010W">
+        <div class="product-title">DW60R30010W 60cm Compact Dishwasher with 6 Place Settings</div>
+        <div class="product-desc">6 place settings compact dishwasher perfect for small spaces, with 6 wash programs and quiet operation.</div>
+        <div class="product-price mt-2">$499.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="92" data-product-name="DW60R30010W 60cm Compact Dishwasher with 6 Place Settings" data-product-price="499.99" data-product-image="./assets/samsung-dishwasher-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/samsung-range-03.jpg" class="product-img" alt="Samsung NZ64K7511BK">
+        <div class="product-title">NZ64K7511BK 60cm Gas Cooktop with 5 Burners and Wi-Fi Connectivity</div>
+        <div class="product-desc">5-burner gas cooktop with powerful burners, Wi-Fi connectivity for remote monitoring, and premium stainless steel design.</div>
+        <div class="product-price mt-2">$1,199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="93" data-product-name="NZ64K7511BK 60cm Gas Cooktop with 5 Burners and Wi-Fi Connectivity" data-product-price="1199.99" data-product-image="./assets/samsung-range-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+            </div>
+            </div>
+            </section>
+            
+            <!-- Toast Container -->
+            <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 left-0 p-2"></div>
+            
+            <footer class="site-footer">
+  <div class="footer-container">
+    <!-- Brand Section -->
+    <div class="footer-section">
+       <div class="footer-logo"><a href="index.html"><img src="assets/EVORA-LOGO.png" alt="Evora Electronics Logo" class="footer-logo-img" width="125px"></a></div>
+      <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="terms and services.html">Terms & Services</a></li>
+        <li><a href="privacy policy.html">Privacy Policy</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+        <li><a href="About us .html">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-section">
+          <h4>Appliance Types</h4>
+          <ul>
+            <li><a href="product2.html">Washers & Dryers</a></li>
+            <li><a href="product2.html">Refrigerators</a></li>
+            <li><a href="product2.html">Microwaves</a></li>
+            <li><a href="product2.html">Air Conditioners</a></li>
+            <li><a href="product2.html">Dishwashers</a></li>
+          </ul>
+        </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>
+        <a><address>
+          <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+            <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+            <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@blueember.com">info@blueember.com</a>
+      </address></a></li></ul>
+      </div>
+    </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="privacy policy.html">Privacy Policy</a> •
+      <a href="terms and services.html">Terms of Service</a> •
+    </div>
+  </div>
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = document.getElementById('searchForm');
+
+    // Prevent form submit
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+    });
+
+    // Real-time filtering
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const productCards = document.querySelectorAll('.col-md-3');
+
+      productCards.forEach(card => {
+        const title = card.querySelector('.product-title').textContent.toLowerCase();
+        const desc = card.querySelector('.product-desc').textContent.toLowerCase();
+
+        if (title.includes(query) || desc.includes(query)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

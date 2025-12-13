@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Haier Products | Evora Electronics</title>
+<!-- Font Imports -->
+<link href="product.css" rel="stylesheet">
+<script src="js/cart.js" defer></script>
+<script src="js/navigation.js" defer></script>
+<script src="js/dollar-font.js" defer></script>
+<script src="js/app.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<style>
+  @media (min-width: 0px) and (max-width: 769px) {
+  .navbar{
+display: none !important;
+}
+       }
+
+/* --- Animated Search Bar Styles --- */
+/* Define the Angle Property for smooth rotation */
+@property --angle {
+syntax: '<angle>';
+initial-value: 0deg;
+inherits: false;
+}
+
+/* The Animated RGB Border & Glow */
+.search-container::before,
+.search-container::after {
+content: '';
+position: absolute;
+/* Negative inset controls border thickness */
+inset: -4px;
+border-radius: 50px;
+z-index: -1;
+
+/* YOUR SPECIFIC COLORS */
+background: conic-gradient(
+from var(--angle),
+#ff2000,
+#0099ff,
+#00c11b,
+#ffb600,
+#ff2000
+);
+
+/* Start Hidden */
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+/* Special Blur for the Shadow (::after) */
+.search-container::after {
+filter: blur(25px);
+z-index: -2;
+}
+
+/* Animation Triggers (Hover AND Click/Focus) */
+/* When Hovering OR When Input is Focused (Clicked) */
+.search-container:hover::before,
+.search-container:hover::after,
+.search-container:focus-within::before,
+.search-container:focus-within::after {
+opacity: 1;
+animation: spin-clockwise 10s linear infinite;
+}
+
+/* The Input Field */
+.search-input {
+width: 100%;
+height: 100%;
+border: none;
+outline: none;
+background: #ffffff; /* White Input */
+border-radius: 50px;
+padding: 0 72px 0 30px; /* Padding for text and icon */
+font-size: 18px;
+color: #000000;
+
+/* Default Static Border (Teal) */
+box-shadow: inset 0 0 0 2px #008080;
+transition: box-shadow 0.3s ease;
+}
+
+.search-input::placeholder {
+color: #008080; /* Teal Placeholder */
+opacity: 0.7;
+}
+
+/* Hide the static Teal border when the animated border is active */
+.search-container:hover .search-input,
+.search-container:focus-within .search-input {
+box-shadow: inset 0 0 0 0 transparent;
+}
+
+/* Search Icon */
+.search-button {
+position: absolute;
+right: 0px;
+width: 65px;
+height: 65px;
+pointer-events: auto;
+background: #23bfda;
+border: none;
+padding: 0;
+}
+
+.search-button i {
+fill: #008080; /* Teal Icon */
+transition: color 0.3s ease;
+}
+
+/* Make icon black when typing */
+.search-container:focus-within .search-button i {
+color: #000000;
+}
+
+/* The Animation Keyframes */
+@keyframes spin-clockwise {
+0% {
+--angle: 0deg;
+}
+100% {
+--angle: 360deg;
+}
+}
+
+/* Override existing search-container styles */
+.search-container {
+position: relative;
+width: 400px;
+height: 50px;
+border-radius: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1;
+padding: 0; /* Remove existing padding */
+}
+
+.search-container form {
+width: 100%;
+height: 100%;
+position: relative;
+}
+
+@media (max-width: 480px) {
+.search-container{
+height: 44px !important;
+}
+.search-input{
+padding: 12px !important;
+}
+}
+</style>
+<body>
+  <nav>
+    <div class="navbar-container">
+      <a href="index.html" aria-label="Navigate to home page">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo" style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <form id="searchForm">
+          <input type="search" class="search-input" id="searchInput" placeholder="Search products..." aria-label="Search products">
+          <button type="submit" class="search-button" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <div class="cart-icon-cont-0">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+          </div>
+        </div>
+      <!-- Main navigation menu -->
+      <ul class="navbar">
+        <li>
+          <a href="BRANDS.HTML">Brands</a>
+        </li>
+        <li><a href="product2.html">Product</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <!-- Cart icon moved OUTSIDE the main navbar list -->
+        <div class="cart-icon-container">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cart Popup Overlay -->
+  <div class="cart-popup-overlay" id="cart-overlay"></div>
+
+  <!-- Cart Popup -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-cart-shopping me-2"></i> Your Shopping Cart <span id="cart-item-count">(0)</span></h3>
+      <button class="cart-close" id="cart-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <!-- Cart items will be populated here dynamically -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" disabled>
+          <span class="payment-icon"></span>Proceed to Checkout</button>
+      <button class="continue-btn" id="continue-btn"><i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Menu - with cart link added -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul style="padding-left: 0px;">
+    <li><a href="index.html">Home</a></li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="BRANDS.HTML" class="split-button-link1">
+        <div class="split-button-left">
+          <i class="fa-solid fa-building"></i>
+          Brands
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="Haier-productpage.html">Haier</a></li>
+        <li><a href="samsung-productpage.html">Samsung</a></li>
+        <li><a href="LG-productpage.html">LG</a></li>
+        <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+        <li><a href="BOSCH-productpage.html">Bosch</a></li>
+        <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+        <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+        <li><a href="Sony-productpage.html">Sony</a></li>
+        <li><a href="Apple-productpage.html">Apple</a></li>
+      </ul>
+    </li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="product2.html" class="split-button-link2">
+        <div class="split-button-left">
+          <i class="fa-solid fa-blender"></i>
+          Appliances
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="product2.html">Washers & Dryers</a></li>
+        <li><a href="product2.html">Refrigerators</a></li>
+        <li><a href="product2.html">Microwaves</a></li>
+        <li><a href="product2.html">Air Conditioners</a></li>
+        <li><a href="product2.html">Dishwashers</a></li>
+        <li><a href="product2.html">Cooktops & Ovens</a></li>
+        <li><a href="product2.html">Vacuum Cleaners</a></li>
+      </ul>
+    </li>
+    <li><a href="product2.html">Product</a></li>
+    <li><a href="compare.html">Compare</a></li>
+    <li><a href="Contact.html">Contact Us</a></li>
+    <!-- Added cart link to mobile menu -->
+    <li>
+      <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        <span class="cart-count" id="mobile-cart-count">0</span>
+      </a>
+    </li>
+  </ul>
+</div>
+    <!-- Products Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class=" mb-4 fw-bold" style="text-align: center;"><img src="assets/download__2_-removebg-preview.png" width="200px" alt="Haier Logo"></h2>
+            <div class="row g-4">
+                
+                <!-- Refrigerators -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/haier-refrigerator-01.jpg" class="product-img" alt="Haier Refrigerator">
+<div class="product-title">Haier 520L Black Glass 4-Door Lumiere Refrigerator</div>
+<div class="product-desc">Premium 4-door refrigerator with black glass finish and advanced cooling technology.</div>
+<div class="product-price mt-2">$1,100.00</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="21" data-product-name="Haier 520L Black Glass 4-Door Lumiere Refrigerator" data-product-price="1100.00" data-product-image="./assets/haier-refrigerator-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/haier-refrigerator-02.jpg" class="product-img" alt="Haier Refrigerator">
+<div class="product-title">Haier 340L French Door Refrigerator with Inverter Technology</div>
+<div class="product-desc">Energy-efficient French door refrigerator with inverter compressor and spacious storage.</div>
+<div class="product-price mt-2">$950.00</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="22" data-product-name="Haier 340L French Door Refrigerator with Inverter Technology" data-product-price="950.00" data-product-image="./assets/haier-refrigerator-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/haier-refrigerator-03.jpg" class="product-img" alt="Haier Refrigerator">
+<div class="product-title">Haier 253L Top Mount Freezer with Multi Air Flow</div>
+<div class="product-desc">Compact top mount freezer refrigerator with Multi Air Flow cooling system for even temperature distribution.</div>
+<div class="product-price mt-2">$650.00</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="23" data-product-name="Haier 253L Top Mount Freezer with Multi Air Flow" data-product-price="650.00" data-product-image="./assets/haier-refrigerator-03.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/haier-refrigerator-04.jpg" class="product-img" alt="Haier Refrigerator">
+<div class="product-title">Haier 610L Side by Side Refrigerator with Water Dispenser</div>
+<div class="product-desc">Large capacity side by side refrigerator with built-in water dispenser and ice maker.</div>
+<div class="product-price mt-2">$1,450.00</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="24" data-product-name="Haier 610L Side by Side Refrigerator with Water Dispenser" data-product-price="1450.00" data-product-image="./assets/haier-refrigerator-04.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+                <!-- Washing Machines -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-washing-machine-01.jpg" class="product-img" alt="Haier 7kg Top Load">
+        <div class="product-title">Haier 7 Kg 5 Star Fully-Automatic Top Load Washing Machine HWM70-148NE</div>
+        <div class="product-desc">7kg capacity with pulsator wash technology, 10 wash programs, and child lock safety features for thorough cleaning.</div>
+        <div class="product-price mt-2">$499.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="215" data-product-name="Haier 7 Kg 5 Star Fully-Automatic Top Load Washing Machine HWM70-148NE" data-product-price="499.99" data-product-image="assets/haier-washing-machine-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-washing-machine-02.jpg" class="product-img" alt="Haier 8kg Front Load">
+        <div class="product-title">Haier 8kg Fully-Automatic Front Load Washing Machine HWM80-BP14636N</div>
+        <div class="product-desc">8kg capacity front load washer with 1400 RPM spin speed, steam wash function, and smart inverter motor for quiet operation.</div>
+        <div class="product-price mt-2">$649.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="216" data-product-name="Haier 8kg Fully-Automatic Front Load Washing Machine HWM80-BP14636N" data-product-price="649.99" data-product-image="assets/haier-washing-machine-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-washing-machine-03.jpg" class="product-img" alt="Haier 6.5kg Semi-Automatic">
+        <div class="product-title">Haier 6.5 Kg Semi-Automatic Top Load Washing Machine HWM65-178NE</div>
+        <div class="product-desc">6.5kg semi-automatic washer with twin tub design, lint filter, and energy-efficient motor for budget-conscious buyers.</div>
+        <div class="product-price mt-2">$349.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="217" data-product-name="Haier 6.5 Kg Semi-Automatic Top Load Washing Machine HWM65-178NE" data-product-price="349.99" data-product-image="assets/haier-washing-machine-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-washing-machine-04.jpg" class="product-img" alt="Haier 10kg Heavy Duty">
+        <div class="product-title">Haier 10kg 5 Star Fully-Automatic Top Load Washing Machine HWM100-178NE</div>
+        <div class="product-desc">10kg capacity heavy duty washer with inverter motor, multiple wash programs, and powerful cleaning performance for large families.</div>
+        <div class="product-price mt-2">$799.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="218" data-product-name="Haier 10kg 5 Star Fully-Automatic Top Load Washing Machine HWM100-178NE" data-product-price="799.99" data-product-image="assets/haier-washing-machine-04.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- Air Conditioners -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-ac-split-01.jpg" class="product-img" alt="Haier 1.5 Ton Split AC">
+        <div class="product-title">Haier 1.5 Ton 5 Star Inverter Split AC HSU19Y-NFA</div>
+        <div class="product-desc">1.5 Ton 5-star rated inverter split AC with anti-bacterial filter, self-diagnosis function, and energy-saving technology. </div>
+        <div class="product-price mt-2">$629.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="219" data-product-name="Haier 1.5 Ton 5 Star Inverter Split AC HSU19Y-NFA" data-product-price="629.99" data-product-image="assets/haier-ac-split-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-ac-split-02.jpg" class="product-img" alt="Haier 2 Ton Split AC">
+        <div class="product-title">Haier 2 Ton 3 Star Inverter Split AC HSU24Y-NFA</div>
+        <div class="product-desc">2 Ton inverter split AC with turbo cooling technology, sleep mode, and copper condenser coil for durability and performance.</div>
+        <div class="product-price mt-2">$899.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="220" data-product-name="Haier 2 Ton 3 Star Inverter Split AC HSU24Y-NFA" data-product-price="899.99" data-product-image="assets/haier-ac-split-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-ac-window.jpg" class="product-img" alt="Haier Window AC">
+        <div class="product-title">Haier 1.5 Ton 3 Star Window AC HWI18Y-NMA</div>
+        <div class="product-desc">1.5 Ton window AC with 3-star energy rating, turbo cool function, and easy installation for residential cooling needs.</div>
+        <div class="product-price mt-2">$449.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="221" data-product-name="Haier 1.5 Ton 3 Star Window AC HWI18Y-NMA" data-product-price="449.99" data-product-image="assets/haier-ac-window.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-ac-portable.jpg" class="product-img" alt="Haier Portable AC">
+        <div class="product-title">Haier 12,000 BTU Portable Air Conditioner with Dehumidifier</div>
+        <div class="product-desc">12,000 BTU portable AC with dehumidifier function, 3-in-1 cooling modes, and easy mobility with castor wheels for flexible cooling.</div>
+        <div class="product-price mt-2">$399.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="222" data-product-name="Haier 12,000 BTU Portable Air Conditioner with Dehumidifier" data-product-price="399.99" data-product-image="assets/haier-ac-portable.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- Microwave Ovens -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-microwave-01.jpg" class="product-img" alt="Haier 20L Solo Microwave">
+        <div class="product-title">Haier 20L Solo Microwave Oven HMW-20MSS</div>
+        <div class="product-desc">20L capacity solo microwave with 5 power levels, mechanical controls, and child safety lock for basic cooking needs.</div>
+        <div class="product-price mt-2">$89.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="223" data-product-name="Haier 20L Solo Microwave Oven HMW-20MSS" data-product-price="89.99" data-product-image="assets/haier-microwave-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-microwave-02.jpg" class="product-img" alt="Haier 23L Grill Microwave">
+        <div class="product-title">Haier 23L Grill Microwave Oven HMW-G23MSS</div>
+        <div class="product-desc">23L grill microwave with 700W cooking power, grill function, and multiple preset programs for versatile cooking options.</div>
+        <div class="product-price mt-2">$119.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="224" data-product-name="Haier 23L Grill Microwave Oven HMW-G23MSS" data-product-price="119.99" data-product-image="assets/haier-microwave-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-microwave-03.jpg" class="product-img" alt="Haier 28L Convection Microwave">
+        <div class="product-title">Haier 28L Convection Microwave Oven HMW-C28MSS</div>
+        <div class="product-desc">28L convection microwave with baking, grilling, and heating functions, touch controls, and auto cook menus for gourmet cooking.</div>
+        <div class="product-price mt-2">$179.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="225" data-product-name="Haier 28L Convection Microwave Oven HMW-C28MSS" data-product-price="179.99" data-product-image="assets/haier-microwave-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- Water Heaters -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-water-heater-01.jpg" class="product-img" alt="Haier 15L Water Heater">
+        <div class="product-title">Haier 15L 5 Star Storage Water Heater HWS-E15</div>
+        <div class="product-desc">15L capacity storage water heater with 5-star energy rating, glass-lined tank, and adjustable thermostat for efficient heating.</div>
+        <div class="product-price mt-2">$149.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="226" data-product-name="Haier 15L 5 Star Storage Water Heater HWS-E15" data-product-price="149.99" data-product-image="assets/haier-water-heater-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-water-heater-02.jpg" class="product-img" alt="Haier 25L Water Heater">
+        <div class="product-title">Haier 25L 5 Star Storage Water Heater HWS-E25</div>
+        <div class="product-desc">25L capacity storage water heater with 5-star energy rating, anti-corrosion coating, and multi-function safety valve for family use.</div>
+        <div class="product-price mt-2">$199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="227" data-product-name="Haier 25L 5 Star Storage Water Heater HWS-E25" data-product-price="199.99" data-product-image="assets/haier-water-heater-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-water-heater-03.jpg" class="product-img" alt="Haier Instant Water Heater">
+        <div class="product-title">Haier 3L Instant Water Heater HIE-3L</div>
+        <div class="product-desc">3L instant water heater with compact design, auto cut-off protection, and energy-efficient heating for kitchen or hand wash use.</div>
+        <div class="product-price mt-2">$259.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="228" data-product-name="Haier 3L Instant Water Heater HIE-3L" data-product-price="259.99" data-product-image="assets/haier-water-heater-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- Air Purifiers -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-air-purifier-01.jpg" class="product-img" alt="Haier Air Purifier">
+        <div class="product-title">Haier 360° Air Purifier with HEPA Filter HAP-360</div>
+        <div class="product-desc">360° air purifier with 3-stage filtration system, HEPA filter, and coverage area of 400 sq. ft. for clean indoor air quality.</div>
+        <div class="product-price mt-2">$199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="229" data-product-name="Haier 360° Air Purifier with HEPA Filter HAP-360" data-product-price="199.99" data-product-image="assets/haier-air-purifier-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-air-purifier-02.jpg" class="product-img" alt="Haier Smart Air Purifier">
+        <div class="product-title">Haier Smart Air Purifier with Wi-Fi Connectivity HAP-S500</div>
+        <div class="product-desc">Smart air purifier with Wi-Fi connectivity, PM2.5 display, auto mode, and coverage area of 600 sq. ft. for large rooms.</div>
+        <div class="product-price mt-2">$299.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="230" data-product-name="Haier Smart Air Purifier with Wi-Fi Connectivity HAP-S500" data-product-price="299.99" data-product-image="assets/haier-air-purifier-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- Kitchen Appliances -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-rice-cooker.jpg" class="product-img" alt="Haier Rice Cooker">
+        <div class="product-title">Haier 1.8L Automatic Rice Cooker HRC-18</div>
+        <div class="product-desc">1.8L capacity rice cooker with non-stick inner pot, keep warm function, and automatic shut-off for perfect rice every time.</div>
+        <div class="product-price mt-2">$49.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="231" data-product-name="Haier 1.8L Automatic Rice Cooker HRC-18" data-product-price="49.99" data-product-image="assets/haier-rice-cooker.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-induction-cooktop.jpg" class="product-img" alt="Haier Induction Cooktop">
+        <div class="product-title">Haier 2000W Single Burner Induction Cooktop HIC-2000</div>
+        <div class="product-desc">2000W single burner induction cooktop with 8 power levels, timer function, and auto pan detection for efficient cooking.</div>
+        <div class="product-price mt-2">$79.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="232" data-product-name="Haier 2000W Single Burner Induction Cooktop HIC-2000" data-product-price="79.99" data-product-image="assets/haier-induction-cooktop.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- Vacuum Cleaners -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-vacuum-cleaner.jpg" class="product-img" alt="Haier Vacuum Cleaner">
+        <div class="product-title">Haier 800W Dry Vacuum Cleaner with HEPA Filter HVC-800</div>
+        <div class="product-desc">800W dry vacuum cleaner with HEPA filtration system, 4L dust capacity, and multiple attachments for thorough home cleaning.</div>
+        <div class="product-price mt-2">$129.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="234" data-product-name="Haier 800W Dry Vacuum Cleaner with HEPA Filter HVC-800" data-product-price="129.99" data-product-image="assets/haier-vacuum-cleaner.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-wet-dry-vacuum.jpg" class="product-img" alt="Haier Wet & Dry Vacuum">
+        <div class="product-title">Haier 1200W Wet & Dry Vacuum Cleaner HWD-1200</div>
+        <div class="product-desc">1200W wet and dry vacuum cleaner with 15L capacity, powerful suction, and auto shut-off feature for versatile cleaning needs.</div>
+        <div class="product-price mt-2">$199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="235" data-product-name="Haier 1200W Wet & Dry Vacuum Cleaner HWD-1200" data-product-price="199.99" data-product-image="assets/haier-wet-dry-vacuum.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- TVs & Entertainment -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-tv-32.jpg" class="product-img" alt="Haier 32-inch Smart TV">
+        <div class="product-title">Haier 32-inch HD Ready Smart LED TV LET32C5500</div>
+        <div class="product-desc">32-inch HD Ready smart TV with built-in apps, voice control support, and multiple connectivity options for entertainment.</div>
+        <div class="product-price mt-2">$249.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="236" data-product-name="Haier 32-inch HD Ready Smart LED TV LET32C5500" data-product-price="249.99" data-product-image="assets/haier-tv-32.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-tv-43.jpg" class="product-img" alt="Haier 43-inch Smart TV">
+        <div class="product-title">Haier 43-inch 4K UHD Smart LED TV LET43C6500</div>
+        <div class="product-desc">43-inch 4K UHD smart TV with HDR10 support, Android TV platform, and gaming features with low input lag for premium viewing experience.</div>
+        <div class="product-price mt-2">$399.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="237" data-product-name="Haier 43-inch 4K UHD Smart LED TV LET43C6500" data-product-price="399.99" data-product-image="assets/haier-tv-43.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/haier-soundbar.jpg" class="product-img" alt="Haier Sound Bar">
+        <div class="product-title">Haier 2.1 Channel Sound Bar with Wireless Subwoofer HSB-21</div>
+        <div class="product-desc">2.1 channel sound bar with wireless subwoofer, Bluetooth connectivity, and multiple sound modes for enhanced audio experience with TVs.</div>
+        <div class="product-price mt-2">$149.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="238" data-product-name="Haier 2.1 Channel Sound Bar with Wireless Subwoofer HSB-21" data-product-price="149.99" data-product-image="assets/haier-soundbar.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container position-fixed bottom-0 end-0 left-0 p-2"></div>
+
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <!-- Brand Section -->
+        <div class="footer-section">
+           <div class="footer-logo"><a href="index.html"><img src="assets/EVORA-LOGO.png" alt="Evora Electronics Logo" class="footer-logo-img" width="125px"></a></div>
+          <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="terms and services.html">Terms & Services</a></li>
+            <li><a href="privacy policy.html">Privacy Policy</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+            <li><a href="About us .html">About Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div class="footer-section">
+          <h4>Appliance Types</h4>
+          <ul>
+            <li><a href="product2.html">Washers & Dryers</a></li>
+            <li><a href="product2.html">Refrigerators</a></li>
+            <li><a href="product2.html">Microwaves</a></li>
+            <li><a href="product2.html">Air Conditioners</a></li>
+            <li><a href="product2.html">Dishwashers</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-section">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>
+          <a><address>
+            <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+              <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+              <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@evora.com">info@evora.com</a>
+        </address></a></li></ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy policy.html">Privacy Policy</a> •
+          <a href="terms and services.html">Terms of Service</a> •
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const searchForm = document.getElementById('searchForm');
+
+        // Prevent form submit
+        searchForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+        });
+
+        // Real-time filtering
+        searchInput.addEventListener('input', () => {
+          const query = searchInput.value.toLowerCase();
+          const productCards = document.querySelectorAll('.col-md-3');
+
+          productCards.forEach(card => {
+            const title = card.querySelector('.product-title').textContent.toLowerCase();
+            const desc = card.querySelector('.product-desc').textContent.toLowerCase();
+
+            if (title.includes(query) || desc.includes(query)) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Whirlpool Products | Evora Electronics</title>
+<!-- Font Imports -->
+<link href="product.css" rel="stylesheet">
+<script src="js/cart.js" defer></script>
+<script src="js/navigation.js" defer></script>
+<script src="js/dollar-font.js" defer></script>
+<script src="js/app.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<style>
+  @media (min-width: 0px) and (max-width: 769px) {
+  .navbar{
+display: none !important;
+}
+       }
+
+/* --- Animated Search Bar Styles --- */
+/* Define the Angle Property for smooth rotation */
+@property --angle {
+syntax: '<angle>';
+initial-value: 0deg;
+inherits: false;
+}
+
+/* The Animated RGB Border & Glow */
+.search-container::before,
+.search-container::after {
+content: '';
+position: absolute;
+/* Negative inset controls border thickness */
+inset: -4px;
+border-radius: 50px;
+z-index: -1;
+
+/* YOUR SPECIFIC COLORS */
+background: conic-gradient(
+from var(--angle),
+#ff2000,
+#0099ff,
+#00c11b,
+#ffb600,
+#ff2000
+);
+
+/* Start Hidden */
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+/* Special Blur for the Shadow (::after) */
+.search-container::after {
+filter: blur(25px);
+z-index: -2;
+}
+
+/* Animation Triggers (Hover AND Click/Focus) */
+/* When Hovering OR When Input is Focused (Clicked) */
+.search-container:hover::before,
+.search-container:hover::after,
+.search-container:focus-within::before,
+.search-container:focus-within::after {
+opacity: 1;
+animation: spin-clockwise 10s linear infinite;
+}
+
+/* The Input Field */
+.search-input {
+width: 100%;
+height: 100%;
+border: none;
+outline: none;
+background: #ffffff; /* White Input */
+border-radius: 50px;
+padding: 0 72px 0 30px; /* Padding for text and icon */
+font-size: 18px;
+color: #000000;
+
+/* Default Static Border (Teal) */
+box-shadow: inset 0 0 0 2px #008080;
+transition: box-shadow 0.3s ease;
+}
+
+.search-input::placeholder {
+color: #008080; /* Teal Placeholder */
+opacity: 0.7;
+}
+
+/* Hide the static Teal border when the animated border is active */
+.search-container:hover .search-input,
+.search-container:focus-within .search-input {
+box-shadow: inset 0 0 0 0 transparent;
+}
+
+/* Search Icon */
+.search-button {
+position: absolute;
+right: 0px;
+width: 65px;
+height: 65px;
+pointer-events: auto;
+background: #0099ff;
+border: none;
+padding: 0;
+}
+
+.search-button i {
+fill: #008080; /* Teal Icon */
+transition: color 0.3s ease;
+}
+
+/* Make icon black when typing */
+.search-container:focus-within .search-button i {
+color: #000000;
+}
+
+/* The Animation Keyframes */
+@keyframes spin-clockwise {
+0% {
+--angle: 0deg;
+}
+100% {
+--angle: 360deg;
+}
+}
+
+/* Override existing search-container styles */
+.search-container {
+position: relative;
+width: 400px;
+height: 50px;
+border-radius: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1;
+padding: 0; /* Remove existing padding */
+}
+
+.search-container form {
+width: 100%;
+height: 100%;
+position: relative;
+}
+
+@media (max-width: 480px) {
+.search-container{
+height: 44px !important;
+}
+.search-input{
+padding: 12px !important;
+}
+}
+
+</style>
+<body>
+  <nav>
+    <div class="navbar-container">
+      <a href="index.html" aria-label="Navigate to home page">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo" style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <form id="searchForm">
+          <input type="search" class="search-input" id="searchInput" placeholder="Search products..." aria-label="Search products">
+          <button type="submit" class="search-button" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <div class="cart-icon-cont-0">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+          </div>
+        </div>
+      <!-- Main navigation menu -->
+      <ul class="navbar">
+        <li>
+          <a href="BRANDS.HTML">Brands</a>
+        </li>
+        <li><a href="product2.html">Product</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <!-- Cart icon moved OUTSIDE the main navbar list -->
+        <div class="cart-icon-container">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cart Popup Overlay -->
+  <div class="cart-popup-overlay" id="cart-overlay"></div>
+
+  <!-- Cart Popup -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-cart-shopping me-2"></i> Your Shopping Cart <span id="cart-item-count">(0)</span></h3>
+      <button class="cart-close" id="cart-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <!-- Cart items will be populated here dynamically -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" disabled>
+          <span class="payment-icon"></span>Proceed to Checkout</button>
+      <button class="continue-btn" id="continue-btn"><i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Menu - with cart link added -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul style="padding-left: 0px;">
+    <li><a href="index.html">Home</a></li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="BRANDS.HTML" class="split-button-link1">
+        <div class="split-button-left">
+          <i class="fa-solid fa-building"></i>
+          Brands
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="Haier-productpage.html">Haier</a></li>
+        <li><a href="samsung-productpage.html">Samsung</a></li>
+        <li><a href="LG-productpage.html">LG</a></li>
+        <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+        <li><a href="BOSCH-productpage.html">Bosch</a></li>
+        <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+        <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+        <li><a href="Sony-productpage.html">Sony</a></li>
+        <li><a href="Apple-productpage.html">Apple</a></li>
+      </ul>
+    </li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="product2.html" class="split-button-link2">
+        <div class="split-button-left">
+          <i class="fa-solid fa-blender"></i>
+          Appliances
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="product2.html">Washers & Dryers</a></li>
+        <li><a href="product2.html">Refrigerators</a></li>
+        <li><a href="product2.html">Microwaves</a></li>
+        <li><a href="product2.html">Air Conditioners</a></li>
+        <li><a href="product2.html">Dishwashers</a></li>
+        <li><a href="product2.html">Cooktops & Ovens</a></li>
+        <li><a href="product2.html">Vacuum Cleaners</a></li>
+      </ul>
+    </li>
+    <li><a href="product2.html">Product</a></li>
+    <li><a href="compare.html">Compare</a></li>
+    <li><a href="Contact.html">Contact Us</a></li>
+    <!-- Added cart link to mobile menu -->
+    <li>
+      <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        <span class="cart-count" id="mobile-cart-count">0</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+    <!-- Products Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class=" mb-4 fw-bold" style="justify-self: center;"><img src="assets/download__4_-removebg-preview.png" width="200px" alt="Whirlpool Logo"></h2>
+            <div class="row g-4">
+                
+                <!-- Refrigerators -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-refrigerator-01.jpg" class="product-img" alt="Whirlpool French Door Refrigerator">
+        <div class="product-title">Whirlpool 25 cu. ft. French Door Refrigerator with Water & Ice Dispenser</div>
+        <div class="product-desc">25 cu. ft. capacity with external water and ice dispenser, adaptive defrost system, and fingerprint-resistant stainless steel finish.</div>
+        <div class="product-price mt-2">$1,799.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="302" data-product-name="Whirlpool 25 cu. ft. French Door Refrigerator with Water & Ice Dispenser" data-product-price="1799.99" data-product-image="assets/whirlpool-refrigerator-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-refrigerator-02.jpg" class="product-img" alt="Whirlpool Side-by-Side Refrigerator">
+        <div class="product-title">Whirlpool 24.5 cu. ft. Side-by-Side Refrigerator with Ice Maker</div>
+        <div class="product-desc">24.5 cu. ft. side-by-side refrigerator with built-in ice maker, adjustable glass shelves, and spill-proof shelves for easy cleaning.</div>
+        <div class="product-price mt-2">$1,499.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="303" data-product-name="Whirlpool 24.5 cu. ft. Side-by-Side Refrigerator with Ice Maker" data-product-price="1499.99" data-product-image="assets/whirlpool-refrigerator-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-refrigerator-03.jpg" class="product-img" alt="Whirlpool Top Freezer Refrigerator">
+        <div class="product-title">Whirlpool 18.2 cu. ft. Top Freezer Refrigerator</div>
+        <div class="product-desc">18.2 cu. ft. top freezer refrigerator with adjustable temperature controls, humidity-controlled crispers, and energy-efficient operation.</div>
+        <div class="product-price mt-2">$899.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="304" data-product-name="Whirlpool 18.2 cu. ft. Top Freezer Refrigerator" data-product-price="899.99" data-product-image="assets/whirlpool-refrigerator-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-refrigerator-04.jpg" class="product-img" alt="Whirlpool Bottom Freezer Refrigerator">
+        <div class="product-title">Whirlpool 21.0 cu. ft. Bottom Freezer Refrigerator</div>
+        <div class="product-desc">21.0 cu. ft. bottom freezer refrigerator with adjustable slide-under shelves, gallon door storage, and electronic temperature controls.</div>
+        <div class="product-price mt-2">$1,299.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="305" data-product-name="Whirlpool 21.0 cu. ft. Bottom Freezer Refrigerator" data-product-price="1299.99" data-product-image="assets/whirlpool-refrigerator-04.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-refrigerator-05.jpg" class="product-img" alt="Whirlpool Counter-Depth Refrigerator">
+        <div class="product-title">Whirlpool 22.3 cu. ft. Counter-Depth French Door Refrigerator</div>
+        <div class="product-desc">Premium counter-depth refrigerator with fingerprint-resistant finish, external ice and water dispenser, and integrated design for modern kitchens.</div>
+        <div class="product-price mt-2">$2,199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="306" data-product-name="Whirlpool 22.3 cu. ft. Counter-Depth French Door Refrigerator" data-product-price="2199.99" data-product-image="assets/whirlpool-refrigerator-05.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- Washing Machines -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-washer-01.jpg" class="product-img" alt="Whirlpool Front Load Washer">
+        <div class="product-title">Whirlpool 4.5 cu. ft. Front Load Washer with Load & Go XL</div>
+        <div class="product-desc">4.5 cu. ft. capacity with Load & Go XL dispenser that holds enough detergent for 20+ loads, plus steam clean option and energy-efficient operation.</div>
+        <div class="product-price mt-2">$999.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="307" data-product-name="Whirlpool 4.5 cu. ft. Front Load Washer with Load & Go XL" data-product-price="999.99" data-product-image="assets/whirlpool-washer-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-washer-02.jpg" class="product-img" alt="Whirlpool Top Load Washer">
+        <div class="product-title">Whirlpool 5.3 cu. ft. Top Load Washer with Deep Fill Option</div>
+        <div class="product-desc">5.3 cu. ft. top load washer with Deep Fill option for extra water, automatic fabric softener dispenser, and 12 wash cycles for versatile cleaning.</div>
+        <div class="product-price mt-2">$849.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="308" data-product-name="Whirlpool 5.3 cu. ft. Top Load Washer with Deep Fill Option" data-product-price="849.99" data-product-image="assets/whirlpool-washer-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-washer-03.jpg" class="product-img" alt="Whirlpool Compact Washer">
+        <div class="product-title">Whirlpool 2.3 cu. ft. Compact Front Load Washer</div>
+        <div class="product-desc">2.3 cu. ft. compact washer perfect for small spaces, apartments, or laundry rooms with limited space, featuring 12 wash cycles and quiet operation.</div>
+        <div class="product-price mt-2">$649.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="309" data-product-name="Whirlpool 2.3 cu. ft. Compact Front Load Washer" data-product-price="649.99" data-product-image="assets/whirlpool-washer-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-washer-04.jpg" class="product-img" alt="Whirlpool Large Capacity Washer">
+        <div class="product-title">Whirlpool 5.5 cu. ft. Front Load Washer with Steam Clean</div>
+        <div class="product-desc">Extra-large capacity washer with steam clean technology, 12 wash cycles, and energy-efficient operation with low water usage for large families.</div>
+        <div class="product-price mt-2">$1,099.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="310" data-product-name="Whirlpool 5.5 cu. ft. Front Load Washer with Steam Clean" data-product-price="1099.99" data-product-image="assets/whirlpool-washer-04.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-washer-05.jpg" class="product-img" alt="Whirlpool Smart Washer">
+        <div class="product-title">Whirlpool 4.8 cu. ft. Smart Front Load Washer with Wi-Fi</div>
+        <div class="product-desc">Smart washer with Wi-Fi connectivity, remote monitoring via app, automatic detergent sensing, and adaptive wash technology for precise cleaning.</div>
+        <div class="product-price mt-2">$1,199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="311" data-product-name="Whirlpool 4.8 cu. ft. Smart Front Load Washer with Wi-Fi" data-product-price="1199.99" data-product-image="assets/whirlpool-washer-05.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- Dryers -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dryer-01.jpg" class="product-img" alt="Whirlpool Electric Dryer">
+        <div class="product-title">Whirlpool 7.4 cu. ft. Electric Dryer with Steam Refresh</div>
+        <div class="product-desc">7.4 cu. ft. electric dryer with Steam Refresh cycle to reduce wrinkles and odors, 12 drying cycles, and auto dry sensing technology.</div>
+        <div class="product-price mt-2">$899.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="312" data-product-name="Whirlpool 7.4 cu. ft. Electric Dryer with Steam Refresh" data-product-price="899.99" data-product-image="assets/whirlpool-dryer-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dryer-02.jpg" class="product-img" alt="Whirlpool Gas Dryer">
+        <div class="product-title">Whirlpool 7.0 cu. ft. Gas Dryer with Quick Dry Cycle</div>
+        <div class="product-desc">7.0 cu. ft. gas dryer with Quick Dry cycle for faster drying times, adjustable temperature settings, and energy-efficient operation with automatic shutoff.</div>
+        <div class="product-price mt-2">$949.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="313" data-product-name="Whirlpool 7.0 cu. ft. Gas Dryer with Quick Dry Cycle" data-product-price="949.99" data-product-image="assets/whirlpool-dryer-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dryer-03.jpg" class="product-img" alt="Whirlpool Compact Dryer">
+        <div class="product-title">Whirlpool 4.3 cu. ft. Compact Electric Dryer</div>
+        <div class="product-desc">4.3 cu. ft. compact electric dryer perfect for small spaces, featuring 4 drying cycles, adjustable temperature control, and easy installation.</div>
+        <div class="product-price mt-2">$599.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="314" data-product-name="Whirlpool 4.3 cu. ft. Compact Electric Dryer" data-product-price="599.99" data-product-image="assets/whirlpool-dryer-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dryer-04.jpg" class="product-img" alt="Whirlpool Stackable Dryer">
+        <div class="product-title">Whirlpool 7.0 cu. ft. Stackable Electric Dryer</div>
+        <div class="product-desc">Stackable electric dryer designed to pair with Whirlpool stackable washer, featuring 12 drying cycles, end-of-cycle signal, and large capacity for family needs.</div>
+        <div class="product-price mt-2">$849.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="315" data-product-name="Whirlpool 7.0 cu. ft. Stackable Electric Dryer" data-product-price="849.99" data-product-image="assets/whirlpool-dryer-04.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dryer-05.jpg" class="product-img" alt="Whirlpool Smart Dryer">
+        <div class="product-title">Whirlpool 7.4 cu. ft. Smart Electric Dryer with Wi-Fi</div>
+        <div class="product-desc">Smart electric dryer with Wi-Fi connectivity, remote cycle monitoring, automatic fabric sensing, and energy usage tracking for efficient drying.</div>
+        <div class="product-price mt-2">$1,099.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="316" data-product-name="Whirlpool 7.4 cu. ft. Smart Electric Dryer with Wi-Fi" data-product-price="1099.99" data-product-image="assets/whirlpool-dryer-05.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- Dishwashers -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dishwasher-01.jpg" class="product-img" alt="Whirlpool Built-in Dishwasher">
+        <div class="product-title">Whirlpool 24" Built-in Dishwasher with Fan Dry Option</div>
+        <div class="product-desc">24-inch built-in dishwasher with Fan Dry option for better drying performance, 1-hour wash cycle, and quiet 52 dBA operation with adjustable racks.</div>
+        <div class="product-price mt-2">$599.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="317" data-product-name="Whirlpool 24\" Built-in Dishwasher with Fan Dry Option" data-product-price="599.99" data-product-image="assets/whirlpool-dishwasher-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dishwasher-02.jpg" class="product-img" alt="Whirlpool Stainless Steel Dishwasher">
+        <div class="product-title">Whirlpool 24" Stainless Steel Dishwasher with Soil Sensor</div>
+        <div class="product-desc">Stainless steel dishwasher with soil sensor that automatically adjusts cycle time and water usage based on load dirtiness, plus sanitize option for germ elimination.</div>
+        <div class="product-price mt-2">$699.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="318" data-product-name="Whirlpool 24\" Stainless Steel Dishwasher with Soil Sensor" data-product-price="699.99" data-product-image="assets/whirlpool-dishwasher-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dishwasher-03.jpg" class="product-img" alt="Whirlpool Portable Dishwasher">
+        <div class="product-title">Whirlpool 18" Portable Countertop Dishwasher</div>
+        <div class="product-desc">18-inch portable countertop dishwasher perfect for apartments, RVs, or small kitchens, featuring 6 wash cycles and compact design with wheels for easy mobility.</div>
+        <div class="product-price mt-2">$399.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="319" data-product-name="Whirlpool 18\" Portable Countertop Dishwasher" data-product-price="399.99" data-product-image="assets/whirlpool-dishwasher-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dishwasher-04.jpg" class="product-img" alt="Whirlpool Smart Dishwasher">
+        <div class="product-title">Whirlpool 24" Smart Dishwasher with Wi-Fi Connectivity</div>
+        <div class="product-desc">Smart dishwasher with Wi-Fi connectivity, remote start/stop, cycle notifications, and adaptive wash technology that senses load size and soil level.</div>
+        <div class="product-price mt-2">$799.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="320" data-product-name="Whirlpool 24\" Smart Dishwasher with Wi-Fi Connectivity" data-product-price="799.99" data-product-image="assets/whirlpool-dishwasher-04.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dishwasher-05.jpg" class="product-img" alt="Whirlpool Quiet Dishwasher">
+        <div class="product-title">Whirlpool 24" Ultra-Quiet Dishwasher with 41 dBA Operation</div>
+        <div class="product-desc">Ultra-quiet dishwasher operating at just 41 dBA with ProWash cycle that automatically adjusts to soil level, plus third-level rack for additional loading capacity.</div>
+        <div class="product-price mt-2">$899.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="321" data-product-name="Whirlpool 24\" Ultra-Quiet Dishwasher with 41 dBA Operation" data-product-price="899.99" data-product-image="assets/whirlpool-dishwasher-05.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- Ranges & Cooktops -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-range-01.jpg" class="product-img" alt="Whirlpool Electric Range">
+        <div class="product-title">Whirlpool 30" Freestanding Electric Range with 5 Elements</div>
+        <div class="product-desc">30-inch freestanding electric range with 5 heating elements including warming zone, convection oven, and ceramic glass cooktop for versatile cooking options.</div>
+        <div class="product-price mt-2">$899.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="322" data-product-name="Whirlpool 30\" Freestanding Electric Range with 5 Elements" data-product-price="899.99" data-product-image="assets/whirlpool-range-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-range-02.jpg" class="product-img" alt="Whirlpool Gas Range">
+        <div class="product-title">Whirlpool 30" Freestanding Gas Range with 5 Burners</div>
+        <div class="product-desc">30-inch gas range with 5 burners including power burner, convection oven with true convection technology, and continuous cast iron grates for professional cooking results.</div>
+        <div class="product-price mt-2">$999.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="323" data-product-name="Whirlpool 30\" Freestanding Gas Range with 5 Burners" data-product-price="999.99" data-product-image="assets/whirlpool-range-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-cooktop-01.jpg" class="product-img" alt="Whirlpool Electric Cooktop">
+        <div class="product-title">Whirlpool 30" Built-in Electric Cooktop with 4 Elements</div>
+        <div class="product-desc">30-inch built-in electric cooktop with 4 heating elements, hot surface indicator lights, and smooth ceramic glass surface for easy cleaning and modern kitchen design.</div>
+        <div class="product-price mt-2">$499.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="324" data-product-name="Whirlpool 30\" Built-in Electric Cooktop with 4 Elements" data-product-price="499.99" data-product-image="assets/whirlpool-cooktop-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-oven-01.jpg" class="product-img" alt="Whirlpool Wall Oven">
+        <div class="product-title">Whirlpool 30" Single Electric Wall Oven with True Convection</div>
+        <div class="product-desc">30-inch single electric wall oven with true convection heating, broil element, and easy clean enamel interior for precise baking and roasting results.</div>
+        <div class="product-price mt-2">$1,199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="325" data-product-name="Whirlpool 30\" Single Electric Wall Oven with True Convection" data-product-price="1199.99" data-product-image="assets/whirlpool-oven-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-microwave-01.jpg" class="product-img" alt="Whirlpool Over-the-Range Microwave">
+        <div class="product-title">Whirlpool 1.9 cu. ft. Over-the-Range Microwave with Sensor Cooking</div>
+        <div class="product-desc">1.9 cu. ft. over-the-range microwave with sensor cooking technology, 4-speed ventilation system, and LED cooktop lighting for kitchen efficiency and convenience.</div>
+        <div class="product-price mt-2">$349.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="326" data-product-name="Whirlpool 1.9 cu. ft. Over-the-Range Microwave with Sensor Cooking" data-product-price="349.99" data-product-image="assets/whirlpool-microwave-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- Air Conditioners -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-ac-split-01.jpg" class="product-img" alt="Whirlpool Split AC">
+        <div class="product-title">Whirlpool 1.5 Ton 5 Star Inverter Split AC with 6th Sense Technology</div>
+        <div class="product-desc">1.5 Ton 5-star rated inverter split AC with 6th Sense technology that adapts to room conditions, turbo cooling mode, and energy-efficient operation for home comfort.</div>
+        <div class="product-price mt-2">$749.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="327" data-product-name="Whirlpool 1.5 Ton 5 Star Inverter Split AC with 6th Sense Technology" data-product-price="749.99" data-product-image="assets/whirlpool-ac-split-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-ac-window-01.jpg" class="product-img" alt="Whirlpool Window AC">
+        <div class="product-title">Whirlpool 1.2 Ton 3 Star Window AC with Auto Restart</div>
+        <div class="product-desc">1.2 Ton window AC with 3-star energy rating, auto restart function, 4-way air deflection, and easy installation for residential cooling needs in moderate climates.</div>
+        <div class="product-price mt-2">$449.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="328" data-product-name="Whirlpool 1.2 Ton 3 Star Window AC with Auto Restart" data-product-price="449.99" data-product-image="assets/whirlpool-ac-window-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-ac-portable-01.jpg" class="product-img" alt="Whirlpool Portable AC">
+        <div class="product-title">Whirlpool 10,000 BTU Portable Air Conditioner with Dehumidifier</div>
+        <div class="product-desc">10,000 BTU portable air conditioner with dehumidifier function, 24-hour timer, and easy mobility with castor wheels for flexible cooling in rooms up to 300 sq. ft.</div>
+        <div class="product-price mt-2">$399.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="329" data-product-name="Whirlpool 10,000 BTU Portable Air Conditioner with Dehumidifier" data-product-price="399.99" data-product-image="assets/whirlpool-ac-portable-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- Small Appliances -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-microwave-02.jpg" class="product-img" alt="Whirlpool Countertop Microwave">
+        <div class="product-title">Whirlpool 1.1 cu. ft. Countertop Microwave with 10 Power Levels</div>
+        <div class="product-desc">1.1 cu. ft. countertop microwave with 10 power levels, 6 quick-set cooking options, and child safety lock for family-friendly operation and easy meal preparation.</div>
+        <div class="product-price mt-2">$129.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="330" data-product-name="Whirlpool 1.1 cu. ft. Countertop Microwave with 10 Power Levels" data-product-price="129.99" data-product-image="assets/whirlpool-microwave-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-blender.jpg" class="product-img" alt="Whirlpool Blender">
+        <div class="product-title">Whirlpool 600W Professional Series Blender with Variable Speed</div>
+        <div class="product-desc">600W professional blender with variable speed control, pulse function, and BPA-free Tritan jar for smoothies, soups, and food preparation with easy-to-clean design.</div>
+        <div class="product-price mt-2">$89.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="331" data-product-name="Whirlpool 600W Professional Series Blender with Variable Speed" data-product-price="89.99" data-product-image="assets/whirlpool-blender.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-coffee-maker.jpg" class="product-img" alt="Whirlpool Coffee Maker">
+        <div class="product-title">Whirlpool 12-Cup Programmable Coffee Maker with Auto Pause</div>
+        <div class="product-desc">12-cup programmable coffee maker with auto pause feature, customizable brew strength, 24-hour timer, and automatic shutoff for convenient morning coffee preparation.</div>
+        <div class="product-price mt-2">$79.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="332" data-product-name="Whirlpool 12-Cup Programmable Coffee Maker with Auto Pause" data-product-price="79.99" data-product-image="assets/whirlpool-coffee-maker.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-toaster.jpg" class="product-img" alt="Whirlpool Toaster">
+        <div class="product-title">Whirlpool 2-Slice Toaster with Extra-Wide Slots and Defrost Function</div>
+        <div class="product-desc">2-slice toaster with extra-wide slots for bagels and thick bread, defrost function, 7 shade settings, and removable crumb tray for easy cleaning and versatile use.</div>
+        <div class="product-price mt-2">$49.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="333" data-product-name="Whirlpool 2-Slice Toaster with Extra-Wide Slots and Defrost Function" data-product-price="49.99" data-product-image="assets/whirlpool-toaster.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-fan.jpg" class="product-img" alt="Whirlpool Tower Fan">
+        <div class="product-title">Whirlpool 42-inch Tower Fan with Remote Control and 3 Speeds</div>
+        <div class="product-desc">42-inch tower fan with oscillation function, 3 speed settings, remote control operation, and quiet performance for comfortable room cooling during warm weather.</div>
+        <div class="product-price mt-2">$129.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="334" data-product-name="Whirlpool 42-inch Tower Fan with Remote Control and 3 Speeds" data-product-price="129.99" data-product-image="assets/whirlpool-fan.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-air-purifier.jpg" class="product-img" alt="Whirlpool Air Purifier">
+        <div class="product-title">Whirlpool Air Purifier with True HEPA Filter and Air Quality Monitor</div>
+        <div class="product-desc">True HEPA air purifier with air quality monitor, 3-stage filtration system, and coverage area of 300 sq. ft. for removing allergens, dust, and odors from indoor air.</div>
+        <div class="product-price mt-2">$199.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="335" data-product-name="Whirlpool Air Purifier with True HEPA Filter and Air Quality Monitor" data-product-price="199.99" data-product-image="assets/whirlpool-air-purifier.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- Vacuum Cleaners -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-vacuum-01.jpg" class="product-img" alt="Whirlpool Upright Vacuum">
+        <div class="product-title">Whirlpool PetPro Upright Vacuum Cleaner with HEPA Filtration</div>
+        <div class="product-desc">PetPro upright vacuum with HEPA filtration system, tangle-free brush roll, and specialized pet tools for removing pet hair and dander from carpets and upholstery effectively.</div>
+        <div class="product-price mt-2">$179.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="336" data-product-name="Whirlpool PetPro Upright Vacuum Cleaner with HEPA Filtration" data-product-price="179.99" data-product-image="assets/whirlpool-vacuum-01.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-vacuum-02.jpg" class="product-img" alt="Whirlpool Cordless Vacuum">
+        <div class="product-title">Whirlpool Freedom Cordless Stick Vacuum with 40-Minute Runtime</div>
+        <div class="product-desc">Cordless stick vacuum with 40-minute runtime, LED headlights, wall-mountable charging dock, and convertible design for handheld use on stairs and furniture cleaning.</div>
+        <div class="product-price mt-2">$249.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="337" data-product-name="Whirlpool Freedom Cordless Stick Vacuum with 40-Minute Runtime" data-product-price="249.99" data-product-image="assets/whirlpool-vacuum-02.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-vacuum-03.jpg" class="product-img" alt="Whirlpool Robot Vacuum">
+        <div class="product-title">Whirlpool RoboClean Robot Vacuum with Mapping Technology</div>
+        <div class="product-desc">RoboClean robot vacuum with smart mapping technology, automatic recharging, scheduled cleaning, and app control for hands-free home cleaning on various floor surfaces.</div>
+        <div class="product-price mt-2">$299.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="338" data-product-name="Whirlpool RoboClean Robot Vacuum with Mapping Technology" data-product-price="299.99" data-product-image="assets/whirlpool-vacuum-03.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-vacuum-04.jpg" class="product-img" alt="Whirlpool Canister Vacuum">
+        <div class="product-title">Whirlpool QuietClean Canister Vacuum with HEPA Filter</div>
+        <div class="product-desc">QuietClean canister vacuum with HEPA filtration, retractable cord, adjustable suction control, and multiple attachments for thorough cleaning of hard floors and carpets.</div>
+        <div class="product-price mt-2">$229.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="339" data-product-name="Whirlpool QuietClean Canister Vacuum with HEPA Filter" data-product-price="229.99" data-product-image="assets/whirlpool-vacuum-04.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- Water Treatment -->
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-water-filter.jpg" class="product-img" alt="Whirlpool Water Filter">
+        <div class="product-title">Whirlpool 40,000 Gall Whole House Water Filter System</div>
+        <div class="product-desc">Whole house water filtration system that removes sediment, chlorine, and other contaminants for cleaner water throughout your home with 40,000-gallon capacity.</div>
+        <div class="product-price mt-2">$349.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="340" data-product-name="Whirlpool 40,000 Gall Whole House Water Filter System" data-product-price="349.99" data-product-image="assets/whirlpool-water-filter.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-water-softener.jpg" class="product-img" alt="Whirlpool Water Softener">
+        <div class="product-title">Whirlpool 48,000 Grain Water Softener System</div>
+        <div class="product-desc">48,000 grain capacity water softener system that removes hardness minerals, reduces scale buildup, and provides softer water for bathing and cleaning with automatic regeneration.</div>
+        <div class="product-price mt-2">$799.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="341" data-product-name="Whirlpool 48,000 Grain Water Softener System" data-product-price="799.99" data-product-image="assets/whirlpool-water-softener.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-ice-maker.jpg" class="product-img" alt="Whirlpool Ice Maker">
+        <div class="product-title">Whirlpool 33 lb. Portable Ice Maker with Self-Cleaning Function</div>
+        <div class="product-desc">Portable ice maker that produces up to 33 pounds of ice per day, with self-cleaning function, 3 ice cube sizes, and compact design perfect for parties and outdoor events.</div>
+        <div class="product-price mt-2">$249.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="342" data-product-name="Whirlpool 33 lb. Portable Ice Maker with Self-Cleaning Function" data-product-price="249.99" data-product-image="assets/whirlpool-ice-maker.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-freezer.jpg" class="product-img" alt="Whirlpool Chest Freezer">
+        <div class="product-title">Whirlpool 7 cu. ft. Chest Freezer with Defrost Drain</div>
+        <div class="product-desc">7 cu. ft. chest freezer with defrost drain, adjustable temperature control, and energy-efficient operation perfect for extra frozen food storage in garages or basements.</div>
+        <div class="product-price mt-2">$399.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="343" data-product-name="Whirlpool 7 cu. ft. Chest Freezer with Defrost Drain" data-product-price="399.99" data-product-image="assets/whirlpool-freezer.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-dehumidifier.jpg" class="product-img" alt="Whirlpool Dehumidifier">
+        <div class="product-title">Whirlpool 50-Pint Dehumidifier with Continuous Drainage</div>
+        <div class="product-desc">50-pint dehumidifier with continuous drainage option, auto restart after power outages, and adjustable humidity control for basements and damp areas up to 3,000 sq. ft.</div>
+        <div class="product-price mt-2">$229.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="344" data-product-name="Whirlpool 50-Pint Dehumidifier with Continuous Drainage" data-product-price="229.99" data-product-image="assets/whirlpool-dehumidifier.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="product-card text-center p-3">
+        <img src="assets/whirlpool-air-conditioner.jpg" class="product-img" alt="Whirlpool Room Air Conditioner">
+        <div class="product-title">Whirlpool 8,000 BTU Window Air Conditioner with Remote Control</div>
+        <div class="product-desc">8,000 BTU window air conditioner with remote control, 3 cooling speeds, 3 fan speeds, and 24-hour timer for efficient cooling of rooms up to 350 sq. ft.</div>
+        <div class="product-price mt-2">$279.99</div>
+        <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="345" data-product-name="Whirlpool 8,000 BTU Window Air Conditioner with Remote Control" data-product-price="279.99" data-product-image="assets/whirlpool-air-conditioner.jpg">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+            </div>
+            </div>
+            </section>
+            
+            <!-- Toast Container -->
+            <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 left-0 p-2"></div>
+            
+            <footer class="site-footer">
+  <div class="footer-container">
+    <!-- Brand Section -->
+    <div class="footer-section">
+       <div class="footer-logo"><a href="index.html"><img src="assets/EVORA-LOGO.png" alt="Evora Electronics Logo" class="footer-logo-img" width="125px"></a></div>
+          <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="terms and services.html">Terms & Services</a></li>
+            <li><a href="privacy policy.html">Privacy Policy</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+            <li><a href="About us .html">About Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div class="footer-section">
+          <h4>Appliance Types</h4>
+          <ul>
+            <li><a href="product2.html">Washers & Dryers</a></li>
+            <li><a href="product2.html">Refrigerators</a></li>
+            <li><a href="product2.html">Microwaves</a></li>
+            <li><a href="product2.html">Air Conditioners</a></li>
+            <li><a href="product2.html">Dishwashers</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <ul>
+              <li>
+            <a><address>
+              <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+                <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+                <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@evora.com">info@evora.com</a>
+          </address></a></li></ul>
+          </div>
+        </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy policy.html">Privacy Policy</a> •
+          <a href="terms and services.html">Terms of Service</a> •
+        </div>
+      </div>
+    </footer>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = document.getElementById('searchForm');
+
+    // Prevent form submit
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+    });
+
+    // Real-time filtering
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const productCards = document.querySelectorAll('.col-md-3');
+
+      productCards.forEach(card => {
+        const title = card.querySelector('.product-title').textContent.toLowerCase();
+        const desc = card.querySelector('.product-desc').textContent.toLowerCase();
+
+        if (title.includes(query) || desc.includes(query)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brands | Evora Electronics</title>
+  <link href="universal.css" rel="stylesheet">
+  <link href="brands.css" rel="stylesheet">
+  <link rel="stylesheet" href="product.css">
+  <script src="js/cart.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/dollar-font.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <link href="RESPONSIVENESS.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+        .add-to-cart-btn.added {
+            pointer-events: none;
+            transform: scale(1.02);
+            padding: 10px;
+            border-radius: 30px;
+            border: none !important;
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+            font-weight: bold;
+        }
+  </style>
+</head>
+
+<body>
+
+
+  <nav>
+    <div class="navbar-container">
+      <a href="HOME.html">
+        <div class="navbar-logo"><img src="assets/EVORA-LOGO.png" width="125px" alt="Evora Logo"></div>
+      </a>
+      <div class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <div class="cart-icon-cont-0">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+          </div>
+        </div>
+      <!-- Main navigation menu -->
+      <ul class="navbar">
+        <li>
+          <a href="BRANDS.HTML">Brands</a>
+        </li>
+        <li><a href="product2.html">Product</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <!-- Cart icon moved OUTSIDE the main navbar list -->
+        <div class="cart-icon-container">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cart Popup Overlay -->
+  <div class="cart-popup-overlay" id="cart-overlay"></div>
+
+  <!-- Cart Popup -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-cart-shopping me-2"></i> Your Shopping Cart <span id="cart-item-count">(0)</span></h3>
+      <button class="cart-close" id="cart-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <!-- Cart items will be populated here dynamically -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" disabled>
+          <span class="payment-icon"></span>Proceed to Checkout</button>
+      <button class="continue-btn" id="continue-btn"><i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Menu - with cart link added -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul style="padding-left: 0px;">
+    <li><a href="HOME.html">Home</a></li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="BRANDS.HTML" class="split-button-link1">
+        <div class="split-button-left">
+          <i class="fa-solid fa-building"></i>
+          Brands
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="Haier-productpage.html">Haier</a></li>
+        <li><a href="samsung-productpage.html">Samsung</a></li>
+        <li><a href="LG-productpage.html">LG</a></li>
+        <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+        <li><a href="BOSCH-productpage.html">Bosch</a></li>
+        <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+        <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+        <li><a href="Sony-productpage.html">Sony</a></li>
+        <li><a href="Apple-productpage.html">Apple</a></li>
+      </ul>
+    </li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="product2.html" class="split-button-link2">
+        <div class="split-button-left">
+          <i class="fa-solid fa-blender"></i>
+          Appliances
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="product2.html">Washers & Dryers</a></li>
+        <li><a href="product2.html">Refrigerators</a></li>
+        <li><a href="product2.html">Microwaves</a></li>
+        <li><a href="product2.html">Air Conditioners</a></li>
+        <li><a href="product2.html">Dishwashers</a></li>
+        <li><a href="product2.html">Cooktops & Ovens</a></li>
+        <li><a href="product2.html">Vacuum Cleaners</a></li>
+      </ul>
+    </li>
+    <li><a href="product2.html">Product</a></li>
+    <li><a href="compare.html">Compare</a></li>
+    <li><a href="Contact.html">Contact Us</a></li>
+    <!-- Added cart link to mobile menu -->
+    <li>
+      <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        <span class="cart-count" id="mobile-cart-count">0</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+  <!-- Brands Container -->
+  <div class="brands-container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">Premium Appliance Brands</h1>
+      <p class="page-subtitle">Discover the world's leading appliance manufacturers, all available at Evora Electronics.
+        We partner with top global brands to bring you the latest in home appliance technology.</p>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <h2 class="filter-title">Filter by Category</h2>
+      <div class="filter-options">
+        <button class="filter-btn active" data-category="all">All Brands</button>
+        <button class="filter-btn" data-category="refrigerators">Refrigerators</button>
+        <button class="filter-btn" data-category="washers">Washers & Dryers</button>
+        <button class="filter-btn" data-category="kitchen">Kitchen Appliances</button>
+        <button class="filter-btn" data-category="cooling">Cooling & Heating</button>
+        <button class="filter-btn" data-category="cleaning">Cleaning Appliances</button>
+      </div>
+    </div>
+
+    <!-- Brands Grid -->
+    <div class="brands-grid" id="brandsGrid">
+      <!-- Brand 1: LG -->
+      <div class="brand-card" data-category="refrigerators washers kitchen">
+        <div class="brand-image">
+          <img src="assets/download.png" alt="LG Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">LG Electronics</h3>
+          <p class="brand-country">South Korea</p>
+          <p class="brand-description">Innovative home appliances with cutting-edge technology including ThinQ AI,
+            InstaView, and TurboWash features.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.6</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">32+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">87%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="LG-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+
+      <!-- Brand 2: Samsung -->
+      <div class="brand-card" data-category="refrigerators kitchen cooling">
+        <div class="brand-image">
+          <img src="assets/download (1).png" +alt="Samsung Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">Samsung</h3>
+          <p class="brand-country">South Korea</p>
+          <p class="brand-description">Premium appliances featuring Family Hub technology, Bespoke customization, and
+            smart home integration.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.5</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">28+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">85%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="samsung-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+
+      <!-- Brand 3: Whirlpool -->
+      <div class="brand-card" data-category="washers cleaning">
+        <div class="brand-image">
+          <img src="assets/download (4).png" alt="Whirlpool Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">Whirlpool</h3>
+          <p class="brand-country">United States</p>
+          <p class="brand-description">Reliable and durable appliances with innovative features like Load & Go
+            dispensers and intuitive controls.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.4</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">35+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">82%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="Whirlpool-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+
+      <!-- Brand 4: Bosch -->
+      <div class="brand-card" data-category="kitchen cooling">
+        <div class="brand-image">
+          <img src="assets/download (5).png" alt="Bosch Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">Bosch</h3>
+          <p class="brand-country">Germany</p>
+          <p class="brand-description">German-engineered appliances known for quiet operation, precision cooking, and
+            innovative dishwasher technology.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.7</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">22+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">89%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="BOSCH-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+
+      <!-- Brand 5: Haier -->
+      <div class="brand-card" data-category="refrigerators washers">
+        <div class="brand-image">
+          <img src="assets/download (2).png" alt="Haier Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">Haier</h3>
+          <p class="brand-country">China</p>
+          <p class="brand-description">Global leader in smart home appliances with innovative designs and
+            energy-efficient technologies.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.3</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">40+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">80%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="Haier-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+
+      <!-- Brand 6: Panasonic -->
+      <div class="brand-card" data-category="kitchen cooling cleaning">
+        <div class="brand-image">
+          <img src="assets/download (3).png" alt="Panasonic Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">Panasonic</h3>
+          <p class="brand-country">Japan</p>
+          <p class="brand-description">Japanese quality and innovation in home appliances featuring nanoeX technology
+            and advanced cooking systems.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.5</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">25+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">86%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="Panasonic-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+
+      <!-- Brand 7: Electrolux -->
+      <div class="brand-card" data-category="kitchen cleaning">
+        <div class="brand-image">
+          <img src="assets/download (6).png" alt="Electrolux Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">Electrolux</h3>
+          <p class="brand-country">Sweden</p>
+          <p class="brand-description">Premium home appliances designed for modern living with focus on sustainability
+            and innovation.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.4</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">30+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">84%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="Electrolux-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+
+
+      <!-- Brand 9: Apple -->
+      <div class="brand-card" data-category="kitchen">
+        <div class="brand-image">
+          <img src="assets/download (9).png" alt="Apple Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">Apple</h3>
+          <p class="brand-country">United States</p>
+          <p class="brand-description">Premium smart home appliances with seamless integration into Apple ecosystem and
+            HomeKit compatibility.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.8</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">8+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">92%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="Apple-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+
+      <!-- Brand 10: Sony -->
+      <div class="brand-card" data-category="kitchen cooling">
+        <div class="brand-image">
+          <img src="assets/download (8).png" alt="Sony Logo">
+        </div>
+        <div class="brand-info">
+          <h3 class="brand-name">Sony</h3>
+          <p class="brand-country">Japan</p>
+          <p class="brand-description">Innovative home appliances with advanced technology and premium design for modern
+            kitchens.</p>
+          <div class="brand-stats">
+            <div class="stat-item">
+              <div class="stat-value">4.6</div>
+              <div class="stat-label">Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">12+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">87%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+          </div>
+          <a href="Sony-productpage.html" class="view-products">View Products</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Brands -->
+    <div class="featured-section">
+      <h2 class="featured-title">Our Top Partner Brands</h2>
+      <div class="featured-brands">
+        <div class="featured-brand">
+          <img src="assets/download-removebg-preview.png" alt="LG">
+        </div>
+        <div class="featured-brand">
+          <img src="assets/download__1_-removebg-preview.png" alt="Samsung">
+        </div>
+        <div class="featured-brand">
+          <img src="assets/download__4_-removebg-preview.png" alt="Whirlpool">
+        </div>
+        <div class="featured-brand">
+          <img src="assets/download__5_-removebg-preview.png" alt="Bosch">
+        </div>
+        <div class="featured-brand">
+          <img src="assets/download__2_-removebg-preview.png" alt="Haier">
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Choose Section -->
+    <div class="why-choose">
+      <h2>Why Choose Evora Electronics?</h2>
+      <p>We've built strong partnerships with the world's leading appliance brands to bring you the best selection,
+        competitive pricing, and expert support.</p>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="benefit-title">Authorized Dealers</h3>
+          <p class="benefit-desc">All our products are 100% genuine with full manufacturer warranties and support.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h3 class="benefit-title">Free Delivery & Installation</h3>
+          <p class="benefit-desc">We offer professional delivery and installation services at no extra cost.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3 class="benefit-title">Expert Support</h3>
+          <p class="benefit-desc">Our appliance specialists are ready to help you choose the perfect products.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Showcase -->
+    <div class="product-showcase">
+      <h2 class="showcase-title">Featured Products</h2>
+      <div class="product-grid">
+        <!-- LG Product -->
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="assets/download (2).jfif"
+              alt="LG Refrigerator">
+          </div>
+          <div class="product-details">
+            <h3 class="product-name">LG InstaView Door-in-Door Refrigerator</h3>
+            <p class="product-brand">LG Electronics</p>
+            <div class="product-price">$1,299.99</div>
+            <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="61" data-product-name="LG InstaView Door-in-Door Refrigerator" data-product-price="1299.99" data-product-image="./assets/download (2).jfif">
+Add to Cart
+</button>
+          </div>
+        </div>
+
+        <!-- Samsung Product -->
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="assets/download (6).jfif"
+              alt="Samsung Washer">
+          </div>
+          <div class="product-details">
+            <h3 class="product-name">Samsung Front Load Washer</h3>
+            <p class="product-brand">Samsung</p>
+            <div class="product-price">$849.99</div>
+            <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="66" data-product-name="Samsung Front Load Washer" data-product-price="849.99" data-product-image="./assets/download (6).jfif">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Whirlpool Product -->
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="assets/download (7).jfif"
+              alt="Whirlpool Dishwasher">
+          </div>
+          <div class="product-details">
+            <h3 class="product-name">Whirlpool Dishwasher <br> advanced cleaning</h3>
+            <p class="product-brand">Whirlpool</p>
+            <div class="product-price">$699.99</div>
+            <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="65" data-product-name="Whirlpool Dishwasher advanced cleaning" data-product-price="699.99" data-product-image="./assets/download (7).jfif">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Bosch Product -->
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="assets/download (11).jfif"
+              alt="Bosch Air Conditioner">
+          </div>
+          <div class="product-details">
+            <h3 class="product-name">Bosch Air Conditioner <br>High efficiency</h3>
+            <p class="product-brand">Bosch</p>
+            <div class="product-price">$549.99</div>
+            <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="64" data-product-name="Bosch Air Conditioner High efficiency" data-product-price="549.99" data-product-image="./assets/download (11).jfif">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Haier Product -->
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="assets/download (9).jfif"
+              alt="Haier Microwave">
+          </div>
+          <div class="product-details">
+            <h3 class="product-name">Haier Microwave Oven</h3>
+            <p class="product-brand">Haier</p>
+            <div class="product-price">$129.99</div>
+            <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="63" data-product-name="Haier Microwave Oven" data-product-price="129.99" data-product-image="./assets/download (9).jfif">Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- Panasonic Product -->
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="assets/download (10).jfif"
+              alt="Panasonic Cooktop">
+          </div>
+          <div class="product-details">
+            <h3 class="product-name">Panasonic Cooktop</h3>
+            <p class="product-brand">Panasonic</p>
+            <div class="product-price">$399.99</div>
+            <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="62" data-product-name="Panasonic Cooktop" data-product-price="399.99" data-product-image="./assets/download (10).jfif">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+  <div class="footer-container">
+    <!-- Brand Section -->
+    <div class="footer-section">
+       <div class="footer-logo"><a href="HOME.html"><img src="assets/EVORA-LOGO.png" alt="Evora Electronics Logo" class="footer-logo-img" width="125px"></a></div>
+      <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="terms and services.html">Terms & Services</a></li>
+        <li><a href="privacy policy.html">Privacy Policy</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+        <li><a href="About us .html">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-section">
+          <h4>Appliance Types</h4>
+          <ul>
+            <li><a href="product2.html">Washers & Dryers</a></li>
+            <li><a href="product2.html">Refrigerators</a></li>
+            <li><a href="product2.html">Microwaves</a></li>
+            <li><a href="product2.html">Air Conditioners</a></li>
+            <li><a href="product2.html">Dishwashers</a></li>
+          </ul>
+        </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <ul>
+        <li>
+      <a><address>
+        <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@evora.com">info@evora.com</a>
+    </address></a></li></ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="privacy policy.html">Privacy Policy</a> •
+      <a href="terms and services.html">Terms of Service</a> •
+    </div>
+  </div>
+</footer>
+
+  <script>
+    // Brand filtering functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const brandCards = document.querySelectorAll('.brand-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+
+        const category = this.getAttribute('data-category');
+
+        // Filter brand cards
+        brandCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

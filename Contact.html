@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evora Electronics - Contact Us</title>
+  <link rel="stylesheet" href="Contact.css">
+  <link rel="stylesheet" href="RESPONSIVENESS.css">
+  <script src="js/cart.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    
+
+    body {
+        background: #ffffff;
+        min-height: 100vh;
+        overflow-x: hidden;
+        color: #212529;
+        position: relative;
+    }
+
+    /* Enhanced particle background */
+    .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        overflow: hidden;
+    }
+
+    .particle {
+        position: absolute;
+        filter: blur(4px);
+        background: #00b9ff;
+        border-radius: 50%;
+        opacity: 0.4;
+        animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.4;
+        }
+        50% {
+            transform: translate(100vw, 100vh) scale(1.5);
+            opacity: 0.2;
+        }
+        100% {
+            transform: translate(200vw, 200vh) scale(2);
+            opacity: 0;
+        }
+    }
+
+ 
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-header {
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+    .contact-header h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        color: #00b9ff;
+        position: relative;
+        display: inline-block;
+        text-shadow: 0 2px 10px rgba(0, 185, 255, 0.15);
+    }
+
+    .contact-header h1::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #00b9ff, transparent);
+        border-radius: 2px;
+    }
+
+    .contact-header p {
+        font-size: 1.2rem;
+        color: #495057;
+        max-width: 700px;
+        margin: 20px auto 0;
+        line-height: 1.7;
+    }
+
+    .contact-form-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        position: relative;
+    }
+
+    @media (max-width: 900px) {
+        .contact-form-container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .form-card {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05),
+                    inset 0 0 20px rgba(0, 185, 255, 0.05);
+        border: 1px solid #e9ecef;
+        height: fit-content;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08),
+                    inset 0 0 20px rgba(0, 185, 255, 0.1);
+    }
+
+    .form-section {
+        position: relative;
+        z-index: 2;
+    }
+
+    .form-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+        color: #00b9ff;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .form-title i {
+        color: #00b9ff;
+        font-size: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+        position: relative;
+    }
+
+    .floating-label {
+        position: absolute;
+        top: 15px;
+        left: 18px;
+        color: #6c757d;
+        transition: all 0.4s ease;
+        pointer-events: none;
+        font-size: 16px;
+        z-index: 2;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 16px 18px;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 14px;
+        color: #212529;
+        font-size: 16px;
+        transition: all 0.4s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #00b9ff;
+        box-shadow: 0 0 0 3px rgba(0, 185, 255, 0.2);
+        background: #ffffff;
+    }
+
+    .form-control.is-valid {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+
+    .form-control.is-invalid {
+        border-color: #ef4444;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    .form-control:focus + .floating-label,
+    .form-control:not(:placeholder-shown) + .floating-label {
+        top: -10px;
+        left: 15px;
+        font-size: 14px;
+        background: #ffffff;
+        padding: 0 8px;
+        color: #00b9ff;
+        border-radius: 4px;
+    }
+
+    textarea.form-control {
+        min-height: 140px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        background: linear-gradient(45deg, #00b9ff, #0080cc);
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 14px;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.6s ease-in-out;
+        position: relative;
+        overflow: hidden;
+        margin-top: 10px;
+        box-shadow: 0 5px 15px rgba(0, 185, 255, 0.3);
+    }
+
+    .submit-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: 0.5s;
+    }
+
+    .submit-btn:hover::before {
+        left: 100%;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-3px);
+        transition: all 0.6s ease-in-out;
+    box-shadow: 0 8px 25px rgba(0, 185, 255, 0.4);
+    background: linear-gradient(45deg, #00fffa, #0099ff);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+
+    .submit-btn i {
+        margin-right: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .submit-btn:hover i {
+        transform: translateX(3px);
+    }
+
+    /* Enhanced animation for form elements */
+    .form-group {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .form-group:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .form-group:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .form-group:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .form-group:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Enhanced contact info section */
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .info-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 16px;
+        transition: all 0.3s ease;
+        border: 1px solid #e9ecef;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        border-color: #00b9ff;
+    }
+
+    .info-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 20px;
+        color: white;
+        background: #00b9ff;
+    }
+
+    .info-details h3 {
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+        color: #212529;
+    }
+
+    .info-details p, .info-details a {
+        color: #495057;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        line-height: 1.6;
+    }
+
+    .info-details a:hover {
+        color: #00b9ff;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e9ecef;
+        color: #00b9ff;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        border: 1px solid #dee2e6;
+    }
+
+    .social-icon:hover {
+        background: #00b9ff;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 185, 255, 0.3);
+    }
+
+    /* Enhanced response card */
+    .response-card {
+        margin-top: 40px;
+        text-align: center;
+        padding: 25px;
+        background: #f8f9fa;
+        border-radius: 16px;
+        border: 1px solid #e9ecef;
+        animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(0, 185, 255, 0.2);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(0, 185, 255, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(0, 185, 255, 0);
+        }
+    }
+
+    .response-title {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        color: #00b9ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .highlight {
+        color: #00b9ff;
+        font-weight: 600;
+    }
+
+    /* Floating elements for added animation */
+    .floating-element {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.2;
+        z-index: -1;
+    }
+
+    .floating-1 {
+        width: 200px;
+        height: 200px;
+        background: #00b9ff;
+        top: -100px;
+        right: -50px;
+        animation: float-circle 25s infinite linear;
+    }
+
+
+    .floating-3 {
+        width: 100px;
+        height: 100px;
+        background: #00b9ff;
+        top: 40%;
+        right: 5%;
+        animation: float-circle 20s infinite linear;
+    }
+
+    @keyframes float-circle {
+        0% {
+            transform: translate(0, 0) scale(1);
+        }
+        50% {
+            transform: translate(15px, 15px) scale(1.05);
+        }
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+    }
+
+    /* Custom checkbox and radio buttons */
+    .form-check {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #00b9ff;
+        border-radius: 4px;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .form-check-input:checked {
+        background: #00b9ff;
+        position: relative;
+    }
+
+    .form-check-input:checked::after {
+        content: '✓';
+        position: absolute;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Custom select dropdown */
+    .select-container {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    .select-container::after {
+        content: '▼';
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #00b9ff;
+        font-size: 12px;
+    }
+
+    .select-container select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+    }
+
+    /* Enhanced progress bar */
+    .progress-container {
+        margin-top: 30px;
+        background: #e9ecef;
+        border-radius: 10px;
+        height: 10px;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 75%;
+        background: #00b9ff;
+        border-radius: 10px;
+        animation: progress 5s ease-out forwards;
+    }
+
+    @keyframes progress {
+        0% { width: 0; }
+        100% { width: 75%; }
+    }
+
+    /* New animated elements */
+    .animated-underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #00b9ff;
+        transition: width 0.5s ease;
+    }
+
+    .form-control:focus + .floating-label + .animated-underline {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .contact-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .contact-form-container {
+            gap: 25px;
+        }
+        
+        .form-card {
+            padding: 30px 20px;
+        }
+        
+        .form-title {
+            font-size: 1.5rem;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="navbar-container">
+      <a href="index.html" aria-label="Navigate to home page">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo" style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
+        </div>
+      </a>
+      <div class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <!-- Main navigation menu -->
+      <ul class="navbar">
+        <li>
+          <a href="BRANDS.HTML">Brands</a>
+        </li>
+        <li><a href="product2.html">Product</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Mobile Sidebar Menu - with cart link added -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul style="padding-left: 0px;">
+    <li><a href="index.html">Home</a></li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="BRANDS.HTML" class="split-button-link1">
+        <div class="split-button-left">
+          <i class="fa-solid fa-building"></i>
+          Brands
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="Haier-productpage.html">Haier</a></li>
+        <li><a href="samsung-productpage.html">Samsung</a></li>
+        <li><a href="LG-productpage.html">LG</a></li>
+        <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+        <li><a href="BOSCH-productpage.html">Bosch</a></li>
+        <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+        <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+        <li><a href="Sony-productpage.html">Sony</a></li>
+        <li><a href="Apple-productpage.html">Apple</a></li>
+      </ul>
+    </li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="product2.html" class="split-button-link2">
+        <div class="split-button-left">
+          <i class="fa-solid fa-blender"></i>
+          Appliances
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="product2.html">Washers & Dryers</a></li>
+        <li><a href="product2.html">Refrigerators</a></li>
+        <li><a href="product2.html">Microwaves</a></li>
+        <li><a href="product2.html">Air Conditioners</a></li>
+        <li><a href="product2.html">Dishwashers</a></li>
+        <li><a href="product2.html">Cooktops & Ovens</a></li>
+        <li><a href="product2.html">Vacuum Cleaners</a></li>
+      </ul>
+    </li>
+    <li><a href="product2.html">Product</a></li>
+    <li><a href="compare.html">Compare</a></li>
+    <li><a href="Contact.html">Contact Us</a></li>
+  </ul>
+</div>
+
+
+ <!-- ===== CONTACT FORM ===== -->
+  <div class="particles" id="particles"></div>
+  <div class="container">
+    <div class="contact-header">
+      <h1>Let's Connect</h1>
+      <p>Have a question or need assistance? Fill out the form below and we'll reach out to you within 24 hours.</p>
+    </div>
+    
+    <div class="contact-form-container">
+      <div class="form-card">
+        <div class="form-section">
+          <form id="contactForm">
+            <h2 class="form-title"><i class="fas fa-paper-plane"></i> Send a Message</h2>
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="name" placeholder=" " required>
+              <label for="name" class="floating-label">Your Full Name</label>
+              <div class="animated-underline"></div>
+            </div>
+
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" placeholder=" " required>
+              <label for="email" class="floating-label">Email Address</label>
+              <div class="animated-underline"></div>
+            </div>
+
+            <div class="form-group select-container">
+              <select class="form-control" id="subject" required>
+                <option value="" disabled selected hidden></option>
+                <option value="general">General Inquiry</option>
+                <option value="support">Customer Support</option>
+                <option value="billing">Billing Question</option>
+                <option value="technical">Technical Issue</option>
+                <option value="sales">Sales Inquiry</option>
+              </select>
+              <label for="subject" class="floating-label">Purpose of Contact</label>
+              <div class="animated-underline"></div>
+            </div>
+
+            <div class="form-group">
+              <textarea class="form-control" id="message" placeholder=" " required></textarea>
+              <label for="message" class="floating-label">Your Message</label>
+              <div class="animated-underline"></div>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="subscribe" checked>
+              <label class="form-check-label" for="subscribe">Send me updates about new products and services</label>
+            </div>
+
+            <button type="submit" class="submit-btn" id="sendMessageBtn">
+              <i class="fas fa-paper-plane"></i>Send Message
+            </button>
+          </form>
+          
+          <div class="response-card">
+            <h3 class="response-title"><i class="fas fa-clock"></i> Response Time</h3>
+            <p>We typically respond within <span class="highlight">24 hours</span> during business days. Emergency inquiries receive priority attention.</p>
+            
+            <div class="progress-container">
+              <div class="progress-bar"></div>
+            </div>
+            <p style="font-size: 14px; color: #6c757d; margin-top: 10px;">Currently processing 3 other inquiries</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-card">
+        <div class="form-section">
+          <h2 class="form-title"><i class="fas fa-map-marker-alt"></i> Contact Information</h2>
+          
+          <div class="contact-info">
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="info-details">
+                <h3>Our Location</h3>
+                <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+              </div>
+            </div>
+            
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="info-details">
+                <h3>Phone Numbers</h3>
+                <p>Main: <a href="tel:+14242316797">+1 (424) 231-6797</a></p>
+                <p>Support: <a href="tel:+13237759142">+1 (323) 775-9142</a></p>
+                <p>International: <a href="tel:+19252319764">+1 (925) 231-9764</a></p>
+              </div>
+            </div>
+            
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="info-details">
+                <h3>Business Hours</h3>
+                <p>Monday - Friday: 8:00 AM - 8:00 PM EST</p>
+                <p>Saturday: 9:00 AM - 6:00 PM EST</p>
+                <p>Sunday: Closed</p>
+              </div>
+            </div>
+            
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container for notifications -->
+  <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-2"></div>
+
+  <div class="header-container-2">
+    <div class="header-text-1">
+      <h1>From Your Kitchen To Your Living Room <br> We're Here To Make Things Easier</h1>
+    </div>
+    <div class="header-text-2">
+      <h2>Explore reliable electronic appliances <br>designed to simplify your everyday life.</h2>
+    </div>
+    <div class="header-text-3">
+      <h3>Let's explore how we can help you. <i class="fa-solid fa-arrow-right-long"></i></h3>
+    </div>
+  </div>
+
+  <!-- ===== LOCATIONS ===== -->
+
+  <div class="location">
+    <h1 id="heading-2" style="display: none;">Our Locations</h1>
+
+    <div class="locations">
+      <div class="product">
+        <img src="assets/pic of australia.jpg" alt="Australia" />
+        <a><h3>Australia</h3></a>
+        <p>
+          3/210 Southern Cross Dr, Airport Business Centre <br>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +61 2 4567 8923 <br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> info@evora.com
+        </p>
+      </div>
+
+      <div class="product">
+        <img src="assets/pic of canada.jpg" alt="Canada" />
+        <a><h3>Canada</h3></a>
+        <p>
+          5811 Cooney Road, Suite 305 (unit #349),Business Centre<br>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (416) 728-3945 <br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> info@evora.com
+        </p>
+      </div>
+
+      <div class="product">
+        <img src="assets/pic of china.png" alt="China" />
+        <a><h3>China</h3></a>
+        <p>
+          Room 602, No. 88 Tianhe Road, Tianhe District, Guangzhou, China 510620 <br>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +86 10 6523 8490 <br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> info@evora.com
+        </p>
+      </div>
+
+      <div class="product">
+        <img src="assets/pic of london" alt="London" />
+        <a><h3>London</h3></a>
+        <p>
+          12 King's Road, Chelsea, London SW3 4RP, United Kingdom <br>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +44 20 3287 5194 <br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> info@evora.com
+        </p>
+      </div>
+
+      
+
+      <div class="product">
+        <img src="assets/pic of lahore" alt="Lahore" />
+        <a><h3>UAE</h3></a>
+        <p>
+          Plot No. 112, Phase 5, DHA, Lahore, Pakistan <br>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +92 42 3756 8123 <br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> info@evora.com
+        </p>
+      </div>
+
+      <div class="product">
+        <img src="assets/pic of saudi arabia" alt="Saudi Arabia" />
+        <a><h3>Saudi Arabia</h3></a>
+        <p>
+          Villa No. 17, Prince Sultan Street, Al Rawdah, Jeddah 23434, Saudi Arabia <br>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +966 12 657 9483 <br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> info@evora.com
+        </p>
+      </div>
+
+      <div class="product">
+        <img src="assets/pic of lslamabad" alt="Islamabad" />
+        <a><h3>Pakistan</h3></a>
+        <p>
+          Office No. 204, Blue Area, Jinnah Avenue, Islamabad, Pakistan <br>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +92 51 281 3649 <br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> info@evora.com
+        </p>
+      </div>
+
+      <div class="product" id="lastproduct">
+        <img src="assets/Pic of Chicago" alt="Chicago" />
+        <a><h3>USA</h3></a>
+        <p>
+          875 N Michigan Ave, Suite 1204, Chicago, IL 60611, USA <br>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (773) 628-4159 <br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> info@evora.com
+        </p>
+      </div>
+    </div>
+  </div>
+
+  
+                    <footer class="site-footer">
+  <div class="footer-container">
+    <!-- Brand Section -->
+    <div class="footer-section">
+      <div class="footer-logo"><a href="index.html"><div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
+          <SPAN>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+          </SPAN>
+        </div></a></div>
+      <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="terms and services.html">Terms & Services</a></li>
+        <li><a href="privacy policy.html">Privacy Policy</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+        <li><a href="About us .html">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-section">
+          <h4>Appliance Types</h4>
+          <ul>
+            <li><a href="product2.html">Washers & Dryers</a></li>
+            <li><a href="product2.html">Refrigerators</a></li>
+            <li><a href="product2.html">Microwaves</a></li>
+            <li><a href="product2.html">Air Conditioners</a></li>
+            <li><a href="product2.html">Dishwashers</a></li>
+          </ul>
+        </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <address>
+       <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+        <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+        <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@evora.com">info@evora.com</a>
+      </address>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="privacy policy.html">Privacy Policy</a> •
+      <a href="terms and services.html">Terms of Service</a> •
+    </div>
+  </div>
+</footer>
+
+<script>
+    /**
+     * Advanced Toast Notification System
+     * Features: Queue management, auto-dismiss, manual close, accessibility, animations
+     */
+    class ToastManager {
+        constructor(containerId = 'toast-container') {
+            this.container = document.getElementById(containerId);
+            this.queue = [];
+            this.activeToasts = new Set();
+            this.maxConcurrent = 3;
+            this.defaultDuration = 5000;
+            this.init();
+        }
+
+        init() {
+            this.injectStyles();
+            this.setupContainer();
+        }
+
+        injectStyles() {
+            if (document.getElementById('toast-styles')) return;
+
+            const styles = document.createElement('style');
+            styles.id = 'toast-styles';
+            styles.textContent = `
+                .toast-container {
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    z-index: 1050;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    max-width: 400px;
+                    pointer-events: none;
+                }
+
+                .toast-notification {
+                    background: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+                    padding: 16px 20px;
+                    min-width: 320px;
+                    max-width: 400px;
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 12px;
+                    pointer-events: auto;
+                    transform: translateX(100%);
+                    opacity: 0;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    border-left: 4px solid;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .toast-notification.show {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+
+                .toast-notification.hide {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+
+                .toast-notification.success {
+                    border-left-color: #10b981;
+                    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+                }
+
+                .toast-notification.error {
+                    border-left-color: #ef4444;
+                    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+                }
+
+                .toast-notification.info {
+                    border-left-color: #3b82f6;
+                    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+                }
+
+                .toast-notification.warning {
+                    border-left-color: #f59e0b;
+                    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+                }
+
+                .toast-icon {
+                    flex-shrink: 0;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                    color: white;
+                    margin-top: 2px;
+                }
+
+                .toast-notification.success .toast-icon {
+                    background: #10b981;
+                }
+
+                .toast-notification.error .toast-icon {
+                    background: #ef4444;
+                }
+
+                .toast-notification.info .toast-icon {
+                    background: #3b82f6;
+                }
+
+                .toast-notification.warning .toast-icon {
+                    background: #f59e0b;
+                }
+
+                .toast-content {
+                    flex: 1;
+                    min-width: 0;
+                }
+
+                .toast-title {
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #1f2937;
+                    margin-bottom: 4px;
+                    line-height: 1.4;
+                }
+
+                .toast-message {
+                    font-size: 13px;
+                    color: #6b7280;
+                    line-height: 1.5;
+                }
+
+                .toast-close {
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    color: #9ca3af;
+                    font-size: 18px;
+                    padding: 0;
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 4px;
+                    transition: all 0.2s ease;
+                    flex-shrink: 0;
+                    margin-left: 8px;
+                }
+
+                .toast-close:hover {
+                    background: rgba(0,0,0,0.05);
+                    color: #6b7280;
+                }
+
+                .toast-progress {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    height: 3px;
+                    background: currentColor;
+                    border-radius: 0 0 8px 8px;
+                    opacity: 0.7;
+                }
+
+                .toast-notification.success .toast-progress {
+                    background: #10b981;
+                }
+
+                .toast-notification.error .toast-progress {
+                    background: #ef4444;
+                }
+
+                .toast-notification.info .toast-progress {
+                    background: #3b82f6;
+                }
+
+                .toast-notification.warning .toast-progress {
+                    background: #f59e0b;
+                }
+
+                @keyframes toastSlideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+
+                @keyframes toastSlideOut {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+
+                @keyframes progressBar {
+                    from { width: 100%; }
+                    to { width: 0%; }
+                }
+
+                @media (max-width: 480px) {
+                    .toast-container {
+                        left: 10px;
+                        right: 10px;
+                        bottom: 10px;
+                        max-width: none;
+                    }
+
+                    .toast-notification {
+                        min-width: auto;
+                        max-width: none;
+                    }
+                }
+            `;
+            document.head.appendChild(styles);
+        }
+
+        setupContainer() {
+            if (!this.container) {
+                this.container = document.createElement('div');
+                this.container.id = 'toast-container';
+                this.container.className = 'toast-container';
+                document.body.appendChild(this.container);
+            }
+        }
+
+        show(options) {
+            const config = {
+                message: '',
+                title: '',
+                type: 'info',
+                duration: this.defaultDuration,
+                persistent: false,
+                ...options
+            };
+
+            // Create toast element
+            const toast = this.createToastElement(config);
+
+            // Add to container
+            this.container.appendChild(toast);
+
+            // Animate in
+            requestAnimationFrame(() => {
+                toast.classList.add('show');
+            });
+
+            // Setup auto-dismiss
+            if (!config.persistent) {
+                this.setupAutoDismiss(toast, config.duration);
+            }
+
+            // Track active toast
+            this.activeToasts.add(toast);
+
+            // Limit concurrent toasts
+            this.manageQueue();
+
+            return toast;
+        }
+
+        createToastElement(config) {
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${config.type}`;
+
+            const iconMap = {
+                success: '✓',
+                error: '✕',
+                info: 'ℹ',
+                warning: '⚠'
+            };
+
+            toast.innerHTML = `
+                <div class="toast-icon">${iconMap[config.type] || 'ℹ'}</div>
+                <div class="toast-content">
+                    ${config.title ? `<div class="toast-title">${this.escapeHtml(config.title)}</div>` : ''}
+                    <div class="toast-message">${this.escapeHtml(config.message)}</div>
+                </div>
+                <button class="toast-close" aria-label="Close notification">&times;</button>
+                ${!config.persistent ? '<div class="toast-progress"></div>' : ''}
+            `;
+
+            // Setup close button
+            const closeBtn = toast.querySelector('.toast-close');
+            closeBtn.addEventListener('click', () => this.dismiss(toast));
+
+            // Setup progress bar animation
+            if (!config.persistent) {
+                const progressBar = toast.querySelector('.toast-progress');
+                if (progressBar) {
+                    progressBar.style.animation = `progressBar ${config.duration}ms linear forwards`;
+                }
+            }
+
+            return toast;
+        }
+
+        setupAutoDismiss(toast, duration) {
+            const timeoutId = setTimeout(() => {
+                this.dismiss(toast);
+            }, duration);
+
+            // Store timeout ID for cleanup
+            toast._timeoutId = timeoutId;
+
+            // Pause on hover
+            toast.addEventListener('mouseenter', () => {
+                clearTimeout(timeoutId);
+                const progressBar = toast.querySelector('.toast-progress');
+                if (progressBar) {
+                    progressBar.style.animationPlayState = 'paused';
+                }
+            });
+
+            toast.addEventListener('mouseleave', () => {
+                toast._timeoutId = setTimeout(() => {
+                    this.dismiss(toast);
+                }, duration * 0.3); // Resume with remaining time
+
+                const progressBar = toast.querySelector('.toast-progress');
+                if (progressBar) {
+                    progressBar.style.animationPlayState = 'running';
+                }
+            });
+        }
+
+        dismiss(toast) {
+            if (!toast || !this.activeToasts.has(toast)) return;
+
+            // Clear timeout
+            if (toast._timeoutId) {
+                clearTimeout(toast._timeoutId);
+            }
+
+            // Animate out
+            toast.classList.remove('show');
+            toast.classList.add('hide');
+
+            // Remove after animation
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+                this.activeToasts.delete(toast);
+                this.processQueue();
+            }, 300);
+        }
+
+        manageQueue() {
+            // If too many active toasts, dismiss oldest
+            const activeArray = Array.from(this.activeToasts);
+            if (activeArray.length > this.maxConcurrent) {
+                this.dismiss(activeArray[0]);
+            }
+        }
+
+        processQueue() {
+            // Process queued toasts if space available
+            if (this.queue.length > 0 && this.activeToasts.size < this.maxConcurrent) {
+                const nextToast = this.queue.shift();
+                this.show(nextToast);
+            }
+        }
+
+        escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Convenience methods
+        success(message, title = '', options = {}) {
+            return this.show({ ...options, message, title, type: 'success' });
+        }
+
+        error(message, title = '', options = {}) {
+            return this.show({ ...options, message, title, type: 'error' });
+        }
+
+        info(message, title = '', options = {}) {
+            return this.show({ ...options, message, title, type: 'info' });
+        }
+
+        warning(message, title = '', options = {}) {
+            return this.show({ ...options, message, title, type: 'warning' });
+        }
+    }
+
+    // Global toast manager instance
+    const toastManager = new ToastManager();
+
+    // Legacy function for backward compatibility
+    function showNotification(message, type = 'info') {
+        return toastManager.show({ message, type });
+    }
+
+    // Create particles with enhanced animation
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 125;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            // Random size between 2-8px
+            const size = Math.random() * 6 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            // Random position
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.left = `${Math.random() * 100}%`;
+
+            // Random animation duration
+            const duration = Math.random() * 30 + 10;
+            particle.style.animationDuration = `${duration}s`;
+
+            // Random animation delay
+            const delay = Math.random() * 15;
+            particle.style.animationDelay = `${delay}s`;
+
+            particlesContainer.appendChild(particle);
+        }
+    }
+
+    // Create animated elements with enhanced effects
+    function createAnimatedElements() {
+        // Add subtle pulse effect to floating elements
+        const floatingElements = document.querySelectorAll('.floating-element');
+        floatingElements.forEach(element => {
+            element.style.animationDuration = `${Math.random() * 10 + 15}s`;
+        });
+
+        // Add animation for form sections
+        const formSections = document.querySelectorAll('.form-section');
+        formSections.forEach((section, index) => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+            setTimeout(() => {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }, 300 + (index * 200));
+        });
+    }
+
+    // Contact form validation and submission with advanced toast notifications
+    function initContactForm() {
+        const form = document.getElementById('contactForm');
+        if (!form) return;
+
+        // Form validation rules
+        const validators = {
+            name: (value) => value.trim().length >= 2,
+            email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()),
+            subject: (value) => value !== '',
+            message: (value) => value.trim().length >= 10
+        };
+
+        // Field labels for error messages
+        const fieldLabels = {
+            name: 'Full Name',
+            email: 'Email Address',
+            subject: 'Purpose of Contact',
+            message: 'Message'
+        };
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            try {
+                // Get form values directly from inputs
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value.trim()
+                };
+
+                // Validate all required fields
+                const validationErrors = [];
+
+                // Check each field
+                if (!formData.name || formData.name.length < 2) {
+                    validationErrors.push('Full Name (minimum 2 characters)');
+                }
+
+                if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+                    validationErrors.push('valid Email Address');
+                }
+
+                if (!formData.subject || formData.subject === '') {
+                    validationErrors.push('Purpose of Contact');
+                }
+
+                if (!formData.message || formData.message.length < 10) {
+                    validationErrors.push('Message (minimum 10 characters)');
+                }
+
+                // Show validation errors if any
+                if (validationErrors.length > 0) {
+                    const errorMessage = validationErrors.length === 1
+                        ? `Please provide a ${validationErrors[0]}.`
+                        : `Please fill in the following: ${validationErrors.join(', ')}.`;
+
+                    toastManager.error(errorMessage, 'Form Incomplete', {
+                        duration: 6000
+                    });
+                    return;
+                }
+
+                // Show loading state
+                const submitBtn = form.querySelector('#sendMessageBtn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+                // Simulate API call (replace with actual submission)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Show success message
+                toastManager.success(
+                    'We will contact you within 24 business hours.',
+                    'Message Sent Successfully!',
+                    {
+                        duration: 7000
+                    }
+                );
+
+                // Reset form
+                form.reset();
+
+                // Clear validation states
+                form.querySelectorAll('.form-control').forEach(input => {
+                    input.classList.remove('is-valid', 'is-invalid');
+                });
+
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+
+            } catch (error) {
+                console.error('Form submission error:', error);
+                toastManager.error(
+                    'Please try again later or contact us directly.',
+                    'Submission Failed'
+                );
+
+                // Restore button on error
+                const submitBtn = form.querySelector('#sendMessageBtn');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i>Send Message';
+            }
+        });
+
+        // Real-time validation feedback
+        const inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                const field = this.id;
+                const value = this.value.trim();
+
+                // Remove previous validation classes
+                this.classList.remove('is-valid', 'is-invalid');
+
+                if (validators[field]) {
+                    if (validators[field](value)) {
+                        this.classList.add('is-valid');
+                    } else if (value) {
+                        this.classList.add('is-invalid');
+                    }
+                }
+            });
+        });
+    }
+
+    // Enhanced hover effects for all interactive elements
+    document.addEventListener('DOMContentLoaded', () => {
+        createParticles();
+        createAnimatedElements();
+        initContactForm();
+
+        // Add micro-interactions for form fields
+        const formControls = document.querySelectorAll('.form-control');
+        formControls.forEach(control => {
+            control.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+
+            control.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+
+        const interactiveElements = document.querySelectorAll('.submit-btn, .info-card, .social-icon, .form-check-input');
+
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+</body>
+</html>

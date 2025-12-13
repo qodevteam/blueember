@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results | Evora Electronics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="navbar.css" rel="stylesheet">
+    <link href="home.css" rel="stylesheet">
+    <link href="product.css" rel="stylesheet">
+    <link href="brands.css" rel="stylesheet">
+    <link href="Contact.css" rel="stylesheet">
+    <link href="RESPONSIVENESS.css" rel="stylesheet">
+     <style>
+        :root {
+            --primary: #1fa6d6;
+            --success: #28a745;
+            --border: #dee2e6;
+            --light-bg: #f8f9fa;
+            --text-muted: #6c757d;
+            --gap: 8px;
+            --card-radius: 6px;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+            --transition: all 0.2s ease;
+        }
+
+        /* Base Styles */
+        .search-container {
+            padding: 1rem 0;
+        }
+
+        .search-bar-container {
+            margin-bottom: 1rem;
+        }
+
+        .search-bar-container input {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .filters-section {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-header {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .filter-close {
+            position: absolute;
+            top: 0;
+            display: none;
+            right: 0;
+            width: 37px;
+            border-radius: 100%;
+            height: 37px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 0.25rem;
+        }
+
+        .filter-close:hover {
+            color: aliceblue;
+            background-color: #6c757d;
+
+        }
+
+        .cart-icon {
+            display: flex;
+            width: 30px;
+            height: 30px;
+            margin-left: 0px;
+            margin-right: 8px;
+            vertical-align: middle;
+            background: url('assets/shopping-cart.png') no-repeat center/contain;
+        }
+
+        .add-to-cart-btn:hover .cart-icon {
+            background-image: url('assets/shopping-cart.gif');
+            mix-blend-mode: multiply;
+            scale: 1.3;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group h5 {
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .brand-checkbox {
+            margin-bottom: 0.25rem;
+        }
+
+        .price-range-slider {
+            margin: 0.5rem 0;
+        }
+
+        .price-range-values {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .results-count {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .sort-container {
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-filters-btn {
+            display: none;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            text-align: left;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Grid Layout - Compact Display */
+        #results-container {
+            display: block;
+    column-count: 3;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-template-rows: masonry;
+    gap: 3px;
+    margin: -5px;
+    margin-bottom: 2rem;
+        }
+
+        .product-card {
+                border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 300px;
+    object-fit: cover;
+    margin-bottom: 3px;
+    transition: var(--transition);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    height: auto;
+    justify-content: center;
+    text-align: center;
+    min-height: 100px;
+}
+    
+          
+
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-img-container {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            padding: 0.5rem;
+        }
+
+        .product-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 0.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.85rem;
+            line-height: 1.3;
+            min-height: 2.6rem;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            flex-grow: 1;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.4rem;
+            font-size: 0.8rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: #1a8fc4;
+            transform: translateY(-1px);
+        }
+        .add-to-cart-btn.added {
+            background: #00e435 !important;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            font-weight: bold;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .no-results i {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            color: #e9ecef;
+        }
+@media (max-width: 769px){
+    .filters-section {
+        width: 150% auto;
+    }
+}
+        /* Desktop Filters Visibility */
+        @media (min-width: 769px) {
+            .filters-section {
+                display: block !important;
+                width: 100% auto;
+
+            }
+            .filter-close {
+                display: block;
+            }
+            body{
+                position: relative !important;
+                top: 100px !important;
+            }
+        }
+
+        /* Mobile: 480px and below */
+        @media (max-width: 480px) {
+            .mobile-filters-btn {
+                display: block;
+            }
+            .filter-close{
+                display: block;
+            }
+            .filters-section {
+                display: none;
+            }
+
+            .filters-section.show {
+                display: block;
+        position: fixed;
+        width: auto;
+        scale: 74%;
+        height: auto;
+        top: -4px;
+        left: -39px;
+        z-index: 100;
+        background: #ffffffb3;
+        backdrop-filter: blur(8px);
+        border-radius: 30px;
+            }
+
+            /* Single column layout */
+            #results-container {
+                grid-template-columns: 1fr;
+                gap: var(--gap);
+            }
+
+            .product-card {
+                        flex-direction: row;
+        height: auto;
+        justify-content: center;
+        text-align: center;
+        min-height: 100px;
+    }
+
+            .product-title{
+                font-size: 17px !important;
+            }
+            #results-container {
+            display: block;
+            column-count: 2;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            grid-template-rows: masonry;
+            gap: 3px;
+            margin: -12px;
+            margin-bottom: 3px;
+        }
+
+            }
+
+            .product-img-container {
+                width: 80px;
+                min-width: 80px;
+                height: 80px;
+                padding: 0.25rem;
+            }
+
+            
+            .product-title {
+                font-size: 1rem !important;
+                margin-bottom: 0.125rem;
+                min-height: 1.4rem;
+            }
+
+            .product-desc {
+                font-size: 0.7rem;
+                margin-bottom: 0.25rem;
+                min-height: 3.2rem;
+            }
+
+            .product-price {
+                font-size: 0.9rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .add-to-cart {
+                width: auto;
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+                align-self: flex-end;
+                margin-top: auto;
+            }
+
+            .sort-container {
+                display: none;
+            }
+        
+@media (min-width: 480px) and (max-width: 650px) {
+    #results-container {
+            display: block;
+    column-count: 2;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-template-rows: masonry;
+    gap: 3px;
+    margin: 0px;
+    margin-bottom: 2rem;
+        }
+}
+        /* Tablet: 481px to 768px */
+        @media (min-width: 480px) and (max-width: 768px) {
+            .mobile-filters-btn {
+                display: block;
+            }
+            .filter-close{
+                display: block;
+            }
+            .filters-section {
+                display: none;
+            }
+
+            
+            .filters-section.show {
+                display: block;
+        position: fixed;
+        width: auto;
+        top: 5px;
+        left: -41px;
+        scale: 76%;
+        height: auto;
+        z-index: 100;
+        background: #ffffffb3;
+        backdrop-filter: blur(8px);
+        border-radius: 30px;
+        border: 1px solid #cacaca;
+    }
+    }
+            
+
+            /* Two-column grid */
+            #results-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
+            }
+
+            .product-img-container {
+                height: 100px;
+            }
+
+            .product-info {
+                padding: 0.4rem;
+            }
+
+            .product-title {
+                font-size: 0.8rem;
+                min-height: 2.2rem;
+            }
+
+            .product-desc {
+                font-size: 0.7rem;
+            }
+
+            .product-price {
+                font-size: 0.95rem;
+            }
+
+            .add-to-cart {
+                padding: 0.35rem;
+                font-size: 0.75rem;
+            }
+        
+
+        /* Social Icons - Externalized from inline styles */
+        .social-facebook { color: rgb(0, 119, 255) !important; }
+        .social-instagram { color: rgb(255, 0, 200) !important; }
+        .social-twitter { color: rgb(29, 161, 242) !important; }
+        .social-youtube { color: rgb(255, 0, 0) !important; }
+        .contact-phone { color: rgb(0, 89, 255) !important; }
+        .contact-envelope { color: rgb(0, 89, 255) !important; }
+       /* --- Animated Search Bar Styles --- */
+       /* Define the Angle Property for smooth rotation */
+       @property --angle {
+           syntax: '<angle>';
+           initial-value: 0deg;
+           inherits: false;
+       }
+
+       /* The Animated RGB Border & Glow */
+       .search-container::before,
+       .search-container::after {
+           content: '';
+           position: absolute;
+           /* Negative inset controls border thickness */
+           inset: -4px;
+           border-radius: 50px;
+           z-index: -1;
+
+           /* YOUR SPECIFIC COLORS */
+           background: conic-gradient(
+               from var(--angle),
+               #ff2000,
+               #0099ff,
+               #00c11b,
+               #ffb600,
+               #ff2000
+           );
+
+           /* Start Hidden */
+           opacity: 0;
+           transition: opacity 0.3s ease;
+       }
+
+       /* Special Blur for the Shadow (::after) */
+       .search-container::after {
+           filter: blur(25px);
+           z-index: -2;
+       }
+
+       /* Animation Triggers (Hover AND Click/Focus) */
+       /* When Hovering OR When Input is Focused (Clicked) */
+       .search-container:hover::before,
+       .search-container:hover::after,
+       .search-container:focus-within::before,
+       .search-container:focus-within::after {
+           opacity: 1;
+           animation: spin-clockwise 10s linear infinite;
+       }
+
+       /* The Input Field */
+       .search-input {
+           width: 100%;
+           height: 100%;
+           border: none;
+           outline: none;
+           background: #ffffff; /* White Input */
+           border-radius: 50px;
+           padding:0 73px 0 15px; /* Padding for text and icon */
+           font-size: 18px;
+           color: #000000;
+
+           /* Default Static Border (Teal) */
+           box-shadow: inset 0 0 0 2px #008080;
+           transition: box-shadow 0.3s ease;
+       }
+
+       .search-input::placeholder {
+           color: #008080; /* Teal Placeholder */
+           opacity: 0.7;
+       }
+
+       /* Hide the static Teal border when the animated border is active */
+       .search-container:hover .search-input,
+       .search-container:focus-within .search-input {
+           box-shadow: inset 0 0 0 0 transparent;
+       }
+
+       /* Search Icon */
+       .search-button {
+           position: absolute;
+    right: 0px;
+    width: 65px;
+    height: 65px;
+    pointer-events: auto;
+    background: #0099ff;
+    border: none;
+    padding: 0;
+       }
+
+       .search-button i {
+           fill: #008080; /* Teal Icon */
+           transition: color 0.3s ease;
+       }
+
+       /* Make icon black when typing */
+       .search-container:focus-within .search-button i {
+           color: #000000;
+       }
+
+       /* The Animation Keyframes */
+       @keyframes spin-clockwise {
+           0% {
+               --angle: 0deg;
+           }
+           100% {
+               --angle: 360deg;
+           }
+       }
+
+       /* Override existing search-container styles */
+       .search-container {
+           position: relative;
+           width: 400px;
+           height: 50px;
+           border-radius: 50px;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           z-index: 1;
+           padding: 0; /* Remove existing padding */
+       }
+
+       .search-container form {
+           width: 100%;
+           height: 100%;
+           position: relative;
+       }
+
+       /* Navbar Logo Animation - Similar to payment-icon pattern */
+       .navbar-logo img {
+           transition: all 0.3s ease;
+           mix-blend-mode: normal;
+       }
+
+       /* Apply GIF effects on hover - similar to payment-icon hover behavior */
+       .navbar-logo:hover img {
+           mix-blend-mode: multiply;
+           transform: scale(1.1);
+           filter: brightness(1.2);
+       }
+
+            /* Payment Icon - Applied to checkout button */
+       .payment-icon {
+           display: inline-block;
+           width: 30px;
+           height: 30px;
+           margin-right: 10px;
+           margin-bottom: 8px;
+           vertical-align: middle;
+           background: url('assets/tap-to-pay.png') no-repeat center/contain;
+           transition: opacity 0.3s ease;
+       }
+
+       /* Hide icon when button is disabled */
+       .checkout-btn:disabled .payment-icon {
+           opacity: 0.7;
+       }
+
+       /* Show GIF ONLY on enabled buttons during hover */
+       .checkout-btn:not(:disabled):hover .payment-icon {
+           background-image: url('assets/tap-to-pay.gif');
+           mix-blend-mode: multiply;
+           scale: 1.7;
+       }
+        @media (max-width: 480px) {
+            .navbar-logo{
+                width: 57px !important; height: 5px !important; scale: 0.6 !important;
+            }
+            .search-container{
+                height: 44px !important;
+            }
+            .search-input{
+                padding: 0 73px 0 15px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="navbar-container">
+          <a href="index.html" aria-label="Navigate to home page">
+            <div class="navbar-logo">
+              <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo" style="width: 30px; height: auto;">
+              <span>
+                <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+                <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+              </span>
+            </div>
+          </a>
+
+          <!-- Search Bar -->
+<div class="search-container">
+  <form action="search-results.html" method="GET" id="searchForm">
+    <input type="search" class="search-input" id="searchInput" name="q" placeholder="Search..." aria-label="Search products">
+    <button type="submit" class="search-button" aria-label="Search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </form>
+</div>
+
+          <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+          <div class="cart-icon-cont-0">
+              <div class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+              </div>
+            </div>
+          <!-- Main navigation menu -->
+          <ul class="navbar">
+            <li>
+              <a href="BRANDS.HTML">Brands</a>
+            </li>
+            <li><a href="product2.html">Product</a></li>
+            <li><a href="compare.html">Compare</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <!-- Cart icon moved OUTSIDE the main navbar list -->
+            <div class="cart-icon-container">
+              <div class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </nav>
+
+    <!-- Cart Popup Overlay -->
+    <div class="cart-popup-overlay" id="cart-overlay"></div>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cart-popup">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-cart-shopping me-2"></i> Your Shopping Cart <span id="cart-item-count">(0)</span></h3>
+            <button class="cart-close" id="cart-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- Cart items will be populated here dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn" disabled>
+                <span class="payment-icon"></span>Proceed to Checkout</button>
+            <button class="continue-btn" id="continue-btn"><i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar Menu - with cart link added -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" id="closeBtn">&times;</button>
+    <ul style="padding-left: 0px;">
+      <li><a href="index.html">Home</a></li>
+      <li class="mobile-dropdown-item">
+        <div class="split-button">
+          <a href="BRANDS.HTML" class="split-button-link1">
+          <div class="split-button-left">
+            <i class="fa-solid fa-building"></i>
+            Brands
+          </div>
+          </a>
+  
+          <div class="split-button-right" aria-expanded="false">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <ul class="mobile-dropdown">
+          <li><a href="Haier-productpage.html">Haier</a></li>
+          <li><a href="samsung-productpage.html">Samsung</a></li>
+          <li><a href="LG-productpage.html">LG</a></li>
+          <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+          <li><a href="BOSCH-productpage.html">Bosch</a></li>
+          <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+          <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+          <li><a href="Sony-productpage.html">Sony</a></li>
+          <li><a href="Apple-productpage.html">Apple</a></li>
+        </ul>
+      </li>
+      <li class="mobile-dropdown-item">
+        <div class="split-button">
+          <a href="product2.html" class="split-button-link2">
+          <div class="split-button-left">
+            <i class="fa-solid fa-blender"></i>
+            Appliances
+          </div>
+          </a>
+  
+          <div class="split-button-right" aria-expanded="false">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <ul class="mobile-dropdown">
+          <li><a href="product2.html">Washers & Dryers</a></li>
+          <li><a href="product2.html">Refrigerators</a></li>
+          <li><a href="product2.html">Microwaves</a></li>
+          <li><a href="product2.html">Air Conditioners</a></li>
+          <li><a href="product2.html">Dishwashers</a></li>
+          <li><a href="product2.html">Cooktops & Ovens</a></li>
+          <li><a href="product2.html">Vacuum Cleaners</a></li>
+        </ul>
+      </li>
+      <li><a href="product2.html">Product</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="Contact.html">Contact Us</a></li>
+      <!-- Added cart link to mobile menu -->
+      <li>
+        <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+          <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+
+    <div class="container">
+        <div class="search-bar-container text-center">
+            <h2>Search Results</h2>
+        </div>
+
+        <div id="no-results" class="no-results" style="display: none;">
+            <i class="fa-solid fa-face-frown fa-3x"></i>
+            <h3>No products found</h3>
+            <p>Try different keywords or adjust your filters</p>
+        </div>
+
+        <div class="row">
+            <!-- Filters Sidebar (hidden on mobile by default) -->
+            <div class="col-md-3">
+                <button class="btn btn-outline-primary mobile-filters-btn" type="button" id="filters-toggle">
+                    <i class="fa-solid fa-filter me-2"></i>Filters
+                </button>
+                <div class="filters-section" id="filters-section">
+                    <div class="filter-header">
+                        <button class="filter-close" id="filter-close"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="filter-group">
+                        <h5>Sort By</h5>
+                        <select id="sort-select" class="form-select">
+                            <option value="relevance">Relevance</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="name-asc">Name: A to Z</option>
+                            <option value="name-desc">Name: Z to A</option>
+                            <option value="brand-asc">Brand: A to Z</option>
+                            <option value="brand-desc">Brand: Z to A</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <h5>Brand</h5>
+                        <div id="brand-filters">
+                            <!-- Brand checkboxes will be populated dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h5>Price Range</h5>
+                        <div class="price-range-values">
+                            <span id="min-price-value">$0</span> - <span id="max-price-value">$5000</span>
+                        </div>
+                        <input type="range" class="form-range price-range-slider" id="min-price" min="0" max="5000" value="0">
+                        <input type="range" class="form-range price-range-slider" id="max-price" min="0" max="5000" value="5000">
+                    </div>
+
+                    <button id="clear-filters" class="btn btn-outline-secondary w-100">Clear Filters</button>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="col-md-9">
+                <div class="sort-container d-md mb-3">
+                    <label for="mobile-sort-select">Sort By:</label>
+                    <select id="mobile-sort-select" class="form-select">
+                        <option value="relevance">Relevance</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="name-asc">Name: A to Z</option>
+                        <option value="name-desc">Name: Z to A</option>
+                        <option value="brand-asc">Brand: A to Z</option>
+                        <option value="brand-desc">Brand: Z to A</option>
+                    </select>
+                </div>
+
+                <div id="results-info" class="results-count">
+                    <!-- Results count will be populated here -->
+                </div>
+                
+                <div id="results-container">
+                    <!-- Results will be populated here dynamically -->
+                    <div class="text-center py-5">
+                        <i class="fa-solid fa-search fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Enter a search term to see results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Brand Section -->
+            <div class="footer-section">
+                <div class="footer-logo"><a href="index.html"><img src="assets/EVORA-LOGO.png" alt="Evora Electronics Logo" class="footer-logo-img" width="125px"></a></div>
+                <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="terms and services.html">Terms & Services</a></li>
+                    <li><a href="privacy policy.html">Privacy Policy</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                    <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+                    <li><a href="About us .html">About Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Categories -->
+            <div class="footer-section">
+                <h4>Appliance Types</h4>
+                <ul>
+                    <li><a href="product2.html">Washers & Dryers</a></li>
+                    <li><a href="product2.html">Refrigerators</a></li>
+                    <li><a href="product2.html">Microwaves</a></li>
+                    <li><a href="product2.html">Air Conditioners</a></li>
+                    <li><a href="product2.html">Dishwashers</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>
+                <a><address>
+                    <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+                    <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+                    <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@blueember.com">info@blueember.com</a>
+                </address></a></li></ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="terms and services.html">Terms & Services</a> |
+                <a href="privacy policy.html">Privacy Policy</a> |
+                <a href="Refund and Exchange.html">Refund & Exchange</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/products.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/search-integration.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/dollar-font.js"></script>
+    <script src="js/app.js"></script>
+   
+</body>
+</html>

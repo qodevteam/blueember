@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LG Products | Evora Electronics</title>
+<!-- Font Imports -->
+<link href="product.css" rel="stylesheet">
+<script src="js/cart.js" defer></script>
+<script src="js/navigation.js" defer></script>
+<script src="js/dollar-font.js" defer></script>
+<script src="js/app.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<style>
+  @media (min-width: 0px) and (max-width: 769px) {
+  .navbar{
+display: none !important;
+}
+  }
+/* --- Animated Search Bar Styles --- */
+/* Define the Angle Property for smooth rotation */
+@property --angle {
+syntax: '<angle>';
+initial-value: 0deg;
+inherits: false;
+}
+
+/* The Animated RGB Border & Glow */
+.search-container::before,
+.search-container::after {
+content: '';
+position: absolute;
+/* Negative inset controls border thickness */
+inset: -4px;
+border-radius: 50px;
+z-index: -1;
+
+/* YOUR SPECIFIC COLORS */
+background: conic-gradient(
+from var(--angle),
+#ff2000,
+#0099ff,
+#00c11b,
+#ffb600,
+#ff2000
+);
+
+/* Start Hidden */
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+/* Special Blur for the Shadow (::after) */
+.search-container::after {
+filter: blur(25px);
+z-index: -2;
+}
+
+/* Animation Triggers (Hover AND Click/Focus) */
+/* When Hovering OR When Input is Focused (Clicked) */
+.search-container:hover::before,
+.search-container:hover::after,
+.search-container:focus-within::before,
+.search-container:focus-within::after {
+opacity: 1;
+animation: spin-clockwise 10s linear infinite;
+}
+
+/* The Input Field */
+.search-input {
+width: 100%;
+height: 100%;
+border: none;
+outline: none;
+background: #ffffff; /* White Input */
+border-radius: 50px;
+padding:0 73px 0 15px; /* Padding for text and icon */
+font-size: 18px;
+color: #000000;
+
+/* Default Static Border (Teal) */
+box-shadow: inset 0 0 0 2px #008080;
+transition: box-shadow 0.3s ease;
+}
+
+.search-input::placeholder {
+color: #008080; /* Teal Placeholder */
+opacity: 0.7;
+}
+
+/* Hide the static Teal border when the animated border is active */
+.search-container:hover .search-input,
+.search-container:focus-within .search-input {
+box-shadow: inset 0 0 0 0 transparent;
+}
+
+/* Search Icon */
+.search-button {
+position: absolute;
+right: 0px;
+width: 65px;
+height: 65px;
+pointer-events: auto;
+background: #23bfda;
+border: none;
+padding: 0;
+}
+
+.search-button i {
+fill: #008080; /* Teal Icon */
+transition: color 0.3s ease;
+}
+
+/* Make icon black when typing */
+.search-container:focus-within .search-button i {
+color: #000000;
+}
+
+/* The Animation Keyframes */
+@keyframes spin-clockwise {
+0% {
+--angle: 0deg;
+}
+100% {
+--angle: 360deg;
+}
+}
+
+/* Override existing search-container styles */
+.search-container {
+position: relative;
+width: 400px;
+height: 50px;
+border-radius: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1;
+padding: 0; /* Remove existing padding */
+}
+
+.search-container form {
+width: 100%;
+height: 100%;
+position: relative;
+}
+
+@media (max-width: 480px) {
+.navbar-logo{
+width: 57px !important; height: 5px !important; scale: 0.6 !important;
+}
+.search-container{
+height: 44px !important;
+}
+.search-input{
+padding: 0 73px 0 15px !important;
+}
+}
+</style>
+<body>
+
+  <nav>
+    <div class="navbar-container">
+      <a href="index.html" aria-label="Navigate to home page">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo" style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <form id="searchForm">
+          <input type="search" class="search-input" id="searchInput" placeholder="Search products..." aria-label="Search products">
+          <button type="submit" class="search-button" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <div class="cart-icon-cont-0">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+          </div>
+        </div>
+      <!-- Main navigation menu -->
+      <ul class="navbar">
+        <li>
+          <a href="BRANDS.HTML">Brands</a>
+        </li>
+        <li><a href="product2.html">Product</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <!-- Cart icon moved OUTSIDE the main navbar list -->
+        <div class="cart-icon-container">
+          <div class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cart Popup Overlay -->
+  <div class="cart-popup-overlay" id="cart-overlay"></div>
+
+  <!-- Cart Popup -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-cart-shopping me-2"></i> Your Shopping Cart <span id="cart-item-count">(0)</span></h3>
+      <button class="cart-close" id="cart-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <!-- Cart items will be populated here dynamically -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn" disabled>
+          <span class="payment-icon"></span>Proceed to Checkout</button>
+      <button class="continue-btn" id="continue-btn"><i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Menu - with cart link added -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul style="padding-left: 0px;">
+    <li><a href="index.html">Home</a></li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="BRANDS.HTML" class="split-button-link1">
+        <div class="split-button-left">
+          <i class="fa-solid fa-building"></i>
+          Brands
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="Haier-productpage.html">Haier</a></li>
+        <li><a href="samsung-productpage.html">Samsung</a></li>
+        <li><a href="LG-productpage.html">LG</a></li>
+        <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+        <li><a href="BOSCH-productpage.html">Bosch</a></li>
+        <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+        <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+        <li><a href="Sony-productpage.html">Sony</a></li>
+        <li><a href="Apple-productpage.html">Apple</a></li>
+      </ul>
+    </li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="product2.html" class="split-button-link2">
+        <div class="split-button-left">
+          <i class="fa-solid fa-blender"></i>
+          Appliances
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="product2.html">Washers & Dryers</a></li>
+        <li><a href="product2.html">Refrigerators</a></li>
+        <li><a href="product2.html">Microwaves</a></li>
+        <li><a href="product2.html">Air Conditioners</a></li>
+        <li><a href="product2.html">Dishwashers</a></li>
+        <li><a href="product2.html">Cooktops & Ovens</a></li>
+        <li><a href="product2.html">Vacuum Cleaners</a></li>
+      </ul>
+    </li>
+    <li><a href="product2.html">Product</a></li>
+    <li><a href="compare.html">Compare</a></li>
+    <li><a href="Contact.html">Contact Us</a></li>
+    <!-- Added cart link to mobile menu -->
+    <li>
+      <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+        <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        <span class="cart-count" id="mobile-cart-count">0</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- Products Section -->
+<section class="py-5">
+<div class="container">
+<h2 class=" mb-4 fw-bold" style="text-align: center;"><img src="assets/download-removebg-preview.png" width="200px" alt="LG Logo"></h2>
+<div class="row g-4">
+
+<!-- Refrigerators -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-refrigerator-01.jpg" class="product-img" alt="LG InstaView Door-in-Door Refrigerator">
+<div class="product-title">LG InstaView Door-in-Door Refrigerator with Craft Ice, 28 cu. ft.</div>
+<div class="product-desc">28 cu. ft. capacity with InstaView Door-in-Door, Craft Ice maker, and SmartThinQ technology.</div>
+<div class="product-price mt-2">$3,299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="33" data-product-name="LG InstaView Door-in-Door Refrigerator with Craft Ice, 28 cu. ft." data-product-price="3299.99" data-product-image="assets/lg-refrigerator-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-refrigerator-02.jpg" class="product-img" alt="LG French Door Refrigerator">
+<div class="product-title">LG 24 cu. ft. French Door Refrigerator with Ice Maker</div>
+<div class="product-desc">24 cu. ft. French door refrigerator with PrintProof finish, Ice Maker, and Linear Cooling technology.</div>
+<div class="product-price mt-2">$1,899.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="34" data-product-name="LG 24 cu. ft. French Door Refrigerator with Ice Maker" data-product-price="1899.99" data-product-image="assets/lg-refrigerator-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-refrigerator-03.jpg" class="product-img" alt="LG Side-by-Side Refrigerator">
+<div class="product-title">LG 27 cu. ft. Side-by-Side Refrigerator with Water & Ice Dispenser</div>
+<div class="product-desc">27 cu. ft. capacity with water and ice dispenser, Smart Cooling system, and energy efficient design.</div>
+<div class="product-price mt-2">$2,199.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="35" data-product-name="LG 27 cu. ft. Side-by-Side Refrigerator with Water & Ice Dispenser" data-product-price="2199.99" data-product-image="assets/lg-refrigerator-03.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-refrigerator-04.jpg" class="product-img" alt="LG Top Freezer Refrigerator">
+<div class="product-title">LG 20 cu. ft. Top Freezer Refrigerator with Smart Cooling</div>
+<div class="product-desc">20 cu. ft. top freezer refrigerator with Smart Cooling, humidity-controlled crispers, and reversible door.</div>
+<div class="product-price mt-2">$999.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="36" data-product-name="LG 20 cu. ft. Top Freezer Refrigerator with Smart Cooling" data-product-price="999.99" data-product-image="assets/lg-refrigerator-04.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-refrigerator-05.jpg" class="product-img" alt="LG Compact Refrigerator">
+<div class="product-title">LG 10 cu. ft. Compact Refrigerator with Freezer</div>
+<div class="product-desc">10 cu. ft. compact refrigerator perfect for dorms, offices, or small spaces with adjustable thermostat.</div>
+<div class="product-price mt-2">$449.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="158" data-product-name="LG 10 cu. ft. Compact Refrigerator with Freezer" data-product-price="449.99" data-product-image="assets/lg-refrigerator-05.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-refrigerator-06.jpg" class="product-img" alt="LG Counter-Depth Refrigerator">
+<div class="product-title">LG 22 cu. ft. Counter-Depth French Door Refrigerator</div>
+<div class="product-desc">22 cu. ft. counter-depth design with InstaView window, Craft Ice maker, and Wi-Fi connectivity.</div>
+<div class="product-price mt-2">$2,799.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="159" data-product-name="LG 22 cu. ft. Counter-Depth French Door Refrigerator" data-product-price="2799.99" data-product-image="assets/lg-refrigerator-06.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-refrigerator-07.jpg" class="product-img" alt="LG Bottom Freezer Refrigerator">
+<div class="product-title">LG 21 cu. ft. Bottom Freezer Refrigerator</div>
+<div class="product-desc">21 cu. ft. bottom freezer refrigerator with Smart Inverter Compressor and Multi-Air Flow system.</div>
+<div class="product-price mt-2">$1,299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="160" data-product-name="LG 21 cu. ft. Bottom Freezer Refrigerator" data-product-price="1299.99" data-product-image="assets/lg-refrigerator-07.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-refrigerator-08.jpg" class="product-img" alt="LG SIGNATURE Refrigerator">
+<div class="product-title">LG SIGNATURE 30 cu. ft. Smart InstaView Refrigerator</div>
+<div class="product-desc">30 cu. ft. premium refrigerator with Smart InstaView™ door, dual ice makers, and AI technology.</div>
+<div class="product-price mt-2">$5,499.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="161" data-product-name="LG SIGNATURE 30 cu. ft. Smart InstaView Refrigerator" data-product-price="5499.99" data-product-image="assets/lg-refrigerator-08.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Washing Machines -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-washer-01.jpg" class="product-img" alt="LG Front Load Washer">
+<div class="product-title">LG 5.2 cu. ft. Front Load Washer with TurboWash 360</div>
+<div class="product-desc">5.2 cu. ft. capacity with TurboWash 360 technology, AI DD motor, and steam cleaning feature.</div>
+<div class="product-price mt-2">$1,099.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="162" data-product-name="LG 5.2 cu. ft. Front Load Washer with TurboWash 360" data-product-price="1099.99" data-product-image="assets/lg-washer-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-washer-02.jpg" class="product-img" alt="LG Top Load Washer">
+<div class="product-title">LG 5.0 cu. ft. Top Load Washer with TurboWash</div>
+<div class="product-desc">5.0 cu. ft. top load washer with TurboWash technology, 6Motion technology, and SmartThinQ app.</div>
+<div class="product-price mt-2">$849.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="163" data-product-name="LG 5.0 cu. ft. Top Load Washer with TurboWash" data-product-price="849.99" data-product-image="assets/lg-washer-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-washer-03.jpg" class="product-img" alt="LG Compact Washer">
+<div class="product-title">LG 2.3 cu. ft. Compact Front Load Washer</div>
+<div class="product-desc">2.3 cu. ft. compact washer perfect for small spaces, apartments, or laundry rooms with limited space.</div>
+<div class="product-price mt-2">$649.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="164" data-product-name="LG 2.3 cu. ft. Compact Front Load Washer" data-product-price="649.99" data-product-image="assets/lg-washer-03.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-dryer-01.jpg" class="product-img" alt="LG Electric Dryer">
+<div class="product-title">LG 7.4 cu. ft. Electric Dryer with Sensor Dry</div>
+<div class="product-desc">7.4 cu. ft. capacity electric dryer with Sensor Dry technology, SteamFresh cycle, and Wi-Fi connectivity.</div>
+<div class="product-price mt-2">$899.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="165" data-product-name="LG 7.4 cu. ft. Electric Dryer with Sensor Dry" data-product-price="899.99" data-product-image="assets/lg-dryer-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-dryer-02.jpg" class="product-img" alt="LG Gas Dryer">
+<div class="product-title">LG 7.3 cu. ft. Gas Dryer with TrueSteam</div>
+<div class="product-desc">7.3 cu. ft. gas dryer with TrueSteam technology to reduce wrinkles and odors, and SmartThinQ compatibility.</div>
+<div class="product-price mt-2">$1,099.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="166" data-product-name="LG 7.3 cu. ft. Gas Dryer with TrueSteam" data-product-price="1099.99" data-product-image="assets/lg-dryer-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-washer-dryer-combo.jpg" class="product-img" alt="LG Washer Dryer Combo">
+<div class="product-title">LG 4.3 cu. ft. Front Load Washer Dryer Combo</div>
+<div class="product-desc">4.3 cu. ft. all-in-one washer dryer combo perfect for apartments with no venting required.</div>
+<div class="product-price mt-2">$1,299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="167" data-product-name="LG 4.3 cu. ft. Front Load Washer Dryer Combo" data-product-price="1299.99" data-product-image="assets/lg-washer-dryer-combo.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-washtower.jpg" class="product-img" alt="LG WashTower">
+<div class="product-title">LG 5.0 cu. ft. Washer and 7.4 cu. ft. Dryer WashTower</div>
+<div class="product-desc">Integrated washer and dryer tower with AI-powered features, steam technology, and space-saving design.</div>
+<div class="product-price mt-2">$1,899.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="168" data-product-name="LG 5.0 cu. ft. Washer and 7.4 cu. ft. Dryer WashTower" data-product-price="1899.99" data-product-image="assets/lg-washtower.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-mini-washer.jpg" class="product-img" alt="LG Mini Washer">
+<div class="product-title">LG 1.0 cu. ft. Portable Mini Washer</div>
+<div class="product-desc">1.0 cu. ft. portable mini washer perfect for small loads, travel, or dorm rooms with compact design.</div>
+<div class="product-price mt-2">$249.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="169" data-product-name="LG 1.0 cu. ft. Portable Mini Washer" data-product-price="249.99" data-product-image="assets/lg-mini-washer.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- Air Conditioners -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-ac-split-01.jpg" class="product-img" alt="LG Dual Inverter AC">
+<div class="product-title">LG 1.5 Ton Dual Inverter Split AC with AI Plus Convertible</div>
+<div class="product-desc">1.5 Ton 5-star rated split AC with Dual Inverter technology, AI Plus Convertible cooling, and quiet operation.</div>
+<div class="product-price mt-2">$799.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="170" data-product-name="LG 1.5 Ton Dual Inverter Split AC with AI Plus Convertible" data-product-price="799.99" data-product-image="assets/lg-ac-split-01.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-ac-split-02.jpg" class="product-img" alt="LG 2 Ton Split AC">
+<div class="product-title">LG 2 Ton 5 Star Dual Inverter Split AC</div>
+<div class="product-desc">2 Ton capacity with Dual Inverter technology, Ocean Black Fin protection, and Wi-Fi connectivity.</div>
+<div class="product-price mt-2">$1,199.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="171" data-product-name="LG 2 Ton 5 Star Dual Inverter Split AC" data-product-price="1199.99" data-product-image="assets/lg-ac-split-02.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-ac-window.jpg" class="product-img" alt="LG Window AC">
+<div class="product-title">LG 1.5 Ton Window AC with 4-in-1 Convertible Cooling</div>
+<div class="product-desc">1.5 Ton 3-star rated window AC with 4-in-1 convertible cooling modes and Auto Clean function.</div>
+<div class="product-price mt-2">$599.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="172" data-product-name="LG 1.5 Ton Window AC with 4-in-1 Convertible Cooling" data-product-price="599.99" data-product-image="assets/lg-ac-window.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-ac-portable.jpg" class="product-img" alt="LG Portable AC">
+<div class="product-title">LG 10,000 BTU Portable Air Conditioner with Dehumidifier</div>
+<div class="product-desc">10,000 BTU portable AC with dehumidifier function, Wi-Fi connectivity, and easy mobility with wheels.</div>
+<div class="product-price mt-2">$449.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="173" data-product-name="LG 10,000 BTU Portable Air Conditioner with Dehumidifier" data-product-price="449.99" data-product-image="assets/lg-ac-portable.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-ac-cassette.jpg" class="product-img" alt="LG Cassette AC">
+<div class="product-title">LG 2.5 Ton Cassette Air Conditioner for Commercial Use</div>
+<div class="product-desc">2.5 Ton commercial cassette AC with multi-directional airflow, energy efficient operation, and quiet performance.</div>
+<div class="product-price mt-2">$1,899.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="174" data-product-name="LG 2.5 Ton Cassette Air Conditioner for Commercial Use" data-product-price="1899.99" data-product-image="assets/lg-ac-cassette.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-ac-inverter-v.jpg" class="product-img" alt="LG Multi Split AC">
+<div class="product-title">LG 3.5 Ton Multi Split Inverter AC System</div>
+<div class="product-desc">3.5 Ton multi-split system with inverter technology, 3 indoor units included, perfect for multiple rooms.</div>
+<div class="product-price mt-2">$2,499.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="175" data-product-name="LG 3.5 Ton Multi Split Inverter AC System" data-product-price="2499.99" data-product-image="assets/lg-ac-inverter-v.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-ac-dual-cool.jpg" class="product-img" alt="LG Dual Cool AC">
+<div class="product-title">LG 1.8 Ton Dual Cool Inverter AC with Himalaya Cooling</div>
+<div class="product-desc">1.8 Ton dual cool inverter AC with Himalaya Cooling technology for extreme temperature performance.</div>
+<div class="product-price mt-2">$949.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="176" data-product-name="LG 1.8 Ton Dual Cool Inverter AC with Himalaya Cooling" data-product-price="949.99" data-product-image="assets/lg-ac-dual-cool.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-ac-ai.jpg" class="product-img" alt="LG AI ThinQ AC">
+<div class="product-title">LG 1.2 Ton AI ThinQ Smart Air Conditioner</div>
+<div class="product-desc">1.2 Ton AI-powered smart AC with ThinQ technology, voice control, and energy monitoring features.</div>
+<div class="product-price mt-2">$849.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="177" data-product-name="LG 1.2 Ton AI ThinQ Smart Air Conditioner" data-product-price="849.99" data-product-image="assets/lg-ac-ai.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<!-- TVs & Entertainment -->
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-tv-oled.jpg" class="product-img" alt="LG OLED TV">
+<div class="product-title">LG OLED evo C3 55-inch 4K Smart TV</div>
+<div class="product-desc">55-inch OLED TV with α9 AI Processor, Dolby Vision IQ, and gaming features with 120Hz refresh rate.</div>
+<div class="product-price mt-2">$1,299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="178" data-product-name="LG OLED evo C3 55-inch 4K Smart TV" data-product-price="1299.99" data-product-image="assets/lg-tv-oled.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-tv-qnhd.jpg" class="product-img" alt="LG QNED TV">
+<div class="product-title">LG QNED90 65-inch 4K Smart TV</div>
+<div class="product-desc">65-inch QNED TV with Quantum Dot NanoCell technology, Full Array Dimming Pro, and webOS smart platform.</div>
+<div class="product-price mt-2">$1,599.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="179" data-product-name="LG QNED90 65-inch 4K Smart TV" data-product-price="1599.99" data-product-image="assets/lg-tv-qnhd.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-tv-ur90.jpg" class="product-img" alt="LG UHD TV">
+<div class="product-title">LG UHD 70 Series 50-inch Smart TV</div>
+<div class="product-desc">50-inch UHD TV with webOS, AI Sound Pro, Filmmaker Mode, and gaming features with low input lag.</div>
+<div class="product-price mt-2">$449.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="180" data-product-name="LG UHD 70 Series 50-inch Smart TV" data-product-price="449.99" data-product-image="assets/lg-tv-ur90.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-soundbar.jpg" class="product-img" alt="LG Sound Bar">
+<div class="product-title">LG S95QR 9.1.5 Channel Sound Bar with Dolby Atmos</div>
+<div class="product-desc">Premium 9.1.5 channel sound bar with Dolby Atmos, wireless surround speakers, and Meridian Audio technology.</div>
+<div class="product-price mt-2">$1,299.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="181" data-product-name="LG S95QR 9.1.5 Channel Sound Bar with Dolby Atmos" data-product-price="1299.99" data-product-image="assets/lg-soundbar.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-projector.jpg" class="product-img" alt="LG CineBeam Projector">
+<div class="product-title">LG CineBeam HU715Q 4K UHD Laser Projector</div>
+<div class="product-desc">4K UHD laser projector with 2,000 lumens brightness, smart features, and compact design for home theater.</div>
+<div class="product-price mt-2">$1,999.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="182" data-product-name="LG CineBeam HU715Q 4K UHD Laser Projector" data-product-price="1999.99" data-product-image="assets/lg-projector.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-stanbyme.jpg" class="product-img" alt="LG StanbyME">
+<div class="product-title">LG StanbyME 27-inch Portable TV with Touch Screen</div>
+<div class="product-desc">27-inch portable touch screen TV with battery operation, smart connectivity, and versatile mounting options.</div>
+<div class="product-price mt-2">$699.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="183" data-product-name="LG StanbyME 27-inch Portable TV with Touch Screen" data-product-price="699.99" data-product-image="assets/lg-stanbyme.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-tv-g3.jpg" class="product-img" alt="LG OLED G3">
+<div class="product-title">LG OLED evo G3 77-inch 4K Smart TV</div>
+<div class="product-desc">77-inch premium OLED TV with Brightness Booster Max, α9 AI Processor Gen6, and gallery design.</div>
+<div class="product-price mt-2">$3,499.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="184" data-product-name="LG OLED evo G3 77-inch 4K Smart TV" data-product-price="3499.99" data-product-image="assets/lg-tv-g3.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="product-card text-center p-3">
+<img src="assets/lg-tv-mini-led.jpg" class="product-img" alt="LG QNED Mini LED">
+<div class="product-title">LG QNED99 Mini LED 86-inch 8K Smart TV</div>
+<div class="product-desc">86-inch 8K QNED Mini LED TV with advanced backlighting, AI upscaling, and premium gaming features.</div>
+<div class="product-price mt-2">$4,999.99</div>
+<button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="185" data-product-name="LG QNED99 Mini LED 86-inch 8K Smart TV" data-product-price="4999.99" data-product-image="assets/lg-tv-mini-led.jpg">
+Add to Cart
+</button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container position-fixed bottom-0 end-0 left-0 p-2"></div>
+
+<footer class="site-footer">
+<div class="footer-container">
+<!-- Brand Section -->
+<div class="footer-section">
+<div class="footer-logo"><a href="index.html"><img src="assets/EVORA-LOGO.png" alt="Evora Electronics Logo" class="footer-logo-img" width="125px"></a></div>
+<p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+<div class="social-icons">
+<a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
+<a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
+<a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
+<a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+</div>
+</div>
+
+<!-- Quick Links -->
+<div class="footer-section">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="terms and services.html">Terms & Services</a></li>
+<li><a href="privacy policy.html">Privacy Policy</a></li>
+<li><a href="Contact.html">Contact</a></li>
+<li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+<li><a href="About us .html">About Us</a></li>
+</ul>
+</div>
+
+<!-- Categories -->
+<div class="footer-section">
+          <h4>Appliance Types</h4>
+          <ul>
+            <li><a href="product2.html">Washers & Dryers</a></li>
+            <li><a href="product2.html">Refrigerators</a></li>
+            <li><a href="product2.html">Microwaves</a></li>
+            <li><a href="product2.html">Air Conditioners</a></li>
+            <li><a href="product2.html">Dishwashers</a></li>
+          </ul>
+        </div>
+
+<!-- Contact Info -->
+<div class="footer-section">
+  <h4>Contact Us</h4>
+  <ul>
+    <li>
+  <a><address>
+    <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+      <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+      <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@blueember.com">info@blueember.com</a>
+</address></a></li></ul>
+</div>
+</div>
+
+<div class="footer-bottom">
+<p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+<div class="footer-legal">
+<a href="privacy policy.html">Privacy Policy</a> •
+<a href="terms and services.html">Terms of Service</a> •
+</div>
+</div>
+</footer></body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = document.getElementById('searchForm');
+
+    // Prevent form submit
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+    });
+
+    // Real-time filtering
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const productCards = document.querySelectorAll('.col-md-3');
+
+      productCards.forEach(card => {
+        const title = card.querySelector('.product-title').textContent.toLowerCase();
+        const desc = card.querySelector('.product-desc').textContent.toLowerCase();
+
+        if (title.includes(query) || desc.includes(query)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</html>

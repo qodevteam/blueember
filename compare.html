@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Refrigerator Comparison | Evora Electronics</title>
+  <link rel="stylesheet" href="compare.css">
+  <link rel="stylesheet" href="RESPONSIVENESS.css">
+  <link rel="stylesheet" href="universal.css">
+  <link rel="stylesheet" href="product.css">
+  <script src="js/cart.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+  .hamburger{
+    display: none !important;
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 8px;
+  }
+  body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #98ccfa 100%);
+            min-height: 100vh;
+            transition: all 0.3s ease-in-out;
+            padding-top: 20px; /* Space for fixed navbar */
+        }
+  @media (max-width: 768px) {
+    .hamburger{
+      display: flex !important;
+    }
+  }
+</style>
+<body>
+  <div class="navbar-container" style="height: 70px;">
+    <a href="HOME.html"><div class="navbar-logo"><img src="assets/EVORA-LOGO.png" width="125" alt="Evora logo"></div></a>
+    <!-- Hamburger Icon -->
+    <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <!-- Desktop Menu -->
+    <ul class="navbar">
+      <li><a href="BRANDS.HTML">Brands</a></li>
+      <li><a href="product2.html">Product</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Mobile Sidebar (keeps your markup) -->
+  <div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul style="padding-left: 0px;">
+    <li><a href="HOME.html">Home</a></li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="BRANDS.HTML" class="split-button-link1">
+        <div class="split-button-left">
+          <i class="fa-solid fa-building"></i>
+          Brands
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="Haier-productpage.html">Haier</a></li>
+        <li><a href="samsung-productpage.html">Samsung</a></li>
+        <li><a href="LG-productpage.html">LG</a></li>
+        <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
+        <li><a href="BOSCH-productpage.html">Bosch</a></li>
+        <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+        <li><a href="Panasonic-productpage.html">Panasonic</a></li>
+        <li><a href="Sony-productpage.html">Sony</a></li>
+        <li><a href="Apple-productpage.html">Apple</a></li>
+      </ul>
+    </li>
+    <li class="mobile-dropdown-item">
+      <div class="split-button">
+        <a href="product2.html" class="split-button-link2">
+        <div class="split-button-left">
+          <i class="fa-solid fa-blender"></i>
+          Appliances
+        </div>
+        </a>
+
+        <div class="split-button-right" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="mobile-dropdown">
+        <li><a href="product2.html">Washers & Dryers</a></li>
+        <li><a href="product2.html">Refrigerators</a></li>
+        <li><a href="product2.html">Microwaves</a></li>
+        <li><a href="product2.html">Air Conditioners</a></li>
+        <li><a href="product2.html">Dishwashers</a></li>
+        <li><a href="product2.html">Cooktops & Ovens</a></li>
+        <li><a href="product2.html">Vacuum Cleaners</a></li>
+      </ul>
+    </li>
+    <li><a href="product2.html">Product</a></li>
+    <li><a href="compare.html">Compare</a></li>
+    <li><a href="Contact.html">Contact Us</a></li>
+    </ul>
+  </div>
+
+  <header>
+    <h1>Refrigerator Comparison</h1>
+    <p>Compare the leading refrigerator brands side-by-side and make an informed decision — find the best model for your home’s style, performance and value</p>
+  </header>
+
+  <section class="comparison-table" aria-label="Refrigerator comparison table">
+    <table id="compareTable" role="table" aria-describedby="table-desc">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Haier</th>
+          <th>Samsung</th>
+          <th>LG</th>
+          <th>Whirlpool</th>
+          <th>Bosch</th>
+          <th>Electrolux</th>
+          <th>Panasonic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feature">Model</td>
+          <td>Haier HRF-619SS</td>
+          <td>Samsung RT42T5558S8</td>
+          <td>LG GL-T402JPZU</td>
+          <td>Whirlpool IF INV CNV 355</td>
+          <td>Bosch KGN57AI50I</td>
+          <td>Electrolux EQE6879A</td>
+          <td>Panasonic NR-BX468V</td>
+        </tr>
+        <tr>
+          <td class="feature">Capacity</td>
+          <td>565 L</td>
+          <td>415 L</td>
+          <td>420 L</td>
+          <td>340 L</td>
+          <td>505 L</td>
+          <td>600 L</td>
+          <td>450 L</td>
+        </tr>
+        <tr>
+          <td class="feature">Type</td>
+          <td>Side-by-Side</td>
+          <td>Double Door</td>
+          <td>Smart Inverter Double Door</td>
+          <td>Convertible Double Door</td>
+          <td>Frost Free Double Door</td>
+          <td>French Door</td>
+          <td>Inverter Double Door</td>
+        </tr>
+        <tr>
+          <td class="feature">Energy Rating</td>
+          <td>3 Star</td>
+          <td>4 Star</td>
+          <td>5 Star</td>
+          <td>3 Star</td>
+          <td>4 Star</td>
+          <td>5 Star</td>
+          <td>4 Star</td>
+        </tr>
+        <tr>
+          <td class="feature">Compressor Type</td>
+          <td>Inverter Compressor</td>
+          <td>Digital Inverter</td>
+          <td>Smart Inverter</td>
+          <td>Intellisense Inverter</td>
+          <td>Vario Inverter</td>
+          <td>Inverter Linear</td>
+          <td>ECONAVI Inverter</td>
+        </tr>
+        <tr>
+          <td class="feature">Cooling Technology</td>
+          <td>Frost Free Twin Cooling</td>
+          <td>All-around Cooling</td>
+          <td>Multi Air Flow Cooling</td>
+          <td>6th Sense Deep Freeze</td>
+          <td>VitaFresh Plus</td>
+          <td>Multi Air Flow System</td>
+          <td>Econavi & Ag Clean</td>
+        </tr>
+        <tr>
+          <td class="feature">Smart Features</td>
+          <td>Touch Control Panel</td>
+          <td>SmartThings App</td>
+          <td>ThinQ App Control</td>
+          <td>Convertible Freezer</td>
+          <td>SuperCool Function</td>
+          <td>Smart Sensor Cooling</td>
+          <td>AI Inverter Control</td>
+        </tr>
+        <tr>
+          <td class="feature">Warranty</td>
+          <td>1 Year + 10 Years on Compressor</td>
+          <td>1 Year + 10 Years on Compressor</td>
+          <td>1 Year + 10 Years on Compressor</td>
+          <td>1 Year + 10 Years on Compressor</td>
+          <td>2 Years + 10 Years on Compressor</td>
+          <td>1 Year + 10 Years on Compressor</td>
+          <td>1 Year + 12 Years on Compressor</td>
+        </tr>
+        <tr>
+          <td class="feature">Approx. Price</td>
+          <td>$766.67</td>
+          <td>$817.41</td>
+          <td>$789.22</td>
+          <td>$653.93</td>
+          <td>$958.34</td>
+          <td>$1071.09</td>
+          <td>$879.42</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+ 
+<!-- FOOTER (unchanged) -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Brand Section -->
+    <div class="footer-section">
+       <div class="footer-logo"><a href="HOME.html"><img src="assets/EVORA-LOGO.png" alt="Evora Electronics Logo" class="footer-logo-img" width="125"></a></div>
+      <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255)"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200)"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5)"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85)"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="terms and services.html">Terms & Services</a></li>
+        <li><a href="privacy policy.html">Privacy Policy</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+        <li><a href="About us .html">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-section">
+          <h4>Appliance Types</h4>
+          <ul>
+            <li><a href="product2.html">Washers & Dryers</a></li>
+            <li><a href="product2.html">Refrigerators</a></li>
+            <li><a href="product2.html">Microwaves</a></li>
+            <li><a href="product2.html">Air Conditioners</a></li>
+            <li><a href="product2.html">Dishwashers</a></li>
+          </ul>
+        </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <ul>
+        <li>
+      <a><address>
+        <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
+          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@evora.com">info@evora.com</a>
+    </address></a></li></ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="privacy policy.html">Privacy Policy</a> •
+      <a href="terms and services.html">Terms of Service</a> •
+    </div>
+  </div>
+</footer>
+
+
+  <!-- Inline script: adds data-label to each TD (so mobile stacked view can show header label) -->
+  <script>
+    (function () {
+      // Add data-label attributes to td elements based on current thead th text (keeps HTML unchanged).
+      function addDataLabels() {
+        var table = document.getElementById('compareTable');
+        if (!table) return;
+        var headers = Array.from(table.querySelectorAll('thead th')).map(function (th) {
+          return th.textContent.trim();
+        });
+        var rows = table.querySelectorAll('tbody tr');
+        rows.forEach(function (tr) {
+          var cells = Array.from(tr.children);
+          cells.forEach(function (td, i) {
+            // i maps to the header index
+            var label = headers[i] || '';
+            td.setAttribute('data-label', label);
+          });
+        });
+      }
+
+      // Run early
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addDataLabels);
+      } else {
+        addDataLabels();
+      }
+    })();
+  </script>
+</body>
+</html>
