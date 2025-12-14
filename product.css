@@ -736,7 +736,7 @@ body::after {
             color: #333;
             font-family: Arial, sans-serif;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-            margin-top: 40px;
+            margin-top:0px;
         }
         .footer-container {
             max-width: 1200px;

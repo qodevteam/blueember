@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aptech Employees</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    tr:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aptech Employees</h1>
+  <table id="employeeTable">
+    <thead>
+      <tr>
+        <th>Department</th>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <script>
+    fetch('employees.xml').then(r=>r.text()).then(
+      d=>{const p=new DOMParser(),
+      x=p.parseFromString(d,'text/xml'),
+      ds=x.getElementsByTagName('department'),
+      t=document.querySelector('#employeeTable tbody');
+      for(let dept of ds){
+        const dn=dept.getAttribute('name'),
+        es=dept.getElementsByTagName('employee');
+        
+        for(let emp of es){
+          const n=emp.getElementsByTagName('name')[0].textContent,
+          pos=emp.getElementsByTagName('position')[0].textContent,
+          sal=emp.getElementsByTagName('salary')[0].textContent,
+          row=document.createElement('tr');
+          row.innerHTML=`<td>${dn}</td><td>${n}</td><td>${pos}</td><td>${sal}</td>`;
+          t.appendChild(row);
+          }
+        }
+      }
+    );
+  </script>
+</body>
+</html>
