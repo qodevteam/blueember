@@ -412,12 +412,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Left part click handler - navigate to link
-    leftPart.addEventListener('click', function (e) {
-      if (e.target !== link && e.target !== leftPart) {
-        return;
-      }
-      // Allow the link to work normally
-    });
+    if (leftPart) {
+      leftPart.addEventListener('click', function (e) {
+        if (e.target !== link && e.target !== leftPart) {
+          return;
+        }
+        // Allow the link to work normally
+      });
+    }
 
     // Prevent dropdown toggle when clicking on nested links
     dropdown.addEventListener('click', function (e) {
