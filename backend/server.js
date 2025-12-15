@@ -13,6 +13,11 @@ app.use(express.json());
 // OpenRouter API Key
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
+// Root Route for checking status
+app.get('/', (req, res) => {
+    res.send('Blue Ember API is running! 🚀');
+});
+
 // --- Chatbot Route (OpenRouter) ---
 app.post('/api/chat', async (req, res) => {
     const { message, model, enableReasoning } = req.body;
