@@ -7,7 +7,19 @@ const app = express();
 const port = 3000;
 
 // Middleware
-app.use(cors());
+// Middleware
+const allowedOrigins = ['https://qodevteam.github.io', 'http://localhost:3000'];
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // OpenRouter API Key
