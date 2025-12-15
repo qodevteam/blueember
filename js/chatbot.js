@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // API Configuration - Auto-detects localhost vs production
     const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:3000/api/chat'
-        : 'https://YOUR_VERCEL_URL_HERE/api/chat'; // Replace after deploying backend
+        : 'https://blueember-mruabw2n6-qodevs-projects.vercel.app/api/chat'; // Production Backend URL
 
     const chatBtn = document.getElementById('chat-bubble-btn');
     const chatWindow = document.getElementById('chat-window');
