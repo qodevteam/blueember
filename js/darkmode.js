@@ -1,43 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Create and inject the toggle button if it doesn't exist
-    if (!document.getElementById('dark-mode-toggle')) {
-        const toggleBtn = document.createElement('button');
-        toggleBtn.id = 'dark-mode-toggle';
-        toggleBtn.ariaLabel = 'Toggle Dark Mode';
-        toggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i>'; updateIcon();
+    // 1. Desktop Toggle: Create and inject if not exists (Legacy Support)
+    let desktopBtn = document.getElementById('dark-mode-toggle');
+    if (!desktopBtn) {
+        desktopBtn = document.createElement('button');
+        desktopBtn.id = 'dark-mode-toggle';
+        desktopBtn.ariaLabel = 'Toggle Dark Mode';
 
-        // Append toggle button to specific container if it exists, otherwise body
+        // Use existing classes plus new generic one
+        desktopBtn.className = 'navbar-toggle theme-toggle-btn';
+
+        // Initial icon placeholder
+        desktopBtn.innerHTML = '<i class="bx bx-moon-star"></i> ';
+
         const navbarContainer = document.getElementById('dark-mode-li');
         if (navbarContainer) {
-            navbarContainer.appendChild(toggleBtn);
-            toggleBtn.classList.add('navbar-toggle'); // Add class for specific styling
+            navbarContainer.appendChild(desktopBtn);
         } else {
-            document.body.appendChild(toggleBtn);
+            document.body.appendChild(desktopBtn);
         }
-
-        // Event listener for toggle
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-
-            // Save preference
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-
-            updateIcon();
-        });
+    } else {
+        // Enforce class if it was manually added but missing class
+        desktopBtn.classList.add('theme-toggle-btn');
     }
 
-    // 3. Check LocalStorage for preference
+    // 2. Attach Event Listeners to ALL theme toggles (desktop + mobile)
+    const allToggles = document.querySelectorAll('#dark-mode-toggle, #mobile-theme-toggle, .theme-toggle-btn');
+
+    allToggles.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleDarkModeLogic();
+        });
+    });
+
+    // 3. Initialize State based on LocalStorage
     const currentTheme = localStorage.getItem('theme');
     if (currentTheme === 'dark') {
         enableDarkMode();
+    } else {
+        // Ensure UI is synced for light mode
+        updateIcons(false);
     }
 });
 
-function toggleDarkMode() {
+function toggleDarkModeLogic() {
     const body = document.body;
     if (body.classList.contains('dark-mode')) {
         disableDarkMode();
@@ -49,22 +55,22 @@ function toggleDarkMode() {
 function enableDarkMode() {
     document.body.classList.add('dark-mode');
     localStorage.setItem('theme', 'dark');
-    updateIcon(true);
+    updateIcons(true);
 }
 
 function disableDarkMode() {
     document.body.classList.remove('dark-mode');
     localStorage.setItem('theme', 'light');
-    updateIcon(false);
+    updateIcons(false);
 }
 
-function updateIcon(isDark) {
-    const btn = document.getElementById('dark-mode-toggle');
-    if (btn) {
+function updateIcons(isDark) {
+    const allToggles = document.querySelectorAll('#dark-mode-toggle, #mobile-theme-toggle, .theme-toggle-btn');
+    allToggles.forEach(btn => {
         if (isDark) {
-            btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            btn.innerHTML = '<i class="bx bx-sun-dim"></i>';
         } else {
-            btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            btn.innerHTML = '<i class="bx bx-moon-star"></i>';
         }
-    }
+    });
 }

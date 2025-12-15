@@ -48,9 +48,10 @@
   }
 
   .navbar-container {
-    padding: 13px 6px 6px 6px;
-        BORDER-RADIUS: 0PX 0PX 20PX 20PX !important;
-            border: 1px solid #8282824d;
+    padding: 20px 6px 10px 6px;
+    BORDER-RADIUS: 0PX 0PX 20PX 20PX !important;
+    border: 1px solid #8282824d;
+    top: -10px !important;
   }
 
   .navbar-logo {
@@ -328,14 +329,14 @@
 /* 2. Container Layout */
 .search-container {
   position: relative;
-    width: 400px;
-    height: 50px;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    padding: 0;
+  width: 400px;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  padding: 0;
 }
 
 /* Desktop Constraint */
@@ -400,7 +401,7 @@
   height: 100%;
   border: none;
   outline: none;
-  
+
   background: transparent;
   padding-left: clamp(15px, 3vw, 30px);
   padding-right: 10px;
@@ -429,8 +430,8 @@
 }
 
 .search-button i {
-      color: #000000;
-    font-size: 28px !important;
+  color: #000000;
+  font-size: 28px !important;
 }
 
 .search-container:focus-within .search-button i {
@@ -439,7 +440,7 @@
 
 /* Media query for max-width: 700px - Space for manual editing */
 @media (max-width: 700px) {
-   .hero-images .hero-img {
+  .hero-images .hero-img {
     height: 336PX;
     POSITION: RELATIVE;
     TOP: -13PX;
@@ -447,56 +448,62 @@
 }
 
 @media (max-width: 480px) {
-   .hero-images .hero-img {
+  .hero-images .hero-img {
     height: 336PX;
     POSITION: RELATIVE;
     TOP: -30PX;
   }
+
   body {
-        padding: 0px;
-    }
-    .search-container::before, .search-container::after {
-      inset: -2px !important;
-    }
-    .search-input{
-      margin: 0px -35px 0px 0px !important;
-    }
-    .search-button{
-      right: -8px !important;
-    }
-    .search-button i{
-      padding: 8px 19px 8px 19px !important;
-    }
+    padding: 0px;
+  }
+
+  .search-container::before,
+  .search-container::after {
+    inset: -2px !important;
+  }
+
+  .search-input {
+    margin: 0px -35px 0px 0px !important;
+  }
+
+  .search-button {
+    right: -8px !important;
+  }
+
+  .search-button i {
+    padding: 8px 19px 8px 19px !important;
+  }
 }
 
 /* --- Animated Search Bar Styles --- */
 /* Define the Angle Property for smooth rotation */
 @property --angle {
- syntax: '<angle>';
- initial-value: 0deg;
- inherits: false;
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
 
 /* The Animated RGB Border & Glow */
 .search-container::before,
 .search-container::after {
- content: '';
- position: absolute;
- /* Negative inset controls border thickness */
- inset: -3px;
- border-radius: 50px;
- z-index: -1;
- /* YOUR SPECIFIC COLORS */
- background: conic-gradient(from var(--angle), #0099ff, #0099ff, #01e8bc, #01e8bc, #0099ff);
- /* Start Hidden */
- opacity: 0;
- transition: opacity 0.3s ease;
+  content: '';
+  position: absolute;
+  /* Negative inset controls border thickness */
+  inset: -3px;
+  border-radius: 50px;
+  z-index: -1;
+  /* YOUR SPECIFIC COLORS */
+  background: conic-gradient(from var(--angle), #0099ff, #0099ff, #01e8bc, #01e8bc, #0099ff);
+  /* Start Hidden */
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* Special Blur for the Shadow (::after) */
 .search-container::after {
- filter: blur(25px);
- z-index: -2;
+  filter: blur(25px);
+  z-index: -2;
 }
 
 /* Animation Triggers (Hover AND Click/Focus) */
@@ -505,301 +512,310 @@
 .search-container:hover::after,
 .search-container:focus-within::before,
 .search-container:focus-within::after {
- opacity: 1;
- animation: spin-clockwise 10s linear infinite;
+  opacity: 1;
+  animation: spin-clockwise 10s linear infinite;
 }
 
 /* The Input Field */
 .search-input {
- height: 100%;
-    border: none;
-    outline: none;
-    position: relative;
-    z-index: 501;
-    background: #ffffff;
-    border-radius: 50px;
-    margin: 0px -30px 0px 0px;
-    padding: 0 15px 0 15px;
-    font-size: 18px;
-    color: #000000;
-    box-shadow: inset 0 0 0 1px #000000;
-    transition: box-shadow 0.3s ease;
+  height: 100%;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 501;
+  background: #ffffff;
+  border-radius: 50px;
+  margin: 0px -30px 0px 0px;
+  padding: 0 15px 0 15px;
+  font-size: 18px;
+  color: #000000;
+  box-shadow: inset 0 0 0 1px #000000;
+  transition: box-shadow 0.3s ease;
 
 
 }
 
 .search-input::placeholder {
- color: #008080; /* Teal Placeholder */
- opacity: 0.7;
+  color: #008080;
+  /* Teal Placeholder */
+  opacity: 0.7;
 }
 
 /* Hide the static Teal border when the animated border is active */
 .search-container:hover .search-input,
 .search-container:focus-within .search-input {
- box-shadow: inset 0 0 0 0 transparent;
+  box-shadow: inset 0 0 0 0 transparent;
 }
 
 /* Search Icon */
 .search-button {
- position: relative;
-    right: -6px;
-    width: 103px;
-    height: 65px;
-    pointer-events: auto;
-    background: #0099ff;
-    border: none;
-    padding: 16px 19px 15px 40px;
+  position: relative;
+  right: -6px;
+  width: 103px;
+  height: 65px;
+  pointer-events: auto;
+  background: #0099ff;
+  border: none;
+  padding: 16px 19px 15px 40px;
 }
 
 .search-button i {
-     fill: #008080;
-    margin: 16px;
-    padding: 11px 22px 11px 22px;
-    align-self: center;
-    border-radius: 25px;
-    display: table;
-    background: #ffffff8a;
-    transition: color 0.3s ease;
+  fill: #008080;
+  margin: 16px;
+  padding: 11px 22px 11px 22px;
+  align-self: center;
+  border-radius: 25px;
+  display: table;
+  background: #ffffff8a;
+  transition: color 0.3s ease;
 }
 
 /* Make icon black when typing */
 .search-container:focus-within .search-button i {
- color: #000000;
+  color: #000000;
 }
 
 /* The Animation Keyframes */
 @keyframes spin-clockwise {
- 0% {
-   --angle: 0deg;
- }
- 100% {
-   --angle: 360deg;
- }
+  0% {
+    --angle: 0deg;
+  }
+
+  100% {
+    --angle: 360deg;
+  }
 }
 
 /* Override existing search-container styles */
 .search-container {
- position: relative;
- width: 400px;
- height: 50px;
- border-radius: 50px;
- display: flex;
- justify-content: center;
- align-items: center;
- z-index: 1;
- padding: 0; /* Remove existing padding */
+  position: relative;
+  width: 400px;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  padding: 0;
+  /* Remove existing padding */
 }
 
 .search-container form {
- width: 100%;
- height: 100%;
- position: relative;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 @media (max-width: 480px) {
- .navbar-logo{
-   width: 57px !important; height: 5px !important; scale: 0.6 !important;
- }
- .search-container{
-   height: 44px !important;
-   width: 220px;
- }
- .search-input{
-   padding: 0 15px 0 10px !important;
- }
+  .navbar-logo {
+    width: 57px !important;
+    height: 5px !important;
+    scale: 0.6 !important;
+  }
+
+  .search-container {
+    height: 44px !important;
+    width: 220px;
+  }
+
+  .search-input {
+    padding: 0 15px 0 10px !important;
+  }
 }
+
 /* Mobile Dropdown */
-   .mobile-dropdown-item {
-       position: relative;
-   }
+.mobile-dropdown-item {
+  position: relative;
+}
 
-   .mobile-dropdown {
-       display: none;
-       list-style: none;
-       padding-left: 0;
-       margin: 8px 0 0;
-       overflow: hidden;
-       max-height: 0;
-       transition: max-height 0.9s ease-in-out;
-   }
+.mobile-dropdown {
+  display: none;
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.9s ease-in-out;
+}
 
-   .mobile-dropdown-item.active .mobile-dropdown {
-       display: block;
-       transition: max-height 0.9s ease-in-out;
-       max-height: 500px;
-   }
-    /* Enhanced Split Button & Dropdown Theme */
-   .split-button {
-       background: rgba(255, 255, 255, 0.6);
-       backdrop-filter: blur(10px);
-       border: 1px solid rgba(255, 255, 255, 0.5);
-       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-   }
+.mobile-dropdown-item.active .mobile-dropdown {
+  display: block;
+  transition: max-height 0.9s ease-in-out;
+  max-height: 500px;
+}
 
-   .split-button:hover {
-       box-shadow: 0 8px 15px rgba(0, 153, 255, 0.15) !important;
-       border-color: rgba(0, 153, 255, 0.3);
-       transform: translateY(-1px);
-   }
+/* Enhanced Split Button & Dropdown Theme */
+.split-button {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-   .split-button-right {
-       border-left: 1px solid rgba(0, 0, 0, 0.06);
-       position: relative;
-       overflow: hidden;
-       color: #1e293b;
-   }
+.split-button:hover {
+  box-shadow: 0 8px 15px rgba(0, 153, 255, 0.15) !important;
+  border-color: rgba(0, 153, 255, 0.3);
+  transform: translateY(-1px);
+}
 
-   .split-button-right::before {
-       content: '';
-       position: absolute;
-       inset: 0;
-       background: linear-gradient(135deg, #0099ff, #00c11b);
-       opacity: 0;
-       transition: opacity 0.3s ease;
-       z-index: 0;
-   }
+.split-button-right {
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+  color: #1e293b;
+}
 
-   .split-button-right:hover::before {
-       opacity: 0.1;
-   }
+.split-button-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0099ff, #00c11b);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
 
-   .split-button-right i {
-       z-index: 1;
-       position: relative;
-       transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-   }
+.split-button-right:hover::before {
+  opacity: 0.1;
+}
 
-   .split-button-right:hover i {
-       color: #0099ff;
-   }
+.split-button-right i {
+  z-index: 1;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
 
-   /* Update for Single Toggle Button */
-   .split-button.single-toggle-action {
-       cursor: pointer;
-       display: flex;
-       align-items: center;
-       justify-content: space-between;
-       padding: 0;
-   }
+.split-button-right:hover i {
+  color: #0099ff;
+}
 
-   .split-button.single-toggle-action:active {
-       transform: scale(0.98);
-   }
+/* Update for Single Toggle Button */
+.split-button.single-toggle-action {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+}
 
-   .split-button-content {
-       display: flex;
-       align-items: center;
-       padding: 12px 12px 12px 20px;
-       flex-grow: 1;
-       font-weight: bold;
-       color: #1e293b;
-       gap: 10px;
-   }
+.split-button.single-toggle-action:active {
+  transform: scale(0.98);
+}
 
-   .split-button-content i {
-       color: #334155;
-       font-size: 16px;
-   }
+.split-button-content {
+  display: flex;
+  align-items: center;
+  padding: 12px 12px 12px 20px;
+  flex-grow: 1;
+  font-weight: bold;
+  color: #1e293b;
+  gap: 10px;
+}
 
-   .split-button-icon {
-       padding: 12px 20px 12px 12px;
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       transition: transform 0.3s ease;
-   }
+.split-button-content i {
+  color: #334155;
+  font-size: 16px;
+}
 
-   /* Remove the split border */
-   .split-button.single-toggle-action .split-button-right,
-   .split-button.single-toggle-action .split-button-icon {
-       border-left: none;
-       background: transparent;
-   }
+.split-button-icon {
+  padding: 12px 20px 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
 
-   /* Hover effect for the whole button */
-   .split-button.single-toggle-action:hover {
-       background: rgba(255, 255, 255, 0.95);
-   }
+/* Remove the split border */
+.split-button.single-toggle-action .split-button-right,
+.split-button.single-toggle-action .split-button-icon {
+  border-left: none;
+  background: transparent;
+}
 
-   /* Rotate icon when expanded */
-   .split-button.single-toggle-action[aria-expanded="true"] .split-button-icon i {
-       transform: rotate(180deg);
-   }
+/* Hover effect for the whole button */
+.split-button.single-toggle-action:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
 
-   /* Ensure existing split-button styles don't conflict */
-   .split-button.single-toggle-action .split-button-content {
-       cursor: pointer;
-   }
+/* Rotate icon when expanded */
+.split-button.single-toggle-action[aria-expanded="true"] .split-button-icon i {
+  transform: rotate(180deg);
+}
 
-   /* Desktop Dropdown Specifics */
-   @media (min-width: 993px) {
-       .navbar .mobile-dropdown {
-       position: absolute;
-       top: 56px;
-       left: 50%;
-       transform: translateX(-50%) translateY(10px);
-       width: 200px;
-       background: rgb(255 255 255);
-       backdrop-filter: blur(20px);
-       border-radius: 19px;
-       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
-       padding: 10px;
-       opacity: 0;
-       visibility: hidden;
-       overflow: visible;
-       display: block !important;
-       max-height: none !important;
-       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-       z-index: 1100;
-     }
+/* Ensure existing split-button styles don't conflict */
+.split-button.single-toggle-action .split-button-content {
+  cursor: pointer;
+}
 
-       .navbar .mobile-dropdown-item.active .mobile-dropdown {
-           opacity: 1;
-           visibility: visible;
-           transform: translateX(-50%) translateY(0);
-       }
+/* Desktop Dropdown Specifics */
+@media (min-width: 993px) {
+  .navbar .mobile-dropdown {
+    position: absolute;
+    top: 56px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 200px;
+    background: rgb(255 255 255);
+    backdrop-filter: blur(20px);
+    border-radius: 19px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    overflow: visible;
+    display: block !important;
+    max-height: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1100;
+  }
 
-       .navbar .mobile-dropdown::before {
-           content: '';
-           position: absolute;
-           top: -16px;
-           left: 50%;
-           transform: translateX(-50%);
-           width: 32px;
-           height: 32px;
-           background-color: #ffffff;
-           /* Curved 4-point star (Sparkle) shape using SVG mask */
-           -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
-           mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
-           -webkit-mask-size: contain;
-           mask-size: contain;
-           -webkit-mask-repeat: no-repeat;
-           mask-repeat: no-repeat;
-           /* Use drop-shadow filter since mask clips box-shadow */
-           filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-           clip-path: none;
-           box-shadow: none;
-       }
+  .navbar .mobile-dropdown-item.active .mobile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
 
-       .navbar .mobile-dropdown li {
-           margin: 0;
-       }
+  .navbar .mobile-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    background-color: #ffffff;
+    /* Curved 4-point star (Sparkle) shape using SVG mask */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    /* Use drop-shadow filter since mask clips box-shadow */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    clip-path: none;
+    box-shadow: none;
+  }
 
-       .navbar .mobile-dropdown a {
-           background: transparent;
-           color: #334155;
-           font-weight: 500;
-           padding: 10px 15px;
-           border-radius: 10px;
-           text-align: left;
-           border: none;
-           display: block;
-       }
+  .navbar .mobile-dropdown li {
+    margin: 0;
+  }
 
-       .navbar .mobile-dropdown a:hover {
-           background: rgba(0, 153, 255, 0.08);
-           color: #0099ff;
-           padding-left: 20px;
-       }
-   }
+  .navbar .mobile-dropdown a {
+    background: transparent;
+    color: #334155;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-align: left;
+    border: none;
+    display: block;
+  }
+
+  .navbar .mobile-dropdown a:hover {
+    background: rgba(0, 153, 255, 0.08);
+    color: #0099ff;
+    padding-left: 20px;
+  }
+}

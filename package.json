@@ -1,0 +1,25 @@
+{
+  "name": "blue-ember",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server",
+    "dev": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qodevteam/blueember.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qodevteam/blueember/issues"
+  },
+  "homepage": "https://github.com/qodevteam/blueember#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
