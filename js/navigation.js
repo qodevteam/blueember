@@ -212,9 +212,9 @@ function showNotification(message, type = 'info') {
 
   // Add to page
   document.body.appendChild(notification);
-  
+
   // Add event listener for close button
-  notification.querySelector('.notification-close').addEventListener('click', function() {
+  notification.querySelector('.notification-close').addEventListener('click', function () {
     this.parentElement.parentElement.remove();
   });
 
@@ -393,44 +393,46 @@ window.initProductModals = initProductModals;
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const splitButtons = document.querySelectorAll('.split-button');
-  
+
   splitButtons.forEach(button => {
     const leftPart = button.querySelector('.split-button-left');
     const rightPart = button.querySelector('.split-button-right');
     const link = button.querySelector('.split-button-link');
     const dropdown = button.parentElement.querySelector('.mobile-dropdown');
-    
+
     // Right part (toggle icon) click handler
-    rightPart.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleDropdown(button, dropdown);
-    });
-    
+    if (rightPart) {
+      rightPart.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleDropdown(button, dropdown);
+      });
+    }
+
     // Left part click handler - navigate to link
-    leftPart.addEventListener('click', function(e) {
+    leftPart.addEventListener('click', function (e) {
       if (e.target !== link && e.target !== leftPart) {
         return;
       }
       // Allow the link to work normally
     });
-    
+
     // Prevent dropdown toggle when clicking on nested links
-    dropdown.addEventListener('click', function(e) {
+    dropdown.addEventListener('click', function (e) {
       e.stopPropagation();
     });
   });
-  
+
   function toggleDropdown(button, dropdown) {
-    const isExpanded = button.getAttribute('aria-expanded') === 'true' || 
-                       button.parentElement.classList.contains('active');
-    
+    const isExpanded = button.getAttribute('aria-expanded') === 'true' ||
+      button.parentElement.classList.contains('active');
+
     // Update button state
     button.setAttribute('aria-expanded', !isExpanded);
     button.parentElement.classList.toggle('active', !isExpanded);
-    
+
     // Toggle dropdown
     if (!isExpanded) {
       dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
@@ -438,20 +440,20 @@ document.addEventListener('DOMContentLoaded', function() {
       dropdown.style.maxHeight = '0';
     }
   }
-/* Search Bar Logic appended by Assistant */
-document.addEventListener("DOMContentLoaded", function() {
+  /* Search Bar Logic appended by Assistant */
+  document.addEventListener("DOMContentLoaded", function () {
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchInput');
 
     // Only run if the search bar exists on this page
     if (searchForm && searchInput) {
-        searchForm.addEventListener('submit', function(e) {
-            // Prevent submission if input is empty
-            if (!searchInput.value.trim()) {
-                e.preventDefault();
-                searchInput.focus();
-            }
-        });
+      searchForm.addEventListener('submit', function (e) {
+        // Prevent submission if input is empty
+        if (!searchInput.value.trim()) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
     }
-});
+  });
 });
