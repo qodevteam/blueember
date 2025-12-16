@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch'); // Removed: Use native Node 18+ fetch
 
 // Load environment variables locally
 if (process.env.NODE_ENV !== 'production') {
@@ -140,7 +140,9 @@ app.post('/api/chat', async (req, res) => {
     console.error('🔥 All keys in chain failed.');
     res.status(500).json({
         error: 'All API providers failed.',
-        lastError: lastError?.message || 'Unknown error'
+        details: lastError?.message || 'Unknown error',
+        note: 'Check Vercel Logs for individual key errors.',
+        chainLength: chain.length
     });
 });
 
