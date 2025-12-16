@@ -102,8 +102,9 @@ app.post('/api/chat', async (req, res) => {
                 headers: {
                     'Authorization': `Bearer ${keyObj.key}`,
                     'Content-Type': 'application/json',
-                    'HTTP-Referer': 'https://blueember.ai', // Required by some providers
-                    'X-Title': 'Blue Ember'
+                    // STEALTH MODE: Use standard browser headers
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'Referer': 'https://google.com' // Generic referer
                 },
                 body: JSON.stringify({
                     model: model,
@@ -133,6 +134,8 @@ app.post('/api/chat', async (req, res) => {
             console.error(`❌ Failed ${keyObj.id}: ${error.message}`);
             lastError = error;
             // Continue to next key in chain...
+            // Add a polite delay to act like a human/avoid WAF triggers
+            await new Promise(r => setTimeout(r, 1000));
         }
     }
 
@@ -147,11 +150,13 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // Start Server
+// Export for Vercel (Serverless)
+module.exports = app;
+
+// Local Development Support
 if (require.main === module) {
     app.listen(port, () => {
         console.log(`Evora Backend v2 running on port ${port}`);
         console.log(`Loaded ${getAllKeys().length} API Keys total.`);
     });
 }
-
-module.exports = app;
