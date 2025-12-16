@@ -1391,10 +1391,14 @@
       </div>
       <div class="chat-model-select-container">
         <select id="chat-model-selector" class="chat-model-selector" aria-label="Select AI Model">
-          <option value="openai/gpt-oss-20b:free">GPT-OSS 20B (Free, Reasoning)</option>
+          <option value="openai/gpt-oss-120b:free">GPT-OSS 120B (Free)</option>
+          <option value="z-ai/glm-4.6:free">GLM 4.6 (Free)</option>
+          <option value="deepseek/deepseek-r1-distill-qwen-32b:free">DeepSeek R1 Distill Qwen 32B (Free)</option>
           <option value="mistralai/devstral-2512:free">Mistral Devstral (Free)</option>
-          <option value="meta-llama/llama-3.2-3b-instruct:free">Llama 3.2 3B (Free)</option>
-          <option value="google/gemma-3n-e2b-it:free">Gemma 3n 2B (Free)</option>
+          <option value="mistralai/mistral-nemo-instruct:free">Mistral Nemo Instruct (Free)</option>
+          <option value="deepseek/deepseek-r1:free">DeepSeek R1 (Free)</option>
+          <!-- Keep verified standard backup -->
+          <option value="openai/gpt-oss-20b:free">GPT-OSS 20B (Verified)</option>
         </select>
       </div>
       <button id="chat-close-btn" class="chat-close-btn" aria-label="Close chat">
@@ -1403,7 +1407,7 @@
     </div>
     <div id="chat-body" class="chat-body">
       <div class="message bot">
-        Hello! 👋 How can I assist you with your home appliance needs today?
+        Hello! 👋 How can I assist you today?
       </div>
     </div>
     <div class="chat-footer">

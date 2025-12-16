@@ -1,87 +1,155 @@
-require('dotenv').config({ path: './api.env' });
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
 
+// Load environment variables locally
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config({ path: './api.env' });
+}
+
 const app = express();
 const port = 3000;
 
-// Middleware
-// Middleware
-app.use(cors()); // Allow all origins (simplest fix for deployment)
+// Middleware - OPEN CORS POLICY (As requested)
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-// OpenRouter API Key
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+// --- 🧠 Smart Routing System ---
 
-// Root Route for checking status
-app.get('/', (req, res) => {
-    res.send('Blue Ember API is running! 🚀');
-});
+// 1. Key Harvester: Scans env vars for ANY number of keys
+// Looks for: OPENROUTER_API_KEY, OPENROUTER_API_KEY_2, _3...
+// Looks for: ROUTEWAY_API_KEY, ROUTEWAY_API_KEY_2, _3...
+const getAllKeys = () => {
+    const keys = [];
 
-// --- Chatbot Route (OpenRouter) ---
+    Object.keys(process.env).forEach(key => {
+        // OpenRouter Keys
+        if (key.startsWith('OPENROUTER_API_KEY')) {
+            const val = process.env[key];
+            if (val && val.trim() !== '') {
+                keys.push({
+                    provider: 'OpenRouter',
+                    url: 'https://openrouter.ai/api/v1',
+                    key: val,
+                    id: key
+                });
+            }
+        }
+        // Routeway Keys
+        if (key.startsWith('ROUTEWAY_API_KEY')) {
+            const val = process.env[key];
+            if (val && val.trim() !== '') {
+                keys.push({
+                    provider: 'Routeway',
+                    url: 'https://api.routeway.ai/v1',
+                    key: val,
+                    id: key
+                });
+            }
+        }
+    });
+    return keys;
+};
+
+// 2. Failover Chain Builder (The "Logic")
+const buildFailoverChain = (model, allKeys) => {
+    // 🔍 Rule 1: GPT-OSS-20B (OpenRouter Only)
+    if (model.includes('gpt-oss-20b')) {
+        console.log(`Routing ${model} -> OpenRouter Chain Only`);
+        return allKeys.filter(k => k.provider === 'OpenRouter');
+    }
+
+    // 🔍 Rule 2: GPT-OSS-120B (Hybrid: OR -> RW)
+    if (model.includes('gpt-oss-120b')) {
+        console.log(`Routing ${model} -> Hybrid Chain (OpenRouter First, then Routeway)`);
+        const orKeys = allKeys.filter(k => k.provider === 'OpenRouter');
+        const rwKeys = allKeys.filter(k => k.provider === 'Routeway');
+        return [...orKeys, ...rwKeys];
+    }
+
+    // 🔍 Rule 3: Everything Else (Routeway Only)
+    // Most models are Routeway exclusives in this setup
+    console.log(`Routing ${model} -> Routeway Chain Only`);
+    return allKeys.filter(k => k.provider === 'Routeway');
+};
+
+// --- API Route ---
 app.post('/api/chat', async (req, res) => {
-    const { message, model, enableReasoning } = req.body;
-    const selectedModel = model || 'openai/gpt-oss-20b:free'; // Default to GPT-OSS
+    const { message, model } = req.body;
 
-    if (!message) {
-        return res.status(400).json({ error: 'Message is required' });
-    }
+    if (!message) return res.status(400).json({ error: 'Message required' });
 
-    if (!OPENROUTER_API_KEY || OPENROUTER_API_KEY === 'your_openrouter_key_here') {
-        return res.status(500).json({ error: 'OpenRouter API key is not configured' });
-    }
+    // 1. Get Keys & Build Chain
+    const allKeys = getAllKeys();
+    const chain = buildFailoverChain(model || 'openai/gpt-oss-20b:free', allKeys);
 
-    try {
-        const requestBody = {
-            model: selectedModel,
-            messages: [
-                { role: 'system', content: 'You are Evora AI, a helpful assistant for Evora Electronics. Keep answers concise.' },
-                { role: 'user', content: message }
-            ]
-        };
-
-        // Add reasoning for GPT-OSS model
-        if (enableReasoning) {
-            requestBody.reasoning = { enabled: true };
-        }
-
-        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-                'Content-Type': 'application/json',
-                'HTTP-Referer': 'https://blueember.com',
-                'X-Title': 'Blue Ember Chatbot'
-            },
-            body: JSON.stringify(requestBody)
+    if (chain.length === 0) {
+        return res.status(500).json({
+            error: 'No valid API keys found for this model config.',
+            details: 'Check your Vercel Env Vars. You need OPENROUTER_API_KEY_x or ROUTEWAY_API_KEY_x.'
         });
-
-        const data = await response.json();
-
-        if (data.error) {
-            throw new Error(data.error.message || 'OpenRouter API error');
-        }
-
-        if (!data.choices || !data.choices[0]) {
-            throw new Error('Invalid response from OpenRouter');
-        }
-
-        const botReply = data.choices[0].message.content;
-        res.json({ reply: botReply });
-
-    } catch (error) {
-        console.error('AI Error:', error.message);
-        res.status(500).json({ error: error.message || 'Error processing request' });
     }
+
+    // 2. Execute Chain (The Loop)
+    let lastError = null;
+
+    for (const keyObj of chain) {
+        console.log(`🔄 Trying ${keyObj.provider} (KeyID: ${keyObj.id})...`);
+
+        try {
+            const response = await fetch(`${keyObj.url}/chat/completions`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${keyObj.key}`,
+                    'Content-Type': 'application/json',
+                    'HTTP-Referer': 'https://blueember.ai', // Required by some providers
+                    'X-Title': 'Blue Ember'
+                },
+                body: JSON.stringify({
+                    model: model,
+                    messages: [
+                        { role: 'system', content: 'You are Evora AI. Helpful and concise.' },
+                        { role: 'user', content: message }
+                    ]
+                })
+            });
+
+            // Handle API Errors (HTTP level)
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                const errMsg = errData.error?.message || response.statusText;
+                throw new Error(`${response.status} - ${errMsg}`);
+            }
+
+            const data = await response.json();
+
+            // Success!
+            if (data.choices?.[0]?.message?.content) {
+                console.log(`✅ Success with ${keyObj.id}`);
+                return res.json({ reply: data.choices[0].message.content });
+            }
+
+        } catch (error) {
+            console.error(`❌ Failed ${keyObj.id}: ${error.message}`);
+            lastError = error;
+            // Continue to next key in chain...
+        }
+    }
+
+    // 3. All Failed
+    console.error('🔥 All keys in chain failed.');
+    res.status(500).json({
+        error: 'All API providers failed.',
+        lastError: lastError?.message || 'Unknown error'
+    });
 });
 
-// Start server if main module
+// Start Server
 if (require.main === module) {
     app.listen(port, () => {
-        console.log(`Server running at http://localhost:${port}`);
+        console.log(`Evora Backend v2 running on port ${port}`);
+        console.log(`Loaded ${getAllKeys().length} API Keys total.`);
     });
 }
 
-// Export for Vercel
 module.exports = app;
