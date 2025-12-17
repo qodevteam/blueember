@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Evora Electronics</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://cdn.boxicons.com/2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Styles -->
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="profile_modern.css">
+    <style>
+        /* Navbar Override for Profile Page Consistency */
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simple Navbar for Dashboard -->
+    <nav
+        style="display: flex; justify-content: space-between; padding: 20px 40px; background: var(--card-light); align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <div style="font-weight: 700; font-size: 24px;">Blue<span style="color: var(--primary);">Ember</span></div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <button id="theme-toggle-btn" style="background: none; border: none; font-size: 20px; cursor: pointer;">
+                <i class="bx bx-moon"></i>
+            </button>
+            <a href="index.html" style="text-decoration: none; color: var(--text-main); font-weight: 500;">Back to
+                Home</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+
+        <!-- Sidebar -->
+        <aside class="profile-sidebar">
+            <div class="user-card">
+                <div class="user-avatar-container">
+                    <img src="https://ui-avatars.com/api/?name=User" id="sidebar-avatar" class="user-avatar"
+                        alt="Profile">
+                    <label for="avatar-upload" class="upload-overlay">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                    <input type="file" id="avatar-upload" hidden accept="image/*">
+                </div>
+                <h3 class="user-name" id="sidebar-name">Loading...</h3>
+                <p class="user-email" id="sidebar-email">...</p>
+            </div>
+
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active" onclick="switchTab('dashboard', this)">
+                    <i class="bx bxs-dashboard"></i> Dashboard
+                </a>
+                <a href="#" class="menu-item" onclick="switchTab('orders', this)">
+                    <i class="bx bxs-package"></i> My Orders
+                </a>
+                <a href="#" class="menu-item" onclick="switchTab('addresses', this)">
+                    <i class="bx bxs-map"></i> Addresses
+                </a>
+                <a href="#" class="menu-item" onclick="switchTab('settings', this)">
+                    <i class="bx bxs-cog"></i> Settings
+                </a>
+                <div style="height: 1px; background: var(--border-light); margin: 10px 0;"></div>
+                <a href="#" class="menu-item" id="logout-btn" style="color: #ff4757;">
+                    <i class="bx bx-log-out"></i> Sign Out
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="profile-content">
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="content-card active">
+                <div class="card-header">
+                    <h2>Dashboard</h2>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                    <div
+                        style="background: linear-gradient(135deg, #6c5ce7, #a29bfe); padding: 20px; border-radius: 15px; color: white;">
+                        <h3>Total Orders</h3>
+                        <h1 id="total-orders-count">0</h1>
+                    </div>
+                    <!-- Add more widgets -->
+                </div>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="orders" class="content-card">
+                <div class="card-header">
+                    <h2>Order History</h2>
+                </div>
+                <div id="orders-list">
+                    <!-- Orders Injected Here -->
+                    <p style="color: var(--text-sub);">No orders found.</p>
+                </div>
+            </div>
+
+            <!-- Addresses Tab -->
+            <div id="addresses" class="content-card">
+                <div class="card-header">
+                    <h2>My Addresses</h2>
+                    <button class="btn-primary" onclick="openAddressModal()">
+                        <i class="fas fa-plus"></i> Add New
+                    </button>
+                </div>
+                <div class="address-grid" id="address-grid">
+                    <!-- Addresses Injected Here -->
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="content-card">
+                <div class="card-header">
+                    <h2>Profile Settings</h2>
+                </div>
+                <form id="profile-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="setting-name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="setting-email" disabled style="opacity: 0.7;">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Add Address Modal -->
+    <div class="modal-overlay" id="address-modal">
+        <div class="modal-content">
+            <div class="card-header" style="border: none; margin-bottom: 20px;">
+                <h2>Add New Address</h2>
+                <button onclick="closeAddressModal()"
+                    style="background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-sub);">&times;</button>
+            </div>
+            <form id="address-form">
+                <div class="form-group">
+                    <label>Address Title (e.g., Home, Office)</label>
+                    <input type="text" id="addr-title" placeholder="Home" required>
+                </div>
+                <div class="form-group">
+                    <label>Street Address</label>
+                    <input type="text" id="addr-street" placeholder="123 Main St" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" id="addr-city" required>
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="text" id="addr-state" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Zip Code</label>
+                        <input type="text" id="addr-zip" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" id="addr-country" value="USA">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Save Address</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // --- Core Logic ---
+
+        // 1. Tab Switching
+        function switchTab(tabId, element) {
+            // Hide all tabs
+            document.querySelectorAll('.content-card').forEach(c => c.classList.remove('active'));
+            // Remove active from links
+            document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+
+            // Activate target
+            document.getElementById(tabId).classList.add('active');
+            if (element) element.classList.add('active');
+
+            // Update URL hash for sharing
+            window.location.hash = tabId;
+        }
+
+        // 2. Modal Controls
+        function openAddressModal() {
+            document.getElementById('address-modal').classList.add('open');
+        }
+        function closeAddressModal() {
+            document.getElementById('address-modal').classList.remove('open');
+        }
+
+        // 3. Dark Mode Logic (Sync with LocalStorage)
+        const themeBtn = document.getElementById('theme-toggle-btn');
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
+        // 4. Data Loading & Handling
+        window.addEventListener('dbReady', async () => {
+            const { data: { user } } = await DB.getUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Populate User Info
+            const name = user.user_metadata.full_name || 'User';
+            document.getElementById('sidebar-name').textContent = name;
+            document.getElementById('sidebar-email').textContent = user.email;
+            document.getElementById('setting-name').value = name;
+            document.getElementById('setting-email').value = user.email;
+
+            // Avatar Handling
+            const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+            if (storedAvatar) {
+                document.getElementById('sidebar-avatar').src = storedAvatar;
+            } else {
+                document.getElementById('sidebar-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+            }
+
+            // Load Orders
+            const orders = await DB.getMyOrders(); // Ensure this method exists
+            document.getElementById('total-orders-count').textContent = orders.length;
+
+            // Load Addresses (Mock Implementation if DB method missing)
+            loadAddresses(user.id);
+        });
+
+        // 5. Avatar Upload
+        document.getElementById('avatar-upload').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                // Validate file size (max 2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('Image size should be less than 2MB');
+                    return;
+                }
+
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Please upload an image file');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = async function (event) {
+                    const base64 = event.target.result;
+                    document.getElementById('sidebar-avatar').src = base64;
+
+                    // Save to user metadata/localstorage
+                    const { data: { user } } = await DB.getUser();
+                    if (user) {
+                        // Save to user-specific key
+                        localStorage.setItem('be_avatar_' + user.id, base64);
+
+                        // Dispatch custom event to update profile icon on other pages
+                        window.dispatchEvent(new Event('profilePictureUpdated'));
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 6. Address Handling
+        function loadAddresses(userId) {
+            const addresses = JSON.parse(localStorage.getItem('be_addresses_' + userId) || '[]');
+            const grid = document.getElementById('address-grid');
+            grid.innerHTML = '';
+
+            addresses.forEach(addr => {
+                const card = document.createElement('div');
+                card.className = 'address-card';
+                card.innerHTML = `
+                    <div class="address-type">${addr.title}</div>
+                    <div style="font-weight: 600;">${addr.street}</div>
+                    <div style="color: var(--text-sub); font-size: 14px;">${addr.city}, ${addr.state} ${addr.zip}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        document.getElementById('address-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const { data: { user } } = await DB.getUser();
+            if (!user) return;
+
+            const newAddr = {
+                title: document.getElementById('addr-title').value,
+                street: document.getElementById('addr-street').value,
+                city: document.getElementById('addr-city').value,
+                state: document.getElementById('addr-state').value,
+                zip: document.getElementById('addr-zip').value
+            };
+
+            const addresses = JSON.parse(localStorage.getItem('be_addresses_' + user.id) || '[]');
+            addresses.push(newAddr);
+            localStorage.setItem('be_addresses_' + user.id, JSON.stringify(addresses));
+
+            loadAddresses(user.id);
+            closeAddressModal();
+            e.target.reset();
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            await DB.signOut();
+            window.location.href = 'index.html';
+        });
+
+        // Handle Settings Save
+        document.getElementById('profile-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newName = document.getElementById('setting-name').value;
+            // Update DB user (Mock)
+            // In real app, DB.updateUser({ full_name: newName })
+            alert('Profile updated!');
+        });
+
+    </script>
+</body>
+
+</html>

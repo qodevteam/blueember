@@ -17,6 +17,7 @@
   <link href="universal.css" rel="stylesheet">
   <link href="home.css" rel="stylesheet">
   <link href="darkmode.css" rel="stylesheet">
+  <link href="mobile-sidebar.css" rel="stylesheet">
   <script src="js/finisher-header.es5.min.js"></script>
   <link rel="stylesheet" href="product.css">
 
@@ -27,6 +28,23 @@
   <script src="js/search-integration.js"></script>
   <script src="js/darkmode.js" defer></script>
   <script src="js/app.js" defer></script>
+  <script src="js/db-client.js"></script>
+  <script src="js/profile-dropdown.js" defer></script>
+  <script src="js/logout-injector.js" defer></script>
+  <script>
+    // Simple Auth Check for Navbar
+    document.addEventListener('dbReady', async () => {
+      const { data: { user } } = await DB.getUser();
+      if (user) {
+        // Update Login Links to Profile
+        document.querySelectorAll('a[href="login.html"]').forEach(link => {
+          link.textContent = 'My Profile';
+          link.href = 'profile.html';
+          link.innerHTML = '<i class="fas fa-user-circle"></i> My Profile';
+        });
+      }
+    });
+  </script>
   <link href="RESPONSIVENESS.css" rel="stylesheet">
   <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -391,6 +409,7 @@
         /* Use drop-shadow filter since mask clips box-shadow */
         filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
         clip-path: none;
+        mix-blend-mode: darken;
         box-shadow: none;
       }
 
@@ -414,6 +433,103 @@
         color: #0099ff;
         padding-left: 20px;
       }
+    }
+
+    .profile-dropdown-container {
+      list-style: none;
+      position: absolute !important;
+      top: 10vh;
+      right: 0;
+      z-index: 1000;
+      background: white;
+      border-radius: 20px;
+      padding: 0px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      display: none;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .profile-dropdown-container.active {
+      display: block;
+    }
+
+    .profile-dropdown-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Force inner dropdown to be visible and static within the container */
+    .profile-dropdown-container .profile-dropdown {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      background: transparent;
+      padding: 0;
+      width: 100%;
+      min-width: 200px;
+    }
+
+    .profile-dropdown-list {
+      justify-items: flex-start;
+    }
+
+    .profile-dropdown-divider {
+      border: 1px solid #80808038;
+    }
+
+    .profile-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #333333;
+      background: grey;
+    }
+
+    .profile-icon-placeholder {
+      color: #ffffff;
+      font-size: 20px;
+      margin: 10px;
+    }
+
+    .profile-icon-img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 120%;
+    }
+
+    .thebigthree-btns-wrapper {
+      display: flex;
+      align-items: center;
+      border-radius: 50px;
+      border: 1px solid #414141;
+      padding: 0px 4px 0px 0px;
+    }
+
+    .profile-dropdown-container::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      background-color: #ffffff;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+      clip-path: none;
+      mix-blend-mode: darken;
+      box-shadow: none;
     }
     }
   </style>
@@ -501,15 +617,75 @@
         <li style="display: none;"><a href="product2.html">Product</a></li>
         <li><a href="compare.html" style="display: none;">Compare</a></li>
         <li><a href="Contact.html">Contact</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li id="dark-mode-li" style="display: flex; align-items: center;"></li>
-        <!-- Cart icon moved OUTSIDE the main navbar list -->
-        <div class="cart-icon-container">
-          <div class="cart-link">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-count">0</span>
+        <!-- Profile Dropdown -->
+
+        <div class="profile-dropdown-container" id="profileDropdownContainer" style="display: none;">
+          <div class="profile-dropdown" id="profileDropdown">
+            <ul class="profile-dropdown-list">
+              <li>
+                <a href="profile.html" class="profile-dropdown-item">
+                  <i class="fa-regular fa-user"></i>
+                  <span>Profile</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="profile-dropdown-item">
+                  <i class="fa-regular fa-comments"></i>
+                  <span>Community</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="profile-dropdown-item">
+                  <i class="fa-regular fa-credit-card"></i>
+                  <span>Subscription</span>
+                  <span class="pro-badge">PRO</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="profile-dropdown-item">
+                  <i class="fa-solid fa-toggle-off"></i>
+                  <span>Settings</span>
+                </a>
+              </li>
+            </ul>
+            <div class="profile-dropdown-divider"></div>
+            <ul class="profile-dropdown-list">
+              <li>
+                <a href="#" class="profile-dropdown-item">
+                  <i class="fa-regular fa-circle-question"></i>
+                  <span>Help center</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="profile-dropdown-item" id="nav-dropdown-logout">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>Logout</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
+        </li>
+        <div class="thebigthree-btns-wrapper" style="display: flex; align-items: center;">
+          <li id="dark-mode-li" style="display: flex; align-items: center; margin:0 !important;"></li>
+          <!-- Cart icon moved OUTSIDE the main navbar list, the profile button is by default stays displayed none until signed up, when client log out, the profile button will be displayed none -->
+          <button class="profile-icon-btn" id="profileIconBtn" aria-label="Open profile menu"
+            style="display: none; align-items: center;">
+            <img src="assets/profilepreview.jpg" alt="Profile" id="profileIconImg" class="profile-icon-img">
+            <i class="fa-solid fa-user profile-icon-placeholder"></i>
+          </button>
+          <li class="thebigthree-login/signup-btn"><button id="signupNavBtn"
+              style="padding: 8px 15px;background: white;font-family: 'Rubik';border-radius: 40px;font-size: 15px; border:none; cursor: pointer;">Signup</button>
+          </li>
+          <div class="cart-icon-container">
+            <div class="cart-link">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="cart-count">0</span>
+            </div>
+          </div>
+        </div>
+
+
       </ul>
     </div>
   </nav>
@@ -538,69 +714,111 @@
     </div>
   </div>
 
-  <!-- Mobile Sidebar Menu - with cart link added -->
+  <!-- Mobile Sidebar Menu (Redesigned) -->
   <div class="mobile-menu" id="mobileMenu">
-    <button class="close-btn" id="closeBtn">&times;</button>
-    <ul style="padding-left: 0px;">
-      <li><a href="index.html">Home</a></li>
-      <li class="mobile-dropdown-item">
-        <div class="split-button single-toggle-action">
-          <div class="split-button-content">
-            <i class="fa-solid fa-building"></i>
-            Brands
-          </div>
-          <div class="split-button-icon">
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
+
+    <!-- 1. Header: Brand or User Profile -->
+    <div class="sidebar-header" id="sidebarHeader">
+      <!-- Default State: Brand Logo -->
+      <div class="header-brand default-brand">
+        <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Logo" class="brand-logo">
+        <div class="user-info">
+          <span class="user-name">Blue Ember</span>
+          <span class="user-status">Electronics</span>
         </div>
-        <ul class="mobile-dropdown">
-          <li><a href="Haier-productpage.html">Haier</a></li>
-          <li><a href="samsung-productpage.html">Samsung</a></li>
-          <li><a href="LG-productpage.html">LG</a></li>
-          <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
-          <li><a href="BOSCH-productpage.html">Bosch</a></li>
-          <li><a href="Electrolux-productpage.html">Electrolux</a></li>
-          <li><a href="Panasonic-productpage.html">Panasonic</a></li>
-          <li><a href="Sony-productpage.html">Sony</a></li>
-          <li><a href="Apple-productpage.html">Apple</a></li>
-        </ul>
-      </li>
-      <li class="mobile-dropdown-item">
-        <div class="split-button single-toggle-action">
-          <div class="split-button-content">
-            <i class="fa-solid fa-blender"></i>
-            Categories
+      </div>
+      <!-- User State (Injected via JS) goes here -->
+
+      <button class="close-sidebar-btn" id="closeBtn">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+
+    <!-- 2. Content: Navigation Links -->
+    <div class="sidebar-content">
+
+      <a href="index.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+
+      <!-- Collapsible: Categories -->
+      <div class="sidebar-collapsible" id="col-categories">
+        <button class="collapsible-trigger">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-solid fa-blender trigger-icon"></i>
+            <span>Categories</span>
           </div>
-          <div class="split-button-icon">
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="collapsible-content">
+          <a href="product2.html" class="sub-link">Washers & Dryers</a>
+          <a href="product2.html" class="sub-link">Refrigerators</a>
+          <a href="product2.html" class="sub-link">Microwaves</a>
+          <a href="product2.html" class="sub-link">Air Conditioners</a>
+          <a href="product2.html" class="sub-link">Dishwashers</a>
+          <a href="product2.html" class="sub-link">Cooktops</a>
+          <a href="product2.html" class="sub-link">Vacuums</a>
         </div>
-        <ul class="mobile-dropdown">
-          <li><a href="product2.html">Washers & Dryers</a></li>
-          <li><a href="product2.html">Refrigerators</a></li>
-          <li><a href="product2.html">Microwaves</a></li>
-          <li><a href="product2.html">Air Conditioners</a></li>
-          <li><a href="product2.html">Dishwashers</a></li>
-          <li><a href="product2.html">Cooktops & Ovens</a></li>
-          <li><a href="product2.html">Vacuum Cleaners</a></li>
-        </ul>
-      </li>
-      <li><a href="product2.html">Product</a></li>
-      <li style="display: none;"><a href="compare.html">Compare</a></li>
-      <li><a href="Contact.html">Contact Us</a></li>
-      <li><a href="login.html">Login</a></li>
-      <!-- Added cart link to mobile menu -->
+      </div>
+
+      <!-- Collapsible: Brands -->
+      <div class="sidebar-collapsible" id="col-brands">
+        <button class="collapsible-trigger">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-solid fa-building trigger-icon"></i>
+            <span>Brands</span>
+          </div>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="collapsible-content">
+          <a href="Haier-productpage.html" class="sub-link">Haier</a>
+          <a href="samsung-productpage.html" class="sub-link">Samsung</a>
+          <a href="LG-productpage.html" class="sub-link">LG</a>
+          <a href="Whirlpool-productpage.html" class="sub-link">Whirlpool</a>
+          <a href="BOSCH-productpage.html" class="sub-link">Bosch</a>
+          <a href="Electrolux-productpage.html" class="sub-link">Electrolux</a>
+          <a href="Apple-productpage.html" class="sub-link">Apple</a>
+        </div>
+      </div>
+
+      <a href="product2.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-tags"></i>
+        <span>Products</span>
+      </a>
+
+      <a href="Contact.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Contact Us</span>
+      </a>
+
+      <!-- Dynamic Cart Link -->
       <li>
         <a href="#" id="mobile-cart-link" class="mobile-cart-link">
           <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
         </a>
       </li>
-      <li style="margin-top: 15px; margin-left:15px;">
-        <button id="mobile-theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
-          <i class="fa-solid fa-moon"></i>
-        </button>
-      </li>
-    </ul>
+
+      <!-- Login Link (Hidden if logged in) -->
+      <div id="sidebar-login-container">
+        <a href="login.html" class="sidebar-nav-item" id="sidebar-login-link">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Login</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 3. Footer: Settings / Logout -->
+    <div class="sidebar-footer" id="sidebarFooter">
+      <button id="mobile-theme-toggle" class="footer-btn">
+        <i class="fa-solid fa-moon"></i>
+        <span>Toggle Theme</span>
+      </button>
+
+      <!-- Logout will be injected here -->
+    </div>
+
   </div>
 
   <!-- HERO / BANNERS - Restructured -->
@@ -1314,58 +1532,41 @@
 
 
     document.addEventListener('DOMContentLoaded', function () {
-      const splitButtons = document.querySelectorAll('.split-button');
+      // New Collapsible Logic for Sidebar
+      const collapsibles = document.querySelectorAll('.sidebar-collapsible');
+      collapsibles.forEach(col => {
+        const btn = col.querySelector('.collapsible-trigger');
+        btn.addEventListener('click', () => {
+          // Close others (accordion style - optional)
+          // collapsibles.forEach(c => { if(c !== col) c.classList.remove('open'); });
 
-      splitButtons.forEach(button => {
-        // Check if this is a single-toggle action button
-        if (button.classList.contains('single-toggle-action')) {
-          button.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const parentItem = button.parentElement; // The list item wrapping the button
-            const dropdown = parentItem.querySelector('.mobile-dropdown');
-            const isExpanded = parentItem.classList.contains('active');
-
-            // Optional: Close other open dropdowns on desktop
-            if (window.innerWidth > 992) {
-              document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
-                if (item !== parentItem) {
-                  item.classList.remove('active');
-                  const btn = item.querySelector('.split-button');
-                  if (btn) btn.setAttribute('aria-expanded', 'false');
-                  const otherDropdown = item.querySelector('.mobile-dropdown');
-                  if (otherDropdown) otherDropdown.style.maxHeight = '0';
-                }
-              });
-            }
-
-            // Toggle current state
-            parentItem.classList.toggle('active');
-            button.setAttribute('aria-expanded', !isExpanded);
-
-            // Handle dropdown animation (if using max-height transition)
-            if (dropdown) {
-              if (!isExpanded) {
-                dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
-              } else {
-                dropdown.style.maxHeight = '0';
-              }
-            }
-          });
-        }
+          col.classList.toggle('open');
+        });
       });
 
-      // Close dropdowns when clicking outside
+      // Mobile Menu Toggle (Hamburger)
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const closeBtn = document.getElementById('closeBtn');
+
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          mobileMenu.classList.add('active');
+        });
+      }
+
+      if (closeBtn && mobileMenu) {
+        closeBtn.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+        });
+      }
+
+      // Close on Outside Click
       document.addEventListener('click', (e) => {
-        if (!e.target.closest('.mobile-dropdown-item')) {
-          document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
-            item.classList.remove('active');
-            const btn = item.querySelector('.split-button');
-            if (btn) btn.setAttribute('aria-expanded', 'false');
-            const dropdown = item.querySelector('.mobile-dropdown');
-            if (dropdown) dropdown.style.maxHeight = '0';
-          });
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+          if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+          }
         }
       });
     });
@@ -1419,6 +1620,107 @@
   </div>
 
   <script src="js/chatbot.js"></script>
+  <!-- Auth Integration -->
+  <script src="js/db-client.js"></script>
+  <script>
+    // Auth & Dropdown Logic
+    const initAuthUI = async () => {
+      if (!window.DB) return;
+
+      const { data: { user } } = await DB.getUser();
+
+      if (user) {
+        const loginLink = document.querySelector('a[href="login.html"]');
+        if (loginLink && loginLink.parentElement) {
+          const li = loginLink.parentElement;
+          const name = user.user_metadata.full_name || 'User';
+          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+
+          // Replace Login Link with Simple Dark Dropdown
+          li.innerHTML = `
+                    
+                `;
+
+
+          // Load Custom Profile Picture if exists
+          const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+          if (storedAvatar) {
+            const avatarImg = li.querySelector('#navbar-avatar-img');
+            if (avatarImg) avatarImg.src = storedAvatar;
+          }
+
+          // Logout Handler
+          document.getElementById('nav-dropdown-logout', 'mobile-logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+              await DB.signOut();
+              window.location.reload();
+            }
+          });
+
+          // Dropdown Toggle
+          // Dropdown Toggle (Desktop)
+          const trigger = li.querySelector('.nav-profile-trigger');
+          const menu = li.querySelector('.nav-profile-menu');
+
+          if (trigger && menu) {
+            trigger.addEventListener('click', (e) => {
+              e.stopPropagation();
+              menu.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+              if (!li.contains(e.target)) {
+                menu.classList.remove('active');
+              }
+            });
+          }
+        }
+
+        // --- Mobile Sidebar Injection (Redesigned) ---
+        const sidebarHeader = document.querySelector('.sidebar-header');
+        const sidebarFooter = document.querySelector('.sidebar-footer');
+        const sidebarLoginLink = document.getElementById('sidebar-login-link');
+
+        if (sidebarHeader && sidebarFooter) {
+          // 1. Update Header with User Info
+          const name = user.user_metadata.full_name || 'User';
+          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+
+          // Replace the "default-brand" part with User Profile
+          const brandContainer = sidebarHeader.querySelector('.header-brand');
+          if (brandContainer) {
+            brandContainer.innerHTML = `
+              <img src="${avatarUrl}" class="sidebar-avatar" alt="Profile" id="mobile-avatar-img">
+              <div class="user-info">
+                  <span class="user-name">Hello, ${name}</span>
+                  <span class="user-status">Member</span>
+              </div>
+            `;
+          }
+
+          // 2. Hide "Login" Wrapper
+          const loginWrapper = document.getElementById('sidebar-login-container');
+          if (loginWrapper) loginWrapper.style.display = 'none';
+
+
+          // Sync Custom Avatar
+          const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+          if (storedAvatar) {
+            const mAvatar = sidebarHeader.querySelector('#mobile-avatar-img');
+            if (mAvatar) mAvatar.src = storedAvatar;
+          }
+        }
+      }
+    };
+
+    // Run Immediately or Wait
+    if (window.DB) {
+      initAuthUI();
+    } else {
+      document.addEventListener('dbReady', initAuthUI);
+    }
+  </script>
 </body>
 
 </html>

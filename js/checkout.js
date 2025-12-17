@@ -91,6 +91,50 @@ class CheckoutManager {
 
     // Mobile menu functionality
     this.bindMobileMenuEvents();
+    
+    // Load Saved Addresses (Custom Addition)
+    this.loadSavedAddresses();
+  }
+
+  async loadSavedAddresses() {
+      if(!window.DB) return;
+      const { data: { user } } = await DB.getUser();
+      
+      if(user) {
+          const addresses = JSON.parse(localStorage.getItem('be_addresses_' + user.id) || '[]');
+          const formContainer = document.getElementById('shipping-form'); 
+          
+          if(addresses.length > 0 && formContainer) {
+              // Check if selector already exists
+              if(document.getElementById('saved-addr-select')) return;
+
+              const savedDiv = document.createElement('div');
+              savedDiv.className = 'saved-address-selector';
+              savedDiv.style.marginBottom = '20px';
+              savedDiv.innerHTML = `
+                  <label style="display:block; margin-bottom:10px; font-weight:600;">Use Saved Address</label>
+                  <select id="saved-addr-select" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; background: white;">
+                      <option value="">-- Select --</option>
+                      ${addresses.map((addr, idx) => `<option value="${idx}">${addr.title}: ${addr.street}</option>`).join('')}
+                  </select>
+              `;
+              
+              // Insert before the first input group
+              const firstInput = formContainer.querySelector('.form-group') || formContainer.firstChild;
+              formContainer.insertBefore(savedDiv, firstInput);
+              
+              document.getElementById('saved-addr-select').addEventListener('change', (e) => {
+                  const idx = e.target.value;
+                  if(idx !== '') {
+                      const addr = addresses[idx];
+                      if(document.getElementById('address')) document.getElementById('address').value = addr.street;
+                      if(document.getElementById('city')) document.getElementById('city').value = addr.city;
+                      if(document.getElementById('state')) document.getElementById('state').value = addr.state;
+                      if(document.getElementById('zip')) document.getElementById('zip').value = addr.zip;
+                  }
+              });
+          }
+      }
   }
 
   loadCart() {
