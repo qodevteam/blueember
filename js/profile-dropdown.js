@@ -90,25 +90,72 @@
     async function handleLogout(e) {
         if (e) e.preventDefault();
 
-        // 1. Confirm intention
-        if (!window.confirm("Are you sure you want to log out?")) {
-            return;
+        // Find the button to animate
+        let btn = null;
+        if (e && e.target) {
+            btn = e.target.closest('.sign-out-btn, #signOutBtn, #nav-dropdown-logout, #mobile-logout-btn, .mobile-logout-btn');
         }
 
-        // Forcefully clear everything
-        localStorage.removeItem('be_session');
-        localStorage.removeItem('profilePicture');
+        // Create the actual logout function
+        const performLogout = async () => {
+            if (btn) {
+                // Ensure button is relative so the absolute spinner centers within it
+                const computedStyle = window.getComputedStyle(btn);
+                if (computedStyle.position === 'static') {
+                    btn.style.position = 'relative';
+                }
 
-        if (typeof DB !== 'undefined') {
-            try {
-                await DB.signOut();
-            } catch (error) {
-                console.warn('DB.signOut failed, but localStorage has been cleared.', error);
+                // Spinner HTML Structure
+                const spinnerHtml = `
+                <div class="spinner center">
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                </div>`;
+
+                // Append spinner to the button
+                btn.insertAdjacentHTML('beforeend', spinnerHtml);
+            }
+
+            // Wait 3 seconds
+            await new Promise(resolve => setTimeout(resolve, 3000));
+
+            // Forcefully clear everything
+            localStorage.removeItem('be_session');
+            localStorage.removeItem('profilePicture');
+
+            if (typeof DB !== 'undefined') {
+                try {
+                    await DB.signOut();
+                } catch (error) {
+                    console.warn('DB.signOut failed, but localStorage has been cleared.', error);
+                }
+            }
+
+            // Redirect to login page
+            window.location.href = 'login.html';
+        };
+
+        // Use custom modal if available, otherwise fallback to native confirm
+        if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
+            window.LogoutModal.confirm(performLogout);
+        } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
+            window.showLogoutConfirmation(performLogout);
+        } else {
+            // Fallback to native confirm
+            if (confirm("Are you sure you want to log out?")) {
+                await performLogout();
             }
         }
-
-        // Redirect to login page
-        window.location.href = 'login.html';
     }
 
     // Event Delegation for Sign Out (Handles dynamic elements)

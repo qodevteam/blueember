@@ -156,9 +156,21 @@
 
         /* Cart Icon Styling */
         .cart-icon-container {
-            position: relative;
-            margin: 9px 11px 9px 4px;
-            align-self: center;
+           position: relative;
+           background: transparent;
+           border: 1px solid #494949;
+           padding: 12px 12px 10px 5px;
+           margin: 3px 0px 3px 4px;
+           align-self: center;
+          border-radius: 849px;
+        }
+        .cart-icon-container:hover{
+            background: white;
+            color: #000;
+            transition: all 0.3s ease-in-out;
+            .cart-link{
+                color: #000;
+            }
         }
         .cart-icon-cont-0{
                 display: none;

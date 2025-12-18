@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Desktop Toggle: Create and inject if not exists (Legacy Support)
+    // Check if we're on a login/signup page - exclude theme toggle button for these pages
+    const isAuthPage = window.location.pathname.includes('login.html') ||
+                      window.location.pathname.includes('signup.html') ||
+                      document.body.classList.contains('signupbody');
+
+    // 1. Desktop Toggle: Create and inject if not exists (Legacy Support) - EXCLUDE for auth pages
     let desktopBtn = document.getElementById('dark-mode-toggle');
-    if (!desktopBtn) {
+    if (!desktopBtn && !isAuthPage) {
         desktopBtn = document.createElement('button');
         desktopBtn.id = 'dark-mode-toggle';
         desktopBtn.ariaLabel = 'Toggle Dark Mode';
@@ -18,22 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             document.body.appendChild(desktopBtn);
         }
-    } else {
+    } else if (desktopBtn && isAuthPage) {
+        // Remove toggle button if it exists on auth pages
+        desktopBtn.remove();
+        desktopBtn = null;
+    } else if (desktopBtn) {
         // Enforce class if it was manually added but missing class
         desktopBtn.classList.add('theme-toggle-btn');
     }
 
-    // 2. Attach Event Listeners to ALL theme toggles (desktop + mobile)
+    // 2. Attach Event Listeners to ALL theme toggles (desktop + mobile) - EXCLUDE for auth pages
     const allToggles = document.querySelectorAll('#dark-mode-toggle, #mobile-theme-toggle, .theme-toggle-btn');
-
-    allToggles.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            toggleDarkModeLogic();
+    
+    if (!isAuthPage) {
+        allToggles.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleDarkModeLogic();
+            });
         });
-    });
+    }
 
-    // 3. Initialize State based on LocalStorage
+    // 3. Initialize State based on LocalStorage - WORK ON ALL PAGES
     const currentTheme = localStorage.getItem('theme');
     if (currentTheme === 'dark') {
         enableDarkMode();

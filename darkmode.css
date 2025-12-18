@@ -12,7 +12,7 @@
 
 /* Body and Global Resets */
 body.dark-mode {
-    background: var(--dm-bg-primary) !important;
+    background-color: var(--dm-bg-primary) !important;
     color: var(--dm-text-primary) !important;
 }
 
@@ -111,7 +111,6 @@ body.dark-mode h6 {
 }
 
 body.dark-mode p,
-body.dark-mode span,
 body.dark-mode li {
     color: var(--dm-text-secondary);
 }
@@ -234,11 +233,6 @@ body.dark-mode .btn-outline:hover {
     background: rgba(0, 153, 255, 0.1) !important;
 }
 
-body.dark-mode .view-brands,
-body.dark-mode .offer-cta,
-body.dark-mode .newsletter-form button {
-    box-shadow: none !important;
-}
 
 /* Modals */
 body.dark-mode .product-modal-template {
@@ -345,7 +339,10 @@ body.dark-mode .text-dark {
 body.dark-mode .bg-light {
     background-color: var(--dm-bg-secondary) !important;
 }
-
+body.dark-mode .profile-dropdown a{
+    background-color: transparent !important;
+    padding: 11px 10px;
+}
 /* Floating Toggle Button (Default / Fallback) */
 #dark-mode-toggle {
     /* Default fixed styles (if appended to body) */
@@ -372,8 +369,8 @@ body.dark-mode .bg-light {
 #dark-mode-toggle.navbar-toggle {
     position: static;
     margin: 3px;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: transparent;
     border: 1px solid var(--dm-border);
@@ -381,8 +378,27 @@ body.dark-mode .bg-light {
     color: #333;
     /* Default dark text for light mode */
     box-shadow: none;
-    font-size: 20px;
+    font-size: 25px;
     z-index: auto;
+}
+
+
+/* Profile Dropdown Container Dark Mode */
+body.dark-mode .profile-dropdown-container {
+    background-color: var(--dm-bg-secondary);
+    border: 1px solid var(--dm-border);
+    box-shadow: 0 8px 25px var(--dm-shadow);
+}
+
+body.dark-mode .profile-dropdown-container.visible {
+    background-color: var(--dm-bg-secondary);
+    border-color: var(--dm-border);
+    opacity: 1;
+}
+
+body.dark-mode .profile-dropdown-container.active {
+    background-color: var(--dm-bg-secondary);
+    border-color: var(--dm-border);
 }
 
 body.dark-mode #dark-mode-toggle.navbar-toggle {
@@ -398,12 +414,13 @@ body.dark-mode #dark-mode-toggle.navbar-toggle {
 
 /* Override hover for navbar toggle */
 #dark-mode-toggle.navbar-toggle:hover {
-    background: rgba(0, 0, 0, 0.05);
+   background: rgb(0 0 0);
     box-shadow: none;
+    color: #ffffff;
 }
 
 body.dark-mode #dark-mode-toggle.navbar-toggle:hover {
-    background: rgba(255, 255, 255, 0.1);
+   background: rgb(255 255 255);
     color: var(--dm-accent);
 }
 
@@ -464,4 +481,101 @@ body.dark-mode .theme-toggle-btn {
 body.dark-mode .theme-toggle-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     color: var(--dm-accent);
+}
+
+body.dark-mode .signupbody{
+    background:#121212;
+}
+
+/* Login & Signup Page Dark Mode Styles */
+body.dark-mode .login-card {
+    background: rgba(30, 30, 30, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--dm-border);
+    box-shadow: 0 20px 60px var(--dm-shadow);
+}
+
+body.dark-mode .brand-logo h2 {
+    color: var(--dm-text-primary) !important;
+}
+
+body.dark-mode .welcome-text h3 {
+    color: var(--dm-text-primary) !important;
+}
+
+body.dark-mode .welcome-text p {
+    color: var(--dm-text-secondary) !important;
+}
+
+body.dark-mode .form-group label {
+    color: var(--dm-text-primary) !important;
+}
+
+body.dark-mode .input-wrapper input {
+    background-color: var(--dm-bg-tertiary) !important;
+    color: var(--dm-text-primary) !important;
+    box-shadow: 0 0.4rem var(--dm-border) !important;
+    border: 1px solid var(--dm-border);
+}
+
+body.dark-mode .input-wrapper input:focus {
+    outline-color: var(--dm-accent) !important;
+    box-shadow: 0 0.6rem var(--dm-accent) !important;
+}
+
+body.dark-mode .input-wrapper input::placeholder {
+    color: var(--dm-text-secondary) !important;
+}
+
+body.dark-mode .input-wrapper i {
+    color: var(--dm-accent) !important;
+}
+
+body.dark-mode .form-options {
+    color: var(--dm-text-secondary);
+}
+
+body.dark-mode .remember-me span {
+    color: var(--dm-text-secondary) !important;
+}
+
+body.dark-mode .forgot-pass {
+    color: var(--dm-accent) !important;
+}
+
+body.dark-mode .footer-text {
+    color: var(--dm-text-secondary) !important;
+}
+
+body.dark-mode .footer-text a {
+    color: var(--dm-accent) !important;
+}
+
+body.dark-mode .password-toggle {
+    color: var(--dm-text-secondary) !important;
+}
+
+body.dark-mode .password-toggle:hover {
+    color: var(--dm-accent) !important;
+    background: rgba(0, 153, 255, 0.1) !important;
+}
+
+body.dark-mode .checkbox-wrapper label:before {
+    background-color: var(--dm-bg-primary) !important;
+    box-shadow: inset 0 var(--shadow) var(--dm-border);
+}
+
+body.dark-mode .checkbox-wrapper input[type="checkbox"]:checked+label {
+    background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%) !important;
+}
+
+body.dark-mode .checkbox-wrapper input[type="checkbox"]:checked+label:before {
+    background-color: transparent !important;
+}
+
+/* Grid Background in Dark Mode */
+body.dark-mode .grid-background {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }

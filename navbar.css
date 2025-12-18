@@ -667,6 +667,10 @@ body.dark-mode .profile-icon-btn {
     border-color: #334155;
 }
 
+body.dark-mode .profile-icon-placeholder {
+    color: #94a3b8;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .profile-dropdown {

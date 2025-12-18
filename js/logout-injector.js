@@ -42,25 +42,35 @@
 
     // Logout handler
     async function handleLogout() {
-        // Confirmation dialog
-        if (!confirm('Are you sure you want to logout?')) {
-            return;
-        }
+        // Create the actual logout function
+        const performLogout = async () => {
+            try {
+                // Sign out from DB
+                if (window.DB && typeof window.DB.signOut === 'function') {
+                    await window.DB.signOut();
+                }
 
-        try {
-            // Sign out from DB
-            if (window.DB && typeof window.DB.signOut === 'function') {
-                await window.DB.signOut();
+                // Clear local session
+                localStorage.removeItem('be_session');
+
+                // Reload page to update UI
+                window.location.reload();
+            } catch (error) {
+                console.error('Logout failed:', error);
+                alert('Logout failed. Please try again.');
             }
+        };
 
-            // Clear local session
-            localStorage.removeItem('be_session');
-
-            // Reload page to update UI
-            window.location.reload();
-        } catch (error) {
-            console.error('Logout failed:', error);
-            alert('Logout failed. Please try again.');
+        // Use custom modal if available, otherwise fallback to native confirm
+        if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
+            window.LogoutModal.confirm(performLogout);
+        } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
+            window.showLogoutConfirmation(performLogout);
+        } else {
+            // Fallback to native confirm
+            if (confirm('Are you sure you want to logout?')) {
+                await performLogout();
+            }
         }
     }
 

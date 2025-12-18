@@ -7,6 +7,8 @@
     <title>Login - Evora Electronics</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="darkmode.css">
+    <script src="js/darkmode.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -31,6 +33,38 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+
+        /* Grid Background */
+        .grid-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .grid-background {
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 50px 50px;
+            }
         }
 
         .login-card {
@@ -44,6 +78,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         /* Decorative top bar */
@@ -98,6 +133,7 @@
             margin-left: 5px;
         }
 
+        /* Updated Input Wrapper - From Uiverse.io */
         .input-wrapper {
             position: relative;
         }
@@ -107,31 +143,35 @@
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #bdc3c7;
+            color: lightcoral;
             font-size: 16px;
             transition: color 0.3s;
+            z-index: 1;
         }
 
         .input-wrapper input {
-            width: 86%;
-            padding: 14px 15px 14px 45px;
-            border: 2px solid #edf2f7;
-            border-radius: 12px;
-            font-size: 14px;
-            outline: none;
+            background-color: #eee;
+            border: none;
+            padding: 1rem;
+            padding-left: 45px;
+            padding-right: 45px;
+            font-size: 1rem;
+            width: calc(100% - 45px - 45px - 1rem);
+            border-radius: 1rem;
+            color: lightcoral;
+            box-shadow: 0 0.4rem #dfd9d9;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
             transition: all 0.3s;
-            background: #f8fafc;
-            color: var(--text-dark);
         }
 
         .input-wrapper input:focus {
-            border-color: var(--primary);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(0, 153, 255, 0.1);
+            outline-color: lightcoral;
+            box-shadow: 0 0.6rem #c9c3c3;
         }
 
-        .input-wrapper input:focus+i {
-            color: var(--primary);
+        .input-wrapper input::placeholder {
+            color: #d4a5a5;
         }
 
         .form-options {
@@ -142,12 +182,123 @@
             font-size: 13px;
         }
 
+        /* Updated Checkbox - From Uiverse.io */
         .remember-me {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             color: var(--text-light);
+        }
+
+        .checkbox-wrapper * {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-wrapper label {
+            --size: 30px;
+           
+            position: relative;
+            display: block;
+            width: var(--size);
+            height: var(--size);
+            margin: 0;
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            border-radius: 50%;
+            box-shadow: 0 var(--shadow) #ffbeb8;
             cursor: pointer;
+            transition: 0.2s ease transform, 0.2s ease background-color,
+                0.2s ease box-shadow;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .checkbox-wrapper label:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            left: 0;
+            width: calc(var(--size) * .7);
+            height: calc(var(--size) * .7);
+            margin: 0 auto;
+            background-color: #fff;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            box-shadow: inset 0 var(--shadow) #ffbeb8;
+            transition: 0.2s ease width, 0.2s ease height;
+        }
+
+        .checkbox-wrapper label:hover:before {
+            width: calc(var(--size) * .55);
+            height: calc(var(--size) * .55);
+            box-shadow: inset 0 var(--shadow) #ff9d96;
+        }
+
+        .checkbox-wrapper label:active {
+            transform: scale(0.9);
+        }
+
+        .checkbox-wrapper .tick_mark {
+            position: absolute;
+            top: -1px;
+            right: 0;
+            left: calc(var(--size) * -.05);
+            width: calc(var(--size) * .6);
+            height: calc(var(--size) * .6);
+            margin: 0 auto;
+            margin-left: calc(var(--size) * .14);
+            transform: rotateZ(-40deg);
+        }
+
+        .checkbox-wrapper .tick_mark:before,
+        .checkbox-wrapper .tick_mark:after {
+            content: "";
+            position: absolute;
+            background-color: #fff;
+            border-radius: 2px;
+            opacity: 0;
+            transition: 0.2s ease transform, 0.2s ease opacity;
+        }
+
+        .checkbox-wrapper .tick_mark:before {
+            left: 0;
+            bottom: 0;
+            width: calc(var(--size) * .1);
+            height: calc(var(--size) * .3);
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.23);
+            transform: translateY(calc(var(--size) * -.68));
+        }
+
+        .checkbox-wrapper .tick_mark:after {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: calc(var(--size) * .1);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.23);
+            transform: translateX(calc(var(--size) * .78));
+        }
+
+        .checkbox-wrapper input[type="checkbox"]:checked+label {
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        }
+
+        .checkbox-wrapper input[type="checkbox"]:checked+label:before {
+            width: 0;
+            height: 0;
+        }
+
+        .checkbox-wrapper input[type="checkbox"]:checked+label .tick_mark:before,
+        .checkbox-wrapper input[type="checkbox"]:checked+label .tick_mark:after {
+            transform: translate(0);
+            opacity: 1;
         }
 
         .forgot-pass {
@@ -157,29 +308,247 @@
         }
 
         .submit-btn {
+            position: relative;
+            top: -6px;
+            border: 1.5px rgb(0, 0, 0) inset;
+            border-radius: 10px;
+            transition: all 40ms ease-out;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            margin-left: 2px;
+            margin-right: 2px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: #666666;
+            box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.1) inset, 0px 8px 0px -1px #f5f5f5, 0 8px 8px 1px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
             width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            background: var(--primary-gradient);
-            color: white;
-            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
             font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-btn:active {
+            top: 1px;
+            color: #ffffff;
+            box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+                0 1px 3px 1px rgba(136, 136, 136, 0.479);
+            background: linear-gradient(45deg, rgb(0, 255, 242), rgb(0, 145, 255));
+        }
+
+        .submit-btn .btn-text {
+            transition: opacity 0.3s;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 153, 255, 0.3);
+        .submit-btn.loading .btn-text {
+            opacity: 0;
         }
 
-        .submit-btn:active {
-            transform: translateY(0);
+        .submit-btn .spinner {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn.loading .spinner {
+            opacity: 1;
+        }
+
+        /* Password Toggle Eye - Enhanced Styling */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 3;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px;
+            border-radius: 50%;
+            background: transparent;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+            background: rgba(0, 153, 255, 0.1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 153, 255, 0.2);
+        }
+
+        .password-toggle:active {
+            transform: translateY(-50%) scale(0.95);
+            background: rgba(0, 153, 255, 0.15);
+        }
+
+        /* Eye icon animation */
+        .password-toggle.fa-eye:before {
+            transition: all 0.3s ease;
+        }
+
+        .password-toggle.fa-eye-slash:before {
+            transition: all 0.3s ease;
+        }
+
+        /* Spinner Loader - From Uiverse.io */
+        .spinner {
+            font-size: 28px;
+            position: absolute;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .spinner.active {
+            opacity: 1;
+        }
+
+        .spinner.center {
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .spinner .spinner-blade {
+            position: absolute;
+            left: 0.4629em;
+            bottom: 0;
+            width: 0.074em;
+            height: 0.2777em;
+            border-radius: 0.0555em;
+            background-color: transparent;
+            -webkit-transform-origin: center -0.2222em;
+            -ms-transform-origin: center -0.2222em;
+            transform-origin: center -0.2222em;
+            animation: spinner-fade9234 1s infinite linear;
+        }
+
+        .spinner .spinner-blade:nth-child(1) {
+            -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+            -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        .spinner .spinner-blade:nth-child(2) {
+            -webkit-animation-delay: 0.083s;
+            animation-delay: 0.083s;
+            -webkit-transform: rotate(30deg);
+            -ms-transform: rotate(30deg);
+            transform: rotate(30deg);
+        }
+
+        .spinner .spinner-blade:nth-child(3) {
+            -webkit-animation-delay: 0.166s;
+            animation-delay: 0.166s;
+            -webkit-transform: rotate(60deg);
+            -ms-transform: rotate(60deg);
+            transform: rotate(60deg);
+        }
+
+        .spinner .spinner-blade:nth-child(4) {
+            -webkit-animation-delay: 0.249s;
+            animation-delay: 0.249s;
+            -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+        .spinner .spinner-blade:nth-child(5) {
+            -webkit-animation-delay: 0.332s;
+            animation-delay: 0.332s;
+            -webkit-transform: rotate(120deg);
+            -ms-transform: rotate(120deg);
+            transform: rotate(120deg);
+        }
+
+        .spinner .spinner-blade:nth-child(6) {
+            -webkit-animation-delay: 0.415s;
+            animation-delay: 0.415s;
+            -webkit-transform: rotate(150deg);
+            -ms-transform: rotate(150deg);
+            transform: rotate(150deg);
+        }
+
+        .spinner .spinner-blade:nth-child(7) {
+            -webkit-animation-delay: 0.498s;
+            animation-delay: 0.498s;
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        .spinner .spinner-blade:nth-child(8) {
+            -webkit-animation-delay: 0.581s;
+            animation-delay: 0.581s;
+            -webkit-transform: rotate(210deg);
+            -ms-transform: rotate(210deg);
+            transform: rotate(210deg);
+        }
+
+        .spinner .spinner-blade:nth-child(9) {
+            -webkit-animation-delay: 0.664s;
+            animation-delay: 0.664s;
+            -webkit-transform: rotate(240deg);
+            -ms-transform: rotate(240deg);
+            transform: rotate(240deg);
+        }
+
+        .spinner .spinner-blade:nth-child(10) {
+            -webkit-animation-delay: 0.747s;
+            animation-delay: 0.747s;
+            -webkit-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+
+        .spinner .spinner-blade:nth-child(11) {
+            -webkit-animation-delay: 0.83s;
+            animation-delay: 0.83s;
+            -webkit-transform: rotate(300deg);
+            -ms-transform: rotate(300deg);
+            transform: rotate(300deg);
+        }
+
+        .spinner .spinner-blade:nth-child(12) {
+            -webkit-animation-delay: 0.913s;
+            animation-delay: 0.913s;
+            -webkit-transform: rotate(330deg);
+            -ms-transform: rotate(330deg);
+            transform: rotate(330deg);
+        }
+
+        @keyframes spinner-fade9234 {
+            0% {
+                background-color: #ffffff;
+            }
+
+            100% {
+                background-color: transparent;
+            }
         }
 
         .footer-text {
@@ -205,10 +574,16 @@
 </head>
 
 <body>
+    <!-- Grid Background -->
+    <div class="grid-wrapper">
+        <div class="grid-background"></div>
+    </div>
 
     <div class="login-card">
-        <div class="brand-logo">
-            <h2>Blue<span>Ember</span></h2>
+       <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
+            style="width: 30px; height: auto;">
+          
         </div>
 
         <div class="welcome-text">
@@ -230,18 +605,41 @@
                 <div class="input-wrapper">
                     <input type="password" id="password" placeholder="••••••••" required>
                     <i class="fas fa-lock"></i>
+                    <i class="fas fa-eye password-toggle" id="togglePassword" style="margin-left: auto;"></i>
                 </div>
             </div>
 
             <div class="form-options">
-                <label class="remember-me">
-                    <input type="checkbox"> Remember me
-                </label>
+                <div class="remember-me">
+                    <div class="checkbox-wrapper">
+                        <input id="_checkbox-26" type="checkbox">
+                        <label for="_checkbox-26">
+                            <div class="tick_mark"></div>
+                        </label>
+                    </div>
+                    <span>Remember me</span>
+                </div>
                 <a href="#" class="forgot-pass">Forgot Password?</a>
             </div>
 
             <button type="submit" class="submit-btn" id="loginBtn">
-                Sign In <i class="fas fa-arrow-right"></i>
+                <span class="btn-text">
+                    Sign In <i class="fas fa-arrow-right"></i>
+                </span>
+                <div class="spinner center" style="position: absolute;">
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                </div>
             </button>
         </form>
 
@@ -253,6 +651,124 @@
     <!-- Auth Scripts -->
     <script src="js/db-client.js"></script>
     <script src="js/auth.js"></script>
+
+    <script>
+        // Password Toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle eye icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Add loader functionality to login button
+        const loginBtn = document.getElementById('loginBtn');
+        const loginForm = document.getElementById('login-form');
+
+        // Inject the splash effect CSS
+        const splashStyle = document.createElement('style');
+        splashStyle.textContent = `
+            .submit-btn {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .splash-effects {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 10;
+            }
+            
+            .splash-circle {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.7);
+                transform: scale(0);
+                animation: splashAnimation 0.8s ease-out forwards;
+            }
+            
+            @keyframes splashAnimation {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(15);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(splashStyle);
+
+        // Add splash effect on button click
+        loginBtn.addEventListener('mousedown', function(e) {
+            // Create splash effect container if it doesn't exist
+            let splashContainer = this.querySelector('.splash-effects');
+            if (!splashContainer) {
+                splashContainer = document.createElement('div');
+                splashContainer.className = 'splash-effects';
+                this.appendChild(splashContainer);
+            }
+            
+            // Create splash circle
+            const splashCircle = document.createElement('div');
+            splashCircle.className = 'splash-circle';
+            
+            // Position splash circle at click location
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            splashCircle.style.left = x + 'px';
+            splashCircle.style.top = y + 'px';
+            
+            splashContainer.appendChild(splashCircle);
+            
+            // Remove splash circle after animation completes
+            setTimeout(() => {
+                splashCircle.remove();
+            }, 800);
+        });
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Show loader
+            loginBtn.classList.add('loading');
+            loginBtn.querySelector('.spinner').classList.add('active');
+            loginBtn.disabled = true;
+
+            // Simulate 2.8s delay to show loader
+            setTimeout(() => {
+                // Get form values
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Trigger the actual login (from auth.js)
+                if (window.handleLogin) {
+                    window.handleLogin(email, password);
+                }
+
+                // Reset button state after another brief moment
+                setTimeout(() => {
+                    loginBtn.classList.remove('loading');
+                    loginBtn.querySelector('.spinner').classList.remove('active');
+                    loginBtn.disabled = false;
+                }, 500);
+            }, 2800);
+        });
+    </script>
 
 </body>
 
