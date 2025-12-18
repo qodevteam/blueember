@@ -55,8 +55,19 @@
     }
 
     // Load profile picture from localStorage
-    function loadProfilePicture() {
-        const profilePicture = localStorage.getItem('profilePicture');
+    async function loadProfilePicture() {
+        let suffix = '';
+        try {
+            if (typeof DB !== 'undefined') {
+                const { data } = await DB.getUser();
+                if (data.user?.id) suffix = '_' + data.user.id;
+            } else {
+                const u = JSON.parse(localStorage.getItem('be_current_user') || '{}');
+                if (u.id) suffix = '_' + u.id;
+            }
+        } catch (e) { console.warn('User fetch failed', e); }
+
+        const profilePicture = localStorage.getItem('be_profile_picture' + suffix);
         const mobileAvatar = document.getElementById('navbar-avatar-img'); // Mobile sidebar avatar
 
         if (profilePicture) {
@@ -129,9 +140,9 @@
             // Wait 3 seconds
             await new Promise(resolve => setTimeout(resolve, 3000));
 
-            // Forcefully clear everything
+            // Forcefully clear session only
             localStorage.removeItem('be_session');
-            localStorage.removeItem('profilePicture');
+            // Do NOT remove profilePicture here as it persists user settings
 
             if (typeof DB !== 'undefined') {
                 try {

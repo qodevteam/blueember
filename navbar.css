@@ -506,9 +506,9 @@ body.dark-mode .menu-divider {
     overflow: hidden;
     padding: 0;
 }
-
-.profile-icon-btn:hover {
-    border-color: #cbd5e1;
+.profile-icon-btn:hover{
+    border-color: #dff9ff;
+    box-shadow: 0px 0px 10px whitesmoke;
 }
 
 /* Profile Icon Image */
@@ -566,10 +566,14 @@ body.dark-mode .menu-divider {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .profile-dropdown-list li {
     margin: 0;
+    width: 100%;
 }
 
 /* Dropdown Divider */
@@ -583,6 +587,7 @@ body.dark-mode .menu-divider {
 .profile-dropdown-item {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 12px;
     padding: 10px 16px;
     border-radius: 12px;
@@ -593,6 +598,12 @@ body.dark-mode .menu-divider {
     transition: all 0.1s ease;
     cursor: pointer;
     position: relative;
+    width: 100%;
+}
+
+.profile-dropdown-item span {
+    flex: 1;
+    text-align: left;
 }
 
 /* Hover Effect */
@@ -644,10 +655,11 @@ body.dark-mode .profile-dropdown {
 
 body.dark-mode .profile-dropdown-item {
     color: #e2e8f0;
+    background-color: transparent !important;
 }
 
 body.dark-mode .profile-dropdown-item:hover {
-    background: #2d2d2d;
+    background-color: transparent;
     color: #fff;
 }
 
@@ -664,7 +676,7 @@ body.dark-mode .profile-dropdown-item:hover i {
 }
 
 body.dark-mode .profile-icon-btn {
-    border-color: #334155;
+    border-color: var(--dm-border);
 }
 
 body.dark-mode .profile-icon-placeholder {

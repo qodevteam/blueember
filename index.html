@@ -17,11 +17,13 @@
   <link href="universal.css" rel="stylesheet">
   <link href="home.css" rel="stylesheet">
   <link href="darkmode.css" rel="stylesheet">
+  <link href="navbar.css" rel="stylesheet">
   <link href="mobile-sidebar.css" rel="stylesheet">
   <script src="js/finisher-header.es5.min.js"></script>
   <link rel="stylesheet" href="product.css">
 
   <script src="js/cart.js" defer></script>
+  <script src="js/cart-manager.js" defer></script>
   <script src="js/navigation.js" defer></script>
   <script src="js/dollar-font.js" defer></script>
   <script src="js/checkout.js"></script>
@@ -241,16 +243,19 @@
     /* Mobile Dropdown */
     .mobile-dropdown-item {
       position: relative;
-      &::after{
-    box-shadow: inset 0 0 0 1px red !important;
-  }
-  &::before{
-    background: red;
-    box-shadow: inset 0 0 0 1px #ffffff !important;
-  }
-  &:hover::before{
-    box-shadow: inset 0 0 0 1px #ffffff !important;
-  }
+
+      &::after {
+        box-shadow: inset 0 0 0 1px red !important;
+      }
+
+      &::before {
+        background: red;
+        box-shadow: inset 0 0 0 1px #ffffff !important;
+      }
+
+      &:hover::before {
+        box-shadow: inset 0 0 0 1px #ffffff !important;
+      }
     }
 
     .mobile-dropdown {
@@ -276,15 +281,15 @@
       border: 1px solid rgba(255, 255, 255, 0.5);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-       
+
     }
 
     .split-button.single-toggle-action:before {
       transform: scaleX(1.015) scaleY(1.035) perspective(1px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
       transition: transform .2s cubic-bezier(.345, .115, .135, 1.42), opacity .15s ease-out;
-}
     }
+
     .split-button:hover {
       box-shadow: 0 8px 15px rgba(0, 153, 255, 0.15) !important;
       border-color: rgba(0, 153, 255, 0.3);
@@ -489,7 +494,7 @@
       background: transparent;
       padding: 0;
       width: 100%;
-      min-width: 200px;
+      min-width: 260px;
     }
 
     .profile-dropdown-list {
@@ -502,12 +507,13 @@
     }
 
     .profile-icon-btn {
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid #333333;
       background: grey;
+      
     }
 
     .profile-icon-placeholder {
@@ -894,7 +900,7 @@
 
     .logout-confirm-btn::before {
       content: '';
-      width: 0;
+      width: -webkit-fill-available !important;
       height: -webkit-fill-available;
       border-radius: inherit;
       position: absolute;
@@ -912,34 +918,35 @@
 
 
     .viewbrands {
-    width: 175px;
-    height: 50px;
-    margin-top: 35px;
-    place-self: center;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 4px;
-    background: linear-gradient(45deg, #00ceff, #00ff5b);
-    border-radius: 30px;
-    color: rgb(19, 19, 19);
-    font-weight: 600;
-    border: none;
-    font-size: 16px;
-    position: relative;
-    cursor: pointer;
-    transition-duration: .2s;
-    box-shadow: 0px 5px 10px rgb(0 0 0 / 22%);
-    padding-left: 4px;
-    transition-duration: .5s;
+      width: 175px;
+      height: 50px;
+      margin-top: 35px;
+      place-self: center;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 4px;
+      background: linear-gradient(45deg, #00ceff, #00ff5b);
+      border-radius: 30px;
+      color: rgb(19, 19, 19);
+      font-weight: 600;
+      border: none;
+      font-size: 16px;
+      position: relative;
+      cursor: pointer;
+      transition-duration: .2s;
+      box-shadow: 0px 5px 10px rgb(0 0 0 / 22%);
+      padding-left: 4px;
+      transition-duration: .5s;
     }
-    .viewbrands:hover{
+
+    .viewbrands:hover {
       scale: 1.1;
     }
 
     .svgIcon {
-height: 42px;
-    transition-duration: 1.5s;
+      height: 42px;
+      transition-duration: 1.5s;
     }
 
     .bell path {
@@ -961,7 +968,49 @@ height: 42px;
       transition-duration: 1.5s;
     }
 
+    /* Navigation Links Hover Effect - Radial Expanding Background */
+    .split-button.single-toggle-action,
+    .navbar a {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
 
+    .split-button.single-toggle-action::before,
+    .navbar a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      background-color: #ccebff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      z-index: -1;
+    }
+
+    .split-button.single-toggle-action:hover::before,
+    .navbar a:hover::before {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 1;
+    }
+
+    /* Dark mode - same color for expanding background */
+    body.dark-mode .split-button.single-toggle-action::before,
+    body.dark-mode .navbar a::before {
+      background-color: #ccebff;
+    transition: all 1.1s cubic-bezier(0.04, 0.86, 0, 1.08);
+    }
+
+    /* Ensure text and icons stay above the background */
+    .split-button-content,
+    .split-button-icon,
+    .navbar a {
+      position: relative;
+      z-index: 1;
     }
   </style>
 </head>
@@ -1006,7 +1055,7 @@ height: 42px;
         <li class="mobile-dropdown-item">
           <div class="split-button single-toggle-action">
             <div class="split-button-content">
-              <i class='bx  bx-menu' style='color:#ffffff'></i> 
+              <i class='bx  bx-menu' style='color:#ffffff'></i>
               Categories
             </div>
             <div class="split-button-icon">
@@ -1062,7 +1111,7 @@ height: 42px;
               <li>
                 <a href="#" class="profile-dropdown-item">
                   <i class="fa-regular fa-comments"></i>
-                  <span>Community</span>
+                  <span>Purchases & Reviews</span>
                 </a>
               </li>
               <li>
@@ -1073,9 +1122,9 @@ height: 42px;
                 </a>
               </li>
               <li>
-                <a href="#" class="profile-dropdown-item">
+                <a href="account.html" class="profile-dropdown-item">
                   <i class="fa-solid fa-toggle-off"></i>
-                  <span>Settings</span>
+                  <span>Account Settings</span>
                 </a>
               </li>
             </ul>
@@ -1116,7 +1165,7 @@ height: 42px;
               </span>
               <span class="button-inner">
                 <span class="button-inner-static">SignUp</span>
-                <span class="button-inner-hover">SignUp</span>
+                <span class="button-inner-hover" style="color: #ffffff;">SignUp</span>
               </span>
             </button>
 

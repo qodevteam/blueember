@@ -101,11 +101,11 @@ const DB = {
 
         const allOrders = JSON.parse(localStorage.getItem(DB.ORDERS_KEY) || '[]');
         const newOrder = {
-            id: 'ord_' + Date.now(),
+            id: orderData.id || ('ord_' + Date.now()),
             user_id: user.id,
             ...orderData,
             status: 'Processing',
-            created_at: new Date().toISOString()
+            created_at: orderData.created_at || new Date().toISOString()
         };
         allOrders.unshift(newOrder); // Add to top
         localStorage.setItem(DB.ORDERS_KEY, JSON.stringify(allOrders));

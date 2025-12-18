@@ -91,50 +91,50 @@ class CheckoutManager {
 
     // Mobile menu functionality
     this.bindMobileMenuEvents();
-    
+
     // Load Saved Addresses (Custom Addition)
     this.loadSavedAddresses();
   }
 
   async loadSavedAddresses() {
-      if(!window.DB) return;
-      const { data: { user } } = await DB.getUser();
-      
-      if(user) {
-          const addresses = JSON.parse(localStorage.getItem('be_addresses_' + user.id) || '[]');
-          const formContainer = document.getElementById('shipping-form'); 
-          
-          if(addresses.length > 0 && formContainer) {
-              // Check if selector already exists
-              if(document.getElementById('saved-addr-select')) return;
+    if (!window.DB) return;
+    const { data: { user } } = await DB.getUser();
 
-              const savedDiv = document.createElement('div');
-              savedDiv.className = 'saved-address-selector';
-              savedDiv.style.marginBottom = '20px';
-              savedDiv.innerHTML = `
+    if (user) {
+      const addresses = JSON.parse(localStorage.getItem('be_addresses_' + user.id) || '[]');
+      const formContainer = document.getElementById('shipping-form');
+
+      if (addresses.length > 0 && formContainer) {
+        // Check if selector already exists
+        if (document.getElementById('saved-addr-select')) return;
+
+        const savedDiv = document.createElement('div');
+        savedDiv.className = 'saved-address-selector';
+        savedDiv.style.marginBottom = '20px';
+        savedDiv.innerHTML = `
                   <label style="display:block; margin-bottom:10px; font-weight:600;">Use Saved Address</label>
                   <select id="saved-addr-select" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; background: white;">
                       <option value="">-- Select --</option>
                       ${addresses.map((addr, idx) => `<option value="${idx}">${addr.title}: ${addr.street}</option>`).join('')}
                   </select>
               `;
-              
-              // Insert before the first input group
-              const firstInput = formContainer.querySelector('.form-group') || formContainer.firstChild;
-              formContainer.insertBefore(savedDiv, firstInput);
-              
-              document.getElementById('saved-addr-select').addEventListener('change', (e) => {
-                  const idx = e.target.value;
-                  if(idx !== '') {
-                      const addr = addresses[idx];
-                      if(document.getElementById('address')) document.getElementById('address').value = addr.street;
-                      if(document.getElementById('city')) document.getElementById('city').value = addr.city;
-                      if(document.getElementById('state')) document.getElementById('state').value = addr.state;
-                      if(document.getElementById('zip')) document.getElementById('zip').value = addr.zip;
-                  }
-              });
+
+        // Insert before the first input group
+        const firstInput = formContainer.querySelector('.form-group') || formContainer.firstChild;
+        formContainer.insertBefore(savedDiv, firstInput);
+
+        document.getElementById('saved-addr-select').addEventListener('change', (e) => {
+          const idx = e.target.value;
+          if (idx !== '') {
+            const addr = addresses[idx];
+            if (document.getElementById('address')) document.getElementById('address').value = addr.street;
+            if (document.getElementById('city')) document.getElementById('city').value = addr.city;
+            if (document.getElementById('state')) document.getElementById('state').value = addr.state;
+            if (document.getElementById('zip')) document.getElementById('zip').value = addr.zip;
           }
+        });
       }
+    }
   }
 
   loadCart() {
@@ -244,7 +244,7 @@ class CheckoutManager {
     const shippingForm = document.getElementById('shipping-form');
     const paymentForm = document.getElementById('payment-form');
     const confirmationPage = document.getElementById('confirmation-page');
-    
+
     if (shippingForm) shippingForm.style.display = 'none';
     if (paymentForm) paymentForm.style.display = 'none';
     if (confirmationPage) confirmationPage.style.display = 'none';
@@ -319,6 +319,11 @@ class CheckoutManager {
       }
     }
 
+    // Capture Order Data BEFORE clearing cart
+    const orderData = this.createOrderFromCart();
+    this.saveOrder(orderData);
+    this.lastOrder = orderData; // Store for confirmation view
+
     // Process the order
     this.showStep(3);
 
@@ -326,6 +331,58 @@ class CheckoutManager {
     this.cart = [];
     localStorage.setItem('evoraCart', JSON.stringify(this.cart));
     this.updateCartDisplay();
+  }
+
+  createOrderFromCart() {
+    const orderId = 'EV-' + Math.floor(1000 + Math.random() * 9000);
+    const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const totals = this.calculateOrderTotals();
+
+    // Get Shipping Info
+    const street = document.getElementById('address') ? document.getElementById('address').value : '';
+    const city = document.getElementById('city') ? document.getElementById('city').value : '';
+    const state = document.getElementById('state') ? document.getElementById('state').value : '';
+    const zip = document.getElementById('zip') ? document.getElementById('zip').value : '';
+
+    // Get Payment Info string
+    let paymentInfo = 'Pay on Delivery';
+    if (this.paymentMethod === 'credit-card') {
+      const cardNum = document.getElementById('card-number').value;
+      paymentInfo = `Visa ending in ${cardNum.slice(-4)}`;
+    } else if (this.paymentMethod === 'paypal') {
+      paymentInfo = 'PayPal';
+    }
+
+    return {
+      id: orderId,
+      date: date,
+      status: 'Processing',
+      total: totals.total,
+      items: this.cart.map(item => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        image: item.image
+      })),
+      shipping: { street, city, state, zip },
+      payment: paymentInfo
+    };
+  }
+
+  async saveOrder(order) {
+    if (window.DB) {
+      const { data: { user } } = await window.DB.getUser();
+      if (user) {
+        // Use DB client to save with user_id
+        window.DB.createOrder(order);
+        return;
+      }
+    }
+
+    // Fallback for guest / no-DB (Global LocalStorage)
+    const existingOrders = JSON.parse(localStorage.getItem('be_orders') || '[]');
+    existingOrders.unshift(order);
+    localStorage.setItem('be_orders', JSON.stringify(existingOrders));
   }
 
   generateOrderConfirmation() {
@@ -374,14 +431,18 @@ class CheckoutManager {
       this.elements.confirmationTotal.textContent = `$${totals.total.toFixed(2)}`;
     }
 
-    // Set order number (random 6 digits)
-    const orderNumber = Math.floor(100000 + Math.random() * 900000);
-    document.getElementById('order-number').textContent = orderNumber;
+    // Set order number
+    if (this.lastOrder) {
+      document.getElementById('order-number').textContent = this.lastOrder.id;
+      document.getElementById('order-date').textContent = this.lastOrder.date;
+    } else {
+      const orderNumber = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('order-number').textContent = orderNumber;
 
-    // Set order date
-    const today = new Date();
-    const dateStr = today.toISOString().split('T')[0];
-    document.getElementById('order-date').textContent = dateStr;
+      const today = new Date();
+      const dateStr = today.toISOString().split('T')[0];
+      document.getElementById('order-date').textContent = dateStr;
+    }
 
     // Set estimated delivery
     const shippingDays = this.shippingMethod === 'standard' ? '5-7' : '2-3';
@@ -444,9 +505,9 @@ function showNotification(message, type = 'info') {
 
   // Add to page
   document.body.appendChild(notification);
-  
+
   // Add event listener for close button
-  notification.querySelector('.notification-close').addEventListener('click', function() {
+  notification.querySelector('.notification-close').addEventListener('click', function () {
     this.parentElement.parentElement.remove();
   });
 
@@ -526,20 +587,20 @@ function showNotification(message, type = 'info') {
 // Initialize checkout when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   const checkoutManager = new CheckoutManager();
-/* Search Bar Logic appended by Assistant */
-document.addEventListener("DOMContentLoaded", function() {
+  /* Search Bar Logic appended by Assistant */
+  document.addEventListener("DOMContentLoaded", function () {
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchInput');
 
     // Only run if the search bar exists on this page
     if (searchForm && searchInput) {
-        searchForm.addEventListener('submit', function(e) {
-            // Prevent submission if input is empty
-            if (!searchInput.value.trim()) {
-                e.preventDefault();
-                searchInput.focus();
-            }
-        });
+      searchForm.addEventListener('submit', function (e) {
+        // Prevent submission if input is empty
+        if (!searchInput.value.trim()) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
     }
-});
+  });
 });
