@@ -7,15 +7,88 @@ class CartManager {
     this.init();
   }
 
-  init() {
-    this.loadCart();
-    this.bindEvents();
-    this.updateCartDisplay();
+  async handleAuthStateChange() {
+    // Listen for dbReady event to ensure DB is initialized
+    if (!window.DB) {
+      document.addEventListener('dbReady', () => this.handleAuthStateChange());
+      return;
+    }
+
+    // Check for login/logout events
+    // This is a simplified approach. A real app would use more robust event handling.
+    setInterval(async () => {
+      await this.loadCart();
+      this.updateCartDisplay();
+    }, 5000); // Check every 5 seconds (for demo purposes)
   }
 
-  loadCart() {
+  async migrateGuestCart() {
+    if (!window.DB) return;
+
+    const { data: { user } } = await window.DB.getUser();
+    if (!user) return;
+
+    const guestCartKey = 'evoraCart';
+    const userCartKey = `evoraCart_user_${user.id}`;
+
+    const guestCart = localStorage.getItem(guestCartKey);
+    if (guestCart) {
+      const parsedGuestCart = JSON.parse(guestCart);
+      if (parsedGuestCart.length > 0) {
+        // Merge guest cart with user cart
+        const userCart = this.cart;
+        parsedGuestCart.forEach(guestItem => {
+          const existingItem = userCart.find(item => item.id === guestItem.id);
+          if (existingItem) {
+            existingItem.quantity += guestItem.quantity;
+          } else {
+            userCart.push(guestItem);
+          }
+        });
+
+        // Save merged cart to user-specific storage
+        localStorage.setItem(userCartKey, JSON.stringify(userCart));
+        // Clear guest cart
+        localStorage.removeItem(guestCartKey);
+        
+        // Update cart display
+        this.updateCartDisplay();
+      }
+    }
+  }
+
+  async init() {
+    await this.loadCart();
+    this.bindEvents();
+    this.updateCartDisplay();
+    
+    // Listen for authentication state changes
+    if (window.DB) {
+      this.handleAuthStateChange();
+    }
+  }
+
+  async loadCart() {
     try {
-      const saved = localStorage.getItem('evoraCart');
+      let cartKey = 'evoraCart'; // Default guest cart key
+      let guestCart = [];
+
+      // Get current user if DB is available
+      if (window.DB) {
+        const { data: { user } } = await window.DB.getUser();
+        if (user) {
+          cartKey = `evoraCart_user_${user.id}`;
+          // Load user-specific cart
+          const userCart = localStorage.getItem(cartKey);
+          if (userCart) {
+            this.cart = JSON.parse(userCart);
+            return;
+          }
+        }
+      }
+
+      // Load guest cart
+      const saved = localStorage.getItem(cartKey);
       this.cart = saved ? JSON.parse(saved) : [];
     } catch (error) {
       console.warn('Failed to load cart:', error);
@@ -23,9 +96,19 @@ class CartManager {
     }
   }
 
-  saveCart() {
+  async saveCart() {
     try {
-      localStorage.setItem('evoraCart', JSON.stringify(this.cart));
+      let cartKey = 'evoraCart'; // Default guest cart key
+
+      // Get current user if DB is available
+      if (window.DB) {
+        const { data: { user } } = await window.DB.getUser();
+        if (user) {
+          cartKey = `evoraCart_user_${user.id}`;
+        }
+      }
+
+      localStorage.setItem(cartKey, JSON.stringify(this.cart));
     } catch (error) {
       console.warn('Failed to save cart:', error);
     }
@@ -286,9 +369,9 @@ class CartManager {
     return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
   }
 
-  clearCart() {
+  async clearCart() {
     this.cart = [];
-    this.saveCart();
+    await this.saveCart();
     this.updateCartDisplay();
   }
 }

@@ -6,6 +6,8 @@ const DB = {
     USERS_KEY: 'be_users',
     SESSION_KEY: 'be_session',
     ORDERS_KEY: 'be_orders',
+    WISHLISTS_KEY: 'be_wishlists',
+    REVIEWS_KEY: 'be_reviews',
 
     // --- Auth Methods ---
 
@@ -110,6 +112,124 @@ const DB = {
         allOrders.unshift(newOrder); // Add to top
         localStorage.setItem(DB.ORDERS_KEY, JSON.stringify(allOrders));
         return newOrder;
+    },
+
+    // --- Wishlist Methods ---
+
+    // Get wishlist for current user
+    getMyWishlist: () => {
+        const user = JSON.parse(localStorage.getItem(DB.SESSION_KEY));
+        if (!user) return [];
+        const allWishlists = JSON.parse(localStorage.getItem(DB.WISHLISTS_KEY) || '[]');
+        return allWishlists.filter(w => w.user_id === user.id);
+    },
+
+    // Add item to wishlist
+    addToWishlist: (productData) => {
+        const user = JSON.parse(localStorage.getItem(DB.SESSION_KEY));
+        if (!user) return null;
+
+        const allWishlists = JSON.parse(localStorage.getItem(DB.WISHLISTS_KEY) || '[]');
+        
+        // Check if item already exists in wishlist
+        const existingItem = allWishlists.find(w => w.user_id === user.id && w.product_id === productData.product_id);
+        if (existingItem) {
+            return existingItem; // Item already in wishlist
+        }
+
+        const newWishlistItem = {
+            id: 'wish_' + Date.now(),
+            user_id: user.id,
+            product_id: productData.product_id,
+            product_name: productData.product_name,
+            product_image: productData.product_image,
+            product_price: productData.product_price,
+            added_at: new Date().toISOString()
+        };
+        
+        allWishlists.unshift(newWishlistItem);
+        localStorage.setItem(DB.WISHLISTS_KEY, JSON.stringify(allWishlists));
+        return newWishlistItem;
+    },
+
+    // Remove item from wishlist
+    removeFromWishlist: (productId) => {
+        const user = JSON.parse(localStorage.getItem(DB.SESSION_KEY));
+        if (!user) return false;
+
+        const allWishlists = JSON.parse(localStorage.getItem(DB.WISHLISTS_KEY) || '[]');
+        const filteredWishlists = allWishlists.filter(w => !(w.user_id === user.id && w.product_id === productId));
+        localStorage.setItem(DB.WISHLISTS_KEY, JSON.stringify(filteredWishlists));
+        return true;
+    },
+
+    // --- Review Methods ---
+
+    // Get reviews for current user
+    getMyReviews: () => {
+        const user = JSON.parse(localStorage.getItem(DB.SESSION_KEY));
+        if (!user) return [];
+        const allReviews = JSON.parse(localStorage.getItem(DB.REVIEWS_KEY) || '[]');
+        return allReviews.filter(r => r.user_id === user.id);
+    },
+
+    // Get all reviews for a product
+    getProductReviews: (productId) => {
+        const allReviews = JSON.parse(localStorage.getItem(DB.REVIEWS_KEY) || '[]');
+        return allReviews.filter(r => r.product_id === productId);
+    },
+
+    // Create a new review
+    createReview: (reviewData) => {
+        const user = JSON.parse(localStorage.getItem(DB.SESSION_KEY));
+        if (!user) return null;
+
+        const allReviews = JSON.parse(localStorage.getItem(DB.REVIEWS_KEY) || '[]');
+        
+        const newReview = {
+            id: 'rev_' + Date.now(),
+            user_id: user.id,
+            product_id: reviewData.product_id,
+            product_name: reviewData.product_name,
+            rating: reviewData.rating,
+            comment: reviewData.comment,
+            created_at: new Date().toISOString()
+        };
+        
+        allReviews.unshift(newReview);
+        localStorage.setItem(DB.REVIEWS_KEY, JSON.stringify(allReviews));
+        return newReview;
+    },
+
+    // --- Dashboard Statistics Methods ---
+
+    // Get dashboard statistics
+    getDashboardStats: () => {
+        const user = JSON.parse(localStorage.getItem(DB.SESSION_KEY));
+        if (!user) {
+            return {
+                totalOrders: 0,
+                totalReviews: 0,
+                totalWishlist: 0,
+                totalSpent: 0,
+                recentOrders: []
+            };
+        }
+
+        const orders = DB.getMyOrders();
+        const reviews = DB.getMyReviews();
+        const wishlist = DB.getMyWishlist();
+        
+        const totalSpent = orders.reduce((sum, order) => sum + (order.total || 0), 0);
+        const recentOrders = orders.slice(0, 5); // Get 5 most recent orders
+        
+        return {
+            totalOrders: orders.length,
+            totalReviews: reviews.length,
+            totalWishlist: wishlist.length,
+            totalSpent: totalSpent,
+            recentOrders: recentOrders
+        };
     }
 };
 

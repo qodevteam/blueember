@@ -537,16 +537,15 @@ body.dark-mode .menu-divider {
 
 /* Profile Dropdown Card */
 .profile-dropdown {
-    position: absolute;
+position: absolute;
     top: calc(100% + 14px);
     right: 0;
     width: 260px;
     background: #ffffff;
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(0, 0, 0, 0.04);
-    opacity: 0;
-    visibility: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    opacity: 1;
+    visibility: visible;
     transform: translateY(-8px) scale(0.98);
     transform-origin: top right;
     transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
