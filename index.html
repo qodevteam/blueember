@@ -7,12 +7,12 @@
   <meta http-equiv="Content-Security-Policy"
     content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';">
   <meta name="description"
-    content="Shop premium home appliances from trusted global brands at Evora Electronics. Find energy-efficient refrigerators, washers, air conditioners, microwaves and more with expert installation and support.">
+    content="Shop premium home appliances from trusted global brands at Blue Ember Electronics. Find energy-efficient refrigerators, washers, air conditioners, microwaves and more with expert installation and support.">
   <meta name="keywords"
     content="home appliances, refrigerators, washing machines, air conditioners, microwaves, dishwashers, energy efficient appliances, appliance store">
-  <meta name="author" content="Evora Electronics">
+  <meta name="author" content="Blue Ember Electronics">
   <link rel="icon" type="image/png" href="assets/favicon.png" style="border-radius: 50%;">
-  <title>Evora Electronics - Premium Home Appliances</title>
+  <title>Blue Ember Electronics - Premium Home Appliances</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="universal.css" rel="stylesheet">
   <link href="home.css" rel="stylesheet">
@@ -31,9 +31,12 @@
   <script src="js/darkmode.js" defer></script>
   <script src="js/app.js" defer></script>
   <script src="js/db-client.js"></script>
+
+  <!-- Logout Modal Script (MUST load first to avoid conflicts) -->
+  <script src="js/logout-modal.js"></script>
+
   <script src="js/profile-dropdown.js" defer></script>
   <script src="js/logout-injector.js" defer></script>
-  <script src="js/logout-modal.js" defer></script>
   <script>
     // Simple Auth Check for Navbar
     document.addEventListener('dbReady', async () => {
@@ -58,7 +61,7 @@
     /* Media query for max-width: 700px - Space for manual editing */
     @media (max-width: 700px) {
       .hero-images .hero-img {
-        height: 336PX;
+        height: 285PX;
         POSITION: RELATIVE;
         TOP: -13PX;
       }
@@ -66,7 +69,7 @@
 
     @media (max-width: 480px) {
       .hero-images .hero-img {
-        height: 336PX;
+        height: 270PX;
         POSITION: RELATIVE;
         TOP: -30PX;
       }
@@ -294,6 +297,12 @@
       box-shadow: 0 8px 15px rgba(0, 153, 255, 0.15) !important;
       border-color: rgba(0, 153, 255, 0.3);
       transform: translateY(-1px);
+      .split-button-content {
+        color: #0064e7 !important;
+      }
+      .split-button-content i {
+        color: #0099ff !important;
+      }
     }
 
     .split-button-right {
@@ -462,12 +471,12 @@
       list-style: none;
       position: absolute !important;
       top: 10vh;
-      right: 0;
+      right: 72px;
       z-index: 1000;
       background: white;
       border-radius: 20px;
       padding: 0px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 24px 25px -2px rgba(0, 0, 0, 0.1);
       display: none;
       opacity: 0;
       transform: translateY(-10px);
@@ -491,6 +500,7 @@
       visibility: visible;
       transform: none;
       box-shadow: none;
+      overflow: hidden;
       background: transparent;
       padding: 0;
       width: 100%;
@@ -511,9 +521,9 @@
       height: 45px;
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid #333333;
+      border: 2px solid #33333367;
       background: grey;
-      
+
     }
 
     .profile-icon-placeholder {
@@ -529,6 +539,129 @@
       border-radius: 120%;
     }
 
+    /* Profile Dropdown Header Styles */
+    .profile-header {
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-name {
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .profile-email {
+      color: #666;
+      font-size: 13px;
+      margin: 4px 0 0 0;
+      line-height: 1.2;
+    }
+
+    /* Dark Mode Overrides */
+    body.dark-mode .profile-header {
+      border-bottom-color: var(--dm-border, #444);
+    }
+
+    body.dark-mode .profile-name {
+      color: var(--dm-text-primary, #fff);
+    }
+
+    /* Dark Mode Overrides */
+    body.dark-mode .profile-header {
+      border-bottom-color: var(--dm-border, #444);
+    }
+
+    body.dark-mode .profile-name {
+      color: var(--dm-text-primary, #fff);
+    }
+
+    body.dark-mode .profile-email {
+      color: var(--dm-text-secondary, #aaa);
+    }
+
+    /* Added for Profile Image in Dropdown Header */
+    #dropdownHeaderImg {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #ddd;
+    }
+
+    /* Mobile Sidebar Profile Styles */
+    .header-profile {
+      display: none;
+      /* Hidden by default */
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+      width: 100%;
+    }
+
+    .header-profile:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      /* Subtle hover */
+    }
+
+    body.dark-mode .header-profile:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    #navbar-avatar-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #0099ff;
+      /* Branded border */
+    }
+
+    .header-profile .user-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .header-profile .user-name {
+      font-weight: 600;
+      font-size: 16px;
+      color: #333;
+      line-height: 1.2;
+    }
+
+    body.dark-mode .header-profile .user-name {
+      color: #fff;
+    }
+
+    .header-profile .user-email {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.2;
+    }
+
+    body.dark-mode .header-profile .user-email {
+      color: #bbb;
+    }
+
+    /* Ensure Dropdown is above sidebar */
+    .profile-dropdown-container {
+      z-index: 2100 !important;
+      /* Higher than typical mobile menu z-index */
+    }
+
     .thebigthree-btns-wrapper {
       display: flex;
       align-items: center;
@@ -541,7 +674,7 @@
       content: '';
       position: absolute;
       top: -16px;
-      left: 50%;
+      left: 88%;
       transform: translateX(-50%);
       width: 32px;
       height: 32px;
@@ -1002,7 +1135,7 @@
     body.dark-mode .split-button.single-toggle-action::before,
     body.dark-mode .navbar a::before {
       background-color: #ccebff;
-    transition: all 1.1s cubic-bezier(0.04, 0.86, 0, 1.08);
+      transition: all 1.1s cubic-bezier(0.04, 0.86, 0, 1.08);
     }
 
     /* Ensure text and icons stay above the background */
@@ -1011,6 +1144,11 @@
     .navbar a {
       position: relative;
       z-index: 1;
+    }
+
+    #main-nav-link {
+      background-color: transparent !important;
+      padding: 0px;
     }
   </style>
 </head>
@@ -1052,7 +1190,7 @@
       </div>
       <!-- Main navigation menu -->
       <ul class="navbar">
-        <li class="mobile-dropdown-item">
+        <li class="mobile-dropdown-item" id="main-nav-link">
           <div class="split-button single-toggle-action">
             <div class="split-button-content">
               <i class='bx  bx-menu' style='color:#ffffff'></i>
@@ -1063,16 +1201,13 @@
             </div>
           </div>
           <ul class="mobile-dropdown">
-            <li><a href="product2.html">Washers & Dryers</a></li>
-            <li><a href="product2.html">Refrigerators</a></li>
-            <li><a href="product2.html">Microwaves</a></li>
-            <li><a href="product2.html">Air Conditioners</a></li>
-            <li><a href="product2.html">Dishwashers</a></li>
-            <li><a href="product2.html">Cooktops & Ovens</a></li>
-            <li><a href="product2.html">Vacuum Cleaners</a></li>
+            <li><a href="product2.html">Toys</a></li>
+            <li><a href="product2.html">Supplyments</a></li>
+            <li><a href="product2.html">Beauty</a></li>
+            <li><a href="product2.html">HomeGoods</a></li>
           </ul>
         </li>
-        <li class="mobile-dropdown-item">
+        <li class="mobile-dropdown-item" id="main-nav-link">
           <div class="split-button single-toggle-action">
             <div class="split-button-content">
               <i class="fa-solid fa-building"></i>
@@ -1083,15 +1218,13 @@
             </div>
           </div>
           <ul class="mobile-dropdown">
-            <li><a href="Haier-productpage.html">Haier</a></li>
+            <li><a href="Haier-productpage.html">Revlon</a></li>
             <li><a href="samsung-productpage.html">Samsung</a></li>
             <li><a href="LG-productpage.html">LG</a></li>
             <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
             <li><a href="BOSCH-productpage.html">Bosch</a></li>
-            <li><a href="Electrolux-productpage.html">Electrolux</a></li>
+            <li><a href="Electrolux-productpage.html">Toys R Us</a></li>
             <li><a href="Panasonic-productpage.html">Panasonic</a></li>
-            <li><a href="Sony-productpage.html">Sony</a></li>
-            <li><a href="Apple-productpage.html">Apple</a></li>
           </ul>
         </li>
         <li style="display: none;"><a href="product2.html">Product</a></li>
@@ -1101,6 +1234,16 @@
 
         <div class="profile-dropdown-container" id="profileDropdownContainer" style="display: none;">
           <div class="profile-dropdown" id="profileDropdown">
+            <!-- Profile Header Added by Fix -->
+            <div class="profile-header">
+              <img src="assets/profilepreview.jpg" alt="User" id="dropdownHeaderImg">
+              <div class="profile-info">
+                <p id="profileDropdownName" class="profile-name">Guest</p>
+                <p id="profileDropdownEmail" class="profile-email">Please log in</p>
+              </div>
+            </div>
+            <div class="profile-dropdown-divider"></div>
+
             <ul class="profile-dropdown-list">
               <li>
                 <a href="profile.html" class="profile-dropdown-item">
@@ -1215,7 +1358,7 @@
     <!-- 1. Header: Brand or User Profile -->
     <div class="sidebar-header" id="sidebarHeader">
       <!-- Default State: Brand Logo -->
-      <div class="header-brand default-brand">
+      <div class="header-brand default-brand" id="sidebarBrand">
         <div class="navbar-logo">
           <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
             style="width: 30px; height: auto;">
@@ -1224,16 +1367,41 @@
             <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
           </span>
         </div>
+      </div>
+
+      <!-- User State (Logged In) -->
+      <div class="header-profile" id="sidebarProfileContainer">
+        <img src="assets/profilepreview.jpg" alt="Profile" id="navbar-avatar-img">
         <div class="user-info">
-          <span class="user-name"></span>
-          <span class="user-status"></span>
+          <span class="user-name" id="sidebarUserName">User Name</span>
+          <span class="user-email" id="sidebarUserEmail">email@example.com</span>
         </div>
       </div>
-      <!-- User State (Injected via JS) goes here -->
 
-      <button class="close-sidebar-btn" id="closeBtn">
-        <i class="fa-solid fa-times"></i>
-      </button>
+      <!-- Close Button -->
+      
+
+      <!-- Mobile Specific Profile Dropdown (Floating) -->
+      <div class="mobile-profile-dropdown" id="mobileProfileDropdown" style="display: none;">
+        <div class="mobile-dropdown-header">
+          <span class="user-name" id="mobileDropdownName">User Name</span>
+          <span class="user-email" id="mobileDropdownEmail">email@example.com</span>
+        </div>
+        <div class="mobile-dropdown-items">
+          <a href="profile.html" class="mobile-dropdown-item">
+            <i class="fa-regular fa-user"></i> Profile
+          </a>
+          <a href="account.html" class="mobile-dropdown-item">
+            <i class="fa-solid fa-toggle-off"></i> Account Settings
+          </a>
+          <a href="#" class="mobile-dropdown-item">
+            <i class="fa-regular fa-comments"></i> Purchases & Reviews
+          </a>
+          <a href="#" class="mobile-dropdown-item">
+            <i class="fa-regular fa-circle-question"></i> Help Center
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- 2. Content: Navigation Links -->
@@ -1324,14 +1492,14 @@
   </div>
 
   <!-- HERO / BANNERS - Restructured -->
-  <section class="hero-images" aria-label="Evora featured banners">
-    <img src="assets/home-herosection-01.png" alt="Living room with Evora electronics" class="hero-img">
+  <section class="hero-images" aria-label="Blue Ember featured banners">
+    <img src="assets/hero-image.png" alt="Living room with Blue Ember electronics" class="hero-img">
   </section>
 
   <!-- PRODUCTS INTRO -->
   <section class="products-overview" id="products-overview" aria-labelledby="products-heading">
     <div class="container">
-      <h2 id="products-heading">Explore Evora Home Appliances</h2>
+      <h2 id="products-heading">Welcome to Blue Ember</h2>
       <p class="lead">Durable, energy-efficient appliances designed for modern homes — refrigerators, washers, air
         conditioners, microwaves and more. Shop top-sellers, compare specs, and find the perfect fit for your needs.</p>
 
@@ -1352,7 +1520,7 @@
         <!-- Product Card 1 -->
         <article class="product-card" data-category="refrigerators" itemscope itemtype="http://schema.org/Product">
           <a href="#" class="product-media modal-trigger" data-target="fridge-modal">
-            <img src="assets/home-product-01.jpg" alt="Evora FrostShield Refrigerator" loading="lazy"
+            <img src="assets/home-product-01.jpg" alt="Blue Ember FrostShield Refrigerator" loading="lazy"
               style="width: 65%;">
           </a>
           <div class="product-body">
@@ -1376,7 +1544,7 @@
         <!-- Product Card 2 -->
         <article class="product-card" data-category="washers & dryers" itemscope itemtype="http://schema.org/Product">
           <a href="#" class="product-media modal-trigger" data-target="washer-modal">
-            <img src="assets/home-product-02.jpg" alt="Evora QuickWash Washer" loading="lazy" style="width: 45%;">
+            <img src="assets/home-product-02.jpg" alt="Blue Ember QuickWash Washer" loading="lazy" style="width: 45%;">
           </a>
           <div class="product-body">
             <h4 itemprop="name">Panasonic 7 Kg Front Load Inverter Washing Machine</h4>
@@ -1399,11 +1567,11 @@
         <!-- Product Card 3 -->
         <article class="product-card" data-category="air conditioners" itemscope itemtype="http://schema.org/Product">
           <a href="#" class="product-media modal-trigger" data-target="ac-modal">
-            <img src="assets/home-product-04.jpg" alt="Evora ClimatePro AC" loading="lazy"
+            <img src="assets/home-product-04.jpg" alt="Blue Ember ClimatePro 1.5T" loading="lazy"
               style="width: 40%; scale: 0.9;">
           </a>
           <div class="product-body">
-            <h4 itemprop="name">Evora ClimatePro 1.5T</h4>
+            <h4 itemprop="name">Blue Ember ClimatePro 1.5T</h4>
             <p class="short-desc">Fast-cool inverter AC with low-noise operation and smart scheduling.</p>
             <ul class="product-features">
               <li>1.5 Ton inverter</li>
@@ -1423,10 +1591,10 @@
         <!-- Product Card 4 -->
         <article class="product-card" data-category="microwaves" itemscope itemtype="http://schema.org/Product">
           <a href="#" class="product-media modal-trigger" data-target="microwave-modal">
-            <img src="assets/home-product-03.jpg" alt="Evora MicroChef Microwave" loading="lazy" style="width: 70%;">
+            <img src="assets/home-product-03.jpg" alt="Blue Ember MicroChef Microwave" loading="lazy" style="width: 70%;">
           </a>
           <div class="product-body">
-            <h4 itemprop="name">Evora MicroChef 30L</h4>
+            <h4 itemprop="name">Blue Ember MicroChef 30L</h4>
             <p class="short-desc">Multi-function convection microwave with auto-cook menus and easy-clean enamel.</p>
             <ul class="product-features">
               <li>30 L capacity</li>
@@ -1515,11 +1683,11 @@
 
   <div id="ac-modal" class="product-modal-template" aria-hidden="true">
     <div class="modal-header">
-      <h3>Evora ClimatePro 1.5T</h3>
+      <h3>Blue Ember ClimatePro 1.5T</h3>
       <div class="modal-price">$599</div>
     </div>
     <div class="modal-body">
-      <img src="assets/home-product-04.jpg" alt="Evora ClimatePro 1.5 Ton AC" class="modal-image">
+      <img src="assets/home-product-04.jpg" alt="Blue Ember ClimatePro 1.5 Ton AC" class="modal-image">
       <div class="modal-description">
         <p>Fast-cooling inverter air conditioner designed for rapid temperature control with whisper-quiet operation.
           Features intelligent scheduling that learns your preferences and eco-friendly refrigerant that minimizes
@@ -1540,18 +1708,18 @@
     <div class="modal-actions">
       <a href="compare.html?product=ac" class="btn-outline">Compare</a>
       <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="59"
-        data-product-name="Evora ClimatePro 1.5T" data-product-price="599"
+        data-product-name="Blue Ember ClimatePro 1.5T" data-product-price="599"
         data-product-image="./assets/home-product-04.jpg">Add to Cart</button>
     </div>
   </div>
 
   <div id="microwave-modal" class="product-modal-template" aria-hidden="true">
     <div class="modal-header">
-      <h3>Evora MicroChef 30L</h3>
+      <h3>Blue Ember MicroChef 30L</h3>
       <div class="modal-price">$229</div>
     </div>
     <div class="modal-body">
-      <img src="assets/home-product-03.jpg" alt="Evora MicroChef 30L Microwave" class="modal-image">
+      <img src="assets/home-product-03.jpg" alt="Blue Ember MicroChef 30L Microwave" class="modal-image">
       <div class="modal-description">
         <p>Versatile multi-function convection microwave that combines speed with precision cooking. Features 12
           auto-cook menus for one-touch meal preparation and easy-clean enamel interior that resists stains and odors
@@ -1571,7 +1739,7 @@
     </div>
     <div class="modal-actions">
       <a href="compare.html?product=microwave" class="btn-outline">Compare</a>
-      <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="60" data-product-name="Evora MicroChef 30L"
+      <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="60" data-product-name="Blue Ember MicroChef 30L"
         data-product-price="229" data-product-image="./assets/home-product-03.jpg">Add to Cart</button>
     </div>
   </div>
@@ -1654,38 +1822,38 @@
       <div class="brands-grid">
         <a href="Haier-productpage.html">
           <div class="brand-card">
-            <img src="assets/download (2).png" alt="Haier" class="brand-logo">
+            <img src="assets/Revlon_Logo_1989.png" alt="Revlon" class="brand-logo">
           </div>
         </a>
 
         <a href="samsung-productpage.html">
           <div class="brand-card">
-            <img src="assets/download (1).png" alt="Samsung" class="brand-logo">
+            <img src="assets/download__1_-removebg-preview.png" alt="Samsung" class="brand-logo">
           </div>
         </a>
 
         <a href="LG-productpage.html">
           <div class="brand-card">
-            <img src="assets/download.png" alt="LG" class="brand-logo">
+            <img src="assets/download-removebg-preview.png" alt="LG" class="brand-logo">
           </div>
         </a>
 
 
         <a href="Whirlpool-productpage.html">
           <div class="brand-card">
-            <img src="assets/download (4).png" alt="Whirlpool" class="brand-logo">
+            <img src="assets/download__4_-removebg-preview.png" alt="Whirlpool" class="brand-logo">
           </div>
         </a>
 
 
-        <a href="Whirlpool-productpage.html">
+        <a href="BOSCH-productpage.html">
           <div class="brand-card">
-            <img src="assets/download (5).png" alt="Bosch" class="brand-logo">
+            <img src="assets/download__5_-removebg-preview.png" alt="Bosch" class="brand-logo">
           </div>
         </a>
         <a href="Electrolux-productpage.html">
           <div class="brand-card">
-            <img src="assets/download (6).png" alt="Electrolux" class="brand-logo">
+            <img src="assets/Toys-R-Us-Logo-1997.png" alt="Toys R Us" class="brand-logo">
           </div>
         </a>
 
@@ -1709,14 +1877,14 @@
     <div class="container" style="display: none;">
       <h2 class="section-title" id="testimonials-heading">Customer Experiences</h2>
       <p class="section-subtitle">Don't just take our word for it. Hear what our satisfied customers have to say about
-        their Evora experience.</p>
+        their Blue Ember experience.</p>
 
       <div class="testimonials-grid">
         <div class="testimonial-card">
           <div class="quote-icon">
             <i class="fas fa-quote-left"></i>
           </div>
-          <p class="testimonial-content">"The refrigerator I purchased from Evora has transformed my kitchen. The smart
+          <p class="testimonial-content">"The refrigerator I purchased from Blue Ember has transformed my kitchen. The smart
             features save energy, and the humidity control keeps my produce fresh twice as long. Their installation team
             was professional and efficient."</p>
           <div class="testimonial-author">
@@ -1762,7 +1930,7 @@
           <div class="quote-icon">
             <i class="fas fa-quote-left"></i>
           </div>
-          <p class="testimonial-content">"When my AC broke during a heatwave, Evora's emergency service team had a
+          <p class="testimonial-content">"When my AC broke during a heatwave, Blue Ember's emergency service team had a
             technician at my home within hours. They diagnosed the issue and had it fixed the same day. Their customer
             service is exceptional - they really care about their customers."</p>
           <div class="testimonial-author">
@@ -1788,7 +1956,7 @@
   <section class="sustainability" aria-labelledby="sustainability-heading">
     <div class="container">
       <h2 class="section-title" id="sustainability-heading">Our Environmental Commitment</h2>
-      <p class="section-subtitle">At Evora, we believe in creating products that are not only efficient but also
+      <p class="section-subtitle">At Blue Ember, we believe in creating products that are not only efficient but also
         environmentally responsible. We're committed to reducing our carbon footprint and helping our customers do the
         same.</p>
 
@@ -2045,7 +2213,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+      <p>&copy; 2025 Blue Ember Electronics. All rights reserved.</p>
       <div class="footer-legal">
         <a href="privacy policy.html">Privacy Policy</a> •
         <a href="terms and services.html">Terms of Service</a> •
@@ -2342,7 +2510,7 @@
           <i class="fa-solid fa-robot"></i>
         </div>
         <div class="chat-title">
-          <h4>Evora AI</h4>
+          <h4>Ember AI</h4>
           <span>Online</span>
         </div>
       </div>
@@ -2366,7 +2534,6 @@
 
   <script src="js/chatbot.js"></script>
   <!-- Auth Integration -->
-  <script src="js/db-client.js"></script>
   <script>
     // Auth & Dropdown Logic
     const initAuthUI = async () => {

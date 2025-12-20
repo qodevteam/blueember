@@ -387,7 +387,6 @@ body.dark-mode .profile-dropdown a {
 /* Profile Dropdown Container Dark Mode */
 body.dark-mode .profile-dropdown-container {
     background-color: var(--dm-bg-secondary);
-    border: 1px solid var(--dm-border);
     box-shadow: 0 8px 25px var(--dm-shadow);
 }
 

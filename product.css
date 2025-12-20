@@ -15,12 +15,10 @@
  }
 
  body {
-   background: transparent;
-   min-height: 100vh;
-
-   transition: all 0.3s ease-in-out;
-   padding-top: 60px;
-   /* Space for fixed navbar */
+       background: transparent;
+    min-height: 100vh;
+    transition: all 0.3s ease-in-out;
+    padding-top: 75px;
  }
 
  /* ===== NAVIGATION ===== */
@@ -85,7 +83,7 @@
 
  .navbar li {
    position: relative;
-   margin: 0 3px;
+   margin: 0;
  }
 
  .navbar a {
@@ -241,7 +239,6 @@
    position: fixed;
    top: 0;
    right: -100%;
-   overflow: auto;
    height: 100vh;
    width: 285px !important;
    background-color: rgba(255, 255, 255, 0.8);
@@ -267,7 +264,6 @@
 
  .mobile-menu>* {
    position: relative;
-   z-index: 1;
  }
 
  .mobile-menu.active {

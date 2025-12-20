@@ -22,7 +22,7 @@
     position: relative;
     box-shadow: 0 12px 30px rgba(16, 24, 40, 0.06);
     transition: transform 0.35s ease;
-    top: -65px;
+    top: -30px;
 }
 
 /* PRODUCTS OVERVIEW */
@@ -140,6 +140,7 @@
   display: block;
   width: 100%;
   height: 190px;
+  background: white;
   overflow: hidden;
 }
 .product-media img {
@@ -1319,9 +1320,10 @@ background: #ad000021;
 }
 
 .logout-confirm-btn.loading .custom-spinner {
-  display: block;
+  display: flex;
 }
 
+/* Fixed spinner centering - single source of truth */
 .custom-spinner {
   display: none;
   position: absolute;
@@ -1330,23 +1332,17 @@ background: #ad000021;
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .spinner {
   font-size: 20px;
   position: relative;
-  display: inline-block;
+  display: block;
   width: 1em;
   height: 1em;
-}
-
-.spinner.center {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+  /* Remove conflicting centering - let parent handle it */
 }
 
 .spinner .spinner-blade {

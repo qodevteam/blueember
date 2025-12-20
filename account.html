@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Manage your Evora Electronics account settings, addresses, payment methods, and preferences.">
+        content="Manage your Blue Ember account settings, addresses, payment methods, and preferences.">
     <link rel="icon" type="image/png" href="assets/favicon.png" style="border-radius: 50%;">
-    <title>Account Settings - Evora Electronics</title>
+    <title>Account Settings - Blue Ember</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
 
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -31,6 +32,7 @@
     <!-- Scripts -->
     <script src="js/darkmode.js" defer></script>
     <script src="js/db-client.js"></script>
+    <script src="js/mobile-sidebar.js" defer></script>
     <script src="js/profile-dropdown.js" defer></script>
     <script src="js/logout-injector.js" defer></script>
     <script src="js/logout-modal.js" defer></script>
@@ -48,7 +50,7 @@
             </button>
 
             <a href="index.html" class="navbar-logo">
-                <img src="assets/logo.png" alt="Evora Logo" style="height: 40px; width: auto;">
+                <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember Logo" style="height: 40px; width: auto;">
             </a>
 
             <ul class="navbar">
@@ -237,7 +239,7 @@
                             <div class="profile-pic-actions">
                                 <label for="profilePicInput" class="btn btn-primary">
                                     <span class="btn-text"><i class="bx bx-upload"></i> Upload Photo</span>
-                                    <div class="spinner" style="display: none;">
+                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -255,7 +257,7 @@
                                 <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
                                 <button class="btn btn-outline" id="removeProfilePic">
                                     <span class="btn-text">Remove</span>
-                                    <div class="spinner" style="display: none;">
+                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -626,7 +628,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="saveAccountBtn">
                                     <span class="btn-text"><i class="bx bx-save"></i> Save Changes</span>
-                                    <div class="spinner" style="display: none;">
+                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -660,7 +662,7 @@
                                     <button type="button" class="btn btn-primary" id="savePhoneBtn"
                                         style="white-space: nowrap;">
                                         <span class="btn-text"><i class="bx bx-save"></i> Save Number</span>
-                                        <div class="spinner" style="display: none;">
+                                        <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                             <div class="spinner-blade"></div>
                                             <div class="spinner-blade"></div>
                                             <div class="spinner-blade"></div>
@@ -692,13 +694,13 @@
 
                     <div class="account-card">
                         <h2>Download Data</h2>
-                        <p class="card-description">Download a .ZIP file of your Evora personal information, provided in
+                        <p class="card-description">Download a .ZIP file of your Blue Ember personal information, provided in
                             both CSV and JSON file formats.</p>
                         <div class="form-actions">
                             <button type="button" class="btn btn-outline" id="exportDataBtn">
                                 <span class="btn-text"><i class="bx bx-download"></i> Request your data for
                                     download</span>
-                                <div class="spinner" style="display: none;">
+                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -731,7 +733,7 @@
                         <div class="form-actions" style="margin-top: 20px;">
                             <button type="button" class="btn btn-outline" id="saveFindabilityBtn">
                                 <span class="btn-text"><i class="bx bx-save"></i> Save findability settings</span>
-                                <div class="spinner" style="display: none;">
+                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -796,7 +798,7 @@
                         <div class="form-actions" style="margin-top: 20px;">
                             <button type="button" class="btn btn-primary" id="savePrivacyBtn">
                                 <span class="btn-text"><i class="bx bx-save"></i> Update privacy settings</span>
-                                <div class="spinner" style="display: none;">
+                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -815,9 +817,9 @@
                     </div>
 
                     <div class="account-card">
-                        <h2>Permanently close and delete your Evora account</h2>
+                        <h2>Permanently close and delete your Blue Ember account</h2>
                         <p class="card-description">
-                            Permanently close and delete your Evora account. Once deleted, your account can't be
+                            Permanently close and delete your Blue Ember account. Once deleted, your account can't be
                             restored. Learn more
                         </p>
                         <div class="form-actions">
@@ -835,7 +837,7 @@
                             <h2>Your Delivery Addresses</h2>
                             <button class="btn btn-primary" id="addAddressBtn">
                                 <span class="btn-text"><i class="bx bx-plus"></i> Add New Address</span>
-                                <div class="spinner" style="display: none;">
+                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -920,7 +922,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="saveAddressBtn">
                                     <span class="btn-text"><i class="bx bx-save"></i> Save Address</span>
-                                    <div class="spinner" style="display: none;">
+                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -950,7 +952,7 @@
                             <h2>Payment Methods</h2>
                             <button class="btn btn-primary" id="addCardBtn">
                                 <span class="btn-text"><i class="bx bx-plus"></i> Add New Card</span>
-                                <div class="spinner" style="display: none;">
+                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -1003,7 +1005,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="saveCardBtn">
                                     <span class="btn-text"><i class="bx bx-save"></i> Save Card</span>
-                                    <div class="spinner" style="display: none;">
+                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -1049,7 +1051,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="changePasswordBtn">
                                     <span class="btn-text"><i class="bx bx-key"></i> Change Password</span>
-                                    <div class="spinner" style="display: none;">
+                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -1089,7 +1091,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="changeEmailBtn">
                                     <span class="btn-text"><i class="bx bx-envelope"></i> Change Email</span>
-                                    <div class="spinner" style="display: none;">
+                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -1124,7 +1126,7 @@
                         <div class="form-actions">
                             <button type="button" class="btn btn-outline danger" id="closeAccountBtn">
                                 <span class="btn-text"><i class="bx bx-error-circle"></i> Close Account</span>
-                                <div class="spinner" style="display: none;">
+                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -1197,7 +1199,7 @@
                                 <div class="toggle-item">
                                     <div class="toggle-info">
                                         <h4>New and Notable</h4>
-                                        <p>Get the very best of Evora - new item trends, recommendations, in our biggest
+                                        <p>Get the very best of Blue Ember - new item trends, recommendations, in our biggest
                                             sale events and more collaborate in - define edgy to your in box.</p>
                                     </div>
                                     <label class="toggle-switch">
@@ -1209,7 +1211,7 @@
                                 <div class="toggle-item">
                                     <div class="toggle-info">
                                         <h4>Feedback</h4>
-                                        <p>Share with us what customers think about your Evora experience through
+                                        <p>Share with us what customers think about your Blue Ember experience through
                                             occasional marketing surveys in your inbox.</p>
                                     </div>
                                     <label class="toggle-switch">
@@ -1233,7 +1235,7 @@
                                 <div class="toggle-item">
                                     <div class="toggle-info">
                                         <h4>Forums</h4>
-                                        <p>Keep up with the conversation through notifications for Evora and Evora Teams
+                                        <p>Keep up with the conversation through notifications for Blue Ember and Blue Ember Teams
                                             forums.</p>
                                     </div>
                                     <label class="toggle-switch">
@@ -1244,8 +1246,8 @@
 
                                 <div class="toggle-item">
                                     <div class="toggle-info">
-                                        <h4>Etsy Advocacy</h4>
-                                        <p>See in-app prompts to support the Evora community, join the Etsy Advocacy
+                                        <h4>Blue Ember Advocacy</h4>
+                                        <p>See in-app prompts to support the Blue Ember community, join the Blue Ember Advocacy
                                             newsletter art.</p>
                                     </div>
                                     <label class="toggle-switch">
@@ -1258,7 +1260,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="saveNotificationsBtn">
                                     <span class="btn-text"><i class="bx bx-save"></i> Save Settings</span>
-                                    <div class="spinner" style="display: none;">
+                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -1286,7 +1288,7 @@
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-section">
-                <h4 class="footer-logo">Evora Electronics</h4>
+                <h4 class="footer-logo">Blue Ember</h4>
                 <p class="footer-tagline">Your trusted source for premium home appliances</p>
                 <div class="social-icons">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -1320,13 +1322,13 @@
                 <h4>Contact</h4>
                 <address>
                     <a href="tel:+1234567890">+1 (234) 567-890</a><br>
-                    <a href="mailto:support@evora-electronics.com">support@evora-electronics.com</a>
+                    <a href="mailto:info@blueember.com">info@blueember.com</a>
                 </address>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+            <p>&copy; 2025 Blue Ember. All rights reserved.</p>
             <div class="footer-legal">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Service</a>
@@ -1351,7 +1353,7 @@
                 <button class="btn btn-primary" id="confirmDeleteBtn"
                     style="background: linear-gradient(90deg, #ef4444, #dc2626);">
                     <span class="btn-text">Close Account</span>
-                    <div class="spinner" style="display: none;">
+                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
                         <div class="spinner-blade"></div>
                         <div class="spinner-blade"></div>
                         <div class="spinner-blade"></div>

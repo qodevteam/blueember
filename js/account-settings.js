@@ -4,7 +4,6 @@
  */
 
 // Global state
-// Global state
 window.hasUnsavedChanges = false;
 window.pendingNavigation = null;
 let SCOPED_SUFFIX = '';
@@ -634,8 +633,8 @@ function isValidEmail(email) {
 }
 
 // Add CSS for notification animations
-const style = document.createElement('style');
-style.textContent = `
+const notificationStyle = document.createElement('style');
+notificationStyle.textContent = `
     @keyframes slideInRight {
         from {
             transform: translateX(400px);
@@ -657,7 +656,7 @@ style.textContent = `
         }
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(notificationStyle);
 
 // ========================================
 // MOBILE SIDEBAR

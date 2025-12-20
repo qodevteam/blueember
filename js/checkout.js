@@ -5,17 +5,16 @@
 
 class CheckoutManager {
   constructor() {
+    this.cart = [];
     this.shippingMethod = 'standard';
     this.paymentMethod = 'credit-card';
     this.currentStep = 1;
-    this.cart = [];
-    this.cartManager = null;
     this.init();
   }
 
   init() {
     this.cacheDOM();
-    this.getCartManager();
+    this.loadCart();
     this.bindEvents();
     this.updateCartDisplay();
     this.showStep(1);
@@ -138,20 +137,17 @@ class CheckoutManager {
     }
   }
 
-  getCartManager() {
-    if (window.evoraApp && window.evoraApp.cartManager) {
-      this.cartManager = window.evoraApp.cartManager;
-      this.cart = this.cartManager.getCart();
-    } else {
-      console.error('CartManager not found. Make sure app.js and cart-manager.js are loaded before checkout.js');
+  loadCart() {
+    try {
+      const saved = localStorage.getItem('evoraCart');
+      this.cart = saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      console.warn('Failed to load cart:', error);
+      this.cart = [];
     }
   }
 
   updateCartDisplay() {
-    if (this.cartManager) {
-      this.cart = this.cartManager.getCart();
-    }
-
     const totalItems = this.cart.reduce((total, item) => total + item.quantity, 0);
 
     if (this.elements.cartCounter) {
@@ -332,12 +328,8 @@ class CheckoutManager {
     this.showStep(3);
 
     // Clear the cart after successful order
-    if (this.cartManager) {
-      this.cartManager.clearCart();
-    } else {
-      this.cart = [];
-      localStorage.setItem('evoraCart', JSON.stringify(this.cart));
-    }
+    this.cart = [];
+    localStorage.setItem('evoraCart', JSON.stringify(this.cart));
     this.updateCartDisplay();
   }
 

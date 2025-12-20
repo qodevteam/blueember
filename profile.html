@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile - Evora Electronics</title>
-    <meta name="description" content="View your Evora Electronics profile dashboard, recent orders, and account stats.">
+    <title>My Profile - Blue Ember Electronics</title>
+    <meta name="description" content="View your Blue Ember Electronics profile dashboard, recent orders, and account stats.">
     <link rel="icon" type="image/png" href="assets/favicon.png" style="border-radius: 50%;">
 
     <!-- Fonts -->
@@ -14,6 +14,7 @@
 
     <!-- Icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Stylesheets -->
@@ -22,6 +23,7 @@
     <link href="navbar.css" rel="stylesheet">
     <link href="mobile-sidebar.css" rel="stylesheet">
     <link href="account.css" rel="stylesheet">
+    <link href="home.css" rel="stylesheet">
 
     <!-- Custom Profile CSS for Grid -->
     <style>
@@ -140,23 +142,45 @@
             color: var(--dm-text-primary);
             border-color: var(--dm-border);
         }
+
+        .thebigtwo{
+            border: 1px solid #3a3a3a;
+            border-radius: 30px;
+
+        }
     </style>
 
     <!-- Scripts -->
+    <!-- Core Dependencies (No defer for immediate availability) -->
+    <script src="js/db-client.js"></script>
+    
+    <!-- Authentication (depends on db-client) -->
+    <script src="js/auth.js"></script>
+    
+    <!-- Logout Modal Script (MUST load first to avoid conflicts) -->
+    <script src="js/logout-modal.js"></script>
+    
+    <!-- UI Functionality Scripts (depend on auth and logout-modal) -->
     <script src="js/darkmode.js" defer></script>
     <script src="js/profile-dropdown.js" defer></script>
     <script src="js/navigation.js" defer></script>
+    
+    <!-- Page-specific Scripts (depend on all above) -->
     <script src="js/profile.js" defer></script>
-    <script src="js/db-client.js"></script>
 </head>
 
 <body>
     <!-- Navbar -->
     <nav>
-        <div class="navbar-container">
-            <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="navbar-container" style="justify-content: space-between;">
+           
             <a href="index.html" class="navbar-logo">
-                <img src="assets/logo.png" alt="Evora Logo" style="height: 40px; width: auto;">
+                <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
+            style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
             </a>
             <ul class="navbar">
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
@@ -164,12 +188,14 @@
                 <li><a href="brands.html"><i class="fas fa-star"></i> Brands</a></li>
                 <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
-            <div style="margin-left: auto; display: flex; align-items: center; gap: 10px;">
+            <div class="thebigtwo">
+            <div style="margin-left: auto;display: flex;align-items: center;gap: 4px;padding: 0px 2px 0px 0px;">
                 <button id="dark-mode-toggle" class="navbar-toggle"><i class="fas fa-moon"></i></button>
                 <button class="profile-icon-btn" id="profileIconBtn">
                     <img src="" alt="Profile" class="profile-icon-img" id="profileIconImg">
                     <i class="fas fa-user profile-icon-placeholder"></i>
                 </button>
+                </div>
                 <!-- Reuse Profile Dropdown -->
                 <div class="profile-dropdown-container" id="profileDropdownContainer" style="display: none;">
                     <div class="profile-dropdown" id="profileDropdown">
@@ -225,16 +251,17 @@
     <main class="account-settings-main">
         <div class="account-container">
             <!-- Welcome Header -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; margin-bottom: 20px; gap:15px;">
+                <div class="profile-pic-container" style="width: 150px;height: 150px;object-fit: cover;overflow: hidden;align-content: center;border-radius: 3284px;">
+                    <img src="" id="dashboardProfilePic" class="profile-pic-img" style="display: none;">
+                    <div class="profile-pic-placeholder" style="font-size: 32px;"><i class="bx bx-user"></i></div>
+                </div>
                 <div>
                     <h1 class="page-title" style="margin-bottom: 5px;">My Profile</h1>
                     <p style="color: #64748b; font-size: 16px;" id="welcomeMsg">Welcome back!</p>
                 </div>
                 <!-- Profile Picture (Large) -->
-                <div class="profile-pic-container" style="width: 80px; height: 80px;">
-                    <img src="" id="dashboardProfilePic" class="profile-pic-img" style="display: none;">
-                    <div class="profile-pic-placeholder" style="font-size: 32px;"><i class="bx bx-user"></i></div>
-                </div>
+                
             </div>
 
             <!-- Profile Tabs -->
@@ -467,6 +494,50 @@
 
         </div>
     </main>
+
+    <!-- LOGOUT CONFIRMATION MODAL -->
+    <div class="modal" id="logoutModal" aria-hidden="true">
+        <div class="modal-overlay logout-modal-overlay" id="logoutModalOverlay"></div>
+        <div class="modal-content logout-modal-content">
+            <div class="logout-modal-header">
+                <div class="logout-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <h3>Confirm Logout</h3>
+            </div>
+            <div class="logout-modal-body">
+                <p>Are you sure you want to log out? You'll need to sign in again to access your account.</p>
+            </div>
+            <div class="logout-modal-actions">
+                <button type="button" class="btn btn-secondary logout-cancel-btn" id="logoutCancelBtn">Cancel</button>
+                <button type="button" class="btn btn-primary logout-confirm-btn" id="logoutConfirmBtn">
+                    <span class="btn-text">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Log Out
+                    </span>
+                    <div class="custom-spinner">
+                        <div class="spinner center">
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
 
 </html>
