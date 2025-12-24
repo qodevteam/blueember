@@ -376,3 +376,5 @@ if (document.readyState === 'loading') {
 // Export for manual initialization
 window.MobileSidebar = MobileSidebar;
 window.initMobileSidebar = initMobileSidebar;
+
+

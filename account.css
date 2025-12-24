@@ -684,7 +684,19 @@
         height: 100px;
     }
 }
+@media (max-width: 768px) {
+.navbar{
+    display: none;
+}
+}
 
+
+@media (max-width: 480px) {
+.profile-pic-container{
+    width: 75px;
+    height: 75px;
+}
+}
 /* 768px - Tablets */
 @media (max-width: 768px) and (min-width: 481px) {
     .account-settings-main {
@@ -1068,3 +1080,5 @@ body.dark-mode .action-btn:hover {
     background: rgba(0, 153, 255, 0.15);
     color: var(--dm-accent);
 }
+
+

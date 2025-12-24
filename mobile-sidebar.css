@@ -357,9 +357,9 @@ body.dark-mode .footer-btn:hover {
     top: calc(100% + 10px);
     left: 10px;
     right: -35px;
+    overflow: hidden;
     background: #1e293b;
     border-radius: 22px;
-    padding: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     z-index: 2100;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -380,7 +380,7 @@ body.dark-mode .footer-btn:hover {
 }
 
 .mobile-dropdown-header {
-    padding-bottom: 12px;
+    padding: 12px;
     margin-bottom: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
@@ -402,6 +402,8 @@ body.dark-mode .footer-btn:hover {
 .mobile-dropdown-items {
     display: flex;
     flex-direction: column;
+    border-radius: 0px;
+    overflow: hidden;
 }
 
 .mobile-dropdown-item {
@@ -409,13 +411,17 @@ body.dark-mode .footer-btn:hover {
     align-items: center;
     gap: 12px;
     padding: 5px !important;
-        background-color: azure !important;
     color: #cbd5e1;
     text-decoration: none;
     border-radius: 8px;
     transition: all 0.2s;
     font-size: 15px;
+    
 }
+
+.mobile-item-links{
+        border-radius: 0 !important;
+    }
 
 .mobile-dropdown-item:hover {
     background: rgba(255, 255, 255, 0.05);
@@ -444,3 +450,5 @@ body.dark-mode .footer-btn:hover {
     background: rgba(239, 68, 68, 0.2);
     transform: translateX(4px);
 }
+
+

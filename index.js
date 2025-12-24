@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// Evora Local Chatbot - Standalone Script
+// Blue Ember Local Chatbot - Standalone Script
 // No server required, runs entirely locally
 
 const readline = require('readline');
@@ -53,7 +53,7 @@ const getLocalResponse = (message) => {
 
     // Brands
     if (msg.includes('bosch')) {
-        return "BOSCH offers premium home appliances with German engineering. Visit our BOSCH page to explore their full range.";
+        return "BOSCH offers premium Store with German engineering. Visit our BOSCH page to explore their full range.";
     }
 
     if (msg.includes('haier')) {
@@ -85,7 +85,7 @@ const getLocalResponse = (message) => {
     }
 
     if (msg.includes('apple')) {
-        return "Apple products combine technology and design. Visit our Apple page for their premium electronics.";
+        return "Apple products combine technology and design. Visit our Apple page for their premium Store.";
     }
 
     // Common questions
@@ -123,7 +123,7 @@ const getLocalResponse = (message) => {
 
     // Greetings
     if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
-        return "Hello! Welcome to Evora Electronics. How can I help you find the perfect appliance today?";
+        return "Hello! Welcome to Blue Ember Store. How can I help you find the perfect appliance today?";
     }
 
     if (msg.includes('thank you') || msg.includes('thanks')) {
@@ -140,7 +140,7 @@ const getLocalResponse = (message) => {
     }
 
     if (msg.includes('about') || msg.includes('company')) {
-        return "Evora Electronics has been providing premium home appliances since 2005. We partner with top global brands to offer energy-efficient, reliable products with expert support.";
+        return "Blue Ember Store has been providing premium Store since 2005. We partner with top global brands to offer energy-efficient, reliable products with expert support.";
     }
 
     // Product features
@@ -211,7 +211,7 @@ const getLocalResponse = (message) => {
 
     // Miscellaneous
     if (msg.includes('career') || msg.includes('job') || msg.includes('work')) {
-        return "We're always looking for talented individuals to join our team. Visit our Contact page to inquire about career opportunities at Evora Electronics.";
+        return "We're always looking for talented individuals to join our team. Visit our Contact page to inquire about career opportunities at Blue Ember Store.";
     }
 
     if (msg.includes('feedback') || msg.includes('review')) {
@@ -396,7 +396,7 @@ const generateFallbackResponse = (message) => {
         "Great question! Our store has an amazing selection of appliances. Could you tell me more about what you're looking for?",
         "I'm excited to help you find the right appliance! Whether it's for your kitchen, laundry room, or living space, I've got you covered.",
         "Thanks for reaching out! I can help you navigate our entire appliance collection. What type of appliance interests you most?",
-        "Absolutely, I'd be happy to assist! We have everything from energy-efficient refrigerators to smart home appliances. What's your main need?",
+        "Absolutely, I'd be happy to assist! We have everything from energy-efficient refrigerators to smart Store. What's your main need?",
         "Perfect timing! I'm here to make your appliance shopping experience smooth and enjoyable. What are you hoping to accomplish?",
         "I appreciate you asking! Our team has carefully selected the best appliances from top brands. What room in your home needs updating?",
         "That's a great start! I can help you compare options and find the best value. Tell me more about your requirements.",
@@ -486,7 +486,7 @@ const main = () => {
         process.exit(0);
     } else {
         // Interactive mode
-        console.log('🚀 Evora Local Chatbot');
+        console.log('🚀 Blue Ember Local Chatbot');
         console.log('🏠 Fully offline and self-contained - no external dependencies');
         console.log('💬 Ask me anything about appliances! Type "exit" or "quit" to end.\n');
 
@@ -502,14 +502,14 @@ const main = () => {
             const message = input.trim();
 
             if (message.toLowerCase() === 'exit' || message.toLowerCase() === 'quit') {
-                console.log('👋 Goodbye! Thanks for chatting with Evora AI.');
+                console.log('👋 Goodbye! Thanks for chatting with Blue Ember AI.');
                 rl.close();
                 return;
             }
 
             if (message) {
                 const response = processMessage(message);
-                console.log(`\n🤖 Evora AI: ${response}\n`);
+                console.log(`\n🤖 Blue Ember AI: ${response}\n`);
             }
 
             rl.prompt();
@@ -526,3 +526,6 @@ const main = () => {
 if (require.main === module) {
     main();
 }
+
+
+

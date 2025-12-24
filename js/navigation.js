@@ -382,6 +382,71 @@ function initProductModals() {
   });
 }
 
+// Mobile Pill Navbar Logic
+function initMobilePillNav() {
+  const navbar = document.getElementById('mobilePillNavbar');
+  const searchOverlay = document.getElementById('mobilePillSearchBar');
+  const searchInput = document.getElementById('mobilePillSearchInput');
+
+  if (!navbar) return;
+
+  const navItems = navbar.querySelectorAll('.nav-item');
+
+  if (!navItems.length) return;
+
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      // 1. Remove active class from all items
+      navItems.forEach(nav => nav.classList.remove('active'));
+
+      // 2. Add active to clicked
+      item.classList.add('active');
+
+      // 3. Logic
+      const target = item.getAttribute('data-target');
+
+      // Handle Search
+      if (target === 'search') {
+        if (searchOverlay) {
+          searchOverlay.classList.add('active');
+          if (searchInput) setTimeout(() => searchInput.focus(), 100);
+        }
+      } else {
+        // Hide search if exists
+        if (searchOverlay) {
+          searchOverlay.classList.remove('active');
+          if (searchInput) searchInput.blur();
+        }
+
+        // Navigation Logic
+        if (target === 'home') {
+          if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/') {
+            window.location.href = 'index.html';
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        } else if (target === 'shop') {
+          window.location.href = 'index.html#products';
+        } else if (target === 'user') {
+          window.location.href = 'profile.html';
+        }
+      }
+    });
+  });
+
+  // Search redirection
+  if (searchInput) {
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const query = searchInput.value.trim();
+        if (query) {
+          window.location.href = `search-results.html?q=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+  }
+}
+
 // Export functions for global use
 window.initMobileNav = initMobileNav;
 window.initCategoryFiltering = initCategoryFiltering;
@@ -389,6 +454,7 @@ window.initScrollAnimations = initScrollAnimations;
 window.initNewsletterForm = initNewsletterForm;
 window.initFixedHeader = initFixedHeader;
 window.initProductModals = initProductModals;
+window.initMobilePillNav = initMobilePillNav;
 
 
 
@@ -442,20 +508,28 @@ document.addEventListener('DOMContentLoaded', function () {
       dropdown.style.maxHeight = '0';
     }
   }
-  /* Search Bar Logic appended by Assistant */
-  document.addEventListener("DOMContentLoaded", function () {
-    const searchForm = document.getElementById('searchForm');
-    const searchInput = document.getElementById('searchInput');
 
-    // Only run if the search bar exists on this page
-    if (searchForm && searchInput) {
-      searchForm.addEventListener('submit', function (e) {
-        // Prevent submission if input is empty
-        if (!searchInput.value.trim()) {
-          e.preventDefault();
-          searchInput.focus();
-        }
-      });
-    }
-  });
+  // Initialize new Navbar
+  initMobilePillNav();
+
+  // Initialize mobile navigation
+  initMobileNav();
+
+  /* Search Bar Logic fixed */
+  const searchForm = document.getElementById('searchForm');
+  const searchInput = document.getElementById('searchInput');
+
+  // Only run if the search bar exists on this page
+  if (searchForm && searchInput) {
+    searchForm.addEventListener('submit', function (e) {
+      // Prevent submission if input is empty
+      if (!searchInput.value.trim()) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+  }
 });
+
+
+

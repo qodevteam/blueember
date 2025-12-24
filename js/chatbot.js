@@ -5,16 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.protocol === 'file:';
 
     const API_URL = isLocal ? 'http://localhost:3000/api/chat' : '/api/chat';
-    console.log(`Evora v2 Init. Environment: ${isLocal ? 'Local' : 'Production'}`);
+    console.log(`Blue Ember v2 Init. Environment: ${isLocal ? 'Local' : 'Production'}`);
 
     // DOM Elements
     const chatBtn = document.getElementById('chat-bubble-btn');
+    const chatBtnTwo = document.getElementById('chat-bubble-btn-two');
     const chatWindow = document.getElementById('chat-window');
     const closeBtn = document.getElementById('chat-close-btn');
     const sendBtn = document.getElementById('chat-send-btn');
     const chatInput = document.getElementById('chat-input');
     const chatBody = document.getElementById('chat-body');
     const modelSelector = document.getElementById('chat-model-selector');
+
+    console.log('chatBtn:', chatBtn);
+    console.log('chatBtnTwo:', chatBtnTwo);
+    console.log('chatWindow:', chatWindow);
 
     // --- 🎯 LOCAL RESPONSE ENGINE ---
     const localResponses = [
@@ -67,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { patterns: ['goodbye', 'bye', 'see you'], response: "Goodbye! Come back anytime. 😊" },
         { patterns: ['how are you', 'how\'s it going'], response: "I'm doing great! Ready to help you find what you need." },
         { patterns: ['what can you do', 'help me', 'features'], response: "I can help you navigate products, answer questions, or direct you to support. Ask me anything!" },
-        { patterns: ['name', 'who are you', 'your name'], response: "I'm Evora, your Blue Ember shopping assistant!" },
+        { patterns: ['name', 'who are you', 'your name'], response: "I'm Blue Ember, your Blue Ember shopping assistant!" },
         { patterns: ['joke', 'funny', 'make me laugh'], response: "Why did the computer go to the doctor? Because it had a virus! 😄" },
         { patterns: ['best product', 'recommend', 'suggestion'], response: "That depends on your needs! Browse our <a href='products.html' class='chat-link'>Products</a> or tell me what you're looking for." },
         { patterns: ['price', 'cost', 'how much'], response: "Prices vary by product. Check our <a href='products.html' class='chat-link'>Products Page</a> for details!" },
@@ -92,19 +97,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // UI Toggles
     const toggleChat = () => {
+        console.log('toggleChat called from:', event?.target?.id || 'unknown');
         chatWindow.classList.toggle('active');
-        const icon = chatBtn.querySelector('i');
+        const icon = chatBtn?.querySelector('ion-icon') || chatBtnTwo?.querySelector('ion-icon');
         if (chatWindow.classList.contains('active')) {
-            icon.classList.remove('fa-comments');
-            icon.classList.add('fa-xmark');
+            icon?.setAttribute('name', 'close-outline');
             setTimeout(() => chatInput.focus(), 300);
         } else {
-            icon.classList.remove('fa-xmark');
-            icon.classList.add('fa-comments');
+            icon?.setAttribute('name', 'chatbubbles-outline');
         }
     };
 
-    chatBtn?.addEventListener('click', toggleChat);
+    if (chatBtn) {
+        chatBtn.addEventListener('click', toggleChat);
+        console.log('Listener added to chatBtn');
+    } else {
+        console.log('chatBtn not found');
+    }
+    if (chatBtnTwo) {
+        chatBtnTwo.addEventListener('click', toggleChat);
+        console.log('Listener added to chatBtnTwo');
+    } else {
+        console.log('chatBtnTwo not found');
+    }
     closeBtn?.addEventListener('click', toggleChat);
 
     // Message Logic
@@ -198,11 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         if (chatWindow.classList.contains('active') &&
             !chatWindow.contains(e.target) &&
-            !chatBtn.contains(e.target)) {
+            !chatBtn?.contains(e.target) &&
+            !chatBtnTwo?.contains(e.target)) {
             toggleChat();
         }
     });
 });
+
+
+
 
 
 

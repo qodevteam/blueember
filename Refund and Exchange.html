@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refund & Exchange Policy - Evora Home Appliances</title>
+    <title>Refund & Exchange Policy - Blue Ember Store</title>
     <link rel="stylesheet" href="universal.css">
+    <link href="darkmode.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <script src="js/finisher-header.es5.min.js"></script>
+    <script src="js/darkmode.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
@@ -467,6 +470,116 @@
             background: linear-gradient(45deg, #00c2fc, #022ad6);
             transform: translateY(-2px);
         }
+
+        /* Dark Mode Overrides */
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .header {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .header h1,
+        body.dark-mode .header h2 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .container {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .section {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .section h2,
+        body.dark-mode .section h3 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .section p,
+        body.dark-mode .section li {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .highlight-box {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .highlight-box h3 {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .step {
+            background-color: #1e1e1e !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .step h3 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .condition-item h3 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .faq-question {
+            background-color: #2d2d2d !important;
+        }
+
+        body.dark-mode .faq-question::after {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .faq-answer {
+            background-color: #1e1e1e !important;
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .contact-info {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .contact-info h3 {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .contact-info li strong {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .warning-box {
+            background-color: #404040 !important;
+            border-color: #606060 !important;
+        }
+
+        body.dark-mode .warning-box strong {
+            color: #ffcc00 !important;
+        }
+
+        body.dark-mode .footer {
+            background-color: #1e1e1e !important;
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .footer a {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .footer a:hover {
+            color: #66ccff !important;
+        }
+
+        /* Dark Mode Toggle Icons */
+        #moon-icon { display: block; }
+        body.dark-mode #moon-icon { display: none; }
+        body.dark-mode #sun-icon { display: block; }
+        #sun-icon { display: none; }
     </style>
 </head>
 <body>
@@ -476,26 +589,30 @@
   <i class="active-icon fa-solid fa-chevron-left"></i>
   <span>Back to Home</span>
 </a>
+<button id="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
+  <i class='bx bx-moon' id="moon-icon"></i>
+  <i class='bx bx-sun' id="sun-icon" style="display: none;"></i>
+</button>
     <div class="header finisher-header" style="width: 100%; height: 300px;">
     <header class="header">
-        <h1>Evora Home Appliances</h1>
+        <h1>Blue Ember Store</h1>
         <h2>Refund & Exchange Policy</h2>
     </header>
 </div>
     <!-- Main Content -->
     <main class="container">
         <div class="section">
-            <p>At Evora Home Appliances, we want you to be completely satisfied with your purchase. If for any reason you're not happy with your product, we offer a straightforward refund and exchange process. This policy outlines the conditions, timelines, and procedures for returns, exchanges, and refunds on all Evora products.</p>
+            <p>At Blue Ember Store, we want you to be completely satisfied with your purchase. If for any reason you're not happy with your product, we offer a straightforward refund and exchange process. This policy outlines the conditions, timelines, and procedures for returns, exchanges, and refunds on all Blue Ember products.</p>
         </div>
 
         <div class="highlight-box">
             <h3>Our Promise to You</h3>
-            <p>We stand behind the quality of every Evora appliance. If your product doesn't meet your expectations, we'll make it right with a full refund, exchange, or replacement—no questions asked within our return window. Your satisfaction is our top priority.</p>
+            <p>We stand behind the quality of every Blue Ember appliance. If your product doesn't meet your expectations, we'll make it right with a full refund, exchange, or replacement—no questions asked within our return window. Your satisfaction is our top priority.</p>
         </div>
 
         <div class="section">
             <h2>1. Return Eligibility</h2>
-            <p>Most new, unopened products purchased from Evora.com are eligible for return within the following timeframes:</p>
+            <p>Most new, unopened products purchased from Blue Ember.com are eligible for return within the following timeframes:</p>
             
             <h3>Standard Returns</h3>
             <ul>
@@ -505,12 +622,12 @@
             </ul>
 
             <h3>Defective or Damaged Products</h3>
-            <p>If your Evora appliance arrives damaged or is defective:</p>
+            <p>If your Blue Ember appliance arrives damaged or is defective:</p>
             <ul>
-                <li>Contact us within <strong>7 days of delivery</strong> at support@evora.com</li>
+                <li>Contact us within <strong>7 days of delivery</strong> at support@Blue Ember.com</li>
                 <li>Provide photos of the damage and your order number</li>
                 <li>We will arrange a free replacement or full refund</li>
-                <li>Return shipping costs are covered by Evora for defective/damaged items</li>
+                <li>Return shipping costs are covered by Blue Ember for defective/damaged items</li>
             </ul>
         </div>
 
@@ -522,7 +639,7 @@
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Contact Us</h3>
-                    <p>Email us at support@evora.com with your order number and reason for return. Include photos if the product is damaged.</p>
+                    <p>Email us at support@Blue Ember.com with your order number and reason for return. Include photos if the product is damaged.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
@@ -613,7 +730,7 @@
             <h2>6. Return Shipping</h2>
             <p>We provide free return shipping for eligible returns:</p>
             <ul>
-                <li><strong>Free return shipping:</strong> For defective, damaged, or wrong items shipped by Evora</li>
+                <li><strong>Free return shipping:</strong> For defective, damaged, or wrong items shipped by Blue Ember</li>
                 <li><strong>Customer-paid shipping:</strong> For change-of-mind returns (except where required by law)</li>
                 <li><strong>International returns:</strong> Customers are responsible for return shipping costs and any customs fees</li>
             </ul>
@@ -656,7 +773,7 @@
     </h2>
     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        We’re sorry for the mix-up! If you received an incorrect product, please contact us at support@evora.com within 7 days of delivery with your order number and a photo of the item you received. We’ll arrange a free return and ship the correct item to you right away—at no extra cost.
+        We’re sorry for the mix-up! If you received an incorrect product, please contact us at support@Blue Ember.com within 7 days of delivery with your order number and a photo of the item you received. We’ll arrange a free return and ship the correct item to you right away—at no extra cost.
       </div>
     </div>
   </div>
@@ -705,23 +822,19 @@ If the new item costs more, you’ll pay the difference. If it costs less, we’
 
     <!-- Footer -->
 
-  <footer class="site-footer">
+<footer class="site-footer">
   <div class="footer-container">
     <!-- Brand Section -->
     <div class="footer-section">
-       <div class="footer-logo"><a href="index.html"><div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-           <SPAN>
-             <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-             <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-           </SPAN>
-         </div></a></div>
-         <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
-      <div class="social-icons">
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255)"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200)"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5)"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85)"></i></a>
-      </div>
+      <div class="footer-logo"><a href="index.html">
+          <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
+            <SPAN>
+              <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+              <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+            </SPAN>
+          </div>
+        </a></div>
+      <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
     </div>
 
     <!-- Quick Links -->
@@ -738,29 +851,36 @@ If the new item costs more, you’ll pay the difference. If it costs less, we’
 
     <!-- Categories -->
     <div class="footer-section">
-          <h4>Appliance Types</h4>
-          <ul>
-            <li><a href="product2.html">Washers & Dryers</a></li>
-            <li><a href="product2.html">Refrigerators</a></li>
-            <li><a href="product2.html">Microwaves</a></li>
-            <li><a href="product2.html">Air Conditioners</a></li>
-            <li><a href="product2.html">Dishwashers</a></li>
-          </ul>
-        </div>
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="product2.html">Toys</a></li>
+        <li><a href="product2.html">Supplyments</a></li>
+        <li><a href="product2.html">Beauty</a></li>
+        <li><a href="product2.html">HomeGoods</a></li>
+      </ul>
+    </div>
 
     <!-- Contact Info -->
     <div class="footer-section">
       <h4>Contact Us</h4>
-      <address>
-       <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
-        <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
-        <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@evora.com">info@evora.com</a>
-      </address>
+      <ul>
+        <li>
+          <a>
+            <address>
+              <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
+              </p>
+              <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+              <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+            </address>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+    <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
     <div class="footer-legal">
       <a href="privacy policy.html">Privacy Policy</a> •
       <a href="terms and services.html">Terms of Service</a> •
@@ -829,3 +949,5 @@ new FinisherHeader({
 </script>
   </body>
   </html>
+
+

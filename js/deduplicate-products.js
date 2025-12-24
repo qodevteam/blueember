@@ -31,3 +31,5 @@ console.log(`Removed ${data.length - deduplicatedData.length} duplicate products
 fs.writeFileSync('./js/PRODUCT-DETAILS-DEDUPLICATED.JSON', JSON.stringify(deduplicatedData, null, 2));
 
 console.log('Deduplicated data saved to PRODUCT-DETAILS-DEDUPLICATED.JSON');
+
+

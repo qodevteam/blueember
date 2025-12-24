@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadUserProfile(); // Wait for user profile to load ID
     await loadOrders();
     initializeProfileTabs();
+    initializeProfileModal();
     checkLoginStatus();
 });
 
@@ -429,3 +430,219 @@ function checkLoginStatus() {
     // Update currentUser
     currentUser = JSON.parse(user);
 }
+
+// ========================================
+// PROFILE IMAGE MODAL
+// ========================================
+
+let imageScale = 1;
+let translateX = 0;
+let translateY = 0;
+let initialDistance = 0;
+let lastScale = 1;
+let isDragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+let initialTranslateX = 0;
+let initialTranslateY = 0;
+
+function initializeProfileModal() {
+    const profilePicContainer = document.querySelector('.profile-pic-container');
+    const modalOverlay = document.getElementById('profileModalOverlay');
+    const modal = document.getElementById('profileImageModal');
+    const modalImage = document.getElementById('profileModalImage');
+    const closeBtn = document.getElementById('profileModalCloseBtn');
+
+    if (!profilePicContainer || !modalOverlay || !modal || !modalImage) return;
+
+    // Open modal on click
+    profilePicContainer.addEventListener('click', () => {
+        const profileImg = document.getElementById('dashboardProfilePic');
+        if (profileImg && profileImg.src && profileImg.style.display !== 'none') {
+            modalImage.src = profileImg.src;
+            imageScale = 1;
+            translateX = 0;
+            translateY = 0;
+            updateImageTransform();
+            modalImage.style.transformOrigin = 'center center';
+            openProfileModal();
+        }
+    });
+
+    // Close modal on overlay click
+    modalOverlay.addEventListener('click', closeProfileModal);
+
+    // Close modal on modal window click (but not on image)
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeProfileModal();
+        }
+    });
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            closeProfileModal();
+        }
+    });
+
+    // Close modal on close button click
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeProfileModal);
+    }
+
+    // Zoom functionality
+    // Mouse wheel zoom
+    modalImage.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const rect = modalImage.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        modalImage.style.transformOrigin = `${x}% ${y}%`;
+
+        const delta = e.deltaY > 0 ? -0.10 : 0.10;
+        imageScale = Math.max(imageScale + delta, 0.1);
+        clampTranslate();
+        updateImageTransform();
+    });
+
+    // Touch and mouse interactions
+    let touches = [];
+    modalImage.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            touches = Array.from(e.touches);
+            initialDistance = getDistance(touches[0], touches[1]);
+            lastScale = imageScale;
+            isDragging = false; // Stop dragging if pinch starts
+        } else if (e.touches.length === 1 && imageScale > 1) {
+            e.preventDefault();
+            isDragging = true;
+            dragStartX = e.touches[0].clientX;
+            dragStartY = e.touches[0].clientY;
+            initialTranslateX = translateX;
+            initialTranslateY = translateY;
+        }
+    });
+
+    modalImage.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            const currentTouches = Array.from(e.touches);
+            const currentDistance = getDistance(currentTouches[0], currentTouches[1]);
+            const scaleChange = currentDistance / initialDistance;
+            const adjustedScaleChange = 1 + (scaleChange - 1) * 0.6;
+            imageScale = Math.max(lastScale * adjustedScaleChange, 0.1);
+
+            // Set transform origin to center of touches
+            const centerX = (currentTouches[0].clientX + currentTouches[1].clientX) / 2;
+            const centerY = (currentTouches[0].clientY + currentTouches[1].clientY) / 2;
+            const rect = modalImage.getBoundingClientRect();
+            const x = ((centerX - rect.left) / rect.width) * 100;
+            const y = ((centerY - rect.top) / rect.height) * 100;
+            modalImage.style.transformOrigin = `${x}% ${y}%`;
+
+            clampTranslate();
+            updateImageTransform();
+        } else if (isDragging && e.touches.length === 1 && imageScale > 1) {
+            e.preventDefault();
+            const deltaX = (e.touches[0].clientX - dragStartX) * 0.6;
+            const deltaY = (e.touches[0].clientY - dragStartY) * 0.6;
+            translateX = initialTranslateX + deltaX;
+            translateY = initialTranslateY + deltaY;
+            clampTranslate();
+            updateImageTransform();
+        }
+    });
+
+    modalImage.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) {
+            touches = [];
+        }
+        isDragging = false;
+    });
+
+    // Mouse drag
+    modalImage.addEventListener('mousedown', (e) => {
+        if (imageScale > 1) {
+            e.preventDefault();
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            initialTranslateX = translateX;
+            initialTranslateY = translateY;
+            modalImage.style.cursor = 'grabbing';
+        }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging && imageScale > 1) {
+            e.preventDefault();
+            const deltaX = (e.clientX - dragStartX) * 0.6;
+            const deltaY = (e.clientY - dragStartY) * 0.6;
+            translateX = initialTranslateX + deltaX;
+            translateY = initialTranslateY + deltaY;
+            clampTranslate();
+            updateImageTransform();
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        modalImage.style.cursor = '';
+    });
+}
+
+function updateImageTransform() {
+    const modalImage = document.getElementById('profileModalImage');
+    modalImage.style.transform = `scale(${imageScale}) translate(${translateX}px, ${translateY}px)`;
+}
+
+function getDistance(touch1, touch2) {
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+function clampTranslate() {
+    if (imageScale <= 1) {
+        translateX = 0;
+        translateY = 0;
+        return;
+    }
+    const modal = document.getElementById('profileImageModal');
+    const rect = modal.getBoundingClientRect();
+    const maxX = (imageScale - 1) * rect.width / 2;
+    const maxY = (imageScale - 1) * rect.height / 2;
+    translateX = Math.max(-maxX, Math.min(maxX, translateX));
+    translateY = Math.max(-maxY, Math.min(maxY, translateY));
+}
+
+function openProfileModal() {
+    const modalOverlay = document.getElementById('profileModalOverlay');
+    const modal = document.getElementById('profileImageModal');
+    const closeBtn = document.getElementById('profileModalCloseBtn');
+
+    modalOverlay.classList.add('show');
+    modal.classList.add('show');
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    if (closeBtn) closeBtn.style.display = 'flex';
+}
+
+function closeProfileModal() {
+    const modalOverlay = document.getElementById('profileModalOverlay');
+    const modal = document.getElementById('profileImageModal');
+    const closeBtn = document.getElementById('profileModalCloseBtn');
+
+    modalOverlay.classList.remove('show');
+    modal.classList.remove('show');
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    if (closeBtn) closeBtn.style.display = 'none';
+}
+
+
+

@@ -240,3 +240,6 @@ window.DB = DB;
 // Log initialization
 console.log('✅ Mock Database (LocalStorage) Initialized');
 window.dispatchEvent(new CustomEvent('dbReady'));
+
+
+

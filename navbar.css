@@ -739,3 +739,135 @@ body.dark-mode .profile-icon-placeholder {
         display: block;
     }
 }
+
+
+   /* --- MOBILE PILL NAVBAR INTEGRATION --- */
+    @media (max-width: 768px) {
+
+      /* --- SEARCH BAR OVERLAY --- */
+      #mobilePillSearchBar {
+        position: fixed;
+        bottom: 90px;
+        /* Adjusted to be above navbar */
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        width: 85%;
+        background: rgb(39, 39, 39);
+        border-radius: 50px;
+        padding: 6px 6px 6px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 2101;
+      }
+
+      #mobilePillSearchBar.active {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: all;
+      }
+
+      #mobilePillSearchBar input {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 14px;
+        border-radius: 30px;
+        padding: 15px 0px 15px 10px;
+        background: transparent;
+      }
+
+      /* --- THE NAVBAR --- */
+      #mobilePillNavbar {
+       position: fixed;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ffffff;
+        padding: 5px;
+        border-radius: 50px;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        align-items: center;
+        gap: 5px;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 2101;
+        /* Higher priority */
+      }
+
+      #mobilePillNavbar .nav-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 45px;
+        padding: 0 15px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        color: #888;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      #mobilePillNavbar .nav-item ion-icon {
+        font-size: 22px;
+        min-width: 22px;
+        transition: color 0.3s;
+        color: #232323;
+      }
+
+      #mobilePillNavbar .nav-text {
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+        max-width: 0;
+        opacity: 0;
+        margin-left: 0;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        transition: all 0.4s ease;
+      }
+
+      #mobilePillNavbar .nav-item.active {
+        background-color: #232323;
+        color: #ffffff;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        padding: 22px 0px 22px 12px;
+      }
+
+      #mobilePillNavbar .nav-item.active ion-icon {
+        color: #ffffff;
+      }
+
+      #mobilePillNavbar .nav-item.active .nav-text {
+        max-width: 100px;
+        opacity: 1;
+        margin-left: 10px;
+      }
+    }
+    abbr{
+        text-decoration: none;
+    }
+
+    .nav-item a{
+ border-radius: 30px;
+    }
+    .nav-item a:hover{
+        background-color: #00c6ff;
+    }
+
+    /* Remove list markers from navbar li elements */
+    .navbar li {
+        list-style: none;
+    }
+
+
+

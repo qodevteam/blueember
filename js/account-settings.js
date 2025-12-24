@@ -872,14 +872,14 @@ function exportAccountData() {
     // Download JSON
     const jsonLink = document.createElement('a');
     jsonLink.href = jsonUrl;
-    jsonLink.download = `evora_account_data_${Date.now()}.json`;
+    jsonLink.download = `Blue Ember_account_data_${Date.now()}.json`;
     jsonLink.click();
 
     // Download CSV
     setTimeout(() => {
         const csvLink = document.createElement('a');
         csvLink.href = csvUrl;
-        csvLink.download = `evora_account_data_${Date.now()}.csv`;
+        csvLink.download = `Blue Ember_account_data_${Date.now()}.csv`;
         csvLink.click();
         showNotification('Account data exported successfully!', 'success');
     }, 500);
@@ -1329,3 +1329,6 @@ function showNotificationWithUndo(message, undoCallback) {
 }
 
 // here 
+
+
+

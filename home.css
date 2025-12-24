@@ -1,5 +1,5 @@
 /* home-products.css
-   Styles for product sections, product cards, categories, CTA and "Why Evora" blocks
+   Styles for product sections, product cards, categories, CTA and "Why Blue Ember" blocks
 */
 
 /* Container utility (matches your other CSS conventions) */
@@ -232,13 +232,13 @@
   box-shadow: 0 12px 30px rgba(31,166,214,0.22);
 }
 
-/* WHY EVORA */
-.why-evora {
+/* WHY Blue Ember */
+.why-Blue Ember {
   padding: 24px 0 36px;
   background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.25));
   border-top: 1px solid rgba(0,0,0,0.02);
 }
-.why-evora h3 {
+.why-Blue Ember h3 {
   font-family: 'Rubik', sans-serif;
   margin-bottom: 18px;
   line-height: 2.8;
@@ -838,7 +838,6 @@ address {
       .services-grid,
       .blog-grid { grid-template-columns: 1fr; }
       .newsletter-form {
-        flex-direction: column;
         gap: 5px;
       }
       .newsletter-form input{
@@ -1647,3 +1646,6 @@ body.dark-mode .logout-cancel-btn:hover {
 .search-container:focus-within .search-button i {
   color: #000000;
 }
+
+
+

@@ -3144,3 +3144,5 @@ const products = [
     "link": "./samsung-productpage.html"
   }
 ]
+
+

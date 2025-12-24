@@ -15,7 +15,7 @@ class CartManager {
 
   loadCart() {
     try {
-      const saved = localStorage.getItem('evoraCart');
+      const saved = localStorage.getItem('Blue EmberCart');
       this.cart = saved ? JSON.parse(saved) : [];
     } catch (error) {
       console.warn('Failed to load cart:', error);
@@ -25,7 +25,7 @@ class CartManager {
 
   saveCart() {
     try {
-      localStorage.setItem('evoraCart', JSON.stringify(this.cart));
+      localStorage.setItem('Blue EmberCart', JSON.stringify(this.cart));
     } catch (error) {
       console.warn('Failed to save cart:', error);
     }
@@ -295,3 +295,5 @@ class CartManager {
 
 // Make CartManager globally available
 window.CartManager = CartManager;
+
+

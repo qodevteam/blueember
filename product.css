@@ -11,6 +11,7 @@
    text-decoration: none !important;
    padding: 0;
    box-sizing: border-box;
+   list-style:none;
    font-family: 'Space Grotesk', sans-serif;
  }
 
@@ -1430,3 +1431,21 @@
  .search-container:focus-within .search-button i {
    color: #000000;
  }
+
+
+.button {
+    all: unset;
+    position: relative;
+    display: inline-flex;
+    height: 2.5rem;
+    align-items: center;
+    border-radius: 9999px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-family: Segoe UI;
+    font-size: 1.2rem;
+    font-weight: 640;
+    color: #ffffff;
+    letter-spacing: -0.06em;
+    cursor: pointer;
+}

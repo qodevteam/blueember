@@ -3,7 +3,7 @@
  * Initializes all components and handles global error handling
  */
 
-class EvoraApp {
+class BlueEmberApp {
   constructor() {
     this.init();
   }
@@ -97,7 +97,7 @@ window.ValidationUtils = ValidationUtils;
 
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  window.evoraApp = new EvoraApp();
+  window.BlueEmberApp = new BlueEmberApp();
 /* Search Bar Logic appended by Assistant */
 document.addEventListener("DOMContentLoaded", function() {
     const searchForm = document.getElementById('searchForm');
@@ -115,3 +115,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 });
+
+
+

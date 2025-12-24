@@ -1,7 +1,7 @@
 {
     "name": "blue-ember",
     "version": "1.0.0",
-    "description": "Evora AI - Vercel Deployment Root",
+    "description": "Blue Ember AI - Vercel Deployment Root",
     "main": "index.js",
     "scripts": {
         "start": "lite-server",
@@ -19,3 +19,5 @@
         "node": "18.x"
     }
 }
+
+

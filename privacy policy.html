@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="universal.css">
+    <link href="darkmode.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="js/finisher-header.es5.min.js"></script>
-    <title>About Evora Home Appliances - Smart Living, Simplified</title>
+    <script src="js/darkmode.js" defer></script>
+    <title>About Blue Ember Store - Smart Living, Simplified</title>
     <style>
         /* Reset and Base Styles */
         @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
@@ -344,18 +347,111 @@
             position: relative;
             top: -100px;
         }
+
+        /* Dark Mode Overrides */
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .header {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .header h1 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .container {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .section {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .section h2,
+        body.dark-mode .section h3 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .section p,
+        body.dark-mode .section li {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .important-notice {
+            background-color: #404040 !important;
+            border-color: #606060 !important;
+        }
+
+        body.dark-mode .important-notice strong {
+            color: #ffcc00 !important;
+        }
+
+        body.dark-mode .contact-info {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .contact-info h3 {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .contact-info li strong {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .data-table th {
+            background-color: #0099ff !important;
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .data-table td,
+        body.dark-mode .data-table tr:nth-child(even) {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .data-table tr:hover {
+            background-color: #404040 !important;
+        }
+
+        body.dark-mode .footer {
+            background-color: #1e1e1e !important;
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .footer a {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .footer a:hover {
+            color: #66ccff !important;
+        }
+
+        /* Dark Mode Toggle Icons */
+        #moon-icon { display: block; }
+        body.dark-mode #moon-icon { display: none; }
+        body.dark-mode #sun-icon { display: block; }
+        #sun-icon { display: none; }
     </style>
 </head>
 <body>
 
     <a href="index.html" class="magic-back-btn" aria-label="Back to Home">
-  <i class="idle-icon fa-solid fa-chevron-left"></i>
-  <i class="active-icon fa-solid fa-chevron-left"></i>
-  <span>Back to Home</span>
-</a>
+   <i class="idle-icon fa-solid fa-chevron-left"></i>
+   <i class="active-icon fa-solid fa-chevron-left"></i>
+   <span>Back to Home</span>
+ </a>
+ <button id="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
+   <i class='bx bx-moon' id="moon-icon"></i>
+   <i class='bx bx-sun' id="sun-icon" style="display: none;"></i>
+ </button>
     <header class="header">
         <div class="header finisher-header" style="width: 100%; height: 300px;"></div>
-        <h1>Evora Home Appliances</h1>
+        <h1>Blue Ember Store</h1>
         <h2 style="position: relative; top: -254px;">Privacy Policy</h2>
     </div>
     </header>
@@ -363,7 +459,7 @@
     <!-- Main Content -->
     <main class="container">
         <div class="section">
-            <p>At Evora Home Appliances, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website (www.evora.com), make a purchase, create an account, or interact with our products and services. By using our website or services, you consent to the data practices described in this policy.</p>
+            <p>At Blue Ember Store, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website (www.Blue Ember.com), make a purchase, create an account, or interact with our products and services. By using our website or services, you consent to the data practices described in this policy.</p>
         </div>
 
         <div class="section">
@@ -487,7 +583,7 @@
             <p>You may request to limit the use or disclosure of your personal information. We will respond to your request within 30 days.</p>
 
             <div class="important-notice">
-                <strong>To exercise any of these rights, please contact us at support@evora.com. We may require verification of your identity before fulfilling your request.</strong>
+                <strong>To exercise any of these rights, please contact us at support@Blue Ember.com. We may require verification of your identity before fulfilling your request.</strong>
             </div>
         </div>
 
@@ -527,57 +623,53 @@
             <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact our Data Protection Officer:</p>
             
             <div class="contact-info">
-  <h3>Evora Home Appliances</h3>
+  <h3>Blue Ember Store</h3>
   <address>
     <ul>
       <li>
         <strong>Data Protection Officer:</strong> 
-        <a href="mailto:privacy@evora.com" >privacy@evora.com</a>
+        <a href="mailto:privacy@Blue Ember.com" >privacy@Blue Ember.com</a>
       </li>
       <li>
         <strong>Customer Support:</strong> 
-        <a href="mailto:support@evora.com">support@evora.com</a>
+        <a href="mailto:support@Blue Ember.com">support@Blue Ember.com</a>
       </li>
       <li>
         <strong>Phone:</strong> 
-        <a href="tel:+18003867227" aria-label="Call Evora Home Appliances at 1-800-386-7227">1-800-EVORA-AP (1-800-386-7227)</a>
+        <a href="tel:+18003867227" aria-label="Call Blue Ember Store at 1-800-386-7227">1-800-Blue Ember-AP (1-800-386-7227)</a>
       </li>
       <li>
-        <strong>Mailing Address:</strong> Evora Home Appliances Inc, 123 Innovation Drive, San Francisco, CA 94105, United States.
+        <strong>Mailing Address:</strong> Blue Ember Store Inc, 123 Innovation Drive, San Francisco, CA 94105, United States.
       </li>
     </ul>
   </address>
 </div>
 
             <h3>California Residents</h3>
-            <p>Under the California Consumer Privacy Act (CCPA), California residents may request information about our disclosure of personal information to third parties for direct marketing purposes. To make such a request, please contact us at privacy@evora.com.</p>
+            <p>Under the California Consumer Privacy Act (CCPA), California residents may request information about our disclosure of personal information to third parties for direct marketing purposes. To make such a request, please contact us at privacy@Blue Ember.com.</p>
 
             <h3>European Economic Area (EEA) and UK Residents</h3>
             <p>If you are located in the EEA or UK, you have the right to lodge a complaint with your local data protection authority if you believe our processing of your personal information violates applicable data protection laws.</p>
         </div>
 
         <div class="section">
-            <p><strong>Thank you for trusting Evora Home Appliances with your information.</strong> We are committed to protecting your privacy and providing you with exceptional home appliances and service.</p>
-            <p>© 2025 Evora Home Appliances, Inc. All rights reserved.</p>
+            <p><strong>Thank you for trusting Blue Ember Store with your information.</strong> We are committed to protecting your privacy and providing you with exceptional Store and service.</p>
+            <p>© 2025 Blue Ember Store, Inc. All rights reserved.</p>
         </div>
     </main>
 <footer class="site-footer">
   <div class="footer-container">
     <!-- Brand Section -->
     <div class="footer-section">
-       <div class="footer-logo"><a href="index.html"><div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-           <SPAN>
-             <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-             <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-           </SPAN>
-         </div></a></div>
-      <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
-      <div class="social-icons">
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255)"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200)"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5)"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85)"></i></a>
-      </div>
+      <div class="footer-logo"><a href="index.html">
+          <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
+            <SPAN>
+              <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+              <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+            </SPAN>
+          </div>
+        </a></div>
+      <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
     </div>
 
     <!-- Quick Links -->
@@ -594,31 +686,36 @@
 
     <!-- Categories -->
     <div class="footer-section">
-          <h4>Appliance Types</h4>
-          <ul>
-            <li><a href="product2.html">Washers & Dryers</a></li>
-            <li><a href="product2.html">Refrigerators</a></li>
-            <li><a href="product2.html">Microwaves</a></li>
-            <li><a href="product2.html">Air Conditioners</a></li>
-            <li><a href="product2.html">Dishwashers</a></li>
-          </ul>
-        </div>
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="product2.html">Toys</a></li>
+        <li><a href="product2.html">Supplyments</a></li>
+        <li><a href="product2.html">Beauty</a></li>
+        <li><a href="product2.html">HomeGoods</a></li>
+      </ul>
+    </div>
 
     <!-- Contact Info -->
     <div class="footer-section">
-        <h4>Contact Us</h4>
-        <ul>
-          <li>
-        <a><address>
-          <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
-            <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
-            <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@blueember.com">info@blueember.com</a>
-      </address></a></li></ul>
-      </div>
+      <h4>Contact Us</h4>
+      <ul>
+        <li>
+          <a>
+            <address>
+              <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
+              </p>
+              <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+              <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+            </address>
+          </a>
+        </li>
+      </ul>
     </div>
+  </div>
 
   <div class="footer-bottom">
-    <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+    <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
     <div class="footer-legal">
       <a href="privacy policy.html">Privacy Policy</a> •
       <a href="terms and services.html">Terms of Service</a> •
@@ -698,3 +795,5 @@
     </script>
 </body>
 </html>
+
+

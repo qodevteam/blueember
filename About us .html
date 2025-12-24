@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="universal.css">
+    <link href="darkmode.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="js/finisher-header.es5.min.js"></script>
-    <title>About Evora Home Appliances - Smart Living, Simplified</title>
+    <script src="js/darkmode.js" defer></script>
+    <title>About Blue Store - Smart Living, Simplified</title>
     <style>
         /* Reset and Base Styles */
         @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
@@ -746,18 +749,148 @@
             background: linear-gradient(45deg, #00c2fc, #022ad6);
             transform: translateY(-2px);
         }
+
+        /* Dark Mode Overrides */
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .header {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .section {
+            background-color: #1e1e1e !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .section h2 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .section p,
+        body.dark-mode .section li {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .value-card {
+            background: linear-gradient(135deg, #2d2d2d 0%, #404040 100%) !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .value-card h3,
+        body.dark-mode .value-card p {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .mission-card,
+        body.dark-mode .vision-card {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .mission-card h3,
+        body.dark-mode .vision-card h3,
+        body.dark-mode .mission-card p,
+        body.dark-mode .vision-card p {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .timeline-content {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .timeline-content h3 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .team-member {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .team-info h3,
+        body.dark-mode .team-info p {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .testimonials {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%) !important;
+        }
+
+        body.dark-mode .testimonials h2,
+        body.dark-mode .testimonial-quote,
+        body.dark-mode .testimonial-author {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .sustainability {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .sustainability h2,
+        body.dark-mode .sustainability-item h3,
+        body.dark-mode .sustainability-item p {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .sustainability-item {
+            background-color: #2d2d2d !important;
+        }
+
+        body.dark-mode .cta-section {
+            background: linear-gradient(135deg, #2d2d2d 0%, #404040 100%) !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .cta-section h2,
+        body.dark-mode .cta-section p {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .btn {
+            background-color: #e0e0e0 !important;
+            color: #121212 !important;
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .footer {
+            background-color: #1e1e1e !important;
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .footer a {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .footer a:hover {
+            color: #66ccff !important;
+        }
+
+        /* Dark Mode Toggle Icons */
+        #moon-icon { display: block; }
+        body.dark-mode #moon-icon { display: none; }
+        body.dark-mode #sun-icon { display: block; }
+        #sun-icon { display: none; }
     </style>
 </head>
 <body>
     <a href="index.html" class="magic-back-btn" aria-label="Back to Home">
-  <i class="idle-icon fa-solid fa-chevron-left"></i>
-  <i class="active-icon fa-solid fa-chevron-left"></i>
-  <span>Back to Home</span>
-</a>
+   <i class="idle-icon fa-solid fa-chevron-left"></i>
+   <i class="active-icon fa-solid fa-chevron-left"></i>
+   <span>Back to Home</span>
+ </a>
+ <button id="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
+   <i class='bx bx-moon' id="moon-icon"></i>
+   <i class='bx bx-sun' id="sun-icon" style="display: none;"></i>
+ </button>
 <div class="header finisher-header" style="width: 100%; height: 300px;">
-        <a href="index.html"><h1 style="position: relative; z-index: 1000;">Evora Home Appliances</h1></a>
+        <a href="index.html"><h1 style="position: relative; z-index: 1000;">Blue Ember Store</h1></a>
         <h2 id="hero-text">Where Innovation Meets Everyday Living</h2>
-        <p class="tagline">Designing smarter, more sustainable home appliances for the modern household</p>
+        <p class="tagline">Designing smarter, more sustainable Store for the modern household</p>
 </div>
 
 
@@ -767,16 +900,16 @@
 
         <div class="section">
             <h2>Our Story</h2>
-            <p>Founded in 2018, Evora Home Appliances began with a simple yet powerful vision: to transform the mundane into the magnificent. What started as a small team of engineers and designers in San Francisco has grown into a global leader in smart home technology, dedicated to creating appliances that don't just function—but elevate your daily life.</p>
-            <p>Our journey began when our founders noticed how traditional home appliances often added complexity rather than convenience. They asked: "What if appliances could anticipate your needs, adapt to your lifestyle, and reduce your environmental footprint?" This question became our mission.</p>
-            <p>Today, Evora combines cutting-edge technology with timeless design to create appliances that are as beautiful as they are intelligent. From our award-winning smart refrigerators to our energy-efficient washing systems, every product is engineered with one goal: to make your home smarter, simpler, and more beautiful.</p>
+            <p>Founded in 2018, Blue Ember Store began with a simple yet powerful vision: to transform the mundane into the magnificent. What started as a small team of engineers and designers in San Francisco has grown into a global leader in smart home technology, dedicated to creating appliances that don't just function—but elevate your daily life.</p>
+            <p>Our journey  began when our founders noticed how traditional Store often added complexity rather than convenience. They asked: "What if appliances could anticipate your needs, adapt to your lifestyle, and reduce your environmental footprint?" This question became our mission.</p>
+            <p>Today, Blue Ember combines cutting-edge technology with timeless design to create appliances that are as beautiful as they are intelligent. From our award-winning smart refrigerators to our energy-efficient washing systems, every product is engineered with one goal: to make your home smarter, simpler, and more beautiful.</p>
         </div>
 
         <div class="hero-image">
-            <img src="assets/ajhjksjjwedf-removebg-preview.png" alt="Evora Smart Home Appliances">
+            <img src="assets/ajhjksjjwedf-removebg-preview.png" alt="Blue Ember Smart Store">
             <div class="hero-text">
-                <p>At Evora, we believe that great design should be intuitive, not complicated. Our appliances are engineered to seamlessly integrate into your life—learning your habits, anticipating your needs, and simplifying your routine. We don't just build appliances; we create intelligent companions for your home.</p>
-                <p>Every Evora product undergoes rigorous testing in real-world conditions to ensure durability, efficiency, and performance. Our commitment to quality means you can trust your Evora appliance to serve you reliably for years to come.</p>
+                <p>At Blue Ember, we believe that great design should be intuitive, not complicated. Our appliances are engineered to seamlessly integrate into your life—learning your habits, anticipating your needs, and simplifying your routine. We don't just build appliances; we create intelligent companions for your home.</p>
+                <p>Every Blue Ember product undergoes rigorous testing in real-world conditions to ensure durability, efficiency, and performance. Our commitment to quality means you can trust your Blue Ember appliance to serve you reliably for years to come.</p>
             </div>
         </div>
 
@@ -828,42 +961,42 @@
                     <div class="timeline-date">2018</div>
                     <div class="timeline-content">
                         <h3>Founding</h3>
-                        <p>Evora Home Appliances was founded by a team of engineers and designers passionate about creating smarter home solutions. Our first prototype, the Evora Smart Refrigerator, was developed in our San Francisco garage.</p>
+                        <p>Blue Ember Store was founded by a team of engineers and designers passionate about creating smarter home solutions. Our first prototype, the Blue Ember Smart Refrigerator, was developed in our San Francisco garage.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2020</div>
                     <div class="timeline-content">
                         <h3>Product Launch</h3>
-                        <p>We launched our first commercial products: the Evora Smart Refrigerator and Evora Energy-Smart Washer. Both received industry awards for innovation and design.</p>
+                        <p>We launched our first commercial products: the Blue Ember Smart Refrigerator and Blue Ember Energy-Smart Washer. Both received industry awards for innovation and design.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2021</div>
                     <div class="timeline-content">
                         <h3>Global Expansion</h3>
-                        <p>Evora expanded to Canada and Europe, establishing our first international distribution centers and beginning partnerships with major retailers.</p>
+                        <p>Blue Ember expanded to Canada and Europe, establishing our first international distribution centers and beginning partnerships with major retailers.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2022</div>
                     <div class="timeline-content">
                         <h3>Smart Ecosystem</h3>
-                        <p>We launched the Evora Home App, creating a unified ecosystem that connects all our appliances for seamless control and intelligent automation.</p>
+                        <p>We launched the Blue Ember Home App, creating a unified ecosystem that connects all our appliances for seamless control and intelligent automation.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2023</div>
                     <div class="timeline-content">
                         <h3>Carbon Neutral Operations</h3>
-                        <p>Evora became a certified carbon-neutral company, offsetting 100% of our operational emissions and implementing sustainable manufacturing practices across all facilities.</p>
+                        <p>Blue Ember became a certified carbon-neutral company, offsetting 100% of our operational emissions and implementing sustainable manufacturing practices across all facilities.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2025</div>
                     <div class="timeline-content">
                         <h3>1 Million Homes</h3>
-                        <p>Over 1 million households worldwide now trust Evora appliances to make their daily lives smarter, simpler, and more beautiful.</p>
+                        <p>Over 1 million households worldwide now trust Blue Ember appliances to make their daily lives smarter, simpler, and more beautiful.</p>
                     </div>
                 </div>
             </div>
@@ -873,23 +1006,19 @@
                 </main>
 
 
-                    <footer class="site-footer">
+<footer class="site-footer">
   <div class="footer-container">
     <!-- Brand Section -->
     <div class="footer-section">
-      <div class="footer-logo"><a href="index.html"><div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-          <SPAN>
-            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-            <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-          </SPAN>
-        </div></a></div>
-      <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
-      <div class="social-icons">
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
-      </div>
+      <div class="footer-logo"><a href="index.html">
+          <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
+            <SPAN>
+              <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+              <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+            </SPAN>
+          </div>
+        </a></div>
+      <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
     </div>
 
     <!-- Quick Links -->
@@ -906,31 +1035,36 @@
 
     <!-- Categories -->
     <div class="footer-section">
-          <h4>Appliance Types</h4>
-          <ul>
-            <li><a href="product2.html">Washers & Dryers</a></li>
-            <li><a href="product2.html">Refrigerators</a></li>
-            <li><a href="product2.html">Microwaves</a></li>
-            <li><a href="product2.html">Air Conditioners</a></li>
-            <li><a href="product2.html">Dishwashers</a></li>
-          </ul>
-        </div>
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="product2.html">Toys</a></li>
+        <li><a href="product2.html">Supplyments</a></li>
+        <li><a href="product2.html">Beauty</a></li>
+        <li><a href="product2.html">HomeGoods</a></li>
+      </ul>
+    </div>
 
     <!-- Contact Info -->
     <div class="footer-section">
       <h4>Contact Us</h4>
       <ul>
         <li>
-      <a><address>
-        <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">196 Burton Ave Hasbrouck Heights NJ 07604 USA</a></p>
-          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
-          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
-    </address></a></li></ul>
+          <a>
+            <address>
+              <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
+              </p>
+              <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+              <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+            </address>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+    <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
     <div class="footer-legal">
       <a href="privacy policy.html">Privacy Policy</a> •
       <a href="terms and services.html">Terms of Service</a> •
@@ -999,3 +1133,5 @@ new FinisherHeader({
 </script>
 </body>
 </html>
+
+

@@ -63,8 +63,8 @@ class DataIntegrationTest {
                 status: 'Delivered',
                 total: 1199.00,
                 items: [
-                    { name: 'Evora ClimatePro 1.5T', price: 599.00, quantity: 1, image: './assets/evora-ac-01.jpg' },
-                    { name: 'Evora MicroChef 30L', price: 229.00, quantity: 1, image: './assets/evora-microwave-01.jpg' }
+                    { name: 'Blue Ember ClimatePro 1.5T', price: 599.00, quantity: 1, image: './assets/Blue Ember-ac-01.jpg' },
+                    { name: 'Blue Ember MicroChef 30L', price: 229.00, quantity: 1, image: './assets/Blue Ember-microwave-01.jpg' }
                 ],
                 shipping: { street: '123 Test St', city: 'Test City', state: 'TC', zip: '12345' },
                 payment: 'Mastercard ending in 8888'
@@ -360,3 +360,5 @@ if (window.location.search.includes('test=data')) {
         }, 1000);
     });
 }
+
+

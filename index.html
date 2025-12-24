@@ -7,12 +7,12 @@
   <meta http-equiv="Content-Security-Policy"
     content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';">
   <meta name="description"
-    content="Shop premium home appliances from trusted global brands at Blue Ember Electronics. Find energy-efficient refrigerators, washers, air conditioners, microwaves and more with expert installation and support.">
+    content="premium Store from trusted global brands at Blue Ember Store. Find energy-efficient refrigerators, washers, air conditioners, microwaves and more with expert installation and support.">
   <meta name="keywords"
-    content="home appliances, refrigerators, washing machines, air conditioners, microwaves, dishwashers, energy efficient appliances, appliance store">
-  <meta name="author" content="Blue Ember Electronics">
+    content="Store, refrigerators, washing machines, air conditioners, microwaves, dishwashers, energy efficient appliances, appliance store">
+  <meta name="author" content="Blue Ember Store">
   <link rel="icon" type="image/png" href="assets/favicon.png" style="border-radius: 50%;">
-  <title>Blue Ember Electronics - Premium Home Appliances</title>
+  <title>Blue Ember Store - Premium Store</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="universal.css" rel="stylesheet">
   <link href="home.css" rel="stylesheet">
@@ -210,6 +210,7 @@
     .search-container {
       position: relative;
       width: 400px;
+      min-width: 200px;
       height: 50px;
       border-radius: 50px;
       display: flex;
@@ -236,6 +237,7 @@
       .search-container {
         height: 44px !important;
         width: 220px;
+        display: none;
       }
 
       .search-input {
@@ -297,9 +299,11 @@
       box-shadow: 0 8px 15px rgba(0, 153, 255, 0.15) !important;
       border-color: rgba(0, 153, 255, 0.3);
       transform: translateY(-1px);
+
       .split-button-content {
         color: #0064e7 !important;
       }
+
       .split-button-content i {
         color: #0099ff !important;
       }
@@ -360,8 +364,8 @@
     }
 
     .split-button-content i {
-      color: #334155;
-      font-size: 16px;
+      color: #8f8e8e;
+      font-size: 13px;
     }
 
     .split-button-icon {
@@ -603,13 +607,15 @@
       display: none;
       /* Hidden by default */
       align-items: center;
-      gap: 12px;
-      padding: 10px;
+      gap: 6px;
+      padding: 15px 0px 15px 4px;
       cursor: pointer;
+      scale: 1.05;
       border-radius: 8px;
       transition: background-color 0.2s;
       width: 100%;
     }
+
 
     .header-profile:hover {
       background-color: rgba(0, 0, 0, 0.05);
@@ -700,19 +706,19 @@
     }
 
     .newsletter-form input {
-      flex: 1;
-      padding: 25px 16px;
-      border: none;
-      width: 285px;
-      border-radius: 50px 0 0 50px;
-      font-size: 16px;
-    }
+    flex: 1;
+    padding: 16px 16px;
+    border: none;
+    width: 200px;
+    border-radius: 50px 0 0 50px;
+    font-size: 16px;
+}
 
     .newsletter-form button {
       background: linear-gradient(90deg, #0099ff, #1f6ed6);
       color: white;
       border: none;
-      padding: 27px 9px;
+      padding: 18px 9px;
       border-radius: 0 50px 50px 0;
       font-weight: 600;
       font-family: 'Rubik', sans-serif;
@@ -1150,7 +1156,130 @@
       background-color: transparent !important;
       padding: 0px;
     }
+
+    /* --- MOBILE PILL NAVBAR INTEGRATION --- */
+    @media (max-width: 768px) {
+
+      /* --- SEARCH BAR OVERLAY --- */
+      #mobilePillSearchBar {
+        position: fixed;
+        bottom: 90px;
+        /* Adjusted to be above navbar */
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        width: 85%;
+        background: rgb(39, 39, 39);
+        border-radius: 50px;
+        padding: 6px 6px 6px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 999;
+      }
+
+      #mobilePillSearchBar.active {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: all;
+      }
+
+      #mobilePillSearchBar input {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 14px;
+        border-radius: 30px;
+        padding: 15px 0px 15px 10px;
+        background: transparent;
+      }
+
+      /* --- THE NAVBAR --- */
+      #mobilePillNavbar {
+       position: fixed;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ffffff;
+        padding: 5px;
+        border-radius: 50px;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        align-items: center;
+        gap: 0px;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+        /* Higher priority */
+      }
+
+      #mobilePillNavbar .nav-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 45px;
+        padding: 0 15px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        color: #888;
+        overflow: hidden;
+      }
+
+      #mobilePillNavbar .nav-item ion-icon {
+        font-size: 22px;
+        min-width: 22px;
+        transition: color 0.3s;
+        color: #232323;
+      }
+
+      #mobilePillNavbar .nav-text {
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+        max-width: 0;
+        opacity: 0;
+        margin-left: 0;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        transition: all 0.4s ease;
+      }
+
+      #mobilePillNavbar .nav-item.active {
+        background-color: #232323;
+        color: #ffffff;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        padding: 22px 0px 22px 12px;
+      }
+
+      #mobilePillNavbar .nav-item.active ion-icon {
+        color: #ffffff;
+      }
+
+      #mobilePillNavbar .nav-item.active .nav-text {
+        max-width: 100px;
+        opacity: 1;
+        margin-left: 10px;
+      }
+    }
+
+    /* Hide on Desktop */
+    @media (min-width: 769px) {
+
+      #mobilePillNavbar,
+      #mobilePillSearchBar {
+        display: none !important;
+      }
+    }
   </style>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
@@ -1193,7 +1322,7 @@
         <li class="mobile-dropdown-item" id="main-nav-link">
           <div class="split-button single-toggle-action">
             <div class="split-button-content">
-              <i class='bx  bx-menu' style='color:#ffffff'></i>
+              <i class='bx  bx-menu'></i>
               Categories
             </div>
             <div class="split-button-icon">
@@ -1315,7 +1444,7 @@
 
 
           </li>
-          <div class="cart-icon-container">
+          <div class="cart-icon-container cart-link">
             <div class="cart-link">
               <i class="fa-solid fa-cart-shopping"></i>
               <span class="cart-count">0</span>
@@ -1376,10 +1505,11 @@
           <span class="user-name" id="sidebarUserName">User Name</span>
           <span class="user-email" id="sidebarUserEmail">email@example.com</span>
         </div>
+        <i class='bx  bx-chevron-down' style='color:#ffffff'></i>
       </div>
 
       <!-- Close Button -->
-      
+
 
       <!-- Mobile Specific Profile Dropdown (Floating) -->
       <div class="mobile-profile-dropdown" id="mobileProfileDropdown" style="display: none;">
@@ -1388,16 +1518,16 @@
           <span class="user-email" id="mobileDropdownEmail">email@example.com</span>
         </div>
         <div class="mobile-dropdown-items">
-          <a href="profile.html" class="mobile-dropdown-item">
+          <a href="profile.html" class="mobile-dropdown-item mobile-item-links">
             <i class="fa-regular fa-user"></i> Profile
           </a>
-          <a href="account.html" class="mobile-dropdown-item">
+          <a href="account.html" class="mobile-dropdown-item mobile-item-links">
             <i class="fa-solid fa-toggle-off"></i> Account Settings
           </a>
-          <a href="#" class="mobile-dropdown-item">
+          <a href="purchases.html" class="mobile-dropdown-item mobile-item-links">
             <i class="fa-regular fa-comments"></i> Purchases & Reviews
           </a>
-          <a href="#" class="mobile-dropdown-item">
+          <a href="#" class="mobile-dropdown-item mobile-item-links">
             <i class="fa-regular fa-circle-question"></i> Help Center
           </a>
         </div>
@@ -1493,7 +1623,7 @@
 
   <!-- HERO / BANNERS - Restructured -->
   <section class="hero-images" aria-label="Blue Ember featured banners">
-    <img src="assets/hero-image.png" alt="Living room with Blue Ember electronics" class="hero-img">
+    <img src="assets/hero-image.png" alt="Living room with Blue Ember Store" class="hero-img">
   </section>
 
   <!-- PRODUCTS INTRO -->
@@ -1591,7 +1721,8 @@
         <!-- Product Card 4 -->
         <article class="product-card" data-category="microwaves" itemscope itemtype="http://schema.org/Product">
           <a href="#" class="product-media modal-trigger" data-target="microwave-modal">
-            <img src="assets/home-product-03.jpg" alt="Blue Ember MicroChef Microwave" loading="lazy" style="width: 70%;">
+            <img src="assets/home-product-03.jpg" alt="Blue Ember MicroChef Microwave" loading="lazy"
+              style="width: 70%;">
           </a>
           <div class="product-body">
             <h4 itemprop="name">Blue Ember MicroChef 30L</h4>
@@ -1739,8 +1870,9 @@
     </div>
     <div class="modal-actions">
       <a href="compare.html?product=microwave" class="btn-outline">Compare</a>
-      <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="60" data-product-name="Blue Ember MicroChef 30L"
-        data-product-price="229" data-product-image="./assets/home-product-03.jpg">Add to Cart</button>
+      <button class="btn btn-primary mt-2 add-to-cart-btn" data-product-id="60"
+        data-product-name="Blue Ember MicroChef 30L" data-product-price="229"
+        data-product-image="./assets/home-product-03.jpg">Add to Cart</button>
     </div>
   </div>
 
@@ -1884,7 +2016,8 @@
           <div class="quote-icon">
             <i class="fas fa-quote-left"></i>
           </div>
-          <p class="testimonial-content">"The refrigerator I purchased from Blue Ember has transformed my kitchen. The smart
+          <p class="testimonial-content">"The refrigerator I purchased from Blue Ember has transformed my kitchen. The
+            smart
             features save energy, and the humidity control keeps my produce fresh twice as long. Their installation team
             was professional and efficient."</p>
           <div class="testimonial-author">
@@ -2081,7 +2214,7 @@
               <span><i class="fas fa-calendar-alt"></i> May 1, 2025</span>
               <span><i class="fas fa-tag"></i> Energy Efficiency</span>
             </div>
-            <h3>5 Energy-Saving Tips for Your Home Appliances</h3>
+            <h3>5 Energy-Saving Tips for Your Store</h3>
             <p>Practical strategies to reduce your electricity bills while maintaining comfort and convenience in your
               home.</p>
             <a href="#" class="read-more">Coming Soon <i class="fas fa-arrow-right"></i></a>
@@ -2156,7 +2289,7 @@
               </SPAN>
             </div>
           </a></div>
-        <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
+        <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
       </div>
 
       <!-- Quick Links -->
@@ -2202,7 +2335,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2025 Blue Ember Electronics. All rights reserved.</p>
+      <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
       <div class="footer-legal">
         <a href="privacy policy.html">Privacy Policy</a> •
         <a href="terms and services.html">Terms of Service</a> •
@@ -2488,9 +2621,77 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link href="chatbot.css" rel="stylesheet">
 
-  <button id="chat-bubble-btn" class="chat-bubble-btn" aria-label="Chat with us">
-    <i class="fa-solid fa-comments"></i>
+  
+    <!-- Search Bar Pop-up -->
+    <div class="search-overlay" id="mobilePillSearchBar">
+      <ion-icon name="search-outline" style="color:#666; font-size:20px;"></ion-icon>
+      <input type="text" placeholder="Search for products..." id="mobilePillSearchInput">
+    </div>
+
+
+    <!-- The Pill Navbar -->
+    <div class="navbar" id="mobilePillNavbar">
+      <abbr title="Home"><div class="nav-item" data-target="home">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="nav-text"><a href="index.html">Home</a></span>
+      </div>
+      </abbr>
+      <abbr title="Search"><div class="nav-item" data-target="search">
+        <ion-icon name="search-outline"></ion-icon>
+        <span class="nav-text"><a href="#">Search</a></span>
+      </div>
+      </abbr>
+      
+      <abbr title="Signup"><div class="nav-item" data-target="signup" id="Hide/UnhideSignupBtn" style="padding: 0px;">
+        <a href="login.html" style="padding: 0px;">
+        <li class="thebigthree-login/signup-btn">
+            <button class="button button-item" id="signupNavBtn">
+              <span class="button-bg">
+                <span class="button-bg-layers">
+                  <span class="button-bg-layer button-bg-layer-1 -purple"></span>
+                  <span class="button-bg-layer button-bg-layer-2 -turquoise"></span>
+                  <span class="button-bg-layer button-bg-layer-3 -yellow"></span>
+                </span>
+              </span>
+              <span class="button-inner">
+                <span class="button-inner-static">SignUp</span>
+                <span class="button-inner-hover" style="color: #ffffff;">SignUp</span>
+              </span>
+            </button>
+
+
+
+          </li>
+          </a>
+      </div>
+      </abbr>
+      </a>
+      <abbr title="Profile"><div class="nav-item" data-target="user" id="Hide/UnhideUserIcon" style="display: none;">
+        <ion-icon name="person-outline"></ion-icon>
+        <span class="nav-text"><a href="profile.html">User</a></span>
+      </div>
+      </abbr>
+      <abbr title="Shop"><div class="nav-item" data-target="shop">
+        <ion-icon name="storefront-outline"></ion-icon>
+        <span class="nav-text"><a href="product2.html">Shop</a></span>
+      </div>
+      </abbr>
+      <abbr title="Chat with us"><div class="nav-item" data-target="chatbot" style="padding:22px;">
+        <button id="chat-bubble-btn" class="chat-bubble-btn" aria-label="Chat with us">
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+    </button>
+    </div>
+      </abbr>
+    </div>
+
+    
+  </div>
+
+<abbr title="Chat with us">
+  <button id="chat-bubble-btn-two" class="chat-bubble-btn" aria-label="Chat with us">
+      <ion-icon name="chatbubbles-outline"></ion-icon>
   </button>
+</abbr>
 
   <div id="chat-window" class="chat-window">
     <div class="chat-header">
@@ -2524,11 +2725,31 @@
   <script src="js/chatbot.js"></script>
   <!-- Auth Integration -->
   <script>
+    // Function to toggle user icon visibility
+    function toggleUserIcon(show) {
+      const icon = document.getElementById('Hide/UnhideUserIcon');
+      if (icon) {
+        icon.style.display = show ? 'flex' : 'none';
+      }
+    }
+
+    // Function to toggle signup button visibility
+    function toggleSignupBtn(show) {
+      const btn = document.getElementById('Hide/UnhideSignupBtn');
+      if (btn) {
+        btn.style.display = show ? 'flex' : 'none';
+      }
+    }
+
     // Auth & Dropdown Logic
     const initAuthUI = async () => {
       if (!window.DB) return;
 
       const { data: { user } } = await DB.getUser();
+
+      // Toggle user icon based on login status
+      toggleUserIcon(!!user);
+      toggleSignupBtn(!user);
 
       if (user) {
         const loginLink = document.querySelector('a[href="login.html"]');
@@ -2639,3 +2860,5 @@
 </body>
 
 </html>
+
+

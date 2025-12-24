@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Services - Evora Home Appliances</title>
+    <title>Terms and Services - Blue Ember Store</title>
     <link rel="stylesheet" href="universal.css">
+    <link href="darkmode.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <script src="js/finisher-header.es5.min.js"></script>
+    <script src="js/darkmode.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
@@ -18,6 +21,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            background: transparent;
             color: #333;
             background-color: #f8f9fa;
         }
@@ -35,7 +39,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 31%;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
             opacity: 0.5;
             background-size: 100px 100px;
@@ -63,6 +67,8 @@
             margin-top: 2rem;
             margin-bottom: 2rem;
             border-radius: 30px;
+                position: relative;
+    z-index: 111;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
@@ -305,29 +311,107 @@
             position: relative;
             top: -100px;
         }
+
+        /* Dark Mode Overrides */
+        body.dark-mode {
+            background: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .header {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .header h1 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .container {
+            background-color: #1e1e1e !important;
+        }
+
+        body.dark-mode .section {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .section h2,
+        body.dark-mode .section h3 {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .section p,
+        body.dark-mode .section li {
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .important-notice {
+            background-color: #404040 !important;
+            border-color: #606060 !important;
+        }
+
+        body.dark-mode .important-notice strong {
+            color: #ffcc00 !important;
+        }
+
+        body.dark-mode .contact-info {
+            background-color: #2d2d2d !important;
+            border-color: #404040 !important;
+        }
+
+        body.dark-mode .contact-info h3 {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .contact-info li strong {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .footer {
+            background-color: #1e1e1e !important;
+            color: #b0b0b0 !important;
+        }
+
+        body.dark-mode .footer a {
+            color: #0099ff !important;
+        }
+
+        body.dark-mode .footer a:hover {
+            color: #66ccff !important;
+        }
+
+        /* Dark Mode Toggle Icons */
+        #moon-icon { display: block; }
+        body.dark-mode #moon-icon { display: none; }
+        body.dark-mode #sun-icon { display: block; }
+        #sun-icon { display: none; }
     </style>
 </head>
 <body>
     <a href="index.html" class="magic-back-btn" aria-label="Back to Home">
-  <i class="idle-icon fa-solid fa-chevron-left"></i>
-  <i class="active-icon fa-solid fa-chevron-left"></i>
-  <span>Back to Home</span>
-</a>
+   <i class="idle-icon fa-solid fa-chevron-left"></i>
+   <i class="active-icon fa-solid fa-chevron-left"></i>
+   <span>Back to Home</span>
+ </a>
+ <button id="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
+   <i class='bx bx-moon' id="moon-icon"></i>
+   <i class='bx bx-sun' id="sun-icon" style="display: none;"></i>
+ </button>
     <div class="header finisher-header" style="width: 100%; height: 300px;">
     <header class="header">
-        <h1>Evora Home Appliances</h1>
+        <h1>Blue Ember Store</h1>
         <h2>Terms and Services</h2>
     </header>
     </div>
     <!-- Main Content -->
     <main class="container">
         <div class="section">
-            <p>Welcome to <strong>Evora Home Appliances</strong> ("Evora," "we," "us," or "our"). We're dedicated to bringing smart, sustainable, and beautifully designed home appliances into your everyday life. By accessing or using our website (www.evora.com), placing an order, or purchasing any of our products, you agree to comply with and be bound by the following Terms and Services. Please read them carefully.</p>
+            <p>Welcome to <strong>Blue Ember Store</strong> ("Blue Ember," "we," "us," or "our"). We're dedicated to bringing smart, sustainable, and beautifully designed Store into your everyday life. By accessing or using our website (www.Blue Ember.com), placing an order, or purchasing any of our products, you agree to comply with and be bound by the following Terms and Services. Please read them carefully.</p>
         </div>
 
         <div class="section">
             <h2>1. Acceptance of Terms</h2>
-            <p>By using our website, creating an account, or purchasing any Evora product, you confirm that you are at least 18 years of age, have the legal capacity to enter into a binding contract, and agree to be bound by these Terms and Services, our <a href="#privacy-policy">Privacy Policy</a>, and all applicable laws and regulations. If you do not agree with these terms, please do not use our website or purchase our products.</p>
+            <p>By using our website, creating an account, or purchasing any Blue Ember product, you confirm that you are at least 18 years of age, have the legal capacity to enter into a binding contract, and agree to be bound by these Terms and Services, our <a href="#privacy-policy">Privacy Policy</a>, and all applicable laws and regulations. If you do not agree with these terms, please do not use our website or purchase our products.</p>
         </div>
 
         <div class="section">
@@ -338,7 +422,7 @@
         <div class="section">
             <h2>3. Ordering and Payment</h2>
             <ul>
-                <li>All orders are subject to acceptance by Evora. We reserve the right to refuse or cancel any order for any reason, including but not limited to errors in pricing, product description, or inventory.</li>
+                <li>All orders are subject to acceptance by Blue Ember. We reserve the right to refuse or cancel any order for any reason, including but not limited to errors in pricing, product description, or inventory.</li>
                 <li>Payment must be made in full at the time of order using a valid credit/debit card, PayPal, or other approved payment methods.</li>
                 <li>All prices are listed in USD and include applicable taxes where required by law. Shipping and handling fees are calculated at checkout based on your delivery location.</li>
                 <li>We reserve the right to adjust prices at any time without notice.</li>
@@ -369,19 +453,19 @@
             <p>Refunds will be processed within 5–10 business days after we receive and inspect your return. The refund will be issued to the original payment method. Shipping fees are non-refundable unless the return is due to our mistake.</p>
 
             <h3>Defective or Damaged Products:</h3>
-            <p>If your Evora product arrives damaged or is defective, please contact our Customer Care team within <strong>7 days of delivery</strong> at support@evora.com. We will arrange for a replacement or refund at no cost to you.</p>
+            <p>If your Blue Ember product arrives damaged or is defective, please contact our Customer Care team within <strong>7 days of delivery</strong> at support@Blue Ember.com. We will arrange for a replacement or refund at no cost to you.</p>
         </div>
 
         <div class="section">
             <h2>6. Warranty</h2>
-            <p>All Evora Home Appliances come with a <strong>limited 2-year manufacturer's warranty</strong> covering defects in materials and workmanship under normal home use. This warranty does not cover:</p>
+            <p>All Blue Ember Store come with a <strong>limited 2-year manufacturer's warranty</strong> covering defects in materials and workmanship under normal home use. This warranty does not cover:</p>
             <ul>
                 <li>Damage caused by misuse, neglect, improper installation, or unauthorized modifications.</li>
                 <li>Normal wear and tear.</li>
                 <li>Consumable parts (e.g., filters, seals, batteries).</li>
-                <li>Damage caused by power surges, water damage, or use with non-Evora accessories.</li>
+                <li>Damage caused by power surges, water damage, or use with non-Blue Ember accessories.</li>
             </ul>
-            <p>To make a warranty claim, please register your product online at <a href="https://www.evora.com/register">www.evora.com/register</a> and contact support@evora.com with proof of purchase.</p>
+            <p>To make a warranty claim, please register your product online at <a href="https://www.Blue Ember.com/register">www.Blue Ember.com/register</a> and contact support@Blue Ember.com with proof of purchase.</p>
             <div class="important-notice">
                 <strong>This warranty gives you specific legal rights, and you may also have other rights that vary by state or province.</strong>
             </div>
@@ -389,7 +473,7 @@
 
         <div class="section">
             <h2>7. Intellectual Property</h2>
-            <p>All content on this website—including text, graphics, logos, product images, software, and trademarks—is the property of Evora Home Appliances or its licensors and is protected by U.S. and international copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any content without our prior written consent.</p>
+            <p>All content on this website—including text, graphics, logos, product images, software, and trademarks—is the property of Blue Ember Store or its licensors and is protected by U.S. and international copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any content without our prior written consent.</p>
         </div>
 
         <div class="section">
@@ -410,7 +494,7 @@
 
         <div class="section">
             <h2>10. Limitation of Liability</h2>
-            <p>To the fullest extent permitted by law, Evora shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of our website, products, or services—including but not limited to lost profits, data loss, or business interruption—even if advised of the possibility of such damages.</p>
+            <p>To the fullest extent permitted by law, Blue Ember shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of our website, products, or services—including but not limited to lost profits, data loss, or business interruption—even if advised of the possibility of such damages.</p>
             <p>Our total liability to you for any claim related to our products or services shall not exceed the amount you paid for the specific product giving rise to the claim.</p>
         </div>
 
@@ -429,23 +513,23 @@
             <p>If you have questions about these Terms and Services, our products, or need assistance, please contact our Customer Care team:</p>
             
             <div class="contact-info">
-  <h3>Evora Home Appliances</h3>
+  <h3>Blue Ember Store</h3>
   <address>
     <ul>
       <li>
         <strong>Data Protection Officer:</strong> 
-        <a href="mailto:privacy@evora.com" >privacy@evora.com</a>
+        <a href="mailto:privacy@Blue Ember.com" >privacy@Blue Ember.com</a>
       </li>
       <li>
         <strong>Customer Support:</strong> 
-        <a href="mailto:support@evora.com">support@evora.com</a>
+        <a href="mailto:support@Blue Ember.com">support@Blue Ember.com</a>
       </li>
       <li>
         <strong>Phone:</strong> 
-        <a href="tel:+18003867227" aria-label="Call Evora Home Appliances at 1-800-386-7227">1-800-EVORA-AP (1-800-386-7227)</a>
+        <a href="tel:+18003867227" aria-label="Call Blue Ember Store at 1-800-386-7227">1-800-Blue Ember-AP (1-800-386-7227)</a>
       </li>
       <li>
-        <strong>Mailing Address:</strong> Evora Home Appliances Inc, 123 Innovation Drive, San Francisco, CA 94105, United States.
+        <strong>Mailing Address:</strong> Blue Ember Store Inc, 123 Innovation Drive, San Francisco, CA 94105, United States.
       </li>
     </ul>
   </address>
@@ -453,27 +537,23 @@
         </div>
 
         <div class="section" style="display: none;">
-            <p><strong>Thank you for choosing Evora.</strong> We're here to make your home smarter, simpler, and more beautiful—one appliance at a time.</p>
-            <p>© 2025 Evora Home Appliances, Inc. All rights reserved.</p>
+            <p><strong>Thank you for choosing Blue Ember.</strong> We're here to make your home smarter, simpler, and more beautiful—one appliance at a time.</p>
+            <p>© 2025 Blue Ember Store, Inc. All rights reserved.</p>
         </div>
     </main>
 <footer class="site-footer">
   <div class="footer-container">
     <!-- Brand Section -->
     <div class="footer-section">
-       <div class="footer-logo"><a href="index.html"><div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-           <SPAN>
-             <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-             <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-           </SPAN>
-         </div></a></div>
-      <p class="footer-tagline">Premium home appliances from trusted global brands. Serving customers since 2005.</p>
-      <div class="social-icons">
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255)"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200)"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5)"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85)"></i></a>
-      </div>
+      <div class="footer-logo"><a href="index.html">
+          <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
+            <SPAN>
+              <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+              <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+            </SPAN>
+          </div>
+        </a></div>
+      <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
     </div>
 
     <!-- Quick Links -->
@@ -490,29 +570,36 @@
 
     <!-- Categories -->
     <div class="footer-section">
-          <h4>Appliance Types</h4>
-          <ul>
-            <li><a href="product2.html">Washers & Dryers</a></li>
-            <li><a href="product2.html">Refrigerators</a></li>
-            <li><a href="product2.html">Microwaves</a></li>
-            <li><a href="product2.html">Air Conditioners</a></li>
-            <li><a href="product2.html">Dishwashers</a></li>
-          </ul>
-        </div>
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="product2.html">Toys</a></li>
+        <li><a href="product2.html">Supplyments</a></li>
+        <li><a href="product2.html">Beauty</a></li>
+        <li><a href="product2.html">HomeGoods</a></li>
+      </ul>
+    </div>
 
     <!-- Contact Info -->
     <div class="footer-section">
       <h4>Contact Us</h4>
-      <address>
-       <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
-        <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
-        <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@evora.com">info@evora.com</a>
-      </address>
+      <ul>
+        <li>
+          <a>
+            <address>
+              <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
+              </p>
+              <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+              <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+            </address>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; 2025 Evora Electronics. All rights reserved.</p>
+    <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
     <div class="footer-legal">
       <a href="privacy policy.html">Privacy Policy</a> •
       <a href="terms and services.html">Terms of Service</a> •
@@ -594,3 +681,5 @@
     </script>
 </body>
 </html>
+
+

@@ -43,7 +43,7 @@ body.dark-mode .navbar li {
 }
 
 body.dark-mode .navbar a:hover {
-    color: var(--dm-accent) !important;
+    color: #0064e7 !important;
 }
 
 body.dark-mode .hamburger span {
@@ -119,7 +119,7 @@ body.dark-mode .section-title,
 body.dark-mode .section-subtitle,
 body.dark-mode .products-overview h2,
 body.dark-mode .products-overview .lead,
-body.dark-mode .why-evora h3,
+body.dark-mode .why-Blue Ember h3,
 body.dark-mode .why-item h4,
 body.dark-mode .brand-name,
 body.dark-mode .testimonial-content,
@@ -128,8 +128,6 @@ body.dark-mode .offer-content h3,
 body.dark-mode .sustainability-item h3,
 body.dark-mode .service-card h3,
 body.dark-mode .blog-content h3,
-body.dark-mode .newsletter h2,
-body.dark-mode .newsletter p,
 body.dark-mode .header-text-1 h1,
 body.dark-mode .header-text-2 h2,
 body.dark-mode .header-text-3 h3,
@@ -139,14 +137,13 @@ body.dark-mode #heading-2 {
 
 /* Section Backgrounds Overrides */
 body.dark-mode .products-overview,
-body.dark-mode .why-evora,
+body.dark-mode .why-Blue Ember,
 body.dark-mode .top-brands,
 body.dark-mode .testimonials,
 body.dark-mode .special-offers,
 body.dark-mode .sustainability,
 body.dark-mode .services,
 body.dark-mode .blog-section,
-body.dark-mode .newsletter,
 body.dark-mode .contact-section,
 body.dark-mode .header-container-2,
 body.dark-mode .location {
@@ -582,3 +579,5 @@ body.dark-mode .profile-icon-btn:hover {
     border-color: #dff9ff;
     box-shadow: 0px 0px 10px whitesmoke;
 }
+
+
