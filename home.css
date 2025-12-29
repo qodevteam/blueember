@@ -93,7 +93,7 @@
   font-family: 'Rubik', sans-serif;
   transition: transform 0.18s ease, background 0.18s ease;
 }
-.chip:hover { transform: translateY(-3px); background: rgba(39,211,221,0.12); }
+.chip:hover {background: rgba(39,211,221,0.12); }
 
 /* FEATURED PRODUCTS */
 .featured-products {
@@ -133,7 +133,6 @@
   flex-direction: column;
 }
 .product-card:hover {
-  transform: translateY(-8px);
   box-shadow: 0 18px 44px rgba(3,18,38,0.12);
 }
 .product-media {
@@ -156,7 +155,7 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
   flex: 1;
 }
 .product-body h4 {
@@ -188,10 +187,11 @@
 /* Product footer area */
 .product-meta {
   margin-top: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  gap:0;
+  scale: 0.9;
 }
 .price {
     font-family: 'tourney';
@@ -201,12 +201,15 @@
 }
 .product-actions {
   display: flex;
-  gap: 8px;
+    gap: 3px;
+    width: auto;
+    scale: 0.9;
 }
 .btn-outline, .btn-primary {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 10px;
+  display: flex;
+  padding: 8px;
+  gap: 5px;
+  border-radius: 30px;
   text-decoration: none;
   font-weight: 700;
   font-family: 'Rubik', sans-serif;
@@ -228,7 +231,6 @@
   box-shadow: 0 8px 18px rgba(31,166,214,0.18);
 }
 .btn-primary:hover {
-  transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(31,166,214,0.22);
 }
 
@@ -303,7 +305,7 @@ address {
 
 /* RESPONSIVE */
 @media (max-width: 1100px) {
-  .products-grid { grid-template-columns: repeat(2,1fr); }
+  .products-grid { grid-template-columns: repeat(3,1fr); }
   .why-grid { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 700px) {
@@ -374,7 +376,6 @@ address {
       aspect-ratio: 1/1;
     }
     .brand-card:hover {
-      transform: translateY(-8px);
       box-shadow: 0 12px 25px rgba(3, 18, 38, 0.1);
     }
     .brand-logo {
@@ -402,7 +403,6 @@ address {
       box-shadow: 0 4px 15px rgba(31, 166, 214, 0.3);
     }
     .view-brands:hover {
-      transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(31, 166, 214, 0.4);
     }
 
@@ -429,7 +429,6 @@ address {
       flex-direction: column;
     }
     .testimonial-card:hover {
-      transform: translateY(-10px);
       box-shadow: 0 15px 30px rgba(0, 30, 60, 0.12);
     }
     .quote-icon {
@@ -563,7 +562,6 @@ address {
       transition: all 0.3s ease;
     }
     .offer-cta:hover {
-      transform: translateY(-3px);
       box-shadow: 0 6px 15px rgba(31, 166, 214, 0.3);
     }
 
@@ -587,7 +585,6 @@ address {
       transition: all 0.3s ease;
     }
     .sustainability-item:hover {
-      transform: translateY(-8px);
       box-shadow: 0 12px 28px rgba(3, 18, 38, 0.15);
     }
     .eco-icon {
@@ -634,7 +631,6 @@ address {
     border: 1px solid rgba(39, 211, 221, 0.2);
     }
     .service-card:hover {
-      transform: translateY(-8px);
       box-shadow: 0 15px 35px rgba(3, 18, 38, 0.12);
       background: white;
       border-color: rgba(39, 211, 221, 0.4);
@@ -688,7 +684,6 @@ address {
       transition: all 0.3s ease;
     }
     .blog-card:hover {
-      transform: translateY(-10px);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     }
     .blog-image {

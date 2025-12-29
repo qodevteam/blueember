@@ -54,16 +54,32 @@ function initializeTabs() {
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             const targetTab = button.getAttribute('data-tab');
-
-            // Remove active class from all buttons and panes
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabPanes.forEach(pane => pane.classList.remove('active'));
-
-            // Add active class to clicked button and corresponding pane
-            button.classList.add('active');
-            document.getElementById(`${targetTab}-tab`).classList.add('active');
+            switchToTab(targetTab);
         });
     });
+
+    // Check URL parameters for tab redirection
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    if (tabParam) {
+        switchToTab(tabParam);
+    }
+
+    function switchToTab(targetTab) {
+        // Remove active class from all buttons and panes
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+
+        // Add active class to target button and corresponding pane
+        const targetButton = document.querySelector(`[data-tab="${targetTab}"]`);
+        if (targetButton) {
+            targetButton.classList.add('active');
+            const targetPane = document.getElementById(`${targetTab}-tab`);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
+        }
+    }
 }
 
 // ========================================

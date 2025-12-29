@@ -27,7 +27,7 @@
     backdrop-filter: blur(var(--sidebar-blur));
     -webkit-backdrop-filter: blur(var(--sidebar-blur));
     z-index: 2000;
-    transform: translateX(-100%);
+    transform: translateX(-10000%);
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
     flex-direction: column;
@@ -104,6 +104,7 @@
     padding: 20px 16px;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
     gap: 8px;
 }
 
@@ -182,14 +183,49 @@
 
 .collapsible-content {
     max-height: 0;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 12px;
+    padding:0 10px 0 6px;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba(0, 0, 0, 0.02);
 }
 
 .sidebar-collapsible.open .collapsible-content {
-    max-height: 500px;
+    max-height: 200px;
     /* Arbitrary large height */
+}
+
+/* Custom thin scrollbar for collapsible content */
+.collapsible-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.collapsible-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
+}
+
+.collapsible-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.collapsible-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Dark mode scrollbar adjustments */
+body.dark-mode .collapsible-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .collapsible-content::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+}
+
+body.dark-mode .collapsible-content::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
 }
 
 .sub-link {
@@ -206,7 +242,6 @@
 .sub-link:hover {
     color: var(--primary-blue);
     background: rgba(255, 255, 255, 0.5);
-    border-left-color: var(--primary-blue);
 }
 
 /* Sidebar Footer */
@@ -217,6 +252,9 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    position: sticky !important;
+    bottom: 0;
+    background: inherit;
 }
 
 .footer-btn {
@@ -451,4 +489,19 @@ body.dark-mode .footer-btn:hover {
     transform: translateX(4px);
 }
 
+
+.close-btn{
+    background: #fafcfe !important;
+    font-size: x-large;
+    padding: 10px 0px !important;
+    border-radius: 30px;
+   }
+   body.dark-mode .close-btn{
+    background: #1e1e1e !important;
+    color: whitesmoke;
+   }
+
+   .header-profile:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
 

@@ -66,7 +66,7 @@
   }
 
   .mobile-menu {
-    width: 240px;
+    width: fit-content;
   }
 }
 
@@ -714,7 +714,7 @@
 }
 
 .split-button-content i {
-  color: #334155;
+  color: #8f8e8e;
   font-size: 16px;
 }
 

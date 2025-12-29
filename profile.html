@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="product.css">
 
   <script src="js/cart.js" defer></script>
+  <script src="js/order-manager.js" defer></script>
   <script src="js/cart-manager.js" defer></script>
   <script src="js/navigation.js" defer></script>
   <script src="js/dollar-font.js" defer></script>
@@ -31,6 +32,8 @@
   <script src="js/darkmode.js" defer></script>
   <script src="js/app.js" defer></script>
   <script src="js/db-client.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/emoji-toolkit@10.0.0/extras/css/joypixels.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/emoji-toolkit@10.0.0/lib/js/joypixels.min.js"></script>
 
   <!-- Logout Modal Script (MUST load first to avoid conflicts) -->
   <script src="js/logout-modal.js"></script>
@@ -707,13 +710,13 @@
     }
 
     .newsletter-form input {
-    flex: 1;
-    padding: 16px 16px;
-    border: none;
-    width: 200px;
-    border-radius: 50px 0 0 50px;
-    font-size: 16px;
-}
+      flex: 1;
+      padding: 16px 16px;
+      border: none;
+      width: 200px;
+      border-radius: 50px 0 0 50px;
+      font-size: 16px;
+    }
 
     .newsletter-form button {
       background: linear-gradient(90deg, #0099ff, #1f6ed6);
@@ -895,9 +898,9 @@
     body.dark-mode input,
     body.dark-mode select,
     body.dark-mode textarea {
-      background: var(--dm-bg-tertiary) !important;
-      border-color: var(--dm-border) !important;
-      color: var(--dm-text-primary) !important;
+      background: var(--dm-bg-tertiary);
+      border-color: var(--dm-border);
+      color: var(--dm-text-primary);
     }
 
 
@@ -1200,7 +1203,7 @@
 
       /* --- THE NAVBAR --- */
       #mobilePillNavbar {
-       position: fixed;
+        position: fixed;
         bottom: 25px;
         left: 50%;
         transform: translateX(-50%);
@@ -1395,7 +1398,7 @@
       border-color: var(--dm-border);
     }
 
-    .thebigtwo{
+    .thebigtwo {
       border: 1px solid #3a3a3a;
       border-radius: 30px;
 
@@ -1403,18 +1406,18 @@
 
     /* Profile Image Modal Styles */
     .profile-modal-overlay {
-       position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-  visibility: hidden;
-  opacity: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
 
-  transition: opacity 1s ease;
+      transition: opacity 1s ease;
     }
 
     .profile-modal-overlay.show {
@@ -1439,17 +1442,18 @@
 
     @media (max-width: 768px) {
       .profile-image-displaying-window {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      z-index: 1001;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 1s ease, transform 1s ease;
-      width: 100%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+        z-index: 1001;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 1s ease, transform 1s ease;
+        width: 100%;
+      }
     }
-    }
+
     .profile-image-displaying-window.show {
       visibility: visible;
       opacity: 1;
@@ -1614,13 +1618,7 @@
                   <span>Purchases & Reviews</span>
                 </a>
               </li>
-              <li>
-                <a href="#" class="profile-dropdown-item">
-                  <i class="fa-regular fa-credit-card"></i>
-                  <span>Subscription</span>
-                  <span class="pro-badge">PRO</span>
-                </a>
-              </li>
+              
               <li>
                 <a href="account.html" class="profile-dropdown-item">
                   <i class="fa-solid fa-toggle-off"></i>
@@ -1631,7 +1629,7 @@
             <div class="profile-dropdown-divider"></div>
             <ul class="profile-dropdown-list">
               <li>
-                <a href="#" class="profile-dropdown-item">
+                <a href="Contact.html" class="profile-dropdown-item">
                   <i class="fa-regular fa-circle-question"></i>
                   <span>Help center</span>
                 </a>
@@ -1709,479 +1707,476 @@
     </div>
   </div>
 
-    <!-- Mobile Sidebar Menu (Redesigned) -->
-    <div class="mobile-menu" id="mobileMenu">
-  
-      <!-- 1. Header: Brand or User Profile -->
-      <div class="sidebar-header" id="sidebarHeader">
-        <!-- Default State: Brand Logo -->
-        <div class="header-brand default-brand" id="sidebarBrand">
-          <div class="navbar-logo">
-            <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
-              style="width: 30px; height: auto;">
-            <span>
-              <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-              <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
-            </span>
-          </div>
-        </div>
-  
-        <!-- User State (Logged In) -->
-        <div class="header-profile" id="sidebarProfileContainer">
-          <img src="assets/profilepreview.jpg" alt="Profile" id="navbar-avatar-img">
-          <div class="user-info">
-            <span class="user-name" id="sidebarUserName">User Name</span>
-            <span class="user-email" id="sidebarUserEmail">email@example.com</span>
-          </div>
-          <i class='bx  bx-chevron-down' style='color:#ffffff'></i>
-        </div>
-  
-        <!-- Close Button -->
-  
-  
-        <!-- Mobile Specific Profile Dropdown (Floating) -->
-        <div class="mobile-profile-dropdown" id="mobileProfileDropdown" style="display: none;">
-          <div class="mobile-dropdown-header">
-            <span class="user-name" id="mobileDropdownName">User Name</span>
-            <span class="user-email" id="mobileDropdownEmail">email@example.com</span>
-          </div>
-          <div class="mobile-dropdown-items">
-            <a href="profile.html" class="mobile-dropdown-item mobile-item-links">
-              <i class="fa-regular fa-user"></i> Profile
-            </a>
-            <a href="account.html" class="mobile-dropdown-item mobile-item-links">
-              <i class="fa-solid fa-toggle-off"></i> Account Settings
-            </a>
-            <a href="purchases.html" class="mobile-dropdown-item mobile-item-links">
-              <i class="fa-regular fa-comments"></i> Purchases & Reviews
-            </a>
-            <a href="#" class="mobile-dropdown-item mobile-item-links">
-              <i class="fa-regular fa-circle-question"></i> Help Center
-            </a>
-          </div>
+  <!-- Mobile Sidebar Menu (Redesigned) -->
+  <div class="mobile-menu" id="mobileMenu">
+
+    <!-- 1. Header: Brand or User Profile -->
+    <div class="sidebar-header" id="sidebarHeader">
+      <!-- Default State: Brand Logo -->
+      <div class="header-brand default-brand" id="sidebarBrand">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
+            style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
         </div>
       </div>
-  
-      <!-- 2. Content: Navigation Links -->
-      <div class="sidebar-content">
-  
-        <a href="index.html" class="sidebar-nav-item">
-          <i class="fa-solid fa-house"></i>
-          <span>Home</span>
-        </a>
-  
-        <!-- Collapsible: Categories -->
-        <div class="sidebar-collapsible" id="col-categories">
-          <button class="collapsible-trigger">
-            <div style="display:flex; align-items:center;">
-              <i class="fa-solid fa-blender trigger-icon"></i>
-              <span>Categories</span>
-            </div>
-            <i class="fa-solid fa-chevron-down chevron"></i>
-          </button>
-          <div class="collapsible-content">
-            <a href="product2.html" class="sub-link">Washers & Dryers</a>
-            <a href="product2.html" class="sub-link">Refrigerators</a>
-            <a href="product2.html" class="sub-link">Microwaves</a>
-            <a href="product2.html" class="sub-link">Air Conditioners</a>
-            <a href="product2.html" class="sub-link">Dishwashers</a>
-            <a href="product2.html" class="sub-link">Cooktops</a>
-            <a href="product2.html" class="sub-link">Vacuums</a>
-          </div>
+
+      <!-- User State (Logged In) -->
+      <div class="header-profile" id="sidebarProfileContainer">
+        <img src="assets/profilepreview.jpg" alt="Profile" id="navbar-avatar-img">
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">User Name</span>
+          <span class="user-email" id="sidebarUserEmail">email@example.com</span>
         </div>
-  
-        <!-- Collapsible: Brands -->
-        <div class="sidebar-collapsible" id="col-brands">
-          <button class="collapsible-trigger">
-            <div style="display:flex; align-items:center;">
-              <i class="fa-solid fa-building trigger-icon"></i>
-              <span>Brands</span>
-            </div>
-            <i class="fa-solid fa-chevron-down chevron"></i>
-          </button>
-          <div class="collapsible-content">
-            <a href="Haier-productpage.html" class="sub-link">Haier</a>
-            <a href="samsung-productpage.html" class="sub-link">Samsung</a>
-            <a href="LG-productpage.html" class="sub-link">LG</a>
-            <a href="Whirlpool-productpage.html" class="sub-link">Whirlpool</a>
-            <a href="BOSCH-productpage.html" class="sub-link">Bosch</a>
-            <a href="Electrolux-productpage.html" class="sub-link">Electrolux</a>
-            <a href="Apple-productpage.html" class="sub-link">Apple</a>
-          </div>
-        </div>
-  
-        <a href="product2.html" class="sidebar-nav-item">
-          <i class="fa-solid fa-tags"></i>
-          <span>Products</span>
-        </a>
-  
-        <a href="Contact.html" class="sidebar-nav-item">
-          <i class="fa-solid fa-envelope"></i>
-          <span>Contact Us</span>
-        </a>
-  
-        <!-- Dynamic Cart Link -->
-        <li>
-          <a href="#" id="mobile-cart-link" class="mobile-cart-link">
-            <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
-          </a>
-        </li>
-  
-        <!-- Login Link (Hidden if logged in) -->
-        <div id="sidebar-login-container">
-          <a href="login.html" class="sidebar-nav-item" id="sidebar-login-link">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            <span>Login</span>
-          </a>
-        </div>
-  
+        <i class='bx  bx-chevron-down' style='color:#ffffff'></i>
       </div>
-  
-      <!-- 3. Footer: Settings / Logout -->
-      <div class="sidebar-footer" id="sidebarFooter">
-        <button id="mobile-theme-toggle" class="footer-btn">
-          <i class="fa-solid fa-moon"></i>
-          <span>Toggle Theme</span>
+
+      <!-- Close Button -->
+
+
+      <!-- Mobile Specific Profile Dropdown (Floating) -->
+      <div class="mobile-profile-dropdown" id="mobileProfileDropdown" style="display: none;">
+        <div class="mobile-dropdown-header">
+          <span class="user-name" id="mobileDropdownName">User Name</span>
+          <span class="user-email" id="mobileDropdownEmail">email@example.com</span>
+        </div>
+        <div class="mobile-dropdown-items">
+          <a href="profile.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-user"></i> Profile
+          </a>
+          <a href="account.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-solid fa-toggle-off"></i> Account Settings
+          </a>
+          <a href="purchases.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-comments"></i> Purchases & Reviews
+          </a>
+          <a href="Contact.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-circle-question"></i> Help Center
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Content: Navigation Links -->
+    <div class="sidebar-content">
+
+      <a href="index.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+
+      <!-- Collapsible: Categories -->
+      <div class="sidebar-collapsible" id="col-categories">
+        <button class="collapsible-trigger">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-solid fa-blender trigger-icon"></i>
+            <span>Categories</span>
+          </div>
+          <i class="fa-solid fa-chevron-down chevron"></i>
         </button>
-  
-        <!-- Logout will be injected here -->
-      </div>
-  
-    </div>
- 
-
-    <!-- Profile Image Modal -->
-    <div class="profile-modal-overlay" id="profileModalOverlay" aria-hidden="true"></div>
-    <div class="profile-image-displaying-window" id="profileImageModal" role="dialog" aria-label="Profile Image Modal" aria-hidden="true">
-        <img src="" alt="Profile Image" class="profile-modal-image" id="profileModalImage">
-    </div>
-    <button class="profile-modal-close-btn" id="profileModalCloseBtn" aria-label="Close Profile Image Modal" style="display: none;"><i class='bx  bx-x' style='color:#ffffff'></i> </button>
-
-    <!-- Login Prompt for Non-Authenticated Users -->
-    <div id="login-prompt" style="display: none; text-align: center; padding: 50px;">
-      <h2>You haven't signed up or logged in yet</h2>
-      <p>Please sign up or log in to access your profile.</p>
-      <a href="signup.html" class="btn btn-primary" style="margin-right: 10px;">Signup</a>
-      <a href="login.html" class="btn btn-outline">Login</a>
-    </div>
-
-    <!-- Main Content -->
-    <main class="account-settings-main">
-        <div class="account-container">
-            <!-- Welcome Header -->
-            <div style="display: flex; align-items: center; margin-bottom: 20px; gap:15px;">
-                <div class="profile-pic-container" style="width: 150px;height: 150px;object-fit: cover;overflow: hidden;align-content: center;border-radius: 3284px;">
-                    <img src="" id="dashboardProfilePic" class="profile-pic-img" style="display: none;">
-                    <div class="profile-pic-placeholder" style="font-size: 32px;"><i class="bx bx-user"></i></div>
-                </div>
-                <div>
-                    <h1 class="page-title" style="margin-bottom: 5px;">My Profile</h1>
-                    <p style="color: #64748b; font-size: 16px;" id="welcomeMsg">Welcome back!</p>
-                </div>
-                <!-- Profile Picture (Large) -->
-                
-            </div>
-
-            <!-- Profile Tabs -->
-            <div class="tabs-navigation">
-                <button class="tab-btn active" data-tab="dashboard">
-                    <i class="bx bx-grid-alt"></i> Dashboard
-                </button>
-                <button class="tab-btn" data-tab="orders">
-                    <i class="bx bx-package"></i> My Orders
-                </button>
-                <button class="tab-btn" data-tab="wishlist">
-                    <i class="bx bx-heart"></i> Wishlist
-                </button>
-            </div>
-
-            <!-- TAB CONTENT -->
-            <div class="tabs-content">
-
-                <!-- DASHBOARD TAB -->
-                <div class="tab-pane active" id="dashboard-tab">
-                    <!-- Stats Grid -->
-                    <div class="profile-dashboard">
-                        <div class="dashboard-stat-card">
-                            <div class="stat-icon"><i class="bx bx-shopping-bag"></i></div>
-                            <div class="stat-info">
-                                <h3 id="statTotalOrders">0</h3>
-                                <p>Total Orders</p>
-                            </div>
-                        </div>
-                        <div class="dashboard-stat-card">
-                            <div class="stat-icon"
-                                style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); color: #16a34a;">
-                                <i class="bx bx-star"></i></div>
-                            <div class="stat-info">
-                                <h3 id="statReviews">0</h3>
-                                <p>Reviews</p>
-                            </div>
-                        </div>
-                        <div class="dashboard-stat-card">
-                            <div class="stat-icon"
-                                style="background: linear-gradient(135deg, #fae8ff 0%, #f5d0fe 100%); color: #d946ef;">
-                                <i class="bx bx-heart"></i></div>
-                            <div class="stat-info">
-                                <h3 id="statWishlist">0</h3>
-                                <p>Wishlist</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Orders Section -->
-                    <div class="account-card">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                            <h2>Recent Orders</h2>
-                            <button class="btn btn-outline btn-sm" onclick="switchTab('orders')">View All</button>
-                        </div>
-                        <div class="orders-table-container">
-                            <table class="orders-table">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Total</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="recentOrdersBody">
-                                    <!-- Populated by JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="profile-dashboard" style="margin-top: 30px;">
-                        <a href="account.html" class="dashboard-stat-card"
-                            style="text-decoration: none; justify-content: center; flex-direction: column; text-align: center;">
-                            <div class="stat-icon" style="background: #f1f5f9; color: #475569;"><i
-                                    class="bx bx-cog"></i></div>
-                            <div class="stat-info">
-                                <h3 style="font-size: 18px;">Account Settings</h3>
-                                <p>Manage details</p>
-                            </div>
-                        </a>
-                        <a href="account.html" class="dashboard-stat-card"
-                            style="text-decoration: none; justify-content: center; flex-direction: column; text-align: center;">
-                            <div class="stat-icon" style="background: #f1f5f9; color: #475569;"><i
-                                    class="bx bx-map"></i></div>
-                            <div class="stat-info">
-                                <h3 style="font-size: 18px;">Addresses</h3>
-                                <p>Manage locations</p>
-                            </div>
-                        </a>
-                        <a href="account.html" class="dashboard-stat-card"
-                            style="text-decoration: none; justify-content: center; flex-direction: column; text-align: center;">
-                            <div class="stat-icon" style="background: #f1f5f9; color: #475569;"><i
-                                    class="bx bx-wallet"></i></div>
-                            <div class="stat-info">
-                                <h3 style="font-size: 18px;">Payment Methods</h3>
-                                <p>Manage cards</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ORDERS TAB -->
-                <div class="tab-pane" id="orders-tab">
-                    <div class="account-card">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                            <h2 style="margin: 0;">My Orders</h2>
-                            <div style="display: flex; gap: 10px;">
-                                <select id="orderFilter" class="form-control" style="width: auto; padding: 8px 15px;">
-                                    <option value="all">All Orders</option>
-                                    <option value="active">Active (Processing/Shipped)</option>
-                                    <option value="completed">Completed (Delivered)</option>
-                                    <option value="cancelled">Cancelled</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="orders-table-container">
-                            <table class="orders-table">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Date</th>
-                                        <th>Items</th>
-                                        <th>Status</th>
-                                        <th>Total</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="allOrdersBody">
-                                    <!-- Populated by JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- WISHLIST TAB -->
-                <div class="tab-pane" id="wishlist-tab">
-                    <div class="account-card" style="text-align: center; padding: 50px;">
-                        <div style="font-size: 48px; color: #cbd5e1; margin-bottom: 15px;"><i class="bx bx-heart"></i>
-                        </div>
-                        <h3>Your Wishlist is empty</h3>
-                        <p style="color: #64748b;">Save items you love to buy later.</p>
-                        <a href="products.html" class="btn btn-primary" style="margin-top: 15px;">Start Shopping</a>
-                    </div>
-                </div>
-
-                <!-- ORDER DETAILS VIEW (Hidden by default, shown via JS) -->
-                <div id="orderDetailsView" style="display: none;">
-                    <button class="btn btn-text" onclick="closeOrderDetails()"
-                        style="margin-bottom: 20px; color: #64748b;">
-                        <i class="bx bx-arrow-back"></i> Back to Orders
-                    </button>
-
-                    <div class="account-card">
-                        <div
-                            style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 25px;">
-                            <div>
-                                <h2 style="margin-bottom: 5px;" id="detailOrderId">Order #EV-0000</h2>
-                                <p style="color: #64748b; font-size: 14px;">Placed on <span id="detailOrderDate">Dec 12,
-                                        2024</span></p>
-                            </div>
-                            <div style="text-align: right;">
-                                <h3 style="color: #0099ff; font-size: 24px; margin-bottom: 5px;" id="detailOrderTotal">
-                                    $0.00</h3>
-                                <span class="status-badge" id="detailOrderStatus">Processing</span>
-                            </div>
-                        </div>
-
-                        <!-- Order Timeline -->
-                        <div class="order-timeline" style="margin-bottom: 40px;">
-                            <!-- Injected via JS -->
-                        </div>
-
-                        <!-- Order Items -->
-                        <h3 style="font-size: 18px; margin-bottom: 15px;">Items in your order</h3>
-                        <div id="detailItemsList"
-                            style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">
-                            <!-- Injected via JS -->
-                        </div>
-
-                        <!-- Order Info Grid -->
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; background: #f8fafc; padding: 20px; border-radius: 12px;"
-                            id="orderInfoGrid">
-                            <div>
-                                <h4
-                                    style="font-size: 14px; color: #64748b; margin-bottom: 10px; text-transform: uppercase;">
-                                    Shipping Address</h4>
-                                <p id="detailShippingAddr" style="font-size: 15px; line-height: 1.6; color: #334155;">
-                                    -
-                                </p>
-                            </div>
-                            <div>
-                                <h4
-                                    style="font-size: 14px; color: #64748b; margin-bottom: 10px; text-transform: uppercase;">
-                                    Payment Method</h4>
-                                <p style="font-size: 15px; color: #334155;"><i class="bx bx-credit-card"></i> <span
-                                        id="detailPayment">Visa ending in ****</span></p>
-                            </div>
-                            <div>
-                                <h4
-                                    style="font-size: 14px; color: #64748b; margin-bottom: 10px; text-transform: uppercase;">
-                                    Order Summary</h4>
-                                <div
-                                    style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px;">
-                                    <span style="color: #64748b;">Subtotal</span>
-                                    <span id="detailSubtotal" style="font-weight: 500;">$0.00</span>
-                                </div>
-                                <div
-                                    style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px;">
-                                    <span style="color: #64748b;">Shipping</span>
-                                    <span id="detailShippingCost" style="font-weight: 500;">Free</span>
-                                </div>
-                                <div
-                                    style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0; font-weight: 700; font-size: 18px;">
-                                    <span>Total</span>
-                                    <span id="detailFinalTotal">$0.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </main>
-
-    <!-- LOGOUT CONFIRMATION MODAL -->
-    <div class="modal" id="logoutModal" aria-hidden="true">
-        <div class="modal-overlay logout-modal-overlay" id="logoutModalOverlay"></div>
-        <div class="modal-content logout-modal-content">
-            <div class="logout-modal-header">
-                <div class="logout-icon">
-                    <i class="fas fa-sign-out-alt"></i>
-                </div>
-                <h3>Confirm Logout</h3>
-            </div>
-            <div class="logout-modal-body">
-                <p>Are you sure you want to log out? You'll need to sign in again to access your account.</p>
-            </div>
-            <div class="logout-modal-actions">
-                <button type="button" class="btn btn-secondary logout-cancel-btn" id="logoutCancelBtn">Cancel</button>
-                <button type="button" class="btn btn-primary logout-confirm-btn" id="logoutConfirmBtn">
-                    <span class="btn-text">
-                        <i class="fas fa-sign-out-alt"></i>
-                        Log Out
-                    </span>
-                    <div class="custom-spinner">
-                        <div class="spinner center">
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div>
-                        </div>
-                    </div>
-                </button>
-            </div>
+        <div class="collapsible-content">
+          <a href="product2.html" class="sub-link">Washers & Dryers</a>
+          <a href="product2.html" class="sub-link">Refrigerators</a>
+          <a href="product2.html" class="sub-link">Microwaves</a>
+          <a href="product2.html" class="sub-link">Air Conditioners</a>
+          <a href="product2.html" class="sub-link">Dishwashers</a>
+          <a href="product2.html" class="sub-link">Cooktops</a>
+          <a href="product2.html" class="sub-link">Vacuums</a>
         </div>
       </div>
-    
-      <!-- Chatbot Interface -->
-      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-      <link href="chatbot.css" rel="stylesheet">
-    
-    
-        <!-- Search Bar Pop-up -->
+
+      <!-- Collapsible: Brands -->
+      <div class="sidebar-collapsible" id="col-brands">
+        <button class="collapsible-trigger">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-solid fa-building trigger-icon"></i>
+            <span>Brands</span>
+          </div>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="collapsible-content">
+          <a href="Haier-productpage.html" class="sub-link">Haier</a>
+          <a href="samsung-productpage.html" class="sub-link">Samsung</a>
+          <a href="LG-productpage.html" class="sub-link">LG</a>
+          <a href="Whirlpool-productpage.html" class="sub-link">Whirlpool</a>
+          <a href="BOSCH-productpage.html" class="sub-link">Bosch</a>
+          <a href="Electrolux-productpage.html" class="sub-link">Electrolux</a>
+          <a href="Apple-productpage.html" class="sub-link">Apple</a>
+        </div>
+      </div>
+
+      <a href="product2.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-tags"></i>
+        <span>Products</span>
+      </a>
+
+      <a href="Contact.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Contact Us</span>
+      </a>
+
+      <!-- Dynamic Cart Link -->
+      <li>
+        <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+          <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        </a>
+      </li>
+
+      <!-- Login Link (Hidden if logged in) -->
+      <div id="sidebar-login-container">
+        <a href="login.html" class="sidebar-nav-item" id="sidebar-login-link">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Login</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 3. Footer: Settings / Logout -->
+    <div class="sidebar-footer" id="sidebarFooter">
+      <button id="mobile-theme-toggle" class="footer-btn">
+        <i class="fa-solid fa-moon"></i>
+        <span>Toggle Theme</span>
+      </button>
+
+      <!-- Logout will be injected here -->
+    </div>
+
+  </div>
+
+
+  <!-- Profile Image Modal -->
+  <div class="profile-modal-overlay" id="profileModalOverlay" aria-hidden="true"></div>
+  <div class="profile-image-displaying-window" id="profileImageModal" role="dialog" aria-label="Profile Image Modal"
+    aria-hidden="true">
+    <img src="" alt="Profile Image" class="profile-modal-image" id="profileModalImage">
+  </div>
+  <button class="profile-modal-close-btn" id="profileModalCloseBtn" aria-label="Close Profile Image Modal"
+    style="display: none;"><i class='bx  bx-x' style='color:#ffffff'></i> </button>
+
+  <!-- Login Prompt for Non-Authenticated Users -->
+  <div id="login-prompt" style="display: none; text-align: center; padding: 50px;">
+    <h2>You haven't signed up or logged in yet</h2>
+    <p>Please sign up or log in to access your profile.</p>
+    <a href="signup.html" class="btn btn-primary" style="margin-right: 10px;">Signup</a>
+    <a href="login.html" class="btn btn-outline">Login</a>
+  </div>
+
+  <!-- Main Content -->
+  <main class="account-settings-main">
+    <div class="account-container">
+      <!-- Welcome Header -->
+      <div style="display: flex; align-items: center; margin-bottom: 20px; gap:15px;">
+        <div class="profile-pic-container"
+          style="width: 150px;height: 150px;object-fit: cover;overflow: hidden;align-content: center;border-radius: 3284px;">
+          <img src="" id="dashboardProfilePic" class="profile-pic-img" style="display: none;">
+          <div class="profile-pic-placeholder" style="font-size: 32px;"><i class="bx bx-user"></i></div>
+        </div>
+        <div>
+          <h1 class="page-title" style="margin-bottom: 5px;">My Profile</h1>
+          <p style="color: #64748b; font-size: 16px;" id="welcomeMsg">Welcome back!</p>
+        </div>
+        <!-- Profile Picture (Large) -->
+
+      </div>
+
+      <!-- Profile Tabs -->
+      <div class="tabs-navigation">
+        <button class="tab-btn active" data-tab="dashboard">
+          <i class="bx bx-grid-alt"></i> Dashboard
+        </button>
+        <button class="tab-btn" data-tab="orders">
+          <i class="bx bx-package"></i> My Orders
+        </button>
+        <button class="tab-btn" data-tab="wishlist">
+          <i class="bx bx-heart"></i> Wishlist
+        </button>
+      </div>
+
+      <!-- TAB CONTENT -->
+      <div class="tabs-content">
+
+        <!-- DASHBOARD TAB -->
+        <div class="tab-pane active" id="dashboard-tab">
+          <!-- Stats Grid -->
+          <div class="profile-dashboard">
+            <div class="dashboard-stat-card">
+              <div class="stat-icon"><i class="bx bx-shopping-bag"></i></div>
+              <div class="stat-info">
+                <h3 id="statTotalOrders">0</h3>
+                <p>Total Orders</p>
+              </div>
+            </div>
+            <div class="dashboard-stat-card">
+              <div class="stat-icon"
+                style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); color: #16a34a;">
+                <i class="bx bx-star"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="statReviews">0</h3>
+                <p>Reviews</p>
+              </div>
+            </div>
+            <div class="dashboard-stat-card">
+              <div class="stat-icon"
+                style="background: linear-gradient(135deg, #fae8ff 0%, #f5d0fe 100%); color: #d946ef;">
+                <i class="bx bx-heart"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="statWishlist">0</h3>
+                <p>Wishlist</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders Section -->
+          <div class="account-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <h2>Recent Orders</h2>
+              <button class="btn btn-outline btn-sm" onclick="switchTab('orders')">View All</button>
+            </div>
+            <div class="orders-table-container">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recentOrdersBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="profile-dashboard" style="margin-top: 30px;">
+            <a href="account.html" class="dashboard-stat-card"
+              style="text-decoration: none; justify-content: center; flex-direction: column; text-align: center;">
+              <div class="stat-icon" style="background: #f1f5f9; color: #475569;"><i class="bx bx-cog"></i></div>
+              <div class="stat-info">
+                <h3 style="font-size: 18px;">Account Settings</h3>
+                <p>Manage details</p>
+              </div>
+            </a>
+            <a href="account.html" class="dashboard-stat-card"
+              style="text-decoration: none; justify-content: center; flex-direction: column; text-align: center;">
+              <div class="stat-icon" style="background: #f1f5f9; color: #475569;"><i class="bx bx-map"></i></div>
+              <div class="stat-info">
+                <h3 style="font-size: 18px;">Addresses</h3>
+                <p>Manage locations</p>
+              </div>
+            </a>
+            <a href="account.html" class="dashboard-stat-card"
+              style="text-decoration: none; justify-content: center; flex-direction: column; text-align: center;">
+              <div class="stat-icon" style="background: #f1f5f9; color: #475569;"><i class="bx bx-wallet"></i></div>
+              <div class="stat-info">
+                <h3 style="font-size: 18px;">Payment Methods</h3>
+                <p>Manage cards</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- ORDERS TAB -->
+        <div class="tab-pane" id="orders-tab">
+          <div class="account-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <h2 style="margin: 0;">My Orders</h2>
+              <div style="display: flex; gap: 10px;">
+                <select id="orderFilter" class="form-control" style="width: auto; padding: 8px 15px;">
+                  <option value="all">All Orders</option>
+                  <option value="active">Active (Processing/Shipped)</option>
+                  <option value="completed">Completed (Delivered)</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+            <div class="orders-table-container">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Items</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="allOrdersBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- WISHLIST TAB -->
+        <div class="tab-pane" id="wishlist-tab">
+          <div class="account-card" style="text-align: center; padding: 50px;">
+            <div style="font-size: 48px; color: #cbd5e1; margin-bottom: 15px;"><i class="bx bx-heart"></i>
+            </div>
+            <h3>Your Wishlist is empty</h3>
+            <p style="color: #64748b;">Save items you love to buy later.</p>
+            <a href="products.html" class="btn btn-primary" style="margin-top: 15px;">Start Shopping</a>
+          </div>
+        </div>
+
+        <!-- ORDER DETAILS VIEW (Hidden by default, shown via JS) -->
+        <div id="orderDetailsView" style="display: none;">
+          <button class="btn btn-text" onclick="closeOrderDetails()" style="margin-bottom: 20px; color: #64748b;">
+            <i class="bx bx-arrow-back"></i> Back to Orders
+          </button>
+
+          <div class="account-card">
+            <div
+              style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 25px;">
+              <div>
+                <h2 style="margin-bottom: 5px;" id="detailOrderId">Order #EV-0000</h2>
+                <p style="color: #64748b; font-size: 14px;">Placed on <span id="detailOrderDate">Dec 12,
+                    2024</span></p>
+              </div>
+              <div style="text-align: right;">
+                <h3 style="color: #0099ff; font-size: 24px; margin-bottom: 5px;" id="detailOrderTotal">
+                  $0.00</h3>
+                <span class="status-badge" id="detailOrderStatus">Processing</span>
+              </div>
+            </div>
+
+            <!-- Order Timeline -->
+            <div class="order-timeline" style="margin-bottom: 40px;">
+              <!-- Injected via JS -->
+            </div>
+
+            <!-- Order Items -->
+            <h3 style="font-size: 18px; margin-bottom: 15px;">Items in your order</h3>
+            <div id="detailItemsList" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">
+              <!-- Injected via JS -->
+            </div>
+
+            <!-- Order Info Grid -->
+            <div
+              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; background: #f8fafc; padding: 20px; border-radius: 12px;"
+              id="orderInfoGrid">
+              <div>
+                <h4 style="font-size: 14px; color: #64748b; margin-bottom: 10px; text-transform: uppercase;">
+                  Shipping Address</h4>
+                <p id="detailShippingAddr" style="font-size: 15px; line-height: 1.6; color: #334155;">
+                  -
+                </p>
+              </div>
+              <div>
+                <h4 style="font-size: 14px; color: #64748b; margin-bottom: 10px; text-transform: uppercase;">
+                  Payment Method</h4>
+                <p style="font-size: 15px; color: #334155;"><i class="bx bx-credit-card"></i> <span
+                    id="detailPayment">Visa ending in ****</span></p>
+              </div>
+              <div>
+                <h4 style="font-size: 14px; color: #64748b; margin-bottom: 10px; text-transform: uppercase;">
+                  Order Summary</h4>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px;">
+                  <span style="color: #64748b;">Subtotal</span>
+                  <span id="detailSubtotal" style="font-weight: 500;">$0.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px;">
+                  <span style="color: #64748b;">Shipping</span>
+                  <span id="detailShippingCost" style="font-weight: 500;">Free</span>
+                </div>
+                <div
+                  style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0; font-weight: 700; font-size: 18px;">
+                  <span>Total</span>
+                  <span id="detailFinalTotal">$0.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- LOGOUT CONFIRMATION MODAL -->
+  <div class="modal" id="logoutModal" aria-hidden="true">
+    <div class="modal-overlay logout-modal-overlay" id="logoutModalOverlay"></div>
+    <div class="modal-content logout-modal-content">
+      <div class="logout-modal-header">
+        <div class="logout-icon">
+          <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <h3>Confirm Logout</h3>
+      </div>
+      <div class="logout-modal-body">
+        <p>Are you sure you want to log out? You'll need to sign in again to access your account.</p>
+      </div>
+      <div class="logout-modal-actions">
+        <button type="button" class="btn btn-secondary logout-cancel-btn" id="logoutCancelBtn">Cancel</button>
+        <button type="button" class="btn btn-primary logout-confirm-btn" id="logoutConfirmBtn">
+          <span class="btn-text">
+            <i class="fas fa-sign-out-alt"></i>
+            Log Out
+          </span>
+          <div class="custom-spinner">
+            <div class="spinner center">
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chatbot Interface -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link href="chatbot.css" rel="stylesheet">
+
+
+  <!-- Search Bar Pop-up -->
   <div class="search-overlay" id="mobilePillSearchBar">
-      <ion-icon name="search-outline" style="color:#666; font-size:20px;"></ion-icon>
-      <input type="text" placeholder="Search for products..." id="mobilePillSearchInput">
-    </div>
+    <ion-icon name="search-outline" style="color:#666; font-size:20px;"></ion-icon>
+    <input type="text" placeholder="Search for products..." id="mobilePillSearchInput">
+  </div>
 
 
-    <!-- The Pill Navbar -->
-    <div class="navbar" id="mobilePillNavbar">
-      <abbr title="Home"><div class="nav-item" data-target="home">
+  <!-- The Pill Navbar -->
+  <div class="navbar" id="mobilePillNavbar">
+    <abbr title="Home">
+      <div class="nav-item" data-target="home">
         <ion-icon name="home-outline"></ion-icon>
         <span class="nav-text"><a href="index.html">Home</a></span>
       </div>
-      </abbr>
-      <abbr title="Search"><div class="nav-item" data-target="search">
+    </abbr>
+    <abbr title="Search">
+      <div class="nav-item" data-target="search">
         <ion-icon name="search-outline"></ion-icon>
         <span class="nav-text"><a href="#">Search</a></span>
       </div>
-      </abbr>
-      
-      <abbr title="Signup"><div class="nav-item" data-target="signup" id="Hide/UnhideSignupBtn">
+    </abbr>
+
+    <abbr title="Signup">
+      <div class="nav-item" data-target="signup" id="Hide/UnhideSignupBtn">
         <a href="login.html" style="padding: 0px;">
-        <li class="thebigthree-login/signup-btn">
+          <li class="thebigthree-login/signup-btn">
             <button class="button button-item" id="signupNavBtn">
               <span class="button-bg">
                 <span class="button-bg-layers">
@@ -2199,437 +2194,674 @@
 
 
           </li>
-          </a>
+        </a>
       </div>
-      </abbr>
-      </a>
-      <abbr title="Profile"><div class="nav-item" data-target="user" id="Hide/UnhideUserIcon" style="display: none;">
+    </abbr>
+    </a>
+    <abbr title="Profile">
+      <div class="nav-item" data-target="user" id="Hide/UnhideUserIcon" style="display: none;">
         <ion-icon name="person-outline"></ion-icon>
         <span class="nav-text"><a href="profile.html">User</a></span>
       </div>
-      </abbr>
-      <abbr title="Shop"><div class="nav-item" data-target="shop">
+    </abbr>
+    <abbr title="Shop">
+      <div class="nav-item" data-target="shop">
         <ion-icon name="storefront-outline"></ion-icon>
         <span class="nav-text"><a href="product2.html">Shop</a></span>
       </div>
-      </abbr>
-      <abbr title="Chat with us"><div class="nav-item" data-target="chatbot" style="padding:22px;">
+    </abbr>
+    <abbr title="Chat with us">
+      <div class="nav-item" data-target="chatbot" style="padding:22px;">
         <button id="chat-bubble-btn" class="chat-bubble-btn" aria-label="Chat with us">
-      <ion-icon name="chatbubbles-outline"></ion-icon>
-    </button>
-    </div>
-      </abbr>
-    </div>
-    
-        <abbr title="Chat with us"><button id="chat-bubble-btn-two" class="chat-bubble-btn" aria-label="Chat with us">
           <ion-icon name="chatbubbles-outline"></ion-icon>
         </button>
+      </div>
     </abbr>
-      <div id="chat-window" class="chat-window">
-        <div class="chat-header">
-          <div class="chat-header-info">
-            <div class="chat-avatar">
-              <i class="fa-solid fa-robot"></i>
-            </div>
-            <div class="chat-title">
-              <h4>Ember AI</h4>
-              <span>Online</span>
-            </div>
-          </div>
-    
-          <button id="chat-close-btn" class="chat-close-btn" aria-label="Close chat">
-            <i class="fa-solid fa-angle-down"></i>
-          </button>
-        </div>
-        <div id="chat-body" class="chat-body">
-          <div class="message bot">
-            Hello! 👋 How can I assist you today?
-          </div>
-        </div>
-        <div class="chat-footer">
-          <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." aria-label="Type message">
-          <button id="chat-send-btn" class="chat-send-btn" aria-label="Send message">
-            <i class="fa-solid fa-paper-plane"></i>
-          </button>
+  </div>
+
+  <abbr title="Chat with us"><button id="chat-bubble-btn-two" class="chat-bubble-btn" aria-label="Chat with us">
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+    </button>
+  </abbr>
+  <div id="chat-window" class="chat-window">
+
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="header-brand">
+        <button class="icon-btn" id="emberSidebarToggle"><i class='bx bx-menu'></i></button>
+        <div class="header-brand">
+          <!-- From Uiverse.io by dexter-st --> 
+<div class="loader-wrapper-chatbot-avatar">
+<span STYLE="FONT-FAMILY:'FontAwesome';z-index:1">E</span>
+  <div class="loader-chatbot-avatar"></div>
+</div>
+
+          <span class="header-title">Chatbase AI Agent</span>
         </div>
       </div>
-    
-      <script src="js/chatbot.js"></script>
-      <!-- Auth Integration -->
-      <script>
-        // Auth & Dropdown Logic
-        const initAuthUI = async () => {
-          if (!window.DB) return;
-    
-          const { data: { user } } = await DB.getUser();
-    
-          // Handle profile content visibility
-          const mainContent = document.querySelector('.account-settings-main');
-          const loginPrompt = document.getElementById('login-prompt');
-    
-          if (user) {
-            if (mainContent) mainContent.style.display = 'block';
-            if (loginPrompt) loginPrompt.style.display = 'none';
-          } else {
-            if (mainContent) mainContent.style.display = 'none';
-            if (loginPrompt) loginPrompt.style.display = 'block';
-          }
-    
-          if (user) {
-            const loginLink = document.querySelector('a[href="login.html"]');
-            if (loginLink && loginLink.parentElement) {
-              const li = loginLink.parentElement;
-              const name = user.user_metadata.full_name || 'User';
-              const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
-    
-              // Replace Login Link with Simple Dark Dropdown
-              li.innerHTML = `
+      <button class="icon-btn" id="emberMenuToggle"><i class='bx bx-dots-horizontal-rounded'></i></button>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <div id="emberDropdown" class="dropdown-menu">
+      <button class="menu-item" onclick="EmberCore.startNewChat()"><i class='bx bx-plus'></i> Start a new chat</button>
+      <button class="menu-item" onclick="EmberCore.endChat()"><i class='bx bx-x'></i> End chat</button>
+      <button class="menu-item" onclick="EmberCore.showRecentChats()"><i class='bx bx-history'></i> View recent
+        chats</button>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="emberSidebar" class="sidebar">
+      <h4 style="color:var(--text-main); margin-top:0;">Menu</h4>
+
+      <button class="menu-item" onclick="EmberCore.switchView('notifications')">
+        <i class='bx bx-bell'></i> Notifications
+        <span class="notification-badge" style="display:none"></span>
+      </button>
+
+      <button class="menu-item" onclick="EmberCore.switchView('settings')">
+        <i class='bx bx-cog'></i> Settings
+      </button>
+
+      <button class="menu-item" onclick="EmberCore.switchView('chat')">
+        <i class='bx  bx-arrow-s-left'></i> Back to Chat
+      </button>
+    </div>
+
+    <!-- Drag & Drop Overlay -->
+    <div id="emberDropZone" class="drop-overlay">
+      <i class='bx bx-cloud-upload' style="font-size: 48px; color: var(--text-sub);"></i>
+      <h3 style="color: var(--text-main); margin: 10px 0;">Drop file to upload</h3>
+    </div>
+
+    <!-- VIEW: CHAT -->
+    <div id="view_chat" class="view-container active">
+
+      <div id="emberChatBody" class="chat-body">
+        <!-- Messages Injected Here -->
+      </div>
+
+      <!-- Footer Section -->
+      <div class="footer-wrapper">
+
+
+
+
+        <!-- Privacy Toast -->
+        <div id="privacyToast" class="privacy-toast">
+          <span>By chatting, you agree to our <u style="cursor:pointer">privacy policy</u>.</span>
+          <i class='bx bx-x' style="font-size:16px; cursor:pointer;"
+            onclick="this.parentElement.classList.add('closing')"></i>
+        </div>
+
+        <div class="preview-of-file-upload-before-send" id="preview-window-2A">
+          <p>Images Uploaded in Chat are Temporary & Deleted after Web reloads.</p>
+          <!-- Preview of File Upload Before Send, edit structure if something a miss -->
+        </div>
+        <!-- Emoji window moved to floating position outside chat -->
+
+        <!-- Input Card -->
+        <div class="input-card">
+          <div id="emberInput" class="chat-input" contenteditable="true" placeholder="Message..."></div>
+
+          <div class="input-actions">
+            <input type="file" id="emberFileInput" class="hidden" multiple onchange="EmberCore.handleFileUpload(this)">
+
+            <!-- Paperclip -->
+            <button class="action-btn" title="Attach File" onclick="document.getElementById('emberFileInput').click()">
+              <i class='bx bx-paperclip'></i>
+            </button>
+
+            <!-- Emojis -->
+            <button class="action-btn" id="emoji-trigger" title="Emojis">
+              <i class='bx bx-smile'></i>
+            </button>
+
+            <!-- Send -->
+            <button id="emberSendBtn" class="action-btn" style="color:var(--text-main);">
+              <i class='bx bx-send'></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: NOTIFICATIONS -->
+    <div id="view_notifications" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Notifications</h3>
+        <div class="list-item">
+          <span style="font-weight:600; font-size:14px;">System Update</span>
+          <span style="font-size:12px; color:var(--text-sub);">We have updated our privacy policy.</span>
+        </div>
+        <div class="list-item">
+          <span style="font-weight:600; font-size:14px;">New Feature</span>
+          <span style="font-size:12px; color:var(--text-sub);">Drag and drop file upload is now available!</span>
+        </div>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')">
+          <i class='bx  bx-arrow-s-left'></i> Back
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW: SETTINGS -->
+    <div id="view_settings" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Settings</h3>
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; color:var(--text-main);">
+          <span>Dark Mode</span>
+          <input type="checkbox" id="darkModeToggle" onchange="EmberCore.toggleDarkMode(this.checked)">
+        </div>
+        <button class="menu-item" style="color:red" onclick="localStorage.clear(); location.reload();">
+          <i class='bx bx-trash'></i> Clear Data
+        </button>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')">
+          <i class='bx  bx-arrow-s-left'></i> Back
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW: RECENT CHATS -->
+    <div id="view_recent" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Recent Chats</h3>
+        <div id="emberHistoryList" style="display:flex; flex-direction:column;"></div>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')">
+          <i class='bx  bx-arrow-s-left'></i> Back
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Floating Draggable Emoji Window -->
+  <div id="emoji-window-2B" class="Emoji-container emoji-floating-window">
+    <div class="emoji-window-header">
+      <span class="emoji-window-title">Emojis</span>
+      <div class="emoji-drag-handle" title="Drag to move">
+        <i class='bx bx-apps'></i>
+      </div>
+      <button class="emoji-close-btn" title="Close">
+        <i class='bx bx-x'></i>
+      </button>
+    </div>
+    <div class="emoji-window-body">
+      <!-- Populated by JavaScript for extreme content & performance -->
+    </div>
+  </div>
+
+  <!-- Lightbox Modal for Image Gallery -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <span class="lightbox-close" onclick="event.stopPropagation(); EmberCore.closeLightbox()">
+      <i class='bx bx-x'></i>
+    </span>
+    <img id="lightbox-img" class="lightbox-content" src="" alt="">
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+  </div>
+
+  <!-- Report Modal -->
+  <div id="report-modal" class="report-modal">
+    <div class="report-modal-content" onclick="event.stopPropagation()">
+      <div class="report-modal-header">
+        <h3>Report</h3>
+        <button class="report-close-btn" onclick="event.stopPropagation(); EmberCore.closeReportModal()">
+          <i class='bx bx-x'></i>
+        </button>
+      </div>
+      <div class="report-modal-body">
+        <div class="report-options">
+          <div class="report-column">
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="threats">
+              <span>Threats & Harassment</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="false">
+              <span>False Statements</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="nsfw">
+              <span>NSFW</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="exploitation">
+              <span>Child Exploitation</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="terrorism">
+              <span>Terrorism & Extremism</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="drugs">
+              <span>Drug Transactions</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="impersonation">
+              <span>Impersonation</span>
+            </label>
+          </div>
+          <div class="report-column">
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="violence">
+              <span>Excessive Violence</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="hate">
+              <span>Hate Speech</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="harassment">
+              <span>Sexual Harassment</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="self-harm">
+              <span>Self Harm</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="illegal">
+              <span>Illegal Activities</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="privacy">
+              <span>Invading Privacy</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="spam">
+              <span>Commercial Spam</span>
+            </label>
+          </div>
+        </div>
+        <div class="report-details">
+          <label>Additional details</label>
+          <textarea id="report-details-input" placeholder="Describe the issue in further detail"></textarea>
+        </div>
+      </div>
+      <div class="report-modal-footer">
+        <button class="report-cancel-btn"
+          onclick="event.stopPropagation(); EmberCore.closeReportModal()">Cancel</button>
+        <button class="report-submit-btn" onclick="event.stopPropagation(); EmberCore.submitReport()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="js/chatbot.js"></script>
+  <!-- Auth Integration -->
+  <script>
+    // Auth & Dropdown Logic
+    const initAuthUI = async () => {
+      if (!window.DB) return;
+
+      const { data: { user } } = await DB.getUser();
+
+      // Handle profile content visibility
+      const mainContent = document.querySelector('.account-settings-main');
+      const loginPrompt = document.getElementById('login-prompt');
+
+      if (user) {
+        if (mainContent) mainContent.style.display = 'block';
+        if (loginPrompt) loginPrompt.style.display = 'none';
+      } else {
+        if (mainContent) mainContent.style.display = 'none';
+        if (loginPrompt) loginPrompt.style.display = 'block';
+      }
+
+      if (user) {
+        const loginLink = document.querySelector('a[href="login.html"]');
+        if (loginLink && loginLink.parentElement) {
+          const li = loginLink.parentElement;
+          const name = user.user_metadata.full_name || 'User';
+          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+
+          // Replace Login Link with Simple Dark Dropdown
+          li.innerHTML = `
     
                     `;
-    
-    
-              // Load Custom Profile Picture if exists
-              const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
-              if (storedAvatar) {
-                const avatarImg = li.querySelector('#navbar-avatar-img');
-                if (avatarImg) avatarImg.src = storedAvatar;
-              }
-    
-              // Logout Handler
-              document.getElementById('nav-dropdown-logout', 'mobile-logout-btn').addEventListener('click', async (e) => {
-                e.preventDefault();
-    
-                // Create the actual logout function
-                const performLogout = async () => {
-                  await DB.signOut();
-                  window.location.reload();
-                };
-    
-                // Use custom modal if available, otherwise fallback to native confirm
-                if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
-                  window.LogoutModal.confirm(performLogout);
-                } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
-                  window.showLogoutConfirmation(performLogout);
-                } else {
-                  // Fallback to native confirm
-                  if (confirm('Are you sure you want to logout?')) {
-                    await performLogout();
-                  }
-                }
-              });
-    
-              // Dropdown Toggle
-              // Dropdown Toggle (Desktop)
-              const trigger = li.querySelector('.nav-profile-trigger');
-              const menu = li.querySelector('.nav-profile-menu');
-    
-              if (trigger && menu) {
-                trigger.addEventListener('click', (e) => {
-                  e.stopPropagation();
-                  menu.classList.toggle('active');
-                });
-    
-                document.addEventListener('click', (e) => {
-                  if (!li.contains(e.target)) {
-                    menu.classList.remove('active');
-                  }
-                });
+
+
+          // Load Custom Profile Picture if exists
+          const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+          if (storedAvatar) {
+            const avatarImg = li.querySelector('#navbar-avatar-img');
+            if (avatarImg) avatarImg.src = storedAvatar;
+          }
+
+          // Logout Handler
+          document.getElementById('nav-dropdown-logout', 'mobile-logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            // Create the actual logout function
+            const performLogout = async () => {
+              await DB.signOut();
+              window.location.reload();
+            };
+
+            // Use custom modal if available, otherwise fallback to native confirm
+            if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
+              window.LogoutModal.confirm(performLogout);
+            } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
+              window.showLogoutConfirmation(performLogout);
+            } else {
+              // Fallback to native confirm
+              if (confirm('Are you sure you want to logout?')) {
+                await performLogout();
               }
             }
-    
-            // --- Mobile Sidebar Injection (Redesigned) ---
-            const sidebarHeader = document.querySelector('.sidebar-header');
-            const sidebarFooter = document.querySelector('.sidebar-footer');
-            const sidebarLoginLink = document.getElementById('sidebar-login-link');
+          });
 
-            if (sidebarHeader && sidebarFooter) {
-              // 1. Update Header with User Info
-              const name = user.user_metadata.full_name || 'User';
-              const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+          // Dropdown Toggle
+          // Dropdown Toggle (Desktop)
+          const trigger = li.querySelector('.nav-profile-trigger');
+          const menu = li.querySelector('.nav-profile-menu');
 
-              // Replace the "default-brand" part with User Profile
-              const brandContainer = sidebarHeader.querySelector('.header-brand');
-              if (brandContainer) {
-                brandContainer.innerHTML = `
+          if (trigger && menu) {
+            trigger.addEventListener('click', (e) => {
+              e.stopPropagation();
+              menu.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+              if (!li.contains(e.target)) {
+                menu.classList.remove('active');
+              }
+            });
+          }
+        }
+
+        // --- Mobile Sidebar Injection (Redesigned) ---
+        const sidebarHeader = document.querySelector('.sidebar-header');
+        const sidebarFooter = document.querySelector('.sidebar-footer');
+        const sidebarLoginLink = document.getElementById('sidebar-login-link');
+
+        if (sidebarHeader && sidebarFooter) {
+          // 1. Update Header with User Info
+          const name = user.user_metadata.full_name || 'User';
+          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+
+          // Replace the "default-brand" part with User Profile
+          const brandContainer = sidebarHeader.querySelector('.header-brand');
+          if (brandContainer) {
+            brandContainer.innerHTML = `
                   <img src="${avatarUrl}" class="sidebar-avatar" alt="Profile" id="mobile-avatar-img">
                   <div class="user-info">
                       <span class="user-name">Hello, ${name}</span>
                       <span class="user-status">Member</span>
                   </div>
                 `;
-              }
-
-              // 2. Hide "Login" Wrapper
-              const loginWrapper = document.getElementById('sidebar-login-container');
-              if (loginWrapper) loginWrapper.style.display = 'none';
-
-
-              // Sync Custom Avatar
-              const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
-              if (storedAvatar) {
-                const mAvatar = sidebarHeader.querySelector('#mobile-avatar-img');
-                if (mAvatar) mAvatar.src = storedAvatar;
-              }
-            }
-
-            // --- Mobile Pill Navbar Toggle ---
-            const signupBtn = document.getElementById('Hide/UnhideSignupBtn');
-            const userIcon = document.getElementById('Hide/UnhideUserIcon');
-            if (signupBtn) signupBtn.style.display = 'none';
-            if (userIcon) userIcon.style.display = 'block';
-          } else {
-            // When not signed in, show signup, hide user icon
-            const signupBtn = document.getElementById('Hide/UnhideSignupBtn');
-            const userIcon = document.getElementById('Hide/UnhideUserIcon');
-            if (signupBtn) signupBtn.style.display = 'block';
-            if (userIcon) userIcon.style.display = 'none';
           }
-        };
-    
-        // Run Immediately or Wait
-        if (window.DB) {
-          initAuthUI();
-        } else {
-          document.addEventListener('dbReady', initAuthUI);
+
+          // 2. Hide "Login" Wrapper
+          const loginWrapper = document.getElementById('sidebar-login-container');
+          if (loginWrapper) loginWrapper.style.display = 'none';
+
+
+          // Sync Custom Avatar
+          const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+          if (storedAvatar) {
+            const mAvatar = sidebarHeader.querySelector('#mobile-avatar-img');
+            if (mAvatar) mAvatar.src = storedAvatar;
+          }
         }
-      </script>
-    
-      
-    
-    
-      <!-- Toast Container -->
-      <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-2"></div>
-    
-    
-      <!-- FOOTER -->
-      <footer class="site-footer">
-        <div class="footer-container">
-          <!-- Brand Section -->
-          <div class="footer-section">
-            <div class="footer-logo"><a href="index.html">
-                <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-                  <SPAN>
-                    <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-                    <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-                  </SPAN>
-                </div>
-              </a></div>
-            <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
-          </div>
-    
-          <!-- Quick Links -->
-          <div class="footer-section">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="terms and services.html">Terms & Services</a></li>
-              <li><a href="privacy policy.html">Privacy Policy</a></li>
-              <li><a href="Contact.html">Contact</a></li>
-              <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
-              <li><a href="About us .html">About Us</a></li>
-            </ul>
-          </div>
-    
-          <!-- Categories -->
-          <div class="footer-section">
-            <h4>Categories</h4>
-            <ul>
-              <li><a href="product2.html">Toys</a></li>
-              <li><a href="product2.html">Supplyments</a></li>
-              <li><a href="product2.html">Beauty</a></li>
-              <li><a href="product2.html">HomeGoods</a></li>
-            </ul>
-          </div>
-    
-          <!-- Contact Info -->
-          <div class="footer-section">
-            <h4>Contact Us</h4>
-            <ul>
-              <li>
-                <a>
-                  <address>
-                    <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
-                    </p>
-                    <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
-                    <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
-                      href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
-                  </address>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    
-        <div class="footer-bottom">
-          <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
-          <div class="footer-legal">
-            <a href="privacy policy.html">Privacy Policy</a> •
-            <a href="terms and services.html">Terms of Service</a> •
-          </div>
-        </div>
-      </footer>
-    
-    
-      <script>
-    
-    
-        document.addEventListener('DOMContentLoaded', function () {
-          // New Collapsible Logic for Sidebar
-          const collapsibles = document.querySelectorAll('.sidebar-collapsible');
-          collapsibles.forEach(col => {
-            const btn = col.querySelector('.collapsible-trigger');
-            btn.addEventListener('click', () => {
-              // Close others (accordion style - optional)
-              // collapsibles.forEach(c => { if(c !== col) c.classList.remove('open'); });
-    
-              col.classList.toggle('open');
+
+        // --- Mobile Pill Navbar Toggle ---
+        const signupBtn = document.getElementById('Hide/UnhideSignupBtn');
+        const userIcon = document.getElementById('Hide/UnhideUserIcon');
+        if (signupBtn) signupBtn.style.display = 'none';
+        if (userIcon) userIcon.style.display = 'flex';
+      } else {
+        // When not signed in, show signup, hide user icon
+        const signupBtn = document.getElementById('Hide/UnhideSignupBtn');
+        const userIcon = document.getElementById('Hide/UnhideUserIcon');
+        if (signupBtn) signupBtn.style.display = 'flex';
+        if (userIcon) userIcon.style.display = 'none';
+      }
+    };
+
+    // Run Immediately or Wait
+    if (window.DB) {
+      initAuthUI();
+    } else {
+      document.addEventListener('dbReady', initAuthUI);
+    }
+  </script>
+
+
+
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-2"></div>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- Brand Section -->
+      <div class="footer-section">
+        <div class="footer-logo"><a href="index.html">
+            <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
+              <SPAN>
+                <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+                <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+              </SPAN>
+            </div>
+          </a></div>
+        <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="terms and services.html">Terms & Services</a></li>
+          <li><a href="privacy policy.html">Privacy Policy</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+          <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+          <li><a href="About us .html">About Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="footer-section">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="product2.html">Toys</a></li>
+          <li><a href="product2.html">Supplyments</a></li>
+          <li><a href="product2.html">Beauty</a></li>
+          <li><a href="product2.html">HomeGoods</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>
+            <a>
+              <address>
+                <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
+                </p>
+                <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+                <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                  href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+              </address>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy policy.html">Privacy Policy</a> •
+        <a href="terms and services.html">Terms of Service</a> •
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // New Collapsible Logic for Sidebar
+      const collapsibles = document.querySelectorAll('.sidebar-collapsible');
+      collapsibles.forEach(col => {
+        const btn = col.querySelector('.collapsible-trigger');
+        btn.addEventListener('click', () => {
+          // Close others (accordion style - optional)
+          // collapsibles.forEach(c => { if(c !== col) c.classList.remove('open'); });
+
+          col.classList.toggle('open');
+        });
+      });
+
+      // Dropdown toggle functionality for Categories and Brands
+      const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
+      dropdownItems.forEach(item => {
+        const toggleBtn = item.querySelector('.split-button.single-toggle-action');
+        const dropdown = item.querySelector('.mobile-dropdown');
+
+        if (toggleBtn && dropdown) {
+          toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            // Close other dropdowns
+            dropdownItems.forEach(otherItem => {
+              if (otherItem !== item) {
+                otherItem.classList.remove('active');
+              }
             });
+
+            // Toggle current dropdown
+            item.classList.toggle('active');
           });
-    
-          // Dropdown toggle functionality for Categories and Brands
-          const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
-          dropdownItems.forEach(item => {
-            const toggleBtn = item.querySelector('.split-button.single-toggle-action');
-            const dropdown = item.querySelector('.mobile-dropdown');
-    
-            if (toggleBtn && dropdown) {
-              toggleBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-    
-                // Close other dropdowns
-                dropdownItems.forEach(otherItem => {
-                  if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                  }
-                });
-    
-                // Toggle current dropdown
-                item.classList.toggle('active');
+        }
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', (e) => {
+        dropdownItems.forEach(item => {
+          if (!item.contains(e.target)) {
+            item.classList.remove('active');
+          }
+        });
+      });
+
+      // Mobile Menu Toggle (Hamburger)
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const closeBtn = document.getElementById('closeBtn');
+
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          mobileMenu.classList.add('active');
+        });
+      }
+
+      if (closeBtn && mobileMenu) {
+        closeBtn.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+        });
+      }
+
+      // Close on Outside Click
+      document.addEventListener('click', (e) => {
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+          if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+          }
+        }
+      });
+
+      // Newsletter Form Functionality
+      const newsletterForm = document.querySelector('.newsletter-form');
+      const emailInput = newsletterForm?.querySelector('input[type="email"]');
+      const submitBtn = newsletterForm?.querySelector('button');
+
+      if (newsletterForm && emailInput && submitBtn) {
+        newsletterForm.addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const email = emailInput.value.trim();
+
+          // Basic email validation
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!email) {
+            showToast('Please enter your email address', 'error');
+            emailInput.focus();
+            return;
+          }
+
+          if (!emailRegex.test(email)) {
+            showToast('Please enter a valid email address', 'error');
+            emailInput.focus();
+            return;
+          }
+
+          // Show loading state with spinner
+          submitBtn.classList.add('loading');
+          submitBtn.disabled = true;
+
+          try {
+            // Simulate API call with 2.8 second delay
+            await new Promise(resolve => setTimeout(resolve, 2800));
+
+            // Success
+            showToast('Subscribed successfully!', 'success');
+            emailInput.value = '';
+
+            // Optional: Track subscription event
+            if (typeof gtag !== 'undefined') {
+              gtag('event', 'newsletter_signup', {
+                event_category: 'engagement',
+                event_label: 'newsletter_subscription'
               });
             }
-          });
-    
-          // Close dropdowns when clicking outside
-          document.addEventListener('click', (e) => {
-            dropdownItems.forEach(item => {
-              if (!item.contains(e.target)) {
-                item.classList.remove('active');
-              }
-            });
-          });
-    
-          // Mobile Menu Toggle (Hamburger)
-          const hamburger = document.getElementById('hamburger');
-          const mobileMenu = document.getElementById('mobileMenu');
-          const closeBtn = document.getElementById('closeBtn');
-    
-          if (hamburger && mobileMenu) {
-            hamburger.addEventListener('click', () => {
-              mobileMenu.classList.add('active');
-            });
+
+          } catch (error) {
+            showToast('Something went wrong. Please try again.', 'error');
+          } finally {
+            // Restore button state
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
           }
-    
-          if (closeBtn && mobileMenu) {
-            closeBtn.addEventListener('click', () => {
-              mobileMenu.classList.remove('active');
-            });
+        });
+
+        // Real-time email validation
+        emailInput.addEventListener('input', function () {
+          const email = this.value.trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (email && !emailRegex.test(email)) {
+            this.style.borderColor = '#ef4444';
+          } else {
+            this.style.borderColor = '';
           }
-    
-          // Close on Outside Click
-          document.addEventListener('click', (e) => {
-            if (mobileMenu && mobileMenu.classList.contains('active')) {
-              if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-              }
-            }
-          });
-    
-          // Newsletter Form Functionality
-          const newsletterForm = document.querySelector('.newsletter-form');
-          const emailInput = newsletterForm?.querySelector('input[type="email"]');
-          const submitBtn = newsletterForm?.querySelector('button');
-    
-          if (newsletterForm && emailInput && submitBtn) {
-            newsletterForm.addEventListener('submit', async function (e) {
-              e.preventDefault();
-    
-              const email = emailInput.value.trim();
-    
-              // Basic email validation
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-              if (!email) {
-                showToast('Please enter your email address', 'error');
-                emailInput.focus();
-                return;
-              }
-    
-              if (!emailRegex.test(email)) {
-                showToast('Please enter a valid email address', 'error');
-                emailInput.focus();
-                return;
-              }
-    
-              // Show loading state with spinner
-              submitBtn.classList.add('loading');
-              submitBtn.disabled = true;
-    
-              try {
-                // Simulate API call with 2.8 second delay
-                await new Promise(resolve => setTimeout(resolve, 2800));
-    
-                // Success
-                showToast('Subscribed successfully!', 'success');
-                emailInput.value = '';
-    
-                // Optional: Track subscription event
-                if (typeof gtag !== 'undefined') {
-                  gtag('event', 'newsletter_signup', {
-                    event_category: 'engagement',
-                    event_label: 'newsletter_subscription'
-                  });
-                }
-    
-              } catch (error) {
-                showToast('Something went wrong. Please try again.', 'error');
-              } finally {
-                // Restore button state
-                submitBtn.classList.remove('loading');
-                submitBtn.disabled = false;
-              }
-            });
-    
-            // Real-time email validation
-            emailInput.addEventListener('input', function () {
-              const email = this.value.trim();
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-              if (email && !emailRegex.test(email)) {
-                this.style.borderColor = '#ef4444';
-              } else {
-                this.style.borderColor = '';
-              }
-            });
-          }
-    
-          // Toast notification function
-          function showToast(message, type = 'info') {
-            const toastContainer = document.getElementById('toast-container');
-            if (!toastContainer) return;
-    
-            const toast = document.createElement('div');
-            toast.className = `toast toast-${type}`;
-            toast.innerHTML = `
+        });
+      }
+
+      // Toast notification function
+      function showToast(message, type = 'info') {
+        const toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
               <div class="toast-content">
                 <span class="toast-message">${message}</span>
                 <button class="toast-close" aria-label="Close">&times;</button>
               </div>
             `;
-    
-            // Add toast styles if not already present
-            if (!document.querySelector('#toast-styles')) {
-              const style = document.createElement('style');
-              style.id = 'toast-styles';
-              style.textContent = `
+
+        // Add toast styles if not already present
+        if (!document.querySelector('#toast-styles')) {
+          const style = document.createElement('style');
+          style.id = 'toast-styles';
+          style.textContent = `
                 .toast {
                   background: white;
                   border-radius: 8px;
@@ -2667,36 +2899,34 @@
                   margin-left: 12px;
                 }
               `;
-              document.head.appendChild(style);
-            }
-    
-            toastContainer.appendChild(toast);
-    
-            // Show toast
-            setTimeout(() => toast.classList.add('show'), 100);
-    
-            // Auto remove after 5 seconds
-            const autoRemove = setTimeout(() => removeToast(toast), 5000);
-    
-            // Manual close
-            toast.querySelector('.toast-close').addEventListener('click', () => {
-              clearTimeout(autoRemove);
-              removeToast(toast);
-            });
-    
-            function removeToast(toastElement) {
-              toastElement.classList.remove('show');
-              setTimeout(() => {
-                if (toastElement.parentNode) {
-                  toastElement.parentNode.removeChild(toastElement);
-                }
-              }, 300);
-            }
-          }
+          document.head.appendChild(style);
+        }
+
+        toastContainer.appendChild(toast);
+
+        // Show toast
+        setTimeout(() => toast.classList.add('show'), 100);
+
+        // Auto remove after 5 seconds
+        const autoRemove = setTimeout(() => removeToast(toast), 5000);
+
+        // Manual close
+        toast.querySelector('.toast-close').addEventListener('click', () => {
+          clearTimeout(autoRemove);
+          removeToast(toast);
         });
-      </script>
-    </body>
+
+        function removeToast(toastElement) {
+          toastElement.classList.remove('show');
+          setTimeout(() => {
+            if (toastElement.parentNode) {
+              toastElement.parentNode.removeChild(toastElement);
+            }
+          }, 300);
+        }
+      }
+    });
+  </script>
+</body>
 
 </html>
-
-

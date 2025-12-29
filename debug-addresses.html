@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Address Data Inspector</title>
+    <script src="js/db-client.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 3px solid #007bff;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔍 Address Data Inspector</h1>
+
+    <div class="section">
+        <h2>Current User Session</h2>
+        <div id="user-status"></div>
+        <pre id="user-data"></pre>
+    </div>
+
+    <div class="section">
+        <h2>Saved Addresses</h2>
+        <div id="address-status"></div>
+        <pre id="address-data"></pre>
+    </div>
+
+    <div class="section">
+        <h2>Account Data</h2>
+        <pre id="account-data"></pre>
+    </div>
+
+    <div class="section">
+        <h2>All Relevant LocalStorage Keys</h2>
+        <pre id="all-keys"></pre>
+    </div>
+
+    <div class="section">
+        <h2>Actions</h2>
+        <button onclick="refreshData()">🔄 Refresh Data</button>
+        <button onclick="window.location.href='checkout.html'">➡️ Go to Checkout</button>
+        <button onclick="window.location.href='account.html?tab=addresses'">➡️ Go to Account (Addresses)</button>
+    </div>
+
+    <script>
+        async function loadDebugInfo() {
+            let userId = null;
+            let SCOPED_SUFFIX = '';
+
+            // Check user session
+            const userStatusDiv = document.getElementById('user-status');
+            const userDataPre = document.getElementById('user-data');
+
+            try {
+                if (window.DB) {
+                    const { data: { user } } = await window.DB.getUser();
+                    if (user?.id) {
+                        userId = user.id;
+                        SCOPED_SUFFIX = '_' + user.id;
+                        userStatusDiv.className = 'status success';
+                        userStatusDiv.textContent = '✅ User Logged In (via DB)';
+                        userDataPre.textContent = JSON.stringify(user, null, 2);
+                    } else {
+                        userStatusDiv.className = 'status error';
+                        userStatusDiv.textContent = '❌ No User Session Found (DB returned null)';
+                        userDataPre.textContent = 'null';
+                    }
+                } else {
+                    const u = JSON.parse(localStorage.getItem('be_current_user') || '{}');
+                    if (u.id) {
+                        userId = u.id;
+                        SCOPED_SUFFIX = '_' + u.id;
+                        userStatusDiv.className = 'status warning';
+                        userStatusDiv.textContent = '⚠️ User found in localStorage (DB not available)';
+                        userDataPre.textContent = JSON.stringify(u, null, 2);
+                    } else {
+                        userStatusDiv.className = 'status error';
+                        userStatusDiv.textContent = '❌ No User Logged In';
+                        userDataPre.textContent = '{}';
+                    }
+                }
+            } catch (e) {
+                userStatusDiv.className = 'status error';
+                userStatusDiv.textContent = '❌ Error: ' + e.message;
+                userDataPre.textContent = e.stack;
+            }
+
+            console.log('User ID:', userId);
+            console.log('Scoped Suffix:', SCOPED_SUFFIX);
+
+            // Check addresses
+            const addressStatusDiv = document.getElementById('address-status');
+            const addressDataPre = document.getElementById('address-data');
+            const addressKey = 'be_addresses' + SCOPED_SUFFIX;
+
+            const addresses = JSON.parse(localStorage.getItem(addressKey) || '[]');
+            console.log('Addresses key:', addressKey);
+            console.log('Addresses found:', addresses);
+
+            if (addresses.length > 0) {
+                addressStatusDiv.className = 'status success';
+                addressStatusDiv.textContent = `✅ Found ${addresses.length} saved address(es) at key: ${addressKey}`;
+                addressDataPre.textContent = JSON.stringify(addresses, null, 2);
+            } else {
+                addressStatusDiv.className = 'status warning';
+                addressStatusDiv.textContent = `⚠️ No addresses found at key: ${addressKey}`;
+                addressDataPre.textContent = '[]';
+            }
+
+            // Check account data
+            const accountDataPre = document.getElementById('account-data');
+            const accountKey = 'be_account_data' + SCOPED_SUFFIX;
+            const accountData = JSON.parse(localStorage.getItem(accountKey) || '{}');
+            accountDataPre.textContent = `Key: ${accountKey}\n\n` + JSON.stringify(accountData, null, 2);
+
+            // List all relevant keys
+            const allKeysPre = document.getElementById('all-keys');
+            const relevantKeys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('be_')) {
+                    relevantKeys.push({
+                        key: key,
+                        valueLength: localStorage.getItem(key).length,
+                        preview: localStorage.getItem(key).substring(0, 100)
+                    });
+                }
+            }
+            allKeysPre.textContent = JSON.stringify(relevantKeys, null, 2);
+        }
+
+        function refreshData() {
+            loadDebugInfo();
+        }
+
+        // Load on page load
+        window.addEventListener('DOMContentLoaded', loadDebugInfo);
+    </script>
+</body>
+
+</html>

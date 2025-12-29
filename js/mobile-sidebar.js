@@ -10,9 +10,11 @@ class MobileSidebar {
         this.closeBtn = null;
         this.isOpen = false;
         this.touchStartX = 0;
+        this.touchStartY = 0;
         this.touchEndX = 0;
+        this.touchEndY = 0;
         this.minSwipeDistance = 50;
-        
+
         this.init();
     }
 
@@ -38,7 +40,6 @@ class MobileSidebar {
         this.bindEvents();
         this.setupCollapsibleSections();
         this.setupKeyboardNavigation();
-        this.setupTouchGestures();
         this.updateUserInfo();
     }
 
@@ -127,39 +128,7 @@ class MobileSidebar {
         }
     }
 
-    setupTouchGestures() {
-        if (!this.sidebar) return;
-
-        // Touch start
-        this.sidebar.addEventListener('touchstart', (e) => {
-            this.touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        // Touch end
-        this.sidebar.addEventListener('touchend', (e) => {
-            this.touchEndX = e.changedTouches[0].screenX;
-            this.handleSwipe();
-        }, { passive: true });
-
-        // Swipe from left edge to open
-        document.addEventListener('touchstart', (e) => {
-            if (!this.isOpen && e.touches[0].screenX < 50) {
-                this.touchStartX = e.touches[0].screenX;
-            }
-        }, { passive: true });
-
-        document.addEventListener('touchend', (e) => {
-            if (!this.isOpen && this.touchStartX < 50) {
-                this.touchEndX = e.changedTouches[0].screenX;
-                const swipeDistance = this.touchEndX - this.touchStartX;
-                if (swipeDistance > this.minSwipeDistance) {
-                    this.open();
-                }
-            }
-        }, { passive: true });
-    }
-
-    handleSwipe() {
+        handleSwipe() {
         const swipeDistance = this.touchStartX - this.touchEndX;
         
         // Swipe left to close
@@ -201,16 +170,16 @@ class MobileSidebar {
             }
 
             if (currentUser) {
-                const displayName = currentUser.user_metadata?.full_name || 
-                                  currentUser.name || 
-                                  currentUser.email?.split('@')[0] || 
-                                  'Guest User';
-                
+                const displayName = currentUser.user_metadata?.full_name ||
+                                  currentUser.name ||
+                                  currentUser.email?.split('@')[0] ||
+                                  'User';
+
                 userNameElement.textContent = displayName;
-                userStatusElement.textContent = currentUser.email || 'Signed In';
+                userStatusElement.textContent = currentUser.email || '';
             } else {
-                userNameElement.textContent = 'Guest User';
-                userStatusElement.textContent = 'Not Signed In';
+                userNameElement.textContent = '';
+                userStatusElement.textContent = '';
             }
         } catch (error) {
             console.warn('MobileSidebar: Error updating user info:', error);
@@ -276,19 +245,24 @@ class MobileSidebar {
 
         this.isOpen = true;
         this.sidebar?.classList.add('active');
-        
+
+        // Hide hamburger when sidebar is open
+        if (this.hamburger) {
+            this.hamburger.style.display = 'none';
+        }
+
         // Add overlay to prevent body scroll
         document.body.style.overflow = 'hidden';
-        
+
         // Focus management
         this.sidebar?.setAttribute('aria-hidden', 'false');
-        
+
         // Animate hamburger icon
         this.animateHamburger(true);
-        
+
         // Dispatch open event
         this.dispatchEvent('sidebarOpened');
-        
+
         console.log('MobileSidebar: Opened');
     }
 
@@ -297,24 +271,29 @@ class MobileSidebar {
 
         this.isOpen = false;
         this.sidebar?.classList.remove('active');
-        
+
+        // Show hamburger when sidebar is closed
+        if (this.hamburger) {
+            this.hamburger.style.display = 'flex';
+        }
+
         // Restore body scroll
         document.body.style.overflow = '';
-        
+
         // Unfocus management
         this.sidebar?.setAttribute('aria-hidden', 'true');
-        
+
         // Animate hamburger icon
         this.animateHamburger(false);
-        
+
         // Close all collapsible sections
         document.querySelectorAll('.sidebar-collapsible').forEach(section => {
             section.classList.remove('open');
         });
-        
+
         // Dispatch close event
         this.dispatchEvent('sidebarClosed');
-        
+
         console.log('MobileSidebar: Closed');
     }
 
@@ -378,3 +357,28 @@ window.MobileSidebar = MobileSidebar;
 window.initMobileSidebar = initMobileSidebar;
 
 
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const collapsibles = document.querySelectorAll('.sidebar-collapsible');
+    collapsibles.forEach(col => {
+        const btn = col.querySelector('.collapsible-trigger');
+        btn.addEventListener('click', () => {
+            // Close all other collapsibles
+            document.querySelectorAll('.sidebar-collapsible').forEach(other => {
+                if (other !== col) {
+                    other.classList.remove('open');
+                }
+            });
+            // Toggle current
+            col.classList.toggle('open');
+        });
+    });
+});

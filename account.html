@@ -22,7 +22,12 @@
     <link href="darkmode.css" rel="stylesheet">
     <link href="navbar.css" rel="stylesheet">
     <link href="mobile-sidebar.css" rel="stylesheet">
+    <link href="RESPONSIVENESS.css" rel="stylesheet">
     <link href="account.css" rel="stylesheet">
+    <link rel="stylesheet" href="chatbot.css">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -32,26 +37,319 @@
     <!-- Scripts -->
     <script src="js/darkmode.js" defer></script>
     <script src="js/db-client.js"></script>
+    <script src="js/order-manager.js" defer></script>
+    <script src="js/chatbot.js" defer></script>
     <script src="js/mobile-sidebar.js" defer></script>
+    <script src="js/navigation.js" defer></script>
     <script src="js/profile-dropdown.js" defer></script>
-    <script src="js/logout-injector.js" defer></script>
     <script src="js/logout-modal.js" defer></script>
     <script src="js/account-settings.js" defer></script>
-    <script src="js/mobile-sidebar.js" defer></script>
 </head>
+<style>
 
+.sidebar-header{
+    padding: 15px;
+}
+
+    /* Add to mobile-sidebar.css */
+
+/* Close button (already exists, but ensuring it's complete) */
+.close-sidebar-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: var(--text-sec);
+    cursor: pointer;
+    transition: color 0.2s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-sidebar-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-main);
+}
+
+/* Sidebar login container (for consistency) */
+.sidebar-login-container {
+    margin-top: 8px;
+}
+
+/* Mobile cart link (consistent with sidebar-nav-item but with special styling) */
+.mobile-cart-link {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    gap: 16px;
+    background: rgba(0, 153, 255, 0.08);
+    /* Light blue background for cart */
+}
+
+.mobile-cart-link i {
+    width: 20px;
+    text-align: center;
+    color: var(--text-sec);
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.mobile-cart-link:hover,
+.mobile-cart-link:active {
+    background: rgba(0, 153, 255, 0.12);
+    color: var(--primary-blue);
+    transform: translateX(4px);
+}
+
+.mobile-cart-link:hover i {
+    color: var(--primary-blue);
+}
+
+/* Dark mode for mobile cart link */
+body.dark-mode .mobile-cart-link {
+    background: rgba(1, 232, 188, 0.1);
+    color: var(--text-inverse);
+}
+
+body.dark-mode .mobile-cart-link:hover {
+    background: rgba(1, 232, 188, 0.15);
+    color: var(--teal-accent);
+}
+
+body.dark-mode .mobile-cart-link:hover i {
+    color: var(--teal-accent);
+}
+
+/* Header profile (if keeping the unused element) */
+.header-profile {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 15px 0px 15px 4px;
+    cursor: pointer;
+    scale: 1.05;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+#navbar-avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #0099ff;
+}
+
+.header-profile .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+body.dark-mode .header-profile .user-name {
+    color: #fff;
+}
+.header-profile .user-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.2;
+}
+.header-profile .user-email {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.2;
+}
+
+/* Default brand state */
+.default-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+body.dark-mode .navbar-toggle {
+    color: #616161;
+}
+
+.hamburger{
+    display: none;
+}
+@media (max-width:799px){
+    .hamburger{
+        display: block;
+    }
+}
+
+/* --- MOBILE PILL NAVBAR INTEGRATION --- */
+@media (max-width: 768px) {
+
+  /* --- SEARCH BAR OVERLAY --- */
+  #mobilePillSearchBar {
+    position: fixed;
+    bottom: 90px;
+    /* Adjusted to be above navbar */
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: 85%;
+    background: rgb(39, 39, 39);
+    border-radius: 50px;
+    padding: 6px 6px 6px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 999;
+  }
+
+  #mobilePillSearchBar.active {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: all;
+  }
+
+  #mobilePillSearchBar input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 30px;
+    padding: 15px 0px 15px 10px;
+    background: transparent;
+  }
+
+  /* --- THE NAVBAR --- */
+  #mobilePillNavbar {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 50px;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center;
+    gap: 0px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    /* Higher priority */
+  }
+
+  #mobilePillNavbar .nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    padding: 0 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    color: #888;
+    overflow: hidden;
+  }
+
+  #mobilePillNavbar .nav-item ion-icon {
+    font-size: 22px;
+    min-width: 22px;
+    transition: color 0.3s;
+    color: #232323;
+  }
+
+  #mobilePillNavbar .nav-text {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    transition: all 0.4s ease;
+  }
+
+  #mobilePillNavbar .nav-item.active {
+    background-color: #232323;
+    color: #ffffff;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    padding: 22px 0px 22px 12px;
+  }
+
+  #mobilePillNavbar .nav-item.active ion-icon {
+    color: #ffffff;
+  }
+
+  #mobilePillNavbar .nav-item.active .nav-text {
+    max-width: 100px;
+    opacity: 1;
+    margin-left: 10px;
+  }
+}
+
+/* Hide on Desktop */
+@media (min-width: 769px) {
+
+  #mobilePillNavbar,
+  #mobilePillSearchBar {
+    display: none !important;
+  }
+}
+
+/* Centered Spinner in Buttons */
+.btn {
+    position: relative;
+}
+
+.btn .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.btn.loading .btn-text {
+    opacity: 0;
+}
+
+.btn.loading .spinner {
+    display: block;
+}
+</style>
 <body>
     <!-- Navbar -->
     <nav>
         <div class="navbar-container">
             <!-- Mobile Hamburger -->
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
+            
 
-            <a href="index.html" class="navbar-logo">
-                <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember Logo" style="height: 40px; width: auto;">
-            </a>
+            <a href="index.html" aria-label="Navigate to home page">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
+            style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
+        </div>
+      </a>
 
             <ul class="navbar">
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
@@ -60,11 +358,15 @@
                 <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
 
-            <div style="margin-left: auto; display: flex; align-items: center; gap: 10px;">
-                <button id="dark-mode-toggle" class="navbar-toggle">
-                    <i class="fas fa-moon"></i>
+        
+            <div class="threebtnswrapper" style="margin-left: auto;display: flex;align-items: center;gap: 5px;border: 1px solid;padding: 3px;border-radius: 30px;height: 52px;color: #828282;flex-wrap: wrap;align-content: center;">
+ 
+                <button id="dark-mode-toggle" class="navbar-toggle" style="margin: 0px;">
+                    <span style="position: relative;top: 2px;"><i class="fas fa-moon"></i></span>
                 </button>
-
+                <button class="hamburger" id="hamburger" style="padding: 5px;">
+                <i class="fas fa-bars"></i>
+                </button>
                 <button class="profile-icon-btn" id="profileIconBtn">
                     <img src="" alt="Profile" class="profile-icon-img" id="profileIconImg">
                     <i class="fas fa-user profile-icon-placeholder"></i>
@@ -85,13 +387,7 @@
                                     <span>Purchases & Reviews</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="profile-dropdown-item">
-                                    <i class="fa-regular fa-credit-card"></i>
-                                    <span>Subscription</span>
-                                    <span class="pro-badge">PRO</span>
-                                </a>
-                            </li>
+                            
                             <li>
                                 <a href="account.html" class="profile-dropdown-item">
                                     <i class="fa-solid fa-toggle-off"></i>
@@ -102,7 +398,7 @@
                         <div class="profile-dropdown-divider"></div>
                         <ul class="profile-dropdown-list">
                             <li>
-                                <a href="#" class="profile-dropdown-item">
+                                <a href="Contact.html" class="profile-dropdown-item">
                                     <i class="fa-regular fa-circle-question"></i>
                                     <span>Help center</span>
                                 </a>
@@ -120,84 +416,162 @@
         </div>
     </nav>
 
-    <!-- Mobile Sidebar (from index.html) -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="sidebar-header" id="sidebarHeader">
-            <div class="header-brand default-brand">
-                <div class="navbar-logo">
-                    <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
-                        style="width: 30px; height: auto;">
-                    <span>
-                        <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-                        <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
-                    </span>
-                </div>
-                <div class="user-info">
-                    <span class="user-name"></span>
-                    <span class="user-status"></span>
-                </div>
+    <!-- Authentication Prompt -->
+    <div id="auth-prompt" class="auth-prompt" style="display: none;">
+        <div class="auth-prompt-container">
+            <h1 class="auth-prompt-title">Don't have an account? Sign up or log in.</h1>
+            <div class="auth-prompt-buttons">
+                <a href="signup.html" class="btn btn-primary auth-btn">Sign Up</a>
+                <a href="login.html" class="btn btn-outline auth-btn">Log In</a>
             </div>
-            <button class="close-sidebar-btn" id="closeBtn">
-                <i class="fa-solid fa-times"></i>
-            </button>
-        </div>
-
-        <div class="sidebar-content">
-            <a href="index.html" class="sidebar-nav-item">
-                <i class="fa-solid fa-house"></i>
-                <span>Home</span>
-            </a>
-
-            <a href="account.html" class="sidebar-nav-item">
-                <i class="fa-solid fa-user"></i>
-                <span>Account Settings</span>
-            </a>
-
-            <div class="sidebar-collapsible" id="col-categories">
-                <button class="collapsible-trigger">
-                    <div style="display:flex; align-items:center;">
-                        <i class="fa-solid fa-blender trigger-icon"></i>
-                        <span>Categories</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-down chevron"></i>
-                </button>
-                <div class="collapsible-content">
-                    <a href="product2.html" class="sub-link">Washers & Dryers</a>
-                    <a href="product2.html" class="sub-link">Refrigerators</a>
-                    <a href="product2.html" class="sub-link">Microwaves</a>
-                    <a href="product2.html" class="sub-link">Air Conditioners</a>
-                    <a href="product2.html" class="sub-link">Dishwashers</a>
-                </div>
-            </div>
-
-            <a href="product2.html" class="sidebar-nav-item">
-                <i class="fa-solid fa-tags"></i>
-                <span>Products</span>
-            </a>
-
-            <a href="Contact.html" class="sidebar-nav-item">
-                <i class="fa-solid fa-envelope"></i>
-                <span>Contact Us</span>
-            </a>
-
-            <div id="sidebar-login-container">
-                <a href="login.html" class="sidebar-nav-item" id="sidebar-login-link">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    <span>Login</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="sidebar-footer" id="sidebarFooter">
-            <button id="mobile-theme-toggle" class="footer-btn">
-                <i class="fa-solid fa-moon"></i>
-                <span>Toggle Theme</span>
-            </button>
         </div>
     </div>
 
+     <!-- Mobile Sidebar Menu (Redesigned) -->
+  <div class="mobile-menu" id="mobileMenu">
+
+    <!-- 1. Header: Brand or User Profile -->
+    <div class="sidebar-header" id="sidebarHeader">
+      <!-- Default State: Brand Logo -->
+      <div class="header-brand default-brand" id="sidebarBrand">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
+            style="width: 30px; height: auto;">
+          <span>
+            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
+        </div>
+      </div>
+
+      <!-- User State (Logged In) -->
+      <div class="header-profile" id="sidebarProfileContainer">
+        <img src="assets/profilepreview.jpg" alt="Profile" id="navbar-avatar-img">
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">User Name</span>
+          <span class="user-email" id="sidebarUserEmail">email@example.com</span>
+        </div>
+        <i class='bx  bx-chevron-down'></i>
+      </div>
+
+      <!-- Close Button -->
+      <button class="close-btn" id="closeBtn" aria-label="Close menu" style="right: -30px;padding: inherit;display: flex;position: relative;border: none;">
+        <i class='bx  bx-caret-big-left'></i> 
+      </button>
+
+      <!-- Mobile Specific Profile Dropdown (Floating) -->
+      <div class="mobile-profile-dropdown" id="mobileProfileDropdown" style="display: none;">
+        <div class="mobile-dropdown-header">
+          <span class="user-name" id="mobileDropdownName">User Name</span>
+          <span class="user-email" id="mobileDropdownEmail">email@example.com</span>
+        </div>
+        <div class="mobile-dropdown-items">
+          <a href="profile.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-user"></i> Profile
+          </a>
+          <a href="account.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-solid fa-toggle-off"></i> Account Settings
+          </a>
+          <a href="purchases.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-comments"></i> Purchases & Reviews
+          </a>
+          <a href="Contact.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-circle-question"></i> Help Center
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Content: Navigation Links -->
+    <div class="sidebar-content">
+
+      <a href="index.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+
+      <!-- Collapsible: Categories -->
+      <div class="sidebar-collapsible" id="col-categories">
+        <button class="collapsible-trigger">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-solid fa-blender trigger-icon"></i>
+            <span>Categories</span>
+          </div>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="collapsible-content">
+          <a href="product2.html" class="sub-link">Washers & Dryers</a>
+          <a href="product2.html" class="sub-link">Refrigerators</a>
+          <a href="product2.html" class="sub-link">Microwaves</a>
+          <a href="product2.html" class="sub-link">Air Conditioners</a>
+          <a href="product2.html" class="sub-link">Dishwashers</a>
+          <a href="product2.html" class="sub-link">Cooktops</a>
+          <a href="product2.html" class="sub-link">Vacuums</a>
+        </div>
+      </div>
+
+      <!-- Collapsible: Brands -->
+      <div class="sidebar-collapsible" id="col-brands">
+        <button class="collapsible-trigger">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-solid fa-building trigger-icon"></i>
+            <span>Brands</span>
+          </div>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="collapsible-content">
+          <a href="Haier-productpage.html" class="sub-link">Haier</a>
+          <a href="samsung-productpage.html" class="sub-link">Samsung</a>
+          <a href="LG-productpage.html" class="sub-link">LG</a>
+          <a href="Whirlpool-productpage.html" class="sub-link">Whirlpool</a>
+          <a href="BOSCH-productpage.html" class="sub-link">Bosch</a>
+          <a href="Electrolux-productpage.html" class="sub-link">Electrolux</a>
+          <a href="Apple-productpage.html" class="sub-link">Apple</a>
+        </div>
+      </div>
+
+      <a href="product2.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-tags"></i>
+        <span>Products</span>
+      </a>
+
+      <a href="Contact.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Contact Us</span>
+      </a>
+
+      <!-- Dynamic Cart Link -->
+      <li>
+        <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+          <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        </a>
+      </li>
+
+      <!-- Login Link (Hidden if logged in) -->
+      <div id="sidebar-login-container">
+        <a href="login.html" class="sidebar-nav-item" id="sidebar-login-link">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Login</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 3. Footer: Settings / Logout -->
+    <div class="sidebar-footer" id="sidebarFooter">
+      <button id="mobile-theme-toggle" class="footer-btn">
+        <i class="fa-solid fa-moon"></i>
+        <span>Toggle Theme</span>
+      </button>
+
+      <!-- Logout will be injected here -->
+    </div>
+
+  </div>
+
+
     <!-- Main Content -->
-    <main class="account-settings-main">
+    <main class="account-settings-main" id="account-main-content">
         <div class="account-container">
             <h1 class="page-title">Account Settings</h1>
 
@@ -239,7 +613,7 @@
                             <div class="profile-pic-actions">
                                 <label for="profilePicInput" class="btn btn-primary">
                                     <span class="btn-text"><i class="bx bx-upload"></i> Upload Photo</span>
-                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                    <div class="spinner">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -257,7 +631,7 @@
                                 <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
                                 <button class="btn btn-outline" id="removeProfilePic">
                                     <span class="btn-text">Remove</span>
-                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                    <div class="spinner">
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -628,7 +1002,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="saveAccountBtn">
                                     <span class="btn-text"><i class="bx bx-save"></i> Save Changes</span>
-                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                    <div class="spinner" >
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -662,7 +1036,7 @@
                                     <button type="button" class="btn btn-primary" id="savePhoneBtn"
                                         style="white-space: nowrap;">
                                         <span class="btn-text"><i class="bx bx-save"></i> Save Number</span>
-                                        <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                        <div class="spinner" >
                                             <div class="spinner-blade"></div>
                                             <div class="spinner-blade"></div>
                                             <div class="spinner-blade"></div>
@@ -700,7 +1074,7 @@
                             <button type="button" class="btn btn-outline" id="exportDataBtn">
                                 <span class="btn-text"><i class="bx bx-download"></i> Request your data for
                                     download</span>
-                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                <div class="spinner" >
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -733,7 +1107,7 @@
                         <div class="form-actions" style="margin-top: 20px;">
                             <button type="button" class="btn btn-outline" id="saveFindabilityBtn">
                                 <span class="btn-text"><i class="bx bx-save"></i> Save findability settings</span>
-                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                <div class="spinner" >
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -798,7 +1172,7 @@
                         <div class="form-actions" style="margin-top: 20px;">
                             <button type="button" class="btn btn-primary" id="savePrivacyBtn">
                                 <span class="btn-text"><i class="bx bx-save"></i> Update privacy settings</span>
-                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                <div class="spinner">
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -837,7 +1211,7 @@
                             <h2>Your Delivery Addresses</h2>
                             <button class="btn btn-primary" id="addAddressBtn">
                                 <span class="btn-text"><i class="bx bx-plus"></i> Add New Address</span>
-                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                <div class="spinner" >
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -922,7 +1296,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="saveAddressBtn">
                                     <span class="btn-text"><i class="bx bx-save"></i> Save Address</span>
-                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                    <div class="spinner" >
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -952,7 +1326,7 @@
                             <h2>Payment Methods</h2>
                             <button class="btn btn-primary" id="addCardBtn">
                                 <span class="btn-text"><i class="bx bx-plus"></i> Add New Card</span>
-                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                <div class="spinner" >
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -1005,7 +1379,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="saveCardBtn">
                                     <span class="btn-text"><i class="bx bx-save"></i> Save Card</span>
-                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                    <div class="spinner" >
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -1051,7 +1425,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="changePasswordBtn">
                                     <span class="btn-text"><i class="bx bx-key"></i> Change Password</span>
-                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                    <div class="spinner" >
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -1091,7 +1465,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="changeEmailBtn">
                                     <span class="btn-text"><i class="bx bx-envelope"></i> Change Email</span>
-                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                    <div class="spinner" >
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -1126,7 +1500,7 @@
                         <div class="form-actions">
                             <button type="button" class="btn btn-outline danger" id="closeAccountBtn">
                                 <span class="btn-text"><i class="bx bx-error-circle"></i> Close Account</span>
-                                <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                <div class="spinner">
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
                                     <div class="spinner-blade"></div>
@@ -1260,7 +1634,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-primary" id="saveNotificationsBtn">
                                     <span class="btn-text"><i class="bx bx-save"></i> Save Settings</span>
-                                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                                    <div class="spinner" >
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
                                         <div class="spinner-blade"></div>
@@ -1284,57 +1658,114 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h4 class="footer-logo">Blue Ember</h4>
-                <p class="footer-tagline">Your trusted source for premium Store</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+    <!-- LOGOUT CONFIRMATION MODAL -->
+    <div class="modal" id="logoutModal">
+        <div class="modal-overlay logout-modal-overlay" id="logoutModalOverlay"></div>
+        <div class="modal-content logout-modal-content">
+            <div class="logout-modal-header">
+                <div class="logout-icon">
+                    <i class="fas fa-sign-out-alt"></i>
                 </div>
+                <h3>Confirm Logout</h3>
             </div>
-
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="brands.html">Brands</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+            <div class="logout-modal-body">
+                <p>Are you sure you want to log out? You'll need to sign in again to access your account.</p>
             </div>
-
-            <div class="footer-section">
-                <h4>Customer Service</h4>
-                <ul>
-                    <li><a href="#">Shipping Info</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Warranty</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <address>
-                    <a href="tel:+1234567890">+1 (234) 567-890</a><br>
-                    <a href="mailto:info@blueember.com">info@blueember.com</a>
-                </address>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2025 Blue Ember. All rights reserved.</p>
-            <div class="footer-legal">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+            <div class="logout-modal-actions">
+                <button type="button" class="btn btn-secondary logout-cancel-btn" id="logoutCancelBtn">Cancel</button>
+                <button type="button" class="btn btn-primary logout-confirm-btn" id="logoutConfirmBtn">
+                    <span class="btn-text">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Log Out
+                    </span>
+                    <div class="custom-spinner">
+                        <div class="spinner center">
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                        </div>
+                    </div>
+                </button>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- Brand Section -->
+      <div class="footer-section">
+        <div class="footer-logo"><a href="index.html">
+            <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
+              <SPAN>
+                <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+                <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+              </SPAN>
+            </div>
+          </a></div>
+        <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="terms and services.html">Terms & Services</a></li>
+          <li><a href="privacy policy.html">Privacy Policy</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+          <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+          <li><a href="About us .html">About Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="footer-section">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="product2.html">Toys</a></li>
+          <li><a href="product2.html">Supplyments</a></li>
+          <li><a href="product2.html">Beauty</a></li>
+          <li><a href="product2.html">HomeGoods</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>
+            <a>
+              <address>
+                <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
+                </p>
+                <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+                <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                  href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+              </address>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy policy.html">Privacy Policy</a> •
+        <a href="terms and services.html">Terms of Service</a> •
+      </div>
+    </div>
+  </footer>
+
 
     <!-- Custom Modal: Delete Account Confirmation -->
     <div class="custom-modal" id="deleteAccountModal" style="display: none;">
@@ -1353,7 +1784,7 @@
                 <button class="btn btn-primary" id="confirmDeleteBtn"
                     style="background: linear-gradient(90deg, #ef4444, #dc2626);">
                     <span class="btn-text">Close Account</span>
-                    <div class="spinner" style="display:none;justify-self: center;position: relative;/* scale: 1.9; */right: 60px;font-size: xx-large;margin-left: -20px;top: 15px;">
+                    <div class="spinner">
                         <div class="spinner-blade"></div>
                         <div class="spinner-blade"></div>
                         <div class="spinner-blade"></div>
@@ -1385,6 +1816,541 @@
             </div>
         </div>
     </div>
+  <!-- Search Bar Pop-up -->
+  <div class="search-overlay" id="mobilePillSearchBar">
+    <ion-icon name="search-outline" style="color:#666; font-size:20px;"></ion-icon>
+    <input type="text" placeholder="Search for products..." id="mobilePillSearchInput">
+  </div>
+
+
+  <!-- The Pill Navbar -->
+  <div class="navbar" id="mobilePillNavbar">
+    <abbr title="Home">
+      <div class="nav-item" data-target="home">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="nav-text"><a href="index.html">Home</a></span>
+      </div>
+    </abbr>
+    <abbr title="Search">
+      <div class="nav-item" data-target="search">
+        <ion-icon name="search-outline"></ion-icon>
+        <span class="nav-text"><a href="#">Search</a></span>
+      </div>
+    </abbr>
+
+    <abbr title="Signup">
+      <div class="nav-item" data-target="signup" id="Hide/UnhideSignupBtn" style="padding: 0px;">
+        <a href="login.html" style="padding: 0px;">
+          <li class="thebigthree-login/signup-btn">
+            <button class="button button-item" id="signupNavBtn">
+              <span class="button-bg">
+                <span class="button-bg-layers">
+                  <span class="button-bg-layer button-bg-layer-1 -purple"></span>
+                  <span class="button-bg-layer button-bg-layer-2 -turquoise"></span>
+                  <span class="button-bg-layer button-bg-layer-3 -yellow"></span>
+                </span>
+              </span>
+              <span class="button-inner">
+                <span class="button-inner-static">SignUp</span>
+                <span class="button-inner-hover" style="color: #ffffff;">SignUp</span>
+              </span>
+            </button>
+
+
+
+          </li>
+        </a>
+      </div>
+    </abbr>
+    </a>
+    <abbr title="Profile">
+      <div class="nav-item" data-target="user" id="Hide/UnhideUserIcon" style="display: none;">
+        <ion-icon name="person-outline"></ion-icon>
+        <span class="nav-text"><a href="profile.html">User</a></span>
+      </div>
+    </abbr>
+    <abbr title="Shop">
+      <div class="nav-item" data-target="shop">
+        <ion-icon name="storefront-outline"></ion-icon>
+        <span class="nav-text"><a href="product2.html">Shop</a></span>
+      </div>
+    </abbr>
+    <abbr title="Chat with us">
+      <div class="nav-item" data-target="chatbot" style="padding:22px;">
+        <button id="chat-bubble-btn" class="chat-bubble-btn" aria-label="Chat with us">
+          <ion-icon name="chatbubbles-outline"></ion-icon>
+        </button>
+      </div>
+    </abbr>
+  </div>
+
+
+  </div>
+
+  <abbr title="Chat with us">
+    <button id="chat-bubble-btn-two" class="chat-bubble-btn" aria-label="Chat with us">
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+    </button>
+
+
+    <div id="chat-window" class="chat-window">
+
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="header-brand">
+        <button class="icon-btn" id="emberSidebarToggle"><i class='bx bx-menu'></i></button>
+        <div class="header-brand">
+          <img src="https://ui-avatars.com/api/?name=C&background=ffffff&color=000&rounded=true"
+            style="width:24px; height:24px;">
+          <span class="header-title">Chatbase AI Agent</span>
+        </div>
+      </div>
+      <button class="icon-btn" id="emberMenuToggle"><i class='bx bx-dots-horizontal-rounded'></i></button>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <div id="emberDropdown" class="dropdown-menu">
+      <button class="menu-item" onclick="EmberCore.startNewChat()"><i class='bx bx-plus'></i> Start a new chat</button>
+      <button class="menu-item" onclick="EmberCore.endChat()"><i class='bx bx-x'></i> End chat</button>
+      <button class="menu-item" onclick="EmberCore.showRecentChats()"><i class='bx bx-history'></i> View recent
+        chats</button>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="emberSidebar" class="sidebar">
+      <h4 style="color:var(--text-main); margin-top:0;">Menu</h4>
+
+      <button class="menu-item" onclick="EmberCore.switchView('notifications')">
+        <i class='bx bx-bell'></i> Notifications
+        <span class="notification-badge" style="display:none"></span>
+      </button>
+
+      <button class="menu-item" onclick="EmberCore.switchView('settings')">
+        <i class='bx bx-cog'></i> Settings
+      </button>
+
+      <button class="menu-item" onclick="EmberCore.switchView('chat')">
+        <i class='bx bx-arrow-back'></i> Back to Chat
+      </button>
+    </div>
+
+    <!-- Drag & Drop Overlay -->
+    <div id="emberDropZone" class="drop-overlay">
+      <i class='bx bx-cloud-upload' style="font-size: 48px; color: var(--text-sub);"></i>
+      <h3 style="color: var(--text-main); margin: 10px 0;">Drop file to upload</h3>
+    </div>
+
+    <!-- VIEW: CHAT -->
+    <div id="view_chat" class="view-container active">
+
+      <div id="emberChatBody" class="chat-body">
+        <!-- Messages Injected Here -->
+      </div>
+
+      <!-- Footer Section -->
+      <div class="footer-wrapper">
+
+
+
+
+        <!-- Privacy Toast -->
+        <div id="privacyToast" class="privacy-toast">
+          <span>By chatting, you agree to our <u style="cursor:pointer">privacy policy</u>.</span>
+          <i class='bx bx-x' style="font-size:16px; cursor:pointer;"
+            onclick="this.parentElement.classList.add('closing')"></i>
+        </div>
+
+        <div class="preview-of-file-upload-before-send" id="preview-window-2A">
+          <p>Images Uploaded in Chat are Temporary & Deleted after Web reloads.</p>
+          <!-- Preview of File Upload Before Send, edit structure if something a miss -->
+        </div>
+        <!-- Emoji window moved to floating position outside chat -->
+
+        <!-- Input Card -->
+        <div class="input-card">
+          <div id="emberInput" class="chat-input" contenteditable="true" placeholder="Message..."></div>
+
+          <div class="input-actions">
+            <input type="file" id="emberFileInput" class="hidden" multiple onchange="EmberCore.handleFileUpload(this)">
+
+            <!-- Paperclip -->
+            <button class="action-btn" title="Attach File" onclick="document.getElementById('emberFileInput').click()">
+              <i class='bx bx-paperclip'></i>
+            </button>
+
+            <!-- Emojis -->
+            <button class="action-btn" id="emoji-trigger" title="Emojis">
+              <i class='bx bx-smile'></i>
+            </button>
+
+            <!-- Send -->
+            <button id="emberSendBtn" class="action-btn" style="color:var(--text-main);">
+              <i class='bx bx-send'></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: NOTIFICATIONS -->
+    <div id="view_notifications" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Notifications</h3>
+        <div class="list-item">
+          <span style="font-weight:600; font-size:14px;">System Update</span>
+          <span style="font-size:12px; color:var(--text-sub);">We have updated our privacy policy.</span>
+        </div>
+        <div class="list-item">
+          <span style="font-weight:600; font-size:14px;">New Feature</span>
+          <span style="font-size:12px; color:var(--text-sub);">Drag and drop file upload is now available!</span>
+        </div>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')">
+          <i class='bx bx-arrow-back'></i> Back
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW: SETTINGS -->
+    <div id="view_settings" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Settings</h3>
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; color:var(--text-main);">
+          <span>Dark Mode</span>
+          <input type="checkbox" id="darkModeToggle" onchange="EmberCore.toggleDarkMode(this.checked)">
+        </div>
+        <button class="menu-item" style="color:red" onclick="localStorage.clear(); location.reload();">
+          <i class='bx bx-trash'></i> Clear Data
+        </button>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')">
+          <i class='bx bx-arrow-back'></i> Back
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW: RECENT CHATS -->
+    <div id="view_recent" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Recent Chats</h3>
+        <div id="emberHistoryList" style="display:flex; flex-direction:column;"></div>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')">
+          <i class='bx bx-arrow-back'></i> Back
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Floating Draggable Emoji Window -->
+  <div id="emoji-window-2B" class="Emoji-container emoji-floating-window">
+    <div class="emoji-window-header">
+      <span class="emoji-window-title">Emojis</span>
+      <div class="emoji-drag-handle" title="Drag to move">
+        <i class='bx bx-apps'></i>
+      </div>
+      <button class="emoji-close-btn" title="Close">
+        <i class='bx bx-x'></i>
+      </button>
+    </div>
+    <div class="emoji-window-body">
+      <!-- Populated by JavaScript for extreme content & performance -->
+    </div>
+  </div>
+
+  <!-- Lightbox Modal for Image Gallery -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <span class="lightbox-close" onclick="event.stopPropagation(); EmberCore.closeLightbox()">
+      <i class='bx bx-x'></i>
+    </span>
+    <img id="lightbox-img" class="lightbox-content" src="" alt="">
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+  </div>
+
+  <!-- Report Modal -->
+  <div id="report-modal" class="report-modal">
+    <div class="report-modal-content" onclick="event.stopPropagation()">
+      <div class="report-modal-header">
+        <h3>Report</h3>
+        <button class="report-close-btn" onclick="event.stopPropagation(); EmberCore.closeReportModal()">
+          <i class='bx bx-x'></i>
+        </button>
+      </div>
+      <div class="report-modal-body">
+        <div class="report-options">
+          <div class="report-column">
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="threats">
+              <span>Threats & Harassment</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="false">
+              <span>False Statements</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="nsfw">
+              <span>NSFW</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="exploitation">
+              <span>Child Exploitation</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="terrorism">
+              <span>Terrorism & Extremism</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="drugs">
+              <span>Drug Transactions</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="impersonation">
+              <span>Impersonation</span>
+            </label>
+          </div>
+          <div class="report-column">
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="violence">
+              <span>Excessive Violence</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="hate">
+              <span>Hate Speech</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="harassment">
+              <span>Sexual Harassment</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="self-harm">
+              <span>Self Harm</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="illegal">
+              <span>Illegal Activities</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="privacy">
+              <span>Invading Privacy</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="spam">
+              <span>Commercial Spam</span>
+            </label>
+          </div>
+        </div>
+        <div class="report-details">
+          <label>Additional details</label>
+          <textarea id="report-details-input" placeholder="Describe the issue in further detail"></textarea>
+        </div>
+      </div>
+      <div class="report-modal-footer">
+        <button class="report-cancel-btn"
+          onclick="event.stopPropagation(); EmberCore.closeReportModal()">Cancel</button>
+        <button class="report-submit-btn" onclick="event.stopPropagation(); EmberCore.submitReport()">Submit</button>
+      </div>
+    </div>
+  </div>
+    <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const collapsibles = document.querySelectorAll('.sidebar-collapsible');
+    collapsibles.forEach(col => {
+        const btn = col.querySelector('.collapsible-trigger');
+        btn.addEventListener('click', () => {
+            // Close all other collapsibles
+            document.querySelectorAll('.sidebar-collapsible').forEach(other => {
+                if (other !== col) {
+                    other.classList.remove('open');
+                }
+            });
+            // Toggle current
+            col.classList.toggle('open');
+        });
+    });
+});
+
+
+
+
+        // Auth Integration
+        // Function to toggle user icon visibility
+        function toggleUserIcon(show) {
+            const icon = document.getElementById('Hide/UnhideUserIcon');
+            if (icon) {
+                icon.style.display = show ? 'flex' : 'none';
+            }
+        }
+
+        // Function to toggle signup button visibility
+        function toggleSignupBtn(show) {
+            const btn = document.getElementById('Hide/UnhideSignupBtn');
+            if (btn) {
+                btn.style.display = show ? 'flex' : 'none';
+            }
+        }
+
+        // Separate logout function
+        function performLogout() {
+            if (!window.DB) return;
+
+            // Use custom modal if available, otherwise fallback to native confirm
+            if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
+                window.LogoutModal.confirm(async () => {
+                    await window.DB.signOut();
+                    window.location.reload();
+                });
+            } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
+                window.showLogoutConfirmation(async () => {
+                    await window.DB.signOut();
+                    window.location.reload();
+                });
+            } else {
+                // Fallback to native confirm
+                if (confirm('Are you sure you want to logout?')) {
+                    window.DB.signOut().then(() => {
+                        window.location.reload();
+                    });
+                }
+            }
+        }
+
+        // Auth & Dropdown Logic
+        const initAuthUI = async () => {
+            if (!window.DB) return;
+
+            const { data: { user } } = await DB.getUser();
+
+            // Toggle user icon based on login status
+            toggleUserIcon(!!user);
+            toggleSignupBtn(!user);
+
+            // Toggle account content based on login status
+            const authPrompt = document.getElementById('auth-prompt');
+            const mainContent = document.getElementById('account-main-content');
+            if (user) {
+                // User is logged in - show main content, hide auth prompt
+                if (authPrompt) authPrompt.style.display = 'none';
+                if (mainContent) mainContent.style.display = 'block';
+
+                // Populate user information in form fields
+                const fullName = user.user_metadata?.full_name || '';
+                const email = user.email || '';
+                const firstName = fullName.split(' ')[0] || '';
+                const lastName = fullName.split(' ').slice(1).join(' ') || '';
+
+                // Populate form fields
+                const firstNameField = document.getElementById('firstName');
+                const lastNameField = document.getElementById('lastName');
+                const currentEmailField = document.getElementById('currentEmail');
+                const newEmailField = document.getElementById('newEmail');
+
+                if (firstNameField) firstNameField.value = firstName;
+                if (lastNameField) lastNameField.value = lastName;
+                if (currentEmailField) currentEmailField.value = email;
+                if (newEmailField) newEmailField.placeholder = email; // Keep placeholder for new email
+
+                // Show sidebar logout button
+                const sidebarLogoutBtn = document.getElementById('sidebar-logout-btn');
+                if (sidebarLogoutBtn) {
+                    sidebarLogoutBtn.style.display = 'flex';
+                    sidebarLogoutBtn.addEventListener('click', performLogout);
+                }
+
+            } else {
+                // User is not logged in - hide main content, show auth prompt
+                if (authPrompt) authPrompt.style.display = 'flex';
+                if (mainContent) mainContent.style.display = 'none';
+            }
+
+            if (user) {
+                const loginLink = document.querySelector('a[href="login.html"]');
+                if (loginLink && loginLink.parentElement) {
+                    const li = loginLink.parentElement;
+                    const name = user.user_metadata.full_name || 'User';
+                    const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+
+                    // Replace Login Link with Simple Dark Dropdown
+                    li.innerHTML = `
+
+                `;
+
+
+                    // Load Custom Profile Picture if exists
+                    const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+                    if (storedAvatar) {
+                        const avatarImg = li.querySelector('#navbar-avatar-img');
+                        if (avatarImg) avatarImg.src = storedAvatar;
+                    }
+
+                    // Logout Handler
+                    document.getElementById('nav-dropdown-logout').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        performLogout();
+                    });
+
+                    // Dropdown Toggle
+                    // Dropdown Toggle (Desktop)
+                    const trigger = li.querySelector('.nav-profile-trigger');
+                    const menu = li.querySelector('.nav-profile-menu');
+
+                    if (trigger && menu) {
+                        trigger.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            menu.classList.toggle('active');
+                        });
+
+                        document.addEventListener('click', (e) => {
+                            if (!li.contains(e.target)) {
+                                menu.classList.remove('active');
+                            }
+                        });
+                    }
+                }
+
+                // --- Mobile Sidebar Injection (Redesigned) ---
+                const sidebarHeader = document.querySelector('.sidebar-header');
+                const sidebarFooter = document.querySelector('.sidebar-footer');
+                const sidebarLoginLink = document.getElementById('sidebar-login-link');
+
+                if (sidebarHeader && sidebarFooter) {
+                    // 1. Update Header with User Info
+                    const name = user.user_metadata.full_name || 'User';
+                    const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+
+                    // Replace the "default-brand" part with User Profile
+                    const brandContainer = sidebarHeader.querySelector('.header-brand');
+                    if (brandContainer) {
+                        brandContainer.innerHTML = `
+                            <img src="${avatarUrl}" class="sidebar-avatar" alt="Profile" id="mobile-avatar-img">
+                            <div class="user-info">
+                                <span class="user-name">Hello, ${name}</span>
+                                <span class="user-status">Member</span>
+                            </div>
+                        `;
+                    }
+
+                    // 2. Hide "Login" Wrapper
+                    const loginWrapper = document.getElementById('sidebar-login-container');
+                    if (loginWrapper) loginWrapper.style.display = 'none';
+
+
+                    // Sync Custom Avatar
+                    const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+                    if (storedAvatar) {
+                        const mAvatar = sidebarHeader.querySelector('#mobile-avatar-img');
+                        if (mAvatar) mAvatar.src = storedAvatar;
+                    }
+                }
+            }
+        };
+
+        // Run Immediately or Wait
+        if (window.DB) {
+            initAuthUI();
+        } else {
+            document.addEventListener('dbReady', initAuthUI);
+        }
+    </script>
 
 </body>
 

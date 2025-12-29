@@ -125,13 +125,13 @@ class CartManager {
             <h4 class="cart-item-name">${item.name}</h4>
             <div class="cart-item-price">$${item.price.toFixed(2)}</div>
             <div class="cart-item-quantity">
-              <button class="quantity-btn minus" data-product-id="${item.id}">-</button>
+              <button class="quantity-btn minus" data-product-id="${item.id}"><i class='bx  bx-minus'></i></button>
               <span class="quantity">${item.quantity}</span>
-              <button class="quantity-btn plus" data-product-id="${item.id}">+</button>
+              <button class="quantity-btn plus" data-product-id="${item.id}"><i class='bx  bx-plus'></i></button>
             </div>
           </div>
-          <button class="cart-item-remove" data-product-id="${item.id}">
-            <i class="fas fa-trash"></i>
+          <button class="cart-item-remove" data-product-id="${item.id}" style="padding: 55px 14px;font-size: x-large;background: #ff000014;border: none;color: #ff0977;cursor: pointer;border-radius: 12px;">
+            <i class='bx  bx-trash-alt'></i>
           </button>
         </div>
       `;

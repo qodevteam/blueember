@@ -97,42 +97,207 @@ class CheckoutManager {
   }
 
   async loadSavedAddresses() {
-    if (!window.DB) return;
-    const { data: { user } } = await DB.getUser();
+    console.log('🔍 [Checkout] loadSavedAddresses called');
+    // Use same scoping logic as account-settings.js
+    let SCOPED_SUFFIX = '';
+    let userData = null;
 
-    if (user) {
-      const addresses = JSON.parse(localStorage.getItem('be_addresses_' + user.id) || '[]');
-      const formContainer = document.getElementById('shipping-form');
+    try {
+      if (window.DB) {
+        console.log('✅ [Checkout] window.DB exists, fetching user...');
+        const { data: { user } } = await window.DB.getUser();
+        console.log('👤 [Checkout] User data:', user);
+        if (user?.id) {
+          SCOPED_SUFFIX = '_' + user.id;
+          userData = user;
+          console.log('✅ [Checkout] User ID found:', user.id, 'Suffix:', SCOPED_SUFFIX);
+        } else {
+          console.warn('⚠️ [Checkout] No user.id found in DB.getUser()');
+        }
+      } else {
+        console.log('⚠️ [Checkout] window.DB not available, using be_current_user');
+        const u = JSON.parse(localStorage.getItem('be_current_user') || '{}');
+        console.log('👤 [Checkout] Current user from localStorage:', u);
+        if (u.id) {
+          SCOPED_SUFFIX = '_' + u.id;
+          userData = u;
+          console.log('✅ [Checkout] User ID found:', u.id, 'Suffix:', SCOPED_SUFFIX);
+        } else {
+          console.warn('⚠️ [Checkout] No user.id in be_current_user');
+        }
+      }
+    } catch (e) {
+      console.error('❌ [Checkout] Failed to init user scope for addresses:', e);
+    }
 
-      if (addresses.length > 0 && formContainer) {
-        // Check if selector already exists
-        if (document.getElementById('saved-addr-select')) return;
+    console.log('📞 [Checkout] Calling autoFillContactInfo with suffix:', SCOPED_SUFFIX);
+    // Auto-fill contact information from user data
+    this.autoFillContactInfo(SCOPED_SUFFIX, userData);
 
-        const savedDiv = document.createElement('div');
-        savedDiv.className = 'saved-address-selector';
-        savedDiv.style.marginBottom = '20px';
-        savedDiv.innerHTML = `
-                  <label style="display:block; margin-bottom:10px; font-weight:600;">Use Saved Address</label>
-                  <select id="saved-addr-select" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; background: white;">
-                      <option value="">-- Select --</option>
-                      ${addresses.map((addr, idx) => `<option value="${idx}">${addr.title}: ${addr.street}</option>`).join('')}
-                  </select>
-              `;
+    console.log('📍 [Checkout] Calling loadAddressesWithScope with suffix:', SCOPED_SUFFIX);
+    // Load and display addresses
+    this.loadAddressesWithScope(SCOPED_SUFFIX);
+  }
 
-        // Insert before the first input group
-        const firstInput = formContainer.querySelector('.form-group') || formContainer.firstChild;
-        formContainer.insertBefore(savedDiv, firstInput);
+  autoFillContactInfo(suffix, userData) {
+    // Load account data from localStorage
+    const accountData = JSON.parse(localStorage.getItem('be_account_data' + suffix) || '{}');
+    const phoneNumber = localStorage.getItem('be_phone_number' + suffix) || '';
 
-        document.getElementById('saved-addr-select').addEventListener('change', (e) => {
-          const idx = e.target.value;
-          if (idx !== '') {
-            const addr = addresses[idx];
-            if (document.getElementById('address')) document.getElementById('address').value = addr.street;
-            if (document.getElementById('city')) document.getElementById('city').value = addr.city;
-            if (document.getElementById('state')) document.getElementById('state').value = addr.state;
-            if (document.getElementById('zip')) document.getElementById('zip').value = addr.zip;
-          }
+    // Auto-fill Full Name
+    const fullNameField = document.getElementById('fullName');
+    if (fullNameField && accountData.firstName && accountData.lastName) {
+      fullNameField.value = `${accountData.firstName} ${accountData.lastName}`;
+    }
+
+    // Auto-fill Email
+    const emailField = document.getElementById('email');
+    if (emailField && userData?.email) {
+      emailField.value = userData.email;
+    }
+
+    // Auto-fill Phone Number
+    const phoneField = document.getElementById('phone');
+    if (phoneField && phoneNumber) {
+      phoneField.value = phoneNumber;
+    }
+  }
+
+  loadAddressesWithScope(suffix) {
+    console.log('🏠 [Checkout] loadAddressesWithScope called with suffix:', suffix);
+    const storageKey = 'be_addresses' + suffix;
+    console.log('🔑 [Checkout] Looking for addresses in localStorage key:', storageKey);
+
+    const addresses = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    console.log('📦 [Checkout] Addresses found:', addresses.length, addresses);
+
+    const sidebar = document.querySelector('.col-lg-4');
+    if (!sidebar) {
+      console.error('❌ [Checkout] Sidebar (.col-lg-4) not found!');
+      return;
+    }
+    console.log('✅ [Checkout] Sidebar element found');
+
+    // Remove existing display if present
+    const existing = document.querySelector('.saved-addresses-display');
+    if (existing) {
+      console.log('🗑️ [Checkout] Removing existing address display');
+      existing.remove();
+    }
+
+    if (addresses.length === 0) {
+      console.log('📭 [Checkout] No addresses found - showing "create address" message');
+      // Show "No addresses" message with redirect button
+      const noAddressDiv = document.createElement('div');
+      noAddressDiv.className = 'saved-addresses-display checkout-section';
+      noAddressDiv.style.cssText = 'margin-top: 2rem; text-align: center; padding: 2rem 1.5rem;';
+      noAddressDiv.innerHTML = `
+        <div style="color:#64748b; margin-bottom: 1.5rem;">
+          <i class="fas fa-map-marker-alt" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+          <p style="font-size: 1rem; margin-bottom: 0.5rem;">There are no saved addresses</p>
+          <p style="font-size: 0.9rem;">Want to create one?</p>
+        </div>
+        <a href="account.html?tab=addresses" class="btn btn-primary" style="padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+          <i class="fas fa-plus"></i> Create Address
+        </a>
+      `;
+
+      // Insert after the order-summary
+      const orderSummary = sidebar.querySelector('.order-summary');
+      if (orderSummary) {
+        orderSummary.insertAdjacentElement('afterend', noAddressDiv);
+      } else {
+        sidebar.appendChild(noAddressDiv);
+      }
+    } else {
+      console.log('✅ [Checkout] Addresses exist - displaying', addresses.length, 'address(es)');
+      // Display saved addresses
+      const addressesDiv = document.createElement('div');
+      addressesDiv.className = 'saved-addresses-display checkout-section';
+      addressesDiv.style.marginTop = '2rem';
+      addressesDiv.innerHTML = `
+        <h5 style="margin-bottom:15px; color:#1e293b; font-weight: 700;">Your Saved Addresses</h5>
+        <div class="addresses-list" style="display:flex; flex-direction:column; gap:12px;">
+          ${addresses.map((addr, idx) => `
+            <div class="address-card" style="border:1px solid #e2e8f0; border-radius:12px; padding:15px; background:#f8fafc; transition: all 0.2s;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+                <span style="font-weight:600; color:#1e293b; font-size: 15px;">${addr.label || 'Saved Address'}</span>
+                <button class="btn btn-sm use-addr-btn" data-idx="${idx}" 
+                  style="font-size:13px; padding: 6px 16px; background: #007bff; color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.2s;">
+                  Select
+                </button>
+              </div>
+              <div style="color:#64748b; font-size:13px; line-height: 1.6;">
+                ${addr.street || ''}<br>
+                ${addr.city || ''}${addr.state ? ', ' + addr.state : ''}${addr.zip ? ' ' + addr.zip : ''}<br>
+                ${addr.country || ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      // Insert after the order-summary
+      const orderSummary = sidebar.querySelector('.order-summary');
+      if (orderSummary) {
+        orderSummary.insertAdjacentElement('afterend', addressesDiv);
+      } else {
+        sidebar.appendChild(addressesDiv);
+      }
+
+      // Add CSS for hover effects
+      const style = document.createElement('style');
+      style.textContent = `
+        .address-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+          border-color: #007bff !important;
+        }
+        .use-addr-btn:hover {
+          background: #0069d9 !important;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Add event listeners to "Select" buttons
+      addressesDiv.querySelectorAll('.use-addr-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = e.target.getAttribute('data-idx');
+          const addr = addresses[idx];
+
+          // Fill the shipping address fields
+          if (document.getElementById('address')) document.getElementById('address').value = addr.street;
+          if (document.getElementById('city')) document.getElementById('city').value = addr.city;
+          if (document.getElementById('state')) document.getElementById('state').value = addr.state;
+          if (document.getElementById('zip')) document.getElementById('zip').value = addr.zip;
+
+          // Show success notification
+          showNotification('Address selected successfully!', 'success');
+
+          // Highlight selected address temporarily
+          const allCards = addressesDiv.querySelectorAll('.address-card');
+          allCards.forEach(card => {
+            card.style.border = '1px solid #e2e8f0';
+          });
+          e.target.closest('.address-card').style.border = '2px solid #007bff';
         });
+      });
+
+      // Pre-fill with first address by default
+      if (addresses.length > 0) {
+        const firstAddr = addresses[0];
+        if (document.getElementById('address')) document.getElementById('address').value = firstAddr.street;
+        if (document.getElementById('city')) document.getElementById('city').value = firstAddr.city;
+        if (document.getElementById('state')) document.getElementById('state').value = firstAddr.state;
+        if (document.getElementById('zip')) document.getElementById('zip').value = firstAddr.zip;
+
+        // Highlight first address as selected
+        setTimeout(() => {
+          const firstCard = addressesDiv.querySelector('.address-card');
+          if (firstCard) firstCard.style.border = '2px solid #007bff';
+        }, 100);
       }
     }
   }
@@ -322,6 +487,17 @@ class CheckoutManager {
     // Capture Order Data BEFORE clearing cart
     const orderData = this.createOrderFromCart();
     this.saveOrder(orderData);
+
+    // Initialize Order Tracking & Notifications
+    if (window.OrderManager) {
+      // Pass full orderData to maintain shipping/payment info if OrderManager supports it, 
+      // otherwise it uses items and total. 
+      // We will stick to the requested signature but pass the object as a third arg if we tweak OrderManager, 
+      // or just rely on items/total as requested.
+      // For now, sticking strictly to prompt: "Expose OrderManager.createOrder(items, total)"
+      window.OrderManager.createOrder(orderData.items, orderData.total, orderData);
+    }
+
     this.lastOrder = orderData; // Store for confirmation view
 
     // Process the order

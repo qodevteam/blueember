@@ -11,7 +11,6 @@
   <link href="mobile-sidebar.css" rel="stylesheet">
   <script src="js/finisher-header.es5.min.js"></script>
   <link rel="stylesheet" href="product.css">
-    <link rel="stylesheet" href="product.css">
     <script src="js/cart.js" defer></script>
     <script src="js/cart-manager.js" defer></script>
     <script src="js/navigation.js" defer></script>
@@ -352,11 +351,6 @@
       font-weight: bold;
       color: #1e293b;
       gap: 0px;
-    }
-
-    .split-button-content i {
-      color: #8f8e8e;
-      font-size: 13px;
     }
 
     .split-button-icon {
@@ -1431,20 +1425,16 @@
    .split-button-content {
        display: flex;
        align-items: center;
-       padding: 12px 12px 12px 20px;
+       padding: 10px 0px 10px 6px;
        flex-grow: 1;
        font-weight: bold;
        color: #1e293b;
-       gap: 10px;
+       gap: 0px;
    }
 
-   .split-button-content i {
-       color: #334155;
-       font-size: 16px;
-   }
 
    .split-button-icon {
-       padding: 12px 20px 12px 12px;
+       padding: 5px;
        display: flex;
        align-items: center;
        justify-content: center;
@@ -2079,15 +2069,38 @@
 
    #main-nav-link {
      background-color: transparent !important;
-     padding: 0px;
+     padding: 3px !important;
    }
 
    .mobnav a{
     padding: 20px;
    }
 
-  }
+   .close-btn{
+    background:#fafcfe !important;
+   }
+   body.dark-mode .close-btn{
+    background: #1e1e1e !important;
+    color: whitesmoke;
+   }
+  
+.mobnav{
+  display: none;
+}
+  
+    /* Hide on Desktop */
+    @media (min-width: 769px) {
 
+      #mobilePillNavbar,
+      .mobnav,
+      #mobilePillSearchBar {
+        display: none !important;
+      }
+    }
+
+
+
+}
 </style>
 <body>
    <nav>
@@ -2123,10 +2136,10 @@
         </div>
       <!-- Main navigation menu -->
       <ul class="navbar">
-                 <li class="mobile-dropdown-item">
+                 <li class="mobile-dropdown-item" id="main-nav-link">
                     <div class="split-button single-toggle-action">
                         <div class="split-button-content">
-                            <i class="fa-solid fa-blender"></i>
+                            <i class='bx  bx-menu'></i>
                             Categories
                         </div>
                         <div class="split-button-icon">
@@ -2143,7 +2156,7 @@
                         <li><a href="product2.html">Vacuum Cleaners</a></li>
                     </ul>
                 </li>
-        <li class="mobile-dropdown-item">
+        <li class="mobile-dropdown-item" id="main-nav-link">
       <div class="split-button single-toggle-action">
         <div class="split-button-content">
           <i class="fa-solid fa-building"></i>
@@ -2195,13 +2208,7 @@
                   <span>Purchases & Reviews</span>
                 </a>
               </li>
-              <li>
-                <a href="#" class="profile-dropdown-item">
-                  <i class="fa-regular fa-credit-card"></i>
-                  <span>Subscription</span>
-                  <span class="pro-badge">PRO</span>
-                </a>
-              </li>
+             
               <li>
                 <a href="account.html" class="profile-dropdown-item">
                   <i class="fa-solid fa-toggle-off"></i>
@@ -2358,8 +2365,8 @@
       </div>
 
       <!-- Close Button -->
-      <button class="close-btn" id="closeBtn" aria-label="Close menu">
-        <i class="fa-solid fa-xmark"></i>
+      <button class="close-btn" id="closeBtn" aria-label="Close menu" style="right: -35px;padding: inherit;display: flex;">
+        <i class='bx  bx-caret-big-left'></i> 
       </button>
 
 
@@ -2394,7 +2401,7 @@
         <span>Home</span>
       </a>
 
-      <!-- Collapsible: Categories -->
+     <!-- Collapsible: Categories -->
       <div class="sidebar-collapsible" id="col-categories">
         <button class="collapsible-trigger">
           <div style="display:flex; align-items:center;">
@@ -2514,77 +2521,73 @@
 
 
 
-    <p class="privacy-note">We respect your privacy. Unsubscribe anytime. Read our <a href="privacy policy.html"
-        style="color: #040404;text-decoration:underline">Privacy Policy</a></p>
-  </div>
-</section>
-</div>
 
+ <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- Brand Section -->
+      <div class="footer-section">
+        <div class="footer-logo"><a href="index.html">
+            <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
+              <SPAN>
+                <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+                <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+              </SPAN>
+            </div>
+          </a></div>
+        <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
+      </div>
 
-                    <footer class="site-footer">
-  <div class="footer-container">
-    <!-- Brand Section -->
-    <div class="footer-section">
-       <div class="footer-logo"><a href="index.html"><div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-           <SPAN>
-             <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-             <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-           </SPAN>
-         </div></a></div>
-      <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
-      <div class="social-icons">
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook" style="color:rgb(0, 119, 255) !important"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:rgb(255, 0, 200) !important"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fa-brands fa-square-x-twitter" style="color:rgb(19, 0, 5) !important"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fa-brands fa-square-youtube" style="color:rgb(255, 0, 85) !important"></i></a>
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="terms and services.html">Terms & Services</a></li>
+          <li><a href="privacy policy.html">Privacy Policy</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+          <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+          <li><a href="About us .html">About Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="footer-section">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="product2.html">Toys</a></li>
+          <li><a href="product2.html">Supplyments</a></li>
+          <li><a href="product2.html">Beauty</a></li>
+          <li><a href="product2.html">HomeGoods</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>
+            <a>
+              <address>
+                <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
+                </p>
+                <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
+                <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                  href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+              </address>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <!-- Quick Links -->
-    <div class="footer-section">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="terms and services.html">Terms & Services</a></li>
-        <li><a href="privacy policy.html">Privacy Policy</a></li>
-        <li><a href="Contact.html">Contact</a></li>
-        <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
-        <li><a href="About us .html">About Us</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy policy.html">Privacy Policy</a> •
+        <a href="terms and services.html">Terms of Service</a> •
+      </div>
     </div>
-
-    <!-- Categories -->
-    <div class="footer-section">
-          <h4>Appliance Types</h4>
-          <ul>
-            <li><a href="product2.html">Washers & Dryers</a></li>
-            <li><a href="product2.html">Refrigerators</a></li>
-            <li><a href="product2.html">Microwaves</a></li>
-            <li><a href="product2.html">Air Conditioners</a></li>
-            <li><a href="product2.html">Dishwashers</a></li>
-          </ul>
-        </div>
-
-    <!-- Contact Info -->
-    <div class="footer-section">
-      <h4>Contact Us</h4>
-      <ul>
-        <li>
-      <a><address>
-        <p><a href="https://maps.app.goo.gl/UQPLaS7wZw73vXbH9">2260 118th Avenue North, Saint Petersburg, FL 33716, United States</a></p>
-          <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
-          <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a href="mailto:info@blueember.com">info@blueember.com</a>
-    </address></a></li></ul>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
-    <div class="footer-legal">
-      <a href="privacy policy.html">Privacy Policy</a> •
-      <a href="terms and services.html">Terms of Service</a> •
-    </div>
-  </div>
-</footer>
+  </footer>
 
 
 
@@ -2593,29 +2596,32 @@
 <link href="chatbot.css" rel="stylesheet">
 
 
-  <!-- Search Bar Pop-up -->
-    <div class="search-overlay" id="mobilePillSearchBar">
-      <ion-icon name="search-outline" style="color:#666; font-size:20px;"></ion-icon>
-      <input type="text" placeholder="Search for products..." id="mobilePillSearchInput">
-    </div>
+   <!-- Search Bar Pop-up -->
+  <div class="search-overlay" id="mobilePillSearchBar">
+    <ion-icon name="search-outline" style="color:#666; font-size:20px;"></ion-icon>
+    <input type="text" placeholder="Search for products..." id="mobilePillSearchInput">
+  </div>
 
 
-    <!-- The Pill Navbar -->
-    <div class="mobnav" id="mobilePillNavbar">
-      <abbr title="Home"><div class="nav-item" data-target="home">
+  <!-- The Pill Navbar -->
+  <div class="mobnav" id="mobilePillNavbar">
+    <abbr title="Home">
+      <div class="nav-item" data-target="home">
         <ion-icon name="home-outline"></ion-icon>
         <span class="nav-text"><a href="index.html">Home</a></span>
       </div>
-      </abbr>
-      <abbr title="Search"><div class="nav-item" data-target="search">
+    </abbr>
+    <abbr title="Search">
+      <div class="nav-item" data-target="search">
         <ion-icon name="search-outline"></ion-icon>
         <span class="nav-text"><a href="#">Search</a></span>
       </div>
-      </abbr>
-      
-      <abbr title="Signup"><div class="nav-item" data-target="signup" id="Hide/UnhideSignupBtn" style="padding: 0px;">
+    </abbr>
+
+    <abbr title="Signup">
+      <div class="nav-item" data-target="signup" id="Hide/UnhideSignupBtn" style="padding: 0px;">
         <a href="login.html" style="padding: 0px;">
-        <li class="thebigthree-login/signup-btn">
+          <li class="thebigthree-login/signup-btn">
             <button class="button button-item" id="signupNavBtn">
               <span class="button-bg">
                 <span class="button-bg-layers">
@@ -2633,69 +2639,330 @@
 
 
           </li>
-          </a>
+        </a>
       </div>
-      </abbr>
-      </a>
-      <abbr title="Profile"><div class="nav-item" data-target="user" id="Hide/UnhideUserIcon" style="display: none;">
+    </abbr>
+    </a>
+    <abbr title="Profile">
+      <div class="nav-item" data-target="user" id="Hide/UnhideUserIcon" style="display: none;">
         <ion-icon name="person-outline"></ion-icon>
         <span class="nav-text"><a href="profile.html">User</a></span>
       </div>
-      </abbr>
-      <abbr title="Shop"><div class="nav-item" data-target="shop">
+    </abbr>
+    <abbr title="Shop">
+      <div class="nav-item" data-target="shop">
         <ion-icon name="storefront-outline"></ion-icon>
         <span class="nav-text"><a href="product2.html">Shop</a></span>
       </div>
-      </abbr>
-      <abbr title="Chat with us"><div class="nav-item" data-target="chatbot" style="padding:22px;">
+    </abbr>
+    <abbr title="Chat with us">
+      <div class="nav-item" data-target="chatbot" style="padding:22px;">
         <button id="chat-bubble-btn" class="chat-bubble-btn" aria-label="Chat with us">
+          <ion-icon name="chatbubbles-outline"></ion-icon>
+        </button>
+      </div>
+    </abbr>
+  </div>
+
+
+  </div>
+
+  <abbr title="Chat with us">
+    <button id="chat-bubble-btn-two" class="chat-bubble-btn" aria-label="Chat with us">
       <ion-icon name="chatbubbles-outline"></ion-icon>
     </button>
-    </div>
-      </abbr>
-    </div>
+  </abbr>
+  <div id="chat-window" class="chat-window">
 
-  <abbr title="Chat with us"><button id="chat-bubble-btn-two" class="chat-bubble-btn" aria-label="Chat with us">
-    <ion-icon name="chatbubbles-outline"></ion-icon>
-  </button>
-</abbr>
-<div id="chat-window" class="chat-window">
-  <div class="chat-header">
-    <div class="chat-header-info">
-      <div class="chat-avatar">
-        <i class="fa-solid fa-robot"></i>
-      </div>
-      <div class="chat-title">
-        <h4>Ember AI</h4>
-        <span>Online</span>
-      </div>
-    </div>
-
-    <button id="chat-close-btn" class="chat-close-btn" aria-label="Close chat">
-      <i class="fa-solid fa-angle-down"></i>
-    </button>
-  </div>
-  <div id="chat-body" class="chat-body">
-    <div class="message bot">
-      Hello! 👋 How can I assist you today?
-    </div>
-  </div>
-  <div class="chat-footer">
-    <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." aria-label="Type message">
-    <button id="chat-send-btn" class="chat-send-btn" aria-label="Send message">
-      <i class="fa-solid fa-paper-plane"></i>
-    </button>
-  </div>
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="header-brand">
+        <button class="icon-btn" id="emberSidebarToggle"><i class='bx bx-menu'></i></button>
+        <div class="header-brand">
+          <!-- From Uiverse.io by dexter-st --> 
+<div class="loader-wrapper-chatbot-avatar">
+<span STYLE="FONT-FAMILY:'FontAwesome';z-index:1">E</span>
+  <div class="loader-chatbot-avatar"></div>
 </div>
 
+          <span class="header-title">Chatbase AI Agent</span>
+        </div>
+      </div>
+      <button class="icon-btn" id="emberMenuToggle"><i class='bx bx-dots-horizontal-rounded'></i></button>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <div id="emberDropdown" class="dropdown-menu">
+      <button class="menu-item" onclick="EmberCore.startNewChat()"><i class='bx bx-plus'></i> Start a new chat</button>
+      <button class="menu-item" onclick="EmberCore.endChat()"><i class='bx bx-x'></i> End chat</button>
+      <button class="menu-item" onclick="EmberCore.showRecentChats()"><i class='bx bx-history'></i> View recent
+        chats</button>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="emberSidebar" class="sidebar">
+      <h4 style="color:var(--text-main); margin-top:0;">Menu</h4>
+
+      <button class="menu-item" onclick="EmberCore.switchView('notifications')">
+        <i class='bx bx-bell'></i> Notifications
+        <span class="notification-badge" style="display:none"></span>
+      </button>
+
+      <button class="menu-item" onclick="EmberCore.switchView('settings')">
+        <i class='bx bx-cog'></i> Settings
+      </button>
+
+      <button class="menu-item" onclick="EmberCore.switchView('chat')">
+        <i class='bx  bx-arrow-s-left'></i> Back to Chat
+      </button>
+    </div>
+
+    <!-- Drag & Drop Overlay -->
+    <div id="emberDropZone" class="drop-overlay">
+      <i class='bx bx-cloud-upload' style="font-size: 48px; color: var(--text-sub);"></i>
+      <h3 style="color: var(--text-main); margin: 10px 0;">Drop file to upload</h3>
+    </div>
+
+    <!-- VIEW: CHAT -->
+    <div id="view_chat" class="view-container active">
+
+      <div id="emberChatBody" class="chat-body">
+        <!-- Messages Injected Here -->
+      </div>
+
+      <!-- Footer Section -->
+      <div class="footer-wrapper">
+
+
+
+
+        <!-- Privacy Toast -->
+        <div id="privacyToast" class="privacy-toast">
+          <span>By chatting, you agree to our <u style="cursor:pointer">privacy policy</u>.</span>
+          <i class='bx bx-x' style="font-size:16px; cursor:pointer;"
+            onclick="this.parentElement.classList.add('closing')"></i>
+        </div>
+
+        <div class="preview-of-file-upload-before-send" id="preview-window-2A">
+          <p>Images Uploaded in Chat are Temporary & Deleted after Web reloads.</p>
+          <!-- Preview of File Upload Before Send, edit structure if something a miss -->
+        </div>
+        <!-- Emoji window moved to floating position outside chat -->
+
+        <!-- Input Card -->
+        <div class="input-card">
+          <div id="emberInput" class="chat-input" contenteditable="true" placeholder="Message..."></div>
+
+          <div class="input-actions">
+            <input type="file" id="emberFileInput" class="hidden" multiple onchange="EmberCore.handleFileUpload(this)">
+
+            <!-- Paperclip -->
+            <button class="action-btn" title="Attach File" onclick="document.getElementById('emberFileInput').click()">
+              <i class='bx bx-paperclip'></i>
+            </button>
+
+            <!-- Emojis -->
+            <button class="action-btn" id="emoji-trigger" title="Emojis">
+              <i class='bx bx-smile'></i>
+            </button>
+
+            <!-- Send -->
+            <button id="emberSendBtn" class="action-btn" style="color:var(--text-main);">
+              <i class='bx bx-send'></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: NOTIFICATIONS -->
+    <div id="view_notifications" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Notifications</h3>
+        <div class="list-item">
+          <span style="font-weight:600; font-size:14px;">System Update</span>
+          <span style="font-size:12px; color:var(--text-sub);">We have updated our privacy policy.</span>
+        </div>
+        <div class="list-item">
+          <span style="font-weight:600; font-size:14px;">New Feature</span>
+          <span style="font-size:12px; color:var(--text-sub);">Drag and drop file upload is now available!</span>
+        </div>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')">
+          <i class='bx  bx-arrow-s-left'></i> Back
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW: SETTINGS -->
+    <div id="view_settings" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Settings</h3>
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; color:var(--text-main);">
+          <span>Dark Mode</span>
+          <input type="checkbox" id="darkModeToggle" onchange="EmberCore.toggleDarkMode(this.checked)">
+        </div>
+        <button class="menu-item" style="color:red" onclick="localStorage.clear(); location.reload();">
+          <i class='bx bx-trash'></i> Clear Data
+        </button>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')">
+          <i class='bx  bx-arrow-s-left'></i> Back
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW: RECENT CHATS -->
+    <div id="view_recent" class="view-container">
+      <div class="list-view-content">
+        <h3 class="list-header">Recent Chats</h3>
+        <div id="emberHistoryList" style="display:flex; flex-direction:column;"></div>
+        <button class="menu-item" onclick="EmberCore.switchView('chat')" >
+          <i class='bx  bx-arrow-s-left'></i> Back
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Floating Draggable Emoji Window -->
+  <div id="emoji-window-2B" class="Emoji-container emoji-floating-window">
+    <div class="emoji-window-header">
+      <span class="emoji-window-title">Emojis</span>
+      <div class="emoji-drag-handle" title="Drag to move">
+        <i class='bx bx-apps'></i>
+      </div>
+      <button class="emoji-close-btn" title="Close">
+        <i class='bx bx-x'></i>
+      </button>
+    </div>
+    <div class="emoji-window-body">
+      <!-- Populated by JavaScript for extreme content & performance -->
+    </div>
+  </div>
+
+  <!-- Lightbox Modal for Image Gallery -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <span class="lightbox-close" onclick="event.stopPropagation(); EmberCore.closeLightbox()">
+      <i class='bx bx-x'></i>
+    </span>
+    <img id="lightbox-img" class="lightbox-content" src="" alt="">
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+  </div>
+
+  <!-- Report Modal -->
+  <div id="report-modal" class="report-modal">
+    <div class="report-modal-content" onclick="event.stopPropagation()">
+      <div class="report-modal-header">
+        <h3>Report</h3>
+        <button class="report-close-btn" onclick="event.stopPropagation(); EmberCore.closeReportModal()">
+          <i class='bx bx-x'></i>
+        </button>
+      </div>
+      <div class="report-modal-body">
+        <div class="report-options">
+          <div class="report-column">
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="threats">
+              <span>Threats & Harassment</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="false">
+              <span>False Statements</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="nsfw">
+              <span>NSFW</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="exploitation">
+              <span>Child Exploitation</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="terrorism">
+              <span>Terrorism & Extremism</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="drugs">
+              <span>Drug Transactions</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="impersonation">
+              <span>Impersonation</span>
+            </label>
+          </div>
+          <div class="report-column">
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="violence">
+              <span>Excessive Violence</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="hate">
+              <span>Hate Speech</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="harassment">
+              <span>Sexual Harassment</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="self-harm">
+              <span>Self Harm</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="illegal">
+              <span>Illegal Activities</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="privacy">
+              <span>Invading Privacy</span>
+            </label>
+            <label class="report-option">
+              <input type="radio" name="report-reason" value="spam">
+              <span>Commercial Spam</span>
+            </label>
+          </div>
+        </div>
+        <div class="report-details">
+          <label>Additional details</label>
+          <textarea id="report-details-input" placeholder="Describe the issue in further detail"></textarea>
+        </div>
+      </div>
+      <div class="report-modal-footer">
+        <button class="report-cancel-btn"
+          onclick="event.stopPropagation(); EmberCore.closeReportModal()">Cancel</button>
+        <button class="report-submit-btn" onclick="event.stopPropagation(); EmberCore.submitReport()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+
 <script src="js/chatbot.js"></script>
-<!-- Auth Integration -->
+
 <script>
+// Function to toggle user icon visibility
+function toggleUserIcon(show) {
+  const icon = document.getElementById('Hide/UnhideUserIcon');
+  if (icon) {
+    icon.style.display = show ? 'flex' : 'none';
+  }
+}
+
+// Function to toggle signup button visibility
+function toggleSignupBtn(show) {
+  const btn = document.getElementById('Hide/UnhideSignupBtn');
+  if (btn) {
+    btn.style.display = show ? 'flex' : 'none';
+  }
+}
+
 // Auth & Dropdown Logic
 const initAuthUI = async () => {
   if (!window.DB) return;
 
   const { data: { user } } = await DB.getUser();
+
+  // Toggle user icon based on login status
+  toggleUserIcon(!!user);
+  toggleSignupBtn(!user);
 
   if (user) {
     const loginLink = document.querySelector('a[href="login.html"]');
@@ -2805,6 +3072,24 @@ if (window.DB) {
 </script>
 
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const collapsibles = document.querySelectorAll('.sidebar-collapsible');
+    collapsibles.forEach(col => {
+        const btn = col.querySelector('.collapsible-trigger');
+        btn.addEventListener('click', () => {
+            // Close all other collapsibles
+            document.querySelectorAll('.sidebar-collapsible').forEach(other => {
+                if (other !== col) {
+                    other.classList.remove('open');
+                }
+            });
+            // Toggle current
+            col.classList.toggle('open');
+        });
+    });
+});
+</script>
 <script>
       document.addEventListener('DOMContentLoaded', function () {
     const splitButtons = document.querySelectorAll('.split-button');

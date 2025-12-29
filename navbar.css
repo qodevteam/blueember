@@ -795,10 +795,10 @@ body.dark-mode .profile-icon-placeholder {
         visibility: visible !important;
         opacity: 1 !important;
         align-items: center;
-        gap: 5px;
+        gap: 0px;
         font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        z-index: 2101;
+        z-index: 999;
         /* Higher priority */
       }
 
@@ -859,9 +859,13 @@ body.dark-mode .profile-icon-placeholder {
 
     .nav-item a{
  border-radius: 30px;
+    padding: 14px;
+    background: #333333;
     }
     .nav-item a:hover{
-        background-color: #00c6ff;
+        background-color: #95caff;
+    color: #035ac6;
+    font-weight: 900;
     }
 
     /* Remove list markers from navbar li elements */

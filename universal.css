@@ -442,7 +442,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: #0099ff;
-  box-shadow: 0 0 0 3px rgba(39, 211, 221, 0.2);
+  box-shadow: 0 0 0 1px rgba(39, 211, 221, 0.2);
 }
 
 /* Tables */
