@@ -190,7 +190,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  gap:0;
+  gap:8px;
   scale: 0.9;
 }
 .price {
@@ -201,14 +201,14 @@
 }
 .product-actions {
   display: flex;
-    gap: 3px;
+    gap: 5px;
     width: auto;
     scale: 0.9;
 }
 .btn-outline, .btn-primary {
   display: flex;
   padding: 8px;
-  gap: 5px;
+  gap: 8px;
   border-radius: 30px;
   text-decoration: none;
   font-weight: 700;
@@ -326,8 +326,9 @@ address {
     /* Additional styles for new sections */
     .top-brands {
       padding: 0px 0;
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-      text-align: center;
+    background: linear-gradient(180deg, #ffffffb5 0%, #efefef 100%);
+    text-align: center;
+    border-radius: 40px 40px 0px 0px;
     }
     .section-title {
       font-family: 'Rubik', sans-serif;
@@ -406,11 +407,6 @@ address {
       box-shadow: 0 6px 20px rgba(31, 166, 214, 0.4);
     }
 
-    /* Testimonials section */
-    .testimonials {
-      padding: 10px 0;
-      background: #f0f7ff;
-    }
     .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -568,14 +564,16 @@ address {
     /* Sustainability section */
     .sustainability {
       padding: 10px 0;
-      background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);
-      text-align: center;
+    background: linear-gradient(180deg, #e6f7ff 0%, #efefef 100%);
+    text-align: center;
+    border-radius: 40px 40px 0px 0px;
     }
     .sustainability-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin-top: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+    scale: 0.8;
+    margin-top: 35px;
     }
     .sustainability-item {
       background: rgba(255, 255, 255, 0.85);
@@ -612,7 +610,6 @@ address {
     /* Services section */
     .services {
       padding: 0px 0;
-      background: white;
     }
     .services-grid {
       display: flex;
@@ -667,8 +664,7 @@ address {
 
     /* Blog section */
     .blog-section {
-      padding: 0px 0;
-      background: #f8fafc;
+      padding: 0px 0px 70px 0px; 
     }
     .blog-grid {
       display: grid;
@@ -1031,8 +1027,6 @@ address {
 
 .modal-content {
   position: fixed;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   background: white;
   border-radius: 16px;
@@ -1190,6 +1184,7 @@ address {
   border-radius: 20px;
   max-width: 450px;
   width: 90%;
+  place-self: anchor-center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   border: none;
   padding: 0;

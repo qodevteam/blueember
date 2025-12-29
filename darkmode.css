@@ -339,6 +339,7 @@ body.dark-mode .bg-light {
 
 body.dark-mode .profile-dropdown a {
     padding: 11px 10px;
+    text-align: left;
 }
 
 /* Floating Toggle Button (Default / Fallback) */
@@ -385,6 +386,7 @@ body.dark-mode .profile-dropdown a {
 body.dark-mode .profile-dropdown-container {
     background-color: var(--dm-bg-secondary);
     box-shadow: 0 8px 25px var(--dm-shadow);
+    top: 8vh;
 }
 
 body.dark-mode .profile-dropdown-container.visible {

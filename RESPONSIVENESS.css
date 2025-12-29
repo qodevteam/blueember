@@ -40,7 +40,7 @@
   body {
     padding: 0px;
     position: relative;
-    top: 50px;
+    top: 62px;
   }
 
   nav {
@@ -52,6 +52,7 @@
     BORDER-RADIUS: 0PX 0PX 20PX 20PX !important;
     border: 1px solid #8282824d;
     top: -10px !important;
+    height: 70px;
   }
 
   .navbar-logo {
@@ -331,6 +332,7 @@
   position: relative;
   width: 400px;
   height: 50px;
+  scale:0.91;
   border-radius: 50px;
   display: flex;
   justify-content: center;

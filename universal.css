@@ -339,7 +339,6 @@ ul {
 }
 
 img {
-  max-width: 100%;
   display: block;
 }
 
@@ -383,11 +382,6 @@ img {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-}
-
-/* Section Spacing */
-section {
-  padding: 60px 0;
 }
 
 /* Utilities */

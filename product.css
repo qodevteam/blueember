@@ -18,7 +18,7 @@
  body {
        background: transparent;
     min-height: 100vh;
-    transition: all 0.3s ease-in-out;
+    transition: all 0s ease-in-out;
     padding-top: 75px;
  }
 
@@ -42,19 +42,18 @@
  }
 
  .navbar-container {
-   display: flex;
-   align-items: center;
-   background-color: rgba(211, 216, 222, 0.3);
-   backdrop-filter: blur(20px);
-   padding: 15px 30px;
-   position: fixed;
-   top: 0;
-   left: 0;
-   right: 0;
-   gap: 3px;
-   z-index: 1000;
-   height: 80px;
-   padding-top: 24px;
+  display: flex;
+    align-items: center;
+    background-color: rgba(211, 216, 222, 0.3);
+    backdrop-filter: blur(20px);
+    padding: 25px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    gap: 3px;
+    z-index: 1000;
+    height: 63px;
  }
 
  .navbar-logo {
@@ -464,7 +463,7 @@
 
  .cart-header {
    padding: 5px 12px;
-   background: linear-gradient(150deg, #0788ff, #17ffdd);
+   background: linear-gradient(150deg, #0788ff, #17d5ff);
    color: white;
    display: flex;
    justify-content: space-between;
@@ -661,7 +660,7 @@
  }
 
  .continue-btn:hover {
-   background: linear-gradient(150deg, #0788ff, #17ffdd);
+   background: linear-gradient(150deg, #0788ff, #17d5ff);
  }
 
  .cart-animation {
@@ -1464,6 +1463,7 @@
   }
   .product-media{
     display: block;
+    min-width: 100px;
     min-height: -webkit-fill-available;
     align-content: center;
     background: white;

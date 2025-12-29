@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Blue Ember Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="darkmode.css">
+    <script src="js/darkmode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+    /* Theme Colors based on the Image */
+    --primary: #ff7e79;
+    --primary-dark: #ff6b6b;
+    --primary-gradient: linear-gradient(135deg, #ff9a9e 0%, #ff6b6b 100%);
+    --text-dark: #2d3436;
+    --text-light: #636e72;
+    --bg-color: #ff7e79;
+    --input-bg: #f5f5f5;
+    --white: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    /* Mimicking the liquid/topographic background from the image using gradients */
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 50px);
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Optional: Keep the grid animation from original HTML but make it subtle/white */
+.grid-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.grid-background {
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+/* The White Card */
+.login-card {
+    background: var(--white);
+    padding: 40px 50px;
+    border-radius: 30px; /* Highly rounded corners like the image */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px; /* Slightly narrower to match mobile feel */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    /* Creating the wavy top effect visually */
+    border-top: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Decorative top bar matching the pink theme */
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--primary-gradient);
+}
+
+.brand-logo {
+    margin-bottom: 25px;
+}
+
+.brand-logo h2 {
+    margin: 0;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+}
+
+.brand-logo span {
+    color: var(--primary-dark);
+}
+
+.welcome-text h3 {
+    margin: 0 0 10px;
+    color: var(--text-dark);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.welcome-text p {
+    margin: 0 0 30px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-left: 5px;
+}
+
+/* Input Styles */
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary); /* Pink Icon */
+    font-size: 16px;
+    transition: color 0.3s;
+    z-index: 1;
+}
+
+.input-wrapper input {
+    background-color: var(--input-bg);
+    border: 2px solid transparent;
+    padding: 1rem;
+    padding-left: 45px;
+    padding-right: 45px;
+    font-size: 1rem;
+    width: calc(100% - 90px - 2rem); /* Adjusted for padding */
+    border-radius: 12px;
+    color: var(--text-dark);
+    box-shadow: none; /* Removing the heavy shadow from original to match flat image style */
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: var(--white);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.1);
+}
+
+.input-wrapper input::placeholder {
+    color: #a0a0a0;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 13px;
+}
+
+/* Checkbox Styles tailored to Pink Theme */
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.checkbox-wrapper * {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-wrapper label {
+    --size: 24px;
+    --shadow: 2px;
+    position: relative;
+    display: block;
+    width: var(--size);
+    height: var(--size);
+    margin: 0;
+    background-color: #ddd;
+    border-radius: 6px; /* Squircle */
+    cursor: pointer;
+    transition: 0.2s ease;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Checked State - Pink Gradient */
+.checkbox-wrapper input[type="checkbox"]:checked + label {
+    background-image: var(--primary-gradient);
+    box-shadow: 0 2px 5px rgba(255, 107, 107, 0.4);
+}
+
+.checkbox-wrapper .tick_mark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-wrapper .tick_mark:before,
+.checkbox-wrapper .tick_mark:after {
+    content: "";
+    position: absolute;
+    background-color: #fff;
+    border-radius: 2px;
+    opacity: 0;
+    transition: 0.2s ease opacity;
+}
+
+/* Creating a simple checkmark */
+.checkbox-wrapper .tick_mark:after {
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    background-color: transparent;
+    opacity: 0;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + label .tick_mark:after {
+    opacity: 1;
+}
+
+.forgot-pass {
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.forgotthepassword {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Submit Button - Matched to Image (Solid Pink, Rounded) */
+.submit-btn {
+    position: relative;
+    border: none;
+    border-radius: 12px; /* Matches input radius */
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    padding: 16px;
+    color: var(--white);
+    background: var(--primary-gradient);
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(255, 107, 107, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 5px 10px rgba(255, 107, 107, 0.3);
+}
+
+#verify-email-btn {
+    height: 50px;
+}
+
+.submit-btn .btn-text {
+    transition: opacity 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.submit-btn.loading .btn-text {
+    opacity: 0;
+}
+
+/* Spinner Loader */
+.spinner {
+    font-size: 28px;
+    position: absolute;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.spinner.active {
+    opacity: 1;
+}
+
+.spinner.center {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.spinner .spinner-blade {
+    position: absolute;
+    left: 0.4629em;
+    bottom: 0;
+    width: 0.074em;
+    height: 0.2777em;
+    border-radius: 0.0555em;
+    background-color: transparent;
+    -webkit-transform-origin: center -0.2222em;
+    -ms-transform-origin: center -0.2222em;
+    transform-origin: center -0.2222em;
+    animation: spinner-fade 1s infinite linear;
+}
+
+/* Generate blades rotation (kept from original) */
+.spinner .spinner-blade:nth-child(1) { animation-delay: 0s; transform: rotate(0deg); }
+.spinner .spinner-blade:nth-child(2) { animation-delay: 0.083s; transform: rotate(30deg); }
+.spinner .spinner-blade:nth-child(3) { animation-delay: 0.166s; transform: rotate(60deg); }
+.spinner .spinner-blade:nth-child(4) { animation-delay: 0.249s; transform: rotate(90deg); }
+.spinner .spinner-blade:nth-child(5) { animation-delay: 0.332s; transform: rotate(120deg); }
+.spinner .spinner-blade:nth-child(6) { animation-delay: 0.415s; transform: rotate(150deg); }
+.spinner .spinner-blade:nth-child(7) { animation-delay: 0.498s; transform: rotate(180deg); }
+.spinner .spinner-blade:nth-child(8) { animation-delay: 0.581s; transform: rotate(210deg); }
+.spinner .spinner-blade:nth-child(9) { animation-delay: 0.664s; transform: rotate(240deg); }
+.spinner .spinner-blade:nth-child(10) { animation-delay: 0.747s; transform: rotate(270deg); }
+.spinner .spinner-blade:nth-child(11) { animation-delay: 0.83s; transform: rotate(300deg); }
+.spinner .spinner-blade:nth-child(12) { animation-delay: 0.913s; transform: rotate(330deg); }
+
+@keyframes spinner-fade {
+    0% { background-color: #ffffff; }
+    100% { background-color: transparent; }
+}
+
+/* Password Toggle Eye */
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffb7b2; /* Lighter pink for inactive eye */
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 3;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px;
+    border-radius: 50%;
+    background: transparent;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: var(--primary-dark);
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.footer-text {
+    margin-top: 25px;
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.footer-text a {
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Splash Effect for JS (required by your script) */
+.submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.splash-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.splash-circle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    animation: splashAnimation 0.8s ease-out forwards;
+}
+
+@keyframes splashAnimation {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(15); opacity: 0; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 25px;
+        margin: 20px;
+        border-radius: 20px;
+    }
+    
+    .welcome-text h3 {
+        font-size: 24px;
+    }
+}
+
+
+/* --- Modal & Overlay Styles (For Password Recovery) --- */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(45, 52, 54, 0.4); /* Dark dim over the pink background */
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    /* Inherits .login-card styles but needs specific positioning resets */
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    max-width: 420px;
+    width: 100%;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-light);
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.close-modal:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: rotate(90deg);
+}
+
+/* Modal Headers */
+.modal-content .brand-logo h2 {
+    font-size: 24px;
+    color: var(--text-dark);
+}
+
+.recovery-step {
+    animation: fadeInSlide 0.4s ease-out forwards;
+}
+
+@keyframes fadeInSlide {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Error Message in Modal */
+#recovery-error {
+    color: var(--primary-dark);
+    font-weight: 500;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 13px;
+    display: none;
+}
+
+/* Code Verification Input Specifics */
+#code-input-container {
+    transition: opacity 0.3s;
+}
+
+#verification-code {
+    letter-spacing: 4px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-dark);
+}
+
+/* --- Interactive Splash Effect (Click Animation) --- */
+
+.splash-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 12px; /* Match button radius */
+    z-index: 5;
+}
+
+.splash-circle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple 0.8s linear;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(25);
+        opacity: 0;
+    }
+}
+
+/* --- Dark Mode Overrides (If system preference is detected) --- */
+
+@media (prefers-color-scheme: dark) {
+    /* You can toggle this class on <body> via JS if needed */
+    body.dark-mode {
+        --bg-color: #2d3436;
+        --white: #2d3436;
+        --text-dark: #dfe6e9;
+        --text-light: #b2bec3;
+        --input-bg: #353b48;
+    }
+    
+    body.dark-mode .login-card {
+        border-top: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+    
+    body.dark-mode .input-wrapper input {
+        color: #dfe6e9;
+    }
+    
+    body.dark-mode .input-wrapper i {
+        color: var(--primary-dark);
+    }
+    
+    body.dark-mode .close-modal {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+</style>
+
+</head>
+
+<body>
+    <!-- Grid Background -->
+    <div class="grid-wrapper">
+        <div class="grid-background"></div>
+    </div>
+
+    <div class="login-card">
+        <div class="navbar-logo">
+            <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
+                style="width: 30px; height: auto;">
+
+        </div>
+
+        <div class="welcome-text">
+            <h3>Welcome Back</h3>
+            <p>Please enter your details to sign in.</p>
+        </div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label>Email Address</label>
+                <div class="input-wrapper">
+                    <input type="email" id="email" placeholder="name@company.com" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" placeholder="••••••••" required>
+                    <i class="fas fa-lock"></i>
+                    <i class="fas fa-eye password-toggle" id="togglePassword" style="margin-left: auto;"></i>
+                </div>
+            </div>
+
+            <div class="form-options">
+                <div class="remember-me">
+                    <div class="checkbox-wrapper">
+                        <input id="_checkbox-26" type="checkbox">
+                        <label for="_checkbox-26">
+                            <div class="tick_mark"></div>
+                        </label>
+                    </div>
+                    <span>Remember me</span>
+                </div>
+                <button class="forgotthepassword"><a href="#" class="forgot-pass">Forgot Password?</a></button>
+            </div>
+
+            <button type="submit" class="submit-btn" id="loginBtn">
+                <span class="btn-text">
+                    Sign In <i class="fas fa-arrow-right"></i>
+                </span>
+                <div class="spinner center" style="position: absolute;">
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                </div>
+            </button>
+        </form>
+
+        <div class="footer-text">
+            Don't have an account? <a href="signup.html">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Auth Scripts -->
+    <script src="js/db-client.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+        // Password Toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle eye icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Add loader functionality to login button
+        const loginBtn = document.getElementById('loginBtn');
+        const loginForm = document.getElementById('login-form');
+
+        // Inject the splash effect CSS
+        const splashStyle = document.createElement('style');
+        splashStyle.textContent = `
+            .submit-btn {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .splash-effects {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 10;
+            }
+            
+            .splash-circle {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.7);
+                transform: scale(0);
+                animation: splashAnimation 0.8s ease-out forwards;
+            }
+            
+            @keyframes splashAnimation {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(15);
+                    opacity: 0;
+                }
+            }
+
+            /* Modal Styles */
+            .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s;
+                backdrop-filter: blur(5px);
+            }
+
+            .modal-overlay.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .modal-content {
+                max-width: 450px;
+                transform: translateY(20px);
+                transition: transform 0.3s;
+                position: relative;
+            }
+
+            .modal-overlay.active .modal-content {
+                transform: translateY(0);
+            }
+
+            .close-modal {
+                position: absolute;
+                top: 15px;
+                right: 20px;
+                font-size: 28px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: var(--text-light);
+                z-index: 10;
+                transition: color 0.3s;
+            }
+
+            .close-modal:hover {
+                color: var(--primary);
+            }
+
+            body.dark-mode .close-modal {
+                color: var(--dm-text-primary);
+            }
+            
+            body.dark-mode .close-modal:hover {
+                color: var(--dm-accent);
+            }
+
+            .recovery-step {
+                animation: fadeIn 0.4s ease-out;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(splashStyle);
+
+        // Add splash effect on button click
+        loginBtn.addEventListener('mousedown', function (e) {
+            // Create splash effect container if it doesn't exist
+            let splashContainer = this.querySelector('.splash-effects');
+            if (!splashContainer) {
+                splashContainer = document.createElement('div');
+                splashContainer.className = 'splash-effects';
+                this.appendChild(splashContainer);
+            }
+
+            // Create splash circle
+            const splashCircle = document.createElement('div');
+            splashCircle.className = 'splash-circle';
+
+            // Position splash circle at click location
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            splashCircle.style.left = x + 'px';
+            splashCircle.style.top = y + 'px';
+
+            splashContainer.appendChild(splashCircle);
+
+            // Remove splash circle after animation completes
+            setTimeout(() => {
+                splashCircle.remove();
+            }, 800);
+        });
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Show loader
+            loginBtn.classList.add('loading');
+            loginBtn.querySelector('.spinner').classList.add('active');
+            loginBtn.disabled = true;
+
+            // Simulate 2.8s delay to show loader
+            setTimeout(() => {
+                // Get form values
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Trigger the actual login (from auth.js)
+                if (window.handleLogin) {
+                    window.handleLogin(email, password);
+                }
+
+                // Reset button state after another brief moment
+                setTimeout(() => {
+                    loginBtn.classList.remove('loading');
+                    loginBtn.querySelector('.spinner').classList.remove('active');
+                    loginBtn.disabled = false;
+                }, 500);
+            }, 2800);
+        });
+
+        // --- Password Recovery Modal Logic ---
+
+        // Modal Elements
+        const recoveryModal = document.createElement('div');
+        recoveryModal.id = 'password-recovery-modal';
+        recoveryModal.className = 'modal-overlay';
+        recoveryModal.innerHTML = `
+            <div class="login-card modal-content" style="max-width: 450px;">
+                <button type="button" class="close-modal">&times;</button>
+                
+                <div class="brand-logo" style="margin-bottom: 20px;">
+                     <h2>Recovery</h2>
+                </div>
+
+                <!-- Step 1: Email -->
+                <div id="step-email" class="recovery-step">
+                    <div class="welcome-text">
+                        <p>Enter your email to verify your identity.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="recovery-email" placeholder="name@company.com" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <button id="verify-email-btn" class="submit-btn" type="button">
+                         <span class="btn-text">Verify Email</span>
+                         <div class="spinner center">
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                        </div>
+                    </button>
+                    <p id="recovery-error" style="color: lightcoral; font-size: 13px; margin-top: 10px; display: none;"></p>
+                </div>
+
+                <!-- Step 2-A: Phone Verification (New Password) -->
+                <div id="step-phone" class="recovery-step" style="display:none;">
+                     <div class="welcome-text">
+                        <p>what is your new password? and also confirm the new password to apply changes?</p>
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="new-password" placeholder="••••••••" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="confirm-new-password" placeholder="••••••••" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                     <button id="reset-password-btn" class="submit-btn" type="button">
+                        <span class="btn-text">Reset Password</span>
+                         <div class="spinner center">
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                        </div>
+                     </button>
+                </div>
+
+                <!-- Step 2-B: Code Verification (No Phone) -->
+                <div id="step-code" class="recovery-step" style="display:none;">
+                     <div class="welcome-text">
+                        <p id="code-message">Searching for verified phone number...</p>
+                    </div>
+                    <div id="code-input-container" class="form-group" style="opacity: 0.7; pointer-events: none;">
+                        <label>Verification Code</label>
+                         <div class="input-wrapper">
+                            <input type="text" id="verification-code" placeholder="Wait for code..." maxlength="8">
+                            <i class="fas fa-key"></i>
+                        </div>
+                    </div>
+                    <button id="verify-code-btn" class="submit-btn" type="button" disabled>
+                        <span class="btn-text">Verify Code</span>
+                         <div class="spinner center">
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(recoveryModal);
+
+        // Open Modal
+        const forgotPassBtn = document.querySelector('.forgot-pass');
+        const forgotBtnWrapper = document.querySelector('.forgotthepassword');
+
+        function openRecoveryModal(e) {
+            e.preventDefault();
+            resetModal();
+            recoveryModal.classList.add('active');
+        }
+
+        if (forgotPassBtn) forgotPassBtn.addEventListener('click', openRecoveryModal);
+        if (forgotBtnWrapper) forgotBtnWrapper.addEventListener('click', openRecoveryModal);
+
+        // Close Modal
+        const closeModalBtn = recoveryModal.querySelector('.close-modal');
+        closeModalBtn.addEventListener('click', () => {
+            recoveryModal.classList.remove('active');
+        });
+
+        // Click outside to close
+        recoveryModal.addEventListener('click', (e) => {
+            if (e.target === recoveryModal) {
+                recoveryModal.classList.remove('active');
+            }
+        });
+
+        // Reset Modal State
+        function resetModal() {
+            document.getElementById('step-email').style.display = 'block';
+            document.getElementById('step-phone').style.display = 'none';
+            document.getElementById('step-code').style.display = 'none';
+            document.getElementById('recovery-email').value = '';
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-new-password').value = '';
+            document.getElementById('verification-code').value = '';
+            document.getElementById('recovery-error').style.display = 'none';
+        }
+
+        // Global variable to store verified user
+        let verifiedUser = null;
+
+        // --- Step 1: Verify Email & Check Phone ---
+        const verifyEmailBtn = document.getElementById('verify-email-btn');
+        verifyEmailBtn.addEventListener('click', () => {
+            const email = document.getElementById('recovery-email').value;
+            const errorMsg = document.getElementById('recovery-error');
+            verifiedUser = null; // Reset
+
+            if (!email || !email.includes('@')) {
+                errorMsg.textContent = "Please enter a valid email address.";
+                errorMsg.style.display = 'block';
+                return;
+            }
+            errorMsg.style.display = 'none';
+
+            // Loading state
+            verifyEmailBtn.classList.add('loading');
+            verifyEmailBtn.querySelector('.spinner').classList.add('active');
+
+            setTimeout(() => {
+                // Check if user exists and has phone
+                let phoneFound = false;
+                // Mock User lookup
+                if (window.DB && window.DB.getUsers) {
+                    const users = window.DB.getUsers();
+                    const user = users.find(u => u.email === email);
+                    if (user) {
+                        verifiedUser = user;
+                        // Check for phone in localStorage with user scope
+                        const phone = localStorage.getItem('be_phone_number_' + user.id);
+                        if (phone) phoneFound = true;
+                    }
+                }
+
+                // Fallback check for unscoped phone (demo mode)
+                if (!phoneFound && localStorage.getItem('be_phone_number')) {
+                    // Only if no user system or single user demo
+                    phoneFound = true;
+                }
+
+                // Transition
+                verifyEmailBtn.classList.remove('loading');
+                verifyEmailBtn.querySelector('.spinner').classList.remove('active');
+                document.getElementById('step-email').style.display = 'none';
+
+                if (phoneFound) {
+                    // Phone Found Flow
+                    document.getElementById('step-phone').style.display = 'block';
+                } else {
+                    // No Phone Flow
+                    startCodeFlow();
+                }
+
+            }, 1000);
+        });
+
+        // --- Code Flow Logic ---
+        function startCodeFlow() {
+            const stepCode = document.getElementById('step-code');
+            stepCode.style.display = 'block';
+            const message = document.getElementById('code-message');
+            const codeInput = document.getElementById('verification-code');
+            const verifyBtn = document.getElementById('verify-code-btn');
+
+            // Generate random code immediately to show in message
+            const randomCode = Math.floor(10000000 + Math.random() * 90000000);
+            message.textContent = `your email received the 8-digit verification code[${randomCode}], and for the code, automatically add random 8-digit code after 4 seconds delay, and automatically proceed back to home after success`;
+
+            // 4 Second Delay to Auto-Fill
+            setTimeout(() => {
+                // Auto populate
+                codeInput.value = randomCode;
+
+                // Auto submit/success
+                verifyBtn.disabled = false;
+                verifyBtn.click(); // Trigger verify
+
+            }, 4000);
+
+            verifyBtn.addEventListener('click', () => {
+                verifyBtn.classList.add('loading');
+                verifyBtn.querySelector('.spinner').classList.add('active');
+
+                setTimeout(() => {
+                    // SET SESSION
+                    if (window.DB && verifiedUser) {
+                        window.DB.setSession(verifiedUser);
+                    }
+                    window.location.href = 'index.html';
+                }, 1500);
+            });
+        }
+
+        // --- Password Reset Flow ---
+        const resetPassBtn = document.getElementById('reset-password-btn');
+        resetPassBtn.addEventListener('click', () => {
+            const pass = document.getElementById('new-password').value;
+            const confirm = document.getElementById('confirm-new-password').value;
+
+            if (!pass || pass !== confirm) {
+                alert("Passwords do not match or are empty.");
+                return;
+            }
+
+            resetPassBtn.classList.add('loading');
+            resetPassBtn.querySelector('.spinner').classList.add('active');
+
+            setTimeout(() => {
+                // Update Password in Mock DB
+                if (window.DB && verifiedUser) {
+                    const users = window.DB.getUsers();
+                    const userIndex = users.findIndex(u => u.id === verifiedUser.id);
+                    if (userIndex !== -1) {
+                        users[userIndex].password = pass; // Update password
+                        window.DB.saveUsers(users); // Save to localStorage
+
+                        // Update our local reference
+                        verifiedUser.password = pass;
+                        verifiedUser = users[userIndex]; // Refresh from source
+
+                        // SET SESSION
+                        window.DB.setSession(verifiedUser);
+                    }
+                }
+
+                alert("Password reset successfully. Logging you in...");
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+    </script>
+
+</body>
+
+</html>
+
+

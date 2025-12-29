@@ -412,7 +412,7 @@ body.dark-mode {
 body {
     font-family: 'JetBrains Mono', monospace;
     margin: 0;
-    background-color: #e5e5e5;
+    background-color: #efefef;
     /* Page Background */
 }
 
@@ -714,6 +714,7 @@ body.dark-mode .drop-overlay {
     right: 30px;
     width: 380px;
     height: 520px;
+    scale: 0.8;
     /* Dark background as seen in image */
     border: 1px solid #333;
     border-radius: 20px;
@@ -768,7 +769,6 @@ body.dark-mode .drop-overlay {
     justify-content: center;
     padding: 12px 300px 12px 6px;
     color: #393939;
-    transition: color 0.2s;
 }
 
 .emoji-drag-handle:active {

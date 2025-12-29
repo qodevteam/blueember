@@ -205,17 +205,38 @@ const EmberCore = (() => {
         let initialX = 0;
         let initialY = 0;
 
+        // Helper function to get current transform position
+        function getCurrentTransformPosition() {
+            const transform = DOM.emojiWindow.style.transform;
+            if (!transform || transform === 'none') {
+                return { x: 0, y: 0 };
+            }
+            const match = transform.match(/translate\(([^,]+)px,\s*([^)]+)px\)/);
+            if (match) {
+                return {
+                    x: parseFloat(match[1]),
+                    y: parseFloat(match[2])
+                };
+            }
+            return { x: 0, y: 0 };
+        }
 
-
-        dragHandle.addEventListener('mousedown', (e) => {
+        // Mouse event handlers
+        function handleMouseDown(e) {
             e.preventDefault();
             isDragging = true;
+            
+            // Get current window position from transform
+            const currentPos = getCurrentTransformPosition();
+            currentX = currentPos.x;
+            currentY = currentPos.y;
+            
             initialX = e.clientX - currentX;
             initialY = e.clientY - currentY;
             DOM.emojiWindow.style.cursor = 'grabbing';
-        });
+        }
 
-        document.addEventListener('mousemove', (e) => {
+        function handleMouseMove(e) {
             if (!isDragging) return;
             e.preventDefault();
 
@@ -223,15 +244,51 @@ const EmberCore = (() => {
             currentY = e.clientY - initialY;
 
             DOM.emojiWindow.style.transform = `translate(${currentX}px, ${currentY}px)`;
-        });
+        }
 
-        document.addEventListener('mouseup', () => {
+        function handleMouseUp() {
             if (isDragging) {
                 isDragging = false;
                 DOM.emojiWindow.style.cursor = 'default';
-
             }
-        });
+        }
+
+        // Touch event handlers
+        function handleTouchStart(e) {
+            if (e.touches.length !== 1) return;
+            e.preventDefault();
+            isDragging = true;
+            initialX = e.touches[0].clientX - currentX;
+            initialY = e.touches[0].clientY - currentY;
+            DOM.emojiWindow.style.cursor = 'grabbing';
+        }
+
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+
+            currentX = e.touches[0].clientX - initialX;
+            currentY = e.touches[0].clientY - initialY;
+
+            DOM.emojiWindow.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        }
+
+        function handleTouchEnd() {
+            if (isDragging) {
+                isDragging = false;
+                DOM.emojiWindow.style.cursor = 'default';
+            }
+        }
+
+        // Add event listeners
+        dragHandle.addEventListener('mousedown', handleMouseDown);
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+
+        // Touch event listeners for mobile devices - attach to drag handle for better handling
+        dragHandle.addEventListener('touchstart', handleTouchStart, { passive: false });
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd);
 
         // Close button
         if (closeBtn) {

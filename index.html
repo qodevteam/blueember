@@ -19,8 +19,11 @@
   <link href="darkmode.css" rel="stylesheet">
   <link href="navbar.css" rel="stylesheet">
   <link href="mobile-sidebar.css" rel="stylesheet">
-  <script src="js/finisher-header.es5.min.js"></script>
+  <script src="https://unpkg.com/finisher-header@1.0.0/dist/finisher-header.es5.min.js"></script>
   <link rel="stylesheet" href="product.css">
+
+  <!-- Preload Boxicons font for faster loading -->
+  <link rel="preload" href="https://cdn.boxicons.com/3.0.6/fonts/boxicons.woff2" as="font" type="font/woff2" crossorigin>
 
   <script src="js/cart.js" defer></script>
   <script src="js/order-manager.js" defer></script>
@@ -59,6 +62,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
+
+    ::ROOT {
+      --fade-amount: 40%;
+    }
     /* Media query for max-width: 700px - Space for manual editing */
     @media (max-width: 700px) {
       .hero-images .hero-img {
@@ -1165,7 +1172,7 @@
     .viewbrands {
       width: 175px;
       height: 50px;
-      margin-top: 35px;
+      margin: 10px 0 40px;
       place-self: center;
       display: flex;
       align-items: center;
@@ -1383,6 +1390,92 @@
         display: none !important;
       }
     }
+
+
+    .partner-logo-slider {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  position: relative;
+  
+}
+
+
+body.dark-mode .partner-logo-slider:before {
+  background: linear-gradient(to right, #121212 0%, rgba(255, 255, 255, 0) 100%);
+}
+body.dark-mode .partner-logo-slider:after {
+  background: linear-gradient(to left, #121212 0%, rgba(255, 255, 255, 0) 100%);
+}
+.partner-logo-slider:before {
+  content: "";
+  background: linear-gradient(to right, #f6f6f6 0%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 9;
+}
+.partner-logo-slider:after {
+  content: "";
+  background: linear-gradient(to left, #f6f6f6 0%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 9;
+}
+.partner-logo-slide {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: partner-logo 30s linear infinite;
+}
+.partner-logo-slide:hover {
+  animation-play-state: paused;
+}
+
+.partner-logo-slide img {
+    width: 190px;
+    border: 1px solid #b2b2b2;
+    padding: 10px;
+    border-radius: 10px;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+    background: #efefef;
+}
+@keyframes partner-logo {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .partner-logo-slide {
+    gap: 5px;
+  }
+  
+  .partner-logo-slide img {
+    height: 90px;
+  }
+}
+@media only screen and (max-width: 768px){
+  .partner-logo-slide img {
+    height: 90px;
+    width: auto;
+  }
+  .viewbrands{
+    scale: 0.8;
+  }
+}
+
+
   </style>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -1612,7 +1705,7 @@
 
       <!-- Close Button -->
       <button class="close-btn" id="closeBtn" aria-label="Close menu"
-        style="right: -35px;padding: inherit;display: flex;position: relative;">
+        style="right: -19px;padding: inherit;display: flex;position: relative;">
         <i class='bx  bx-caret-big-left'></i>
       </button>
 
@@ -2082,44 +2175,23 @@
       <p class="section-subtitle">We partner with the world's leading appliance manufacturers to bring you cutting-edge
         technology, reliability, and innovative design.</p>
 
-      <div class="brands-grid">
-        <a href="Haier-productpage.html">
-          <div class="brand-card">
-            <img src="assets/Revlon_Logo_1989.png" alt="Revlon" class="brand-logo">
-          </div>
-        </a>
-
-        <a href="samsung-productpage.html">
-          <div class="brand-card">
-            <img src="assets/download__1_-removebg-preview.png" alt="Samsung" class="brand-logo">
-          </div>
-        </a>
-
-        <a href="LG-productpage.html">
-          <div class="brand-card">
-            <img src="assets/download-removebg-preview.png" alt="LG" class="brand-logo">
-          </div>
-        </a>
-
-
-        <a href="Whirlpool-productpage.html">
-          <div class="brand-card">
-            <img src="assets/download__4_-removebg-preview.png" alt="Whirlpool" class="brand-logo">
-          </div>
-        </a>
-
-
-        <a href="BOSCH-productpage.html">
-          <div class="brand-card">
-            <img src="assets/download__5_-removebg-preview.png" alt="Bosch" class="brand-logo">
-          </div>
-        </a>
-        <a href="Electrolux-productpage.html">
-          <div class="brand-card">
-            <img src="assets/Toys-R-Us-Logo-1997.png" alt="Toys R Us" class="brand-logo">
-          </div>
-        </a>
-
+      
+        <div class="partner-logo-slider">
+  <div class="partner-logo-slide">
+    <img src="assets/Revlon_Logo_1989.png"/>
+    <a href="BOSCH-productpage.html"><img src="assets/download__5_-removebg-preview.png"/></a>
+    <a href="Whirlpool-productpage.html"><img src="assets/download__4_-removebg-preview.png"/></a>
+    <a href="samsung-productpage.html"><img src="assets/download__1_-removebg-preview.png"/></a>
+    <img src="assets/Toys-R-Us-Logo-1997.png"/>
+    <a href="LG-productpage.html"><img src="assets/download-removebg-preview.png"/></a>
+    <img src="assets/Revlon_Logo_1989.png"/>
+    <a href="BOSCH-productpage.html"><img src="assets/download__5_-removebg-preview.png"/></a>
+    <a href="Whirlpool-productpage.html"><img src="assets/download__4_-removebg-preview.png"/></a>
+    <a href="samsung-productpage.html"><img src="assets/download__1_-removebg-preview.png"/></a>
+    <img src="assets/Toys-R-Us-Logo-1997.png"/>
+    <a href="LG-productpage.html"><img src="assets/download-removebg-preview.png"/></a>
+  </div>
+</div>
       </div>
 
 
@@ -2360,7 +2432,7 @@
 
 
 
-  <div class="header finisher-header" style="width: 100%;height: 405px;z-index: 100;position: relative;">
+  <div id="finisher-header" class="header finisher-header" style="width: 100%;height: 405px;z-index: 100;position: relative;">
     <section class="newsletter" aria-labelledby="newsletter-heading">
       <div class="newsletter-container">
         <h2 id="newsletter-heading">Stay Updated with Blue Ember</h2>
@@ -2479,6 +2551,18 @@
 
 
   <script>
+$(document).ready(function () {
+  const $slides = $(".partner-logo-slide");
+  const cloneCount = 3;
+
+  for (let i = 0; i < cloneCount; i++) {
+    $slides.children().clone(true).appendTo($slides);
+  }
+});
+
+
+
+
     // Dropdown toggle functionality for Categories and Brands
     const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
     dropdownItems.forEach(item => {
