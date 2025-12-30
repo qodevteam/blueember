@@ -473,10 +473,7 @@
 
       <!-- Mobile Specific Profile Dropdown (Floating) -->
       <div class="mobile-profile-dropdown" id="mobileProfileDropdown" style="display: none;">
-        <div class="mobile-dropdown-header">
-          <span class="user-name" id="mobileDropdownName">User Name</span>
-          <span class="user-email" id="mobileDropdownEmail">email@example.com</span>
-        </div>
+
         <div class="mobile-dropdown-items">
           <a href="profile.html" class="mobile-dropdown-item mobile-item-links">
             <i class="fa-regular fa-user"></i> Profile
@@ -512,13 +509,10 @@
           <i class="fa-solid fa-chevron-down chevron"></i>
         </button>
         <div class="collapsible-content">
-          <a href="product2.html" class="sub-link">Washers & Dryers</a>
-          <a href="product2.html" class="sub-link">Refrigerators</a>
-          <a href="product2.html" class="sub-link">Microwaves</a>
-          <a href="product2.html" class="sub-link">Air Conditioners</a>
-          <a href="product2.html" class="sub-link">Dishwashers</a>
-          <a href="product2.html" class="sub-link">Cooktops</a>
-          <a href="product2.html" class="sub-link">Vacuums</a>
+          <a href="product2.html" class="sub-link">Toys</a>
+          <a href="product2.html" class="sub-link">Supplyments</a>
+          <a href="product2.html" class="sub-link">Beauty</a>
+          <a href="product2.html" class="sub-link">HomeGoods</a>
         </div>
       </div>
 
@@ -532,13 +526,12 @@
           <i class="fa-solid fa-chevron-down chevron"></i>
         </button>
         <div class="collapsible-content">
-          <a href="Haier-productpage.html" class="sub-link">Haier</a>
           <a href="samsung-productpage.html" class="sub-link">Samsung</a>
           <a href="LG-productpage.html" class="sub-link">LG</a>
           <a href="Whirlpool-productpage.html" class="sub-link">Whirlpool</a>
           <a href="BOSCH-productpage.html" class="sub-link">Bosch</a>
-          <a href="Electrolux-productpage.html" class="sub-link">Electrolux</a>
-          <a href="Apple-productpage.html" class="sub-link">Apple</a>
+          <a href="Electrolux-productpage.html" class="sub-link">Revlon</a>
+          <a href="Apple-productpage.html" class="sub-link">Toys R Us</a>
         </div>
       </div>
 
@@ -2364,7 +2357,64 @@
         document.addEventListener('dbReady', initAuthUI);
       }
     </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const splitButtons = document.querySelectorAll('.split-button');
 
+    splitButtons.forEach(button => {
+      // Check if this is a single-toggle action button
+      if (button.classList.contains('single-toggle-action')) {
+        button.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const parentItem = button.parentElement; // The list item wrapping the button
+          const dropdown = parentItem.querySelector('.mobile-dropdown');
+          const isExpanded = parentItem.classList.contains('active');
+
+          // Optional: Close other open dropdowns on desktop
+          if (window.innerWidth > 992) {
+            document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
+              if (item !== parentItem) {
+                item.classList.remove('active');
+                const btn = item.querySelector('.split-button');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+                const otherDropdown = item.querySelector('.mobile-dropdown');
+                if (otherDropdown) otherDropdown.style.maxHeight = '0';
+              }
+            });
+          }
+
+          // Toggle current state
+          parentItem.classList.toggle('active');
+          button.setAttribute('aria-expanded', !isExpanded);
+
+          // Handle dropdown animation (if using max-height transition)
+          if (dropdown) {
+            if (!isExpanded) {
+              dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
+            } else {
+              dropdown.style.maxHeight = '0';
+            }
+          }
+        });
+      }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.mobile-dropdown-item')) {
+        document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
+          item.classList.remove('active');
+          const btn = item.querySelector('.split-button');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+          const dropdown = item.querySelector('.mobile-dropdown');
+          if (dropdown) dropdown.style.maxHeight = '0';
+        });
+      }
+    });
+  });
+</script>
 </body>
 
 </html>

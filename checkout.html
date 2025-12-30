@@ -982,15 +982,12 @@
                     <span class="toggle-icon">+</span>
                 </a>
                 <ul class="mobile-dropdown">
-                    <li><a href="#">Haier</a></li>
                     <li><a href="#">Samsung</a></li>
                     <li><a href="#">LG</a></li>
                     <li><a href="#">Whirlpool</a></li>
                     <li><a href="#">Bosch</a></li>
-                    <li><a href="#">Electrolux</a></li>
-                    <li><a href="#">Panasonic</a></li>
-                    <li><a href="#">Sony</a></li>
-                    <li><a href="#">Apple</a></li>
+                    <li><a href="#">Revlon</a></li>
+                    <li><a href="#">Toys R Us</a></li>
                     <li><a href="#">Midea</a></li>
                 </ul>
             </li>
@@ -1000,13 +997,10 @@
                     <span class="toggle-icon">+</span>
                 </a>
                 <ul class="mobile-dropdown">
-                    <li><a href="#">Washers & Dryers</a></li>
-                    <li><a href="#">Refrigerators</a></li>
-                    <li><a href="#">Microwaves</a></li>
-                    <li><a href="#">Air Conditioners</a></li>
-                    <li><a href="#">Dishwashers</a></li>
-                    <li><a href="#">Cooktops & Ovens</a></li>
-                    <li><a href="#">Vacuum Cleaners</a></li>
+                    <li><a href="#">Toys</a></li>
+                    <li><a href="#">Supplyments</a></li>
+                    <li><a href="#">Beauty</a></li>
+                    <li><a href="#">HomeGoods</a></li>
                 </ul>
             </li>
             <li><a href="product2.html">Product</a></li>
@@ -1282,10 +1276,10 @@
             <div class="footer-section">
                 <h4>Appliance Types</h4>
                 <ul>
-                    <li><a href="product2.html">Washers & Dryers</a></li>
-                    <li><a href="product2.html">Refrigerators</a></li>
-                    <li><a href="product2.html">Microwaves</a></li>
-                    <li><a href="product2.html">Air Conditioners</a></li>
+                    <li><a href="product2.html">Toys</a></li>
+                    <li><a href="product2.html">Supplyments</a></li>
+                    <li><a href="product2.html">Beauty</a></li>
+                    <li><a href="product2.html">HomeGoods</a></li>
                     <li><a href="product2.html">Dishwashers</a></li>
                 </ul>
             </div>
@@ -1326,6 +1320,65 @@
 
     <!-- Checkout Logic -->
     <script src="js/checkout.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const splitButtons = document.querySelectorAll('.split-button');
+
+        splitButtons.forEach(button => {
+          // Check if this is a single-toggle action button
+          if (button.classList.contains('single-toggle-action')) {
+            button.addEventListener('click', function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              const parentItem = button.parentElement; // The list item wrapping the button
+              const dropdown = parentItem.querySelector('.mobile-dropdown');
+              const isExpanded = parentItem.classList.contains('active');
+
+              // Optional: Close other open dropdowns on desktop
+              if (window.innerWidth > 992) {
+                document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
+                  if (item !== parentItem) {
+                    item.classList.remove('active');
+                    const btn = item.querySelector('.split-button');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                    const otherDropdown = item.querySelector('.mobile-dropdown');
+                    if (otherDropdown) otherDropdown.style.maxHeight = '0';
+                  }
+                });
+              }
+
+              // Toggle current state
+              parentItem.classList.toggle('active');
+              button.setAttribute('aria-expanded', !isExpanded);
+
+              // Handle dropdown animation (if using max-height transition)
+              if (dropdown) {
+                if (!isExpanded) {
+                  dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
+                } else {
+                  dropdown.style.maxHeight = '0';
+                }
+              }
+            });
+          }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.mobile-dropdown-item')) {
+            document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
+              item.classList.remove('active');
+              const btn = item.querySelector('.split-button');
+              if (btn) btn.setAttribute('aria-expanded', 'false');
+              const dropdown = item.querySelector('.mobile-dropdown');
+              if (dropdown) dropdown.style.maxHeight = '0';
+            });
+          }
+        });
+      });
+    </script>
 </body>
 
 </html>

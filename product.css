@@ -1477,6 +1477,7 @@
   .product-body {
     padding: 10px;
     display: flex;
+    width: 260px;
     flex-direction: column;
     gap: 5px;
     flex: 1;

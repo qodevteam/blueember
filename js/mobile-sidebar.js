@@ -358,27 +358,34 @@ window.initMobileSidebar = initMobileSidebar;
 
 
 
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const collapsibles = document.querySelectorAll('.sidebar-collapsible');
-    collapsibles.forEach(col => {
-        const btn = col.querySelector('.collapsible-trigger');
-        btn.addEventListener('click', () => {
-            // Close all other collapsibles
-            document.querySelectorAll('.sidebar-collapsible').forEach(other => {
-                if (other !== col) {
-                    other.classList.remove('open');
-                }
-            });
-            // Toggle current
-            col.classList.toggle('open');
-        });
+ 
+// New Collapsible Logic for Sidebar with Accordion Behavior
+const collapsibles = document.querySelectorAll('.sidebar-collapsible');
+collapsibles.forEach(col => {
+  const btn = col.querySelector('.collapsible-trigger');
+  const content = col.querySelector('.collapsible-content');
+  
+  btn.addEventListener('click', () => {
+    // Close all other collapsibles first
+    collapsibles.forEach(otherCol => {
+      if (otherCol !== col) {
+        otherCol.classList.remove('open');
+        const otherContent = otherCol.querySelector('.collapsible-content');
+        if (otherContent) {
+          otherContent.style.maxHeight = '0';
+        }
+      }
     });
+    
+    // Toggle current collapsible
+    const isOpen = col.classList.contains('open');
+    col.classList.toggle('open');
+    
+    if (col.classList.contains('open')) {
+      // Calculate and set dynamic height
+      content.style.maxHeight = content.scrollHeight + 'px';
+    } else {
+      content.style.maxHeight = '0';
+    }
+  });
 });

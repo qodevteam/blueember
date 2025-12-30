@@ -29,7 +29,7 @@ body {
     top: 50px;
     }
     nav {
-      margin: 20px;
+      margin: 0px !important;
     }
 
     .navbar a {
@@ -395,7 +395,7 @@ textarea:focus {
 .product {
   background-color: #fff;
   border-radius: 12px;
-  padding: 20px;
+  padding: 4px 4px 20px 4px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   text-align: center;
   transition: transform 0.3s ease;

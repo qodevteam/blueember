@@ -1561,15 +1561,12 @@
           </div>
         </div>
         <ul class="mobile-dropdown">
-          <li><a href="Haier-productpage.html">Haier</a></li>
           <li><a href="samsung-productpage.html">Samsung</a></li>
           <li><a href="LG-productpage.html">LG</a></li>
           <li><a href="Whirlpool-productpage.html">Whirlpool</a></li>
           <li><a href="BOSCH-productpage.html">Bosch</a></li>
-          <li><a href="Electrolux-productpage.html">Electrolux</a></li>
-          <li><a href="Panasonic-productpage.html">Panasonic</a></li>
-          <li><a href="Sony-productpage.html">Sony</a></li>
-          <li><a href="Apple-productpage.html">Apple</a></li>
+          <li><a href="Electrolux-productpage.html">Revlon</a></li>
+          <li><a href="Panasonic-productpage.html">Toys R Us</a></li>
         </ul>
       </li>
       <li class="mobile-dropdown-item">
@@ -1586,13 +1583,10 @@
           </div>
         </div>
         <ul class="mobile-dropdown">
-          <li><a href="product2.html">Washers & Dryers</a></li>
-          <li><a href="product2.html">Refrigerators</a></li>
-          <li><a href="product2.html">Microwaves</a></li>
-          <li><a href="product2.html">Air Conditioners</a></li>
-          <li><a href="product2.html">Dishwashers</a></li>
-          <li><a href="product2.html">Cooktops & Ovens</a></li>
-          <li><a href="product2.html">Vacuum Cleaners</a></li>
+          <li><a href="product2.html">Toys</a></li>
+          <li><a href="product2.html">Supplyments</a></li>
+          <li><a href="product2.html">Beauty</a></li>
+          <li><a href="product2.html">HomeGoods</a></li>
         </ul>
       </li>
       <li><a href="product2.html">Product</a></li>
@@ -1706,6 +1700,65 @@
       </div>
     </div>
   </footer>
-</body>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const splitButtons = document.querySelectorAll('.split-button');
+
+    splitButtons.forEach(button => {
+      // Check if this is a single-toggle action button
+      if (button.classList.contains('single-toggle-action')) {
+        button.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const parentItem = button.parentElement; // The list item wrapping the button
+          const dropdown = parentItem.querySelector('.mobile-dropdown');
+          const isExpanded = parentItem.classList.contains('active');
+
+          // Optional: Close other open dropdowns on desktop
+          if (window.innerWidth > 992) {
+            document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
+              if (item !== parentItem) {
+                item.classList.remove('active');
+                const btn = item.querySelector('.split-button');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+                const otherDropdown = item.querySelector('.mobile-dropdown');
+                if (otherDropdown) otherDropdown.style.maxHeight = '0';
+              }
+            });
+          }
+
+          // Toggle current state
+          parentItem.classList.toggle('active');
+          button.setAttribute('aria-expanded', !isExpanded);
+
+          // Handle dropdown animation (if using max-height transition)
+          if (dropdown) {
+            if (!isExpanded) {
+              dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
+            } else {
+              dropdown.style.maxHeight = '0';
+            }
+          }
+        });
+      }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.mobile-dropdown-item')) {
+        document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
+          item.classList.remove('active');
+          const btn = item.querySelector('.split-button');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+          const dropdown = item.querySelector('.mobile-dropdown');
+          if (dropdown) dropdown.style.maxHeight = '0';
+        });
+      }
+    });
+  });
+</script>
+
+</body>
 </html>
