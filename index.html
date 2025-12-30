@@ -810,79 +810,259 @@
       box-shadow: none;
     }
 
-    /* Newsletter Container Styles - Original Design from home.css */
+    /* --- Main Card Container --- */
+    .newsletter {
+      width: 100%;
+    max-width: 1101px;
+    background: var(--card-bg);
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    place-self: center;
+    scale: 0.9;
+    top: -35px;
+    }
+
+    /* --- Left Side (Visuals) --- */
+    /* Simulating the 3D graphic area from the screenshot */
+    .newsletter-visual {
+      flex: 1;
+      background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 350px;
+    }
+
+    .newsletter-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* If you don't have the 3D image, this ensures it looks clean */
+      mix-blend-mode: multiply;
+    }
+
+    /* --- Right Side (Content) --- */
+    .newsletter-container {
+      flex: 1;
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--text-main);
+      margin-bottom: 15px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* --- Form Styling --- */
     .newsletter-form {
       display: flex;
-      max-width: 500px;
-      align-items: center;
-      margin: 0 auto;
+      flex-direction: row; /* Default stacked matching the screenshot */
+      gap: 12px;
+      width: 100%;
+    }
+
+    /* Input Styling */
+    .input-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
     }
 
     .newsletter-form input {
-      flex: 1;
-      padding: 16px 16px;
+      width: 100%;
+      padding: 16px 20px 16px 50px; /* Space for icon */
       border: none;
-      width: 200px;
-      border-radius: 50px 0 0 50px;
-      font-size: 16px;
+      border-radius: 50px;
+      background-color: var(--input-bg);
+      font-size: 1rem;
+      outline: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: box-shadow 0.3s ease;
     }
 
-    .newsletter-form button {
-      background: linear-gradient(90deg, #0099ff, #1f6ed6);
-      color: white;
-      border: none;
-      padding: 18px 9px;
-      border-radius: 0 50px 50px 0;
-      font-weight: 600;
-      font-family: 'Rubik', sans-serif;
-      cursor: pointer;
-      transition: all 0.3s ease;
+    .newsletter-form input:focus {
+      box-shadow: 0 4px 20px rgba(118, 123, 245, 0.2);
+    }
+
+    /* Button Styling */
+    .btn-container {
+      --btn-color: #0099ff;
+      --corner-color: #0002;
+      --corner-dist: 24px;
+      --corner-multiplier: 1.5;
+      --timing-function: cubic-bezier(0, 0, 0, 2.5);
+      --duration: 250ms;
+
       position: relative;
-      overflow: hidden;
-    }
-
-    .newsletter-form button .btn-text {
       display: flex;
       align-items: center;
-      gap: 8px;
-      transition: opacity 0.3s ease;
+      justify-content: center;
     }
 
-    .newsletter-form button .custom-spinner {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    .submit {
+      position: relative;
+      width: auto;
+      min-height: calc(var(--corner-dist) * 2);
+      border-radius: 16px;
+      border: none;
+      padding: 0.25em 1em;
+
+      background: linear-gradient(#fff2, #0001), var(--btn-color);
+      box-shadow:
+        1px 1px 2px -1px #fff inset,
+        0 2px 1px #00000010,
+        0 4px 2px #00000010,
+        0 8px 4px #00000010,
+        0 16px 8px #00000010,
+        0 32px 16px #00000010;
+
+      transition:
+        transform var(--duration) var(--timing-function),
+        filter var(--duration) var(--timing-function);
+      -webkit-transition:
+        transform var(--duration) var(--timing-function),
+        -webkit-filter var(--duration) var(--timing-function);
+
+      cursor: pointer;
     }
 
-    .newsletter-form button.loading .btn-text {
-      opacity: 0;
+
+    .btn-container:has(.submit:hover),
+    .btn-container:has(.submit:focus-visible) {
+      .submit {
+        filter: drop-shadow(0 16px 16px #0002);
+        -webkit-filter: drop-shadow(0 16px 16px #0002);
+      }
     }
 
-    .newsletter-form button.loading .custom-spinner {
-      display: block;
+
+    .btn-container:has(.submit:active) {
+      .submit {
+        transform: scale(0.95);
+        filter: drop-shadow(0 10px 4px #0002);
+        -webkit-filter: drop-shadow(0 10px 4px #0002);
+      }
     }
 
-    /* Spinner Animation */
-    .custom-spinner .spinner {
-      font-size: 28px;
+    /* Privacy Note */
+    .privacy-note {
+      font-size: 0.75rem;
+      margin-top: 20px;
+      margin-bottom: 0;
+      color: #9ca3af;
+    }
+
+    /* --- RESPONSIVE LOGIC --- */
+
+    /* Tablet: Stack Card vertically, but keep form standard */
+    @media (max-width: 850px) {
+      .newsletter {
+        flex-direction: row;
+        max-width: fit-content;
+      }
+      .newsletter-visual {
+        min-height: 250px;
+      }
+      .newsletter-container {
+        padding: 50px;
+      }
+    }
+
+    @media (max-width: 768px){
+      .newsletter-container{
+        padding: 25px;
+      }
+      .newsletter{
+        scale: 0.9;
+        top: -10px;
+      }
+    }
+    @media (max-width: 480px) {
+      .newsletter-form {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+      .newsletter-visual img{
+        width: 50%;
+      }
+
+      .newsletter{
+        flex-direction: column;
+        scale: 0.9;
+        top: -50px;
+      }
+      .input-group {
+        flex: 1; /* Input takes available space */
+      }
+
+      .newsletter-form button {
+        width: auto; /* Button shrinks to content */
+        padding: 16px 20px;
+      }
+
+      /* Hide button text on small screens if needed to fit,
+         or just the icon. keeping strictly flex-row here. */
+      .btn-text {
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 401px) {
+      .newsletter-form {
+        flex-direction: column; /* Back to stacked */
+      }
+
+      .newsletter-form button {
+        width: 100%; /* Full width again */
+      }
+    }
+
+
+    /* --- SPINNER CSS (Keeping Intact) --- */
+    /* Hiding the spinner container by default, toggle via JS typically.
+       For this demo, we layout it inside the button but hidden or overlayed. */
+    .custom-spinner {
+      display: none; /* Set to block when loading */
+      margin-left: 10px;
+    }
+
+    /* To show spinner for demo purposes, you can uncomment below: */
+    /* .custom-spinner { display: block; } .btn-text { display: none; } */
+
+    .spinner {
+      font-size: 20px;
       position: relative;
       display: inline-block;
       width: 1em;
       height: 1em;
     }
 
-    .custom-spinner .spinner.center {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-    }
-
-    .custom-spinner .spinner .spinner-blade {
+    .spinner-blade {
       position: absolute;
       left: 0.4629em;
       bottom: 0;
@@ -890,116 +1070,26 @@
       height: 0.2777em;
       border-radius: 0.0555em;
       background-color: transparent;
-      -webkit-transform-origin: center -0.2222em;
-      -ms-transform-origin: center -0.2222em;
       transform-origin: center -0.2222em;
-      animation: spinner-fade9234 1s infinite linear;
+      animation: spinner-fade 1s infinite linear;
     }
 
-    .custom-spinner .spinner .spinner-blade:nth-child(1) {
-      -webkit-animation-delay: 0s;
-      animation-delay: 0s;
-      -webkit-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
+    .spinner-blade:nth-child(1) { animation-delay: 0s; transform: rotate(0deg); background-color: white; }
+    .spinner-blade:nth-child(2) { animation-delay: 0.083s; transform: rotate(30deg); background-color: white; }
+    .spinner-blade:nth-child(3) { animation-delay: 0.166s; transform: rotate(60deg); background-color: white; }
+    .spinner-blade:nth-child(4) { animation-delay: 0.249s; transform: rotate(90deg); background-color: white; }
+    .spinner-blade:nth-child(5) { animation-delay: 0.332s; transform: rotate(120deg); background-color: white; }
+    .spinner-blade:nth-child(6) { animation-delay: 0.415s; transform: rotate(150deg); background-color: white; }
+    .spinner-blade:nth-child(7) { animation-delay: 0.498s; transform: rotate(180deg); background-color: white; }
+    .spinner-blade:nth-child(8) { animation-delay: 0.581s; transform: rotate(210deg); background-color: white; }
+    .spinner-blade:nth-child(9) { animation-delay: 0.664s; transform: rotate(240deg); background-color: white; }
+    .spinner-blade:nth-child(10) { animation-delay: 0.747s; transform: rotate(270deg); background-color: white; }
+    .spinner-blade:nth-child(11) { animation-delay: 0.83s; transform: rotate(300deg); background-color: white; }
+    .spinner-blade:nth-child(12) { animation-delay: 0.913s; transform: rotate(330deg); background-color: white; }
 
-    .custom-spinner .spinner .spinner-blade:nth-child(2) {
-      -webkit-animation-delay: 0.083s;
-      animation-delay: 0.083s;
-      -webkit-transform: rotate(30deg);
-      -ms-transform: rotate(30deg);
-      transform: rotate(30deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(3) {
-      -webkit-animation-delay: 0.166s;
-      animation-delay: 0.166s;
-      -webkit-transform: rotate(60deg);
-      -ms-transform: rotate(60deg);
-      transform: rotate(60deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(4) {
-      -webkit-animation-delay: 0.249s;
-      animation-delay: 0.249s;
-      -webkit-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-      transform: rotate(90deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(5) {
-      -webkit-animation-delay: 0.332s;
-      animation-delay: 0.332s;
-      -webkit-transform: rotate(120deg);
-      -ms-transform: rotate(120deg);
-      transform: rotate(120deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(6) {
-      -webkit-animation-delay: 0.415s;
-      animation-delay: 0.415s;
-      -webkit-transform: rotate(150deg);
-      -ms-transform: rotate(150deg);
-      transform: rotate(150deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(7) {
-      -webkit-animation-delay: 0.498s;
-      animation-delay: 0.498s;
-      -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-      transform: rotate(180deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(8) {
-      -webkit-animation-delay: 0.581s;
-      animation-delay: 0.581s;
-      -webkit-transform: rotate(210deg);
-      -ms-transform: rotate(210deg);
-      transform: rotate(210deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(9) {
-      -webkit-animation-delay: 0.664s;
-      animation-delay: 0.664s;
-      -webkit-transform: rotate(240deg);
-      -ms-transform: rotate(240deg);
-      transform: rotate(240deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(10) {
-      -webkit-animation-delay: 0.747s;
-      animation-delay: 0.747s;
-      -webkit-transform: rotate(270deg);
-      -ms-transform: rotate(270deg);
-      transform: rotate(270deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(11) {
-      -webkit-animation-delay: 0.83s;
-      animation-delay: 0.83s;
-      -webkit-transform: rotate(300deg);
-      -ms-transform: rotate(300deg);
-      transform: rotate(300deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(12) {
-      -webkit-animation-delay: 0.913s;
-      animation-delay: 0.913s;
-      -webkit-transform: rotate(330deg);
-      -ms-transform: rotate(330deg);
-      transform: rotate(330deg);
-    }
-
-    @keyframes spinner-fade9234 {
-      0% {
-        background-color: #ffffff;
-      }
-
-      100% {
-        background-color: transparent;
-      }
+    @keyframes spinner-fade {
+      0% { opacity: 1; }
+      100% { opacity: 0.25; }
     }
 
     /* Dark mode styles for newsletter */
@@ -1474,7 +1564,18 @@ body.dark-mode .partner-logo-slider:after {
     scale: 0.8;
   }
 }
+.input-group .input {
+  font-size: 1rem;
+  border: 1.5px solid #000;
+  border-radius: 14px;
+  box-shadow: 2.5px 3px 0 #000;
+  outline: none;
+  transition: ease 0.25s;
+}
 
+.input-group .input:focus {
+  box-shadow: 5.5px 7px 0 black;
+}
 
   </style>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -2430,45 +2531,58 @@ body.dark-mode .partner-logo-slider:after {
 
 
 
+ <section class="newsletter" aria-labelledby="newsletter-heading">
 
+   <!-- Left Side Visual (Matches the image placement) -->
+   <div class="newsletter-visual">
+     <!-- Using the src from your snippet, or a placeholder if that path is local -->
+     <img src="assets/Newsletter-AdobeStock_602634440-c-darkovujic-transparent-01.webp" alt="3D Newsletter Illustration">
+   </div>
 
-  <div id="finisher-header" class="header finisher-header" style="width: 100%;height: 405px;z-index: 100;position: relative;">
-    <section class="newsletter" aria-labelledby="newsletter-heading">
-      <div class="newsletter-container">
-        <h2 id="newsletter-heading">Stay Updated with Blue Ember</h2>
-        <p>Subscribe to our newsletter for exclusive offers, product launches, and home appliance tips delivered
-          straight to your inbox.</p>
+   <!-- Right Side Content -->
+   <div class="newsletter-container">
+     <h2 id="newsletter-heading">Subscribe to Our Newsletter!</h2>
+     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque.</p>
 
-        <form class="newsletter-form" aria-label="Newsletter signup">
-          <input type="email" placeholder="Your email address" required>
-          <button type="submit">
-            <span class="btn-text">
-              <i class="fas fa-paper-plane"></i>
-              Subscribe
-            </span>
-            <div class="custom-spinner">
-              <div class="spinner center">
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-                <div class="spinner-blade"></div>
-              </div>
-            </div>
-          </button>
-        </form>
+     <form class="newsletter-form" aria-label="Newsletter signup">
+       <!-- Added wrapper for input to handle icon positioning -->
+       <div class="input-group">
 
-        <p class="privacy-note">We respect your privacy. Unsubscribe anytime. Read our <a href="privacy policy.html"
-            style="color: #040404;text-decoration:underline">Privacy Policy</a></p>
-      </div>
-    </section>
+         <i class="far fa-envelope"></i>
+         <input class="input" type="email" placeholder="Enter your email" required>
+       </div>
+
+       <div class="btn-container">
+       <div class="btn-container">
+         <button type="submit" class="submit">
+           <span class="btn-text">
+             SUBSCRIBE
+           </span>
+           <!-- Spinner Intact -->
+           <div class="custom-spinner">
+             <div class="spinner center">
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+               <div class="spinner-blade"></div>
+             </div>
+           </div>
+         </button>
+       </div>
+       </div>
+     </form>
+
+     <p class="privacy-note">We respect your privacy. Unsubscribe anytime.</p>
+   </div>
+ </section>
   </div>
 
 

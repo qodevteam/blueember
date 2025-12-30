@@ -1463,7 +1463,7 @@
   }
   .product-media{
     display: block;
-    min-width: 100px;
+    min-width: 60px;
     min-height: -webkit-fill-available;
     align-content: center;
     background: white;

@@ -2129,7 +2129,7 @@ body.dark-mode .msg-menu-btn:hover {
 
 .message-context-menu {
     position: absolute;
-    background: #1a1a1ae8;
+    background: #ffffff79;
     border: 1px solid #333;
     border-radius: 12px;
     padding: 4px;
@@ -2138,7 +2138,9 @@ body.dark-mode .msg-menu-btn:hover {
     z-index: 10500;
     display: none;
 }
-
+body.dark-mode .message-context-menu{
+    background: #0e0e0e61;
+}
 .message-context-menu.active {
     display: block;
     animation: popIn 0.34s ease;

@@ -14,6 +14,12 @@
 body.dark-mode {
     background-color: var(--dm-bg-primary) !important;
     color: var(--dm-text-primary) !important;
+    --card-bg: var(--dm-bg-secondary);
+    --text-main: var(--dm-text-primary);
+    --text-muted: var(--dm-text-secondary);
+    --input-bg: var(--dm-bg-tertiary);
+    --primary: var(--dm-accent);
+    --primary-hover: #0064e7;
 }
 
 /* Navbar */

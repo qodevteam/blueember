@@ -1509,6 +1509,7 @@
     body.dark-mode .profile-modal-close-btn:hover {
       background: rgba(0, 0, 0, 1);
     }
+    
   </style>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -1872,8 +1873,8 @@
       <!-- Welcome Header -->
       <div style="display: flex; align-items: center; margin-bottom: 20px; gap:15px;">
         <div class="profile-pic-container"
-          style="width: 150px;height: 150px;object-fit: cover;overflow: hidden;align-content: center;border-radius: 3284px;">
-          <img src="" id="dashboardProfilePic" class="profile-pic-img" style="display: none;">
+         style="width: 150px;height: 150px;object-fit: cover;overflow: hidden;align-content: center;border-radius: 3284px;background: #80808029;">
+          <img src="" id="dashboardProfilePic" class="profile-pic-img" style="display: none; width:100%; object-fit:contain;">
           <div class="profile-pic-placeholder" style="font-size: 32px;"><i class="bx bx-user"></i></div>
         </div>
         <div>
@@ -2065,7 +2066,7 @@
 
             <!-- Order Info Grid -->
             <div
-              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; background: #f8fafc; padding: 20px; border-radius: 12px;"
+              style="display: grid;grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));gap: 30px;padding: 20px;border-radius: 12px;border: 1px solid #7d7d7d;"
               id="orderInfoGrid">
               <div>
                 <h4 style="font-size: 14px; color: #64748b; margin-bottom: 10px; text-transform: uppercase;">

@@ -12,6 +12,16 @@
   font-family: 'Space Grotesk', sans-serif;
 }
 
+/* Newsletter Variables */
+:root {
+  --card-bg: #ffffff;
+  --text-main: #333333;
+  --text-muted: #666666;
+  --input-bg: #f8f9fa;
+  --primary: #0099ff;
+  --primary-hover: #007bff;
+}
+
 body {
   background: linear-gradient(135deg, #f5f7fa 0%, #98ccfa 100%);
   min-height: 100vh;

@@ -335,6 +335,7 @@
         #verify-email-btn {
             height: 50px;
         }
+
         .submit-btn:active {
             top: 1px;
             color: #ffffff;
@@ -873,11 +874,10 @@
                             <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
                             <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
                             <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
-                            <div class="spinner-blade"></div><div class="spinner-blade"></div><div class="spinner-blade"></div>
                         </div>
                     </button>
-                    <p id="recovery-error" style="color: lightcoral; font-size: 13px; margin-top: 10px; display: none;"></p>
                 </div>
+                <p id="recovery-error" style="color: lightcoral; font-size: 13px; margin-top: 10px; display: none; text-align: center; padding: 0 20px;"></p>
 
                 <!-- Step 2-A: Phone Verification (New Password) -->
                 <div id="step-phone" class="recovery-step" style="display:none;">
@@ -971,19 +971,20 @@
             document.getElementById('confirm-new-password').value = '';
             document.getElementById('verification-code').value = '';
             document.getElementById('recovery-error').style.display = 'none';
+            verifiedUser = null; // Reset verified user when modal closes/resets
         }
 
         // Global variable to store verified user
         let verifiedUser = null;
 
-        // --- Step 1: Verify Email & Check Phone ---
         const verifyEmailBtn = document.getElementById('verify-email-btn');
         verifyEmailBtn.addEventListener('click', () => {
-            const email = document.getElementById('recovery-email').value;
+            const emailInput = document.getElementById('recovery-email').value.trim();
             const errorMsg = document.getElementById('recovery-error');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             verifiedUser = null; // Reset
 
-            if (!email || !email.includes('@')) {
+            if (!emailInput || !emailRegex.test(emailInput)) {
                 errorMsg.textContent = "Please enter a valid email address.";
                 errorMsg.style.display = 'block';
                 return;
@@ -993,41 +994,58 @@
             // Loading state
             verifyEmailBtn.classList.add('loading');
             verifyEmailBtn.querySelector('.spinner').classList.add('active');
+            verifyEmailBtn.disabled = true;
 
             setTimeout(() => {
-                // Check if user exists and has phone
-                let phoneFound = false;
-                // Mock User lookup
-                if (window.DB && window.DB.getUsers) {
-                    const users = window.DB.getUsers();
-                    const user = users.find(u => u.email === email);
-                    if (user) {
-                        verifiedUser = user;
-                        // Check for phone in localStorage with user scope
-                        const phone = localStorage.getItem('be_phone_number_' + user.id);
-                        if (phone) phoneFound = true;
+                try {
+                    let userFound = false;
+                    let phoneFound = false;
+                    const normalizedEmail = emailInput.toLowerCase();
+
+                    // Mock User lookup
+                    if (window.DB && window.DB.getUsers) {
+                        const users = window.DB.getUsers();
+                        const user = users.find(u => u.email.toLowerCase() === normalizedEmail);
+                        if (user) {
+                            userFound = true;
+                            verifiedUser = user;
+                            // Check for phone in localStorage with user scope
+                            const phone = localStorage.getItem('be_phone_number_' + user.id) || localStorage.getItem('be_phone_number');
+                            if (phone) phoneFound = true;
+                        }
                     }
+
+                    if (!userFound) {
+                        // Account not found - Show specific error with Sign Up link
+                        verifyEmailBtn.classList.remove('loading');
+                        verifyEmailBtn.querySelector('.spinner').classList.remove('active');
+                        verifyEmailBtn.disabled = false;
+                        errorMsg.innerHTML = 'We did not find any account associated with this email. Try creating a new account instead. <a href="signup.html" style="color: var(--primary); font-weight: 600; text-decoration: underline;">Sign Up</a>';
+                        errorMsg.style.display = 'block';
+                        return;
+                    }
+
+                    // Transition
+                    verifyEmailBtn.classList.remove('loading');
+                    verifyEmailBtn.querySelector('.spinner').classList.remove('active');
+                    verifyEmailBtn.disabled = false;
+                    document.getElementById('step-email').style.display = 'none';
+
+                    if (phoneFound) {
+                        // Phone Found Flow (As per description: proceeds to verification code system)
+                        startCodeFlow();
+                    } else {
+                        // No Phone Flow (As per description: shows new password, confirm new password)
+                        document.getElementById('step-phone').style.display = 'block';
+                    }
+                } catch (err) {
+                    console.error("Recovery error:", err);
+                    verifyEmailBtn.classList.remove('loading');
+                    verifyEmailBtn.querySelector('.spinner').classList.remove('active');
+                    verifyEmailBtn.disabled = false;
+                    errorMsg.textContent = "An error occurred. Please try again later.";
+                    errorMsg.style.display = 'block';
                 }
-
-                // Fallback check for unscoped phone (demo mode)
-                if (!phoneFound && localStorage.getItem('be_phone_number')) {
-                    // Only if no user system or single user demo
-                    phoneFound = true;
-                }
-
-                // Transition
-                verifyEmailBtn.classList.remove('loading');
-                verifyEmailBtn.querySelector('.spinner').classList.remove('active');
-                document.getElementById('step-email').style.display = 'none';
-
-                if (phoneFound) {
-                    // Phone Found Flow
-                    document.getElementById('step-phone').style.display = 'block';
-                } else {
-                    // No Phone Flow
-                    startCodeFlow();
-                }
-
             }, 1000);
         });
 
@@ -1068,40 +1086,52 @@
             });
         }
 
-        // --- Password Reset Flow ---
         const resetPassBtn = document.getElementById('reset-password-btn');
         resetPassBtn.addEventListener('click', () => {
             const pass = document.getElementById('new-password').value;
             const confirm = document.getElementById('confirm-new-password').value;
+            const errorMsg = document.getElementById('recovery-error');
 
             if (!pass || pass !== confirm) {
-                alert("Passwords do not match or are empty.");
+                errorMsg.textContent = "Passwords do not match or are empty.";
+                errorMsg.style.display = 'block';
                 return;
             }
+            errorMsg.style.display = 'none';
 
             resetPassBtn.classList.add('loading');
             resetPassBtn.querySelector('.spinner').classList.add('active');
+            resetPassBtn.disabled = true;
 
             setTimeout(() => {
-                // Update Password in Mock DB
-                if (window.DB && verifiedUser) {
-                    const users = window.DB.getUsers();
-                    const userIndex = users.findIndex(u => u.id === verifiedUser.id);
-                    if (userIndex !== -1) {
-                        users[userIndex].password = pass; // Update password
-                        window.DB.saveUsers(users); // Save to localStorage
+                try {
+                    // Update Password in Mock DB
+                    if (window.DB && verifiedUser) {
+                        const users = window.DB.getUsers();
+                        const userIndex = users.findIndex(u => u.id === verifiedUser.id);
+                        if (userIndex !== -1) {
+                            users[userIndex].password = pass; // Update password
+                            window.DB.saveUsers(users); // Save to localStorage
 
-                        // Update our local reference
-                        verifiedUser.password = pass;
-                        verifiedUser = users[userIndex]; // Refresh from source
+                            // Update our local reference
+                            verifiedUser.password = pass;
+                            verifiedUser = users[userIndex]; // Refresh from source
 
-                        // SET SESSION
-                        window.DB.setSession(verifiedUser);
+                            // SET SESSION
+                            window.DB.setSession(verifiedUser);
+                        }
                     }
-                }
 
-                alert("Password reset successfully. Logging you in...");
-                window.location.href = 'index.html';
+                    alert("Password reset successfully. Logging you in...");
+                    window.location.href = 'index.html';
+                } catch (err) {
+                    console.error("Reset error:", err);
+                    resetPassBtn.classList.remove('loading');
+                    resetPassBtn.querySelector('.spinner').classList.remove('active');
+                    resetPassBtn.disabled = false;
+                    errorMsg.textContent = "An error occurred during password reset.";
+                    errorMsg.style.display = 'block';
+                }
             }, 1500);
         });
     </script>
@@ -1109,5 +1139,3 @@
 </body>
 
 </html>
-
-

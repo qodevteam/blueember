@@ -219,7 +219,7 @@ function renderAllOrders(filter = 'all') {
 
 // Format date string to readable format
 function formatOrderDate(dateString) {
-    if (!dateString) return 'N/A';
+    if (!dateString) return "n/a";
 
     // Handle both ISO strings and already formatted dates
     if (dateString.includes('T')) {
@@ -358,7 +358,7 @@ function viewOrderDetails(orderId) {
     if (shippingAddrElement && order.shipping) {
         shippingAddrElement.textContent = `${order.shipping.street}, ${order.shipping.city}, ${order.shipping.state} ${order.shipping.zip} `;
     }
-    if (paymentElement) paymentElement.textContent = order.payment || 'N/A';
+    if (paymentElement) paymentElement.textContent = order.payment || `${time}`;
 
     // Calculations
     const subtotal = order.total || 0;
@@ -394,7 +394,7 @@ function viewOrderDetails(orderId) {
     const itemsContainer = document.getElementById('detailItemsList');
     if (itemsContainer && order.items) {
         itemsContainer.innerHTML = order.items.map(item => `
-        <div style="display: flex; gap: 15px; border: 1px solid #e2e8f0; padding: 15px; border-radius: 12px; background: white; margin-bottom: 10px;">
+        <div style="display: flex; gap: 15px; border: 1px solid #7d7d7d; padding: 15px; border-radius: 12px; margin-bottom: 10px;">
             <div style="width: 60px; height: 60px; background: #f1f5f9; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
                 ${item.image ? `<img src="${item.image}" style="width:100%; height:100%; object-fit:contain;">` : '<i class="bx bx-package" style="font-size: 24px; color: #94a3b8;"></i>'}
             </div>
@@ -512,8 +512,8 @@ function renderTimeline(container, order) {
     else if (order.status === 'Delivered') statusMsg = 'Order successfully delivered';
 
     html += `
-        <div style="text-align: center; margin-top: 20px; font-size: 13px; color: #505c6e; background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; display:flex; align-items:center; justify-content:center; gap:8px;">
-            <i class='bx bx-time-five' style="color:#64748b"></i> 
+        <div style="text-align: center;margin-top: 20px;font-size: 13px;color: #505c6e;padding: 12px;border-radius: 14px;border: 1px solid #7d7d7d;display:flex;align-items:center;gap:8px;width: fit-content;place-self: center;">
+            <i class='bx bx-box-alt' style="color:#64748b"></i> 
             <span><strong>${statusMsg}</strong> <span style="color:#94a3b8">• ${time}</span></span>
         </div>
     `;
