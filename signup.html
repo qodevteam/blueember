@@ -8,7 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="css/cookie-consent.css">
     <script src="js/darkmode.js"></script>
+    <script src="js/cookie-manager.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -171,7 +173,7 @@
             box-shadow: 0 0.6rem #c9c3c3, 0 0 0 4px rgba(0, 153, 255, 0.1);
         }
 
-        .input-wrapper input:focus + i {
+        .input-wrapper input:focus+i {
             color: var(--primary);
         }
 
@@ -181,35 +183,36 @@
 
         /* 3D Button Styles */
         .button-3d {
-                position: relative;
-    top: -6px;
-    border: 1.5px rgb(0, 0, 0) inset;
-    border-radius: 10px;
-    transition: all 40ms ease-out;
-    margin-top: 31px;
-    margin-bottom: 1px;
-    margin-left: 2px;
-    margin-right: 2px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: #666666;
-    box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.1) inset, 0px 8px 0px -1px #f5f5f5, 0 8px 8px 1px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-    width: 96%;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
+            position: relative;
+            top: -6px;
+            border: 1.5px rgb(0, 0, 0) inset;
+            border-radius: 10px;
+            transition: all 40ms ease-out;
+            margin-top: 31px;
+            margin-bottom: 1px;
+            margin-left: 2px;
+            margin-right: 2px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: #666666;
+            box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.1) inset, 0px 8px 0px -1px #f5f5f5, 0 8px 8px 1px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            width: 96%;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
         }
+
         .button-3d:active {
-  top: 1px;
-  color: #ffffff;
-  box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-    0 1px 3px 1px rgba(136, 136, 136, 0.479);
-  background: linear-gradient(45deg, rgb(0, 255, 242), rgb(0, 145, 255));
-}
+            top: 1px;
+            color: #ffffff;
+            box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+                0 1px 3px 1px rgba(136, 136, 136, 0.479);
+            background: linear-gradient(45deg, rgb(0, 255, 242), rgb(0, 145, 255));
+        }
 
         .button-3d .button-text {
             transition: opacity 0.3s;
@@ -480,7 +483,8 @@
                     <input type="password" id="signup-password" placeholder="Create strong password" required
                         minlength="6">
                     <i class="fas fa-lock"></i>
-                    <i class="fas fa-eye password-toggle" id="toggleSignupPassword" style="margin-left: auto !important;"></i>
+                    <i class="fas fa-eye password-toggle" id="toggleSignupPassword"
+                        style="margin-left: auto !important;"></i>
                 </div>
             </div>
 
@@ -616,7 +620,7 @@
         document.head.appendChild(animationStyle);
 
         // Add splash effect on button click
-        signupBtn.addEventListener('mousedown', function(e) {
+        signupBtn.addEventListener('mousedown', function (e) {
             // Create splash effect container if it doesn't exist
             let splashContainer = this.querySelector('.splash-effects');
             if (!splashContainer) {
@@ -624,21 +628,21 @@
                 splashContainer.className = 'splash-effects';
                 this.appendChild(splashContainer);
             }
-            
+
             // Create splash circle
             const splashCircle = document.createElement('div');
             splashCircle.className = 'splash-circle';
-            
+
             // Position splash circle at click location
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             splashCircle.style.left = x + 'px';
             splashCircle.style.top = y + 'px';
-            
+
             splashContainer.appendChild(splashCircle);
-            
+
             // Remove splash circle after animation completes
             setTimeout(() => {
                 splashCircle.remove();
@@ -646,7 +650,7 @@
         });
 
         // Add path animation container
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const pathContainer = document.createElement('div');
             pathContainer.className = 'path-container';
             pathContainer.innerHTML = `
@@ -688,5 +692,3 @@
 </body>
 
 </html>
-
-

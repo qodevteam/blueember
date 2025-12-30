@@ -25,6 +25,8 @@
   <script src="js/cart.js" defer></script>
   <script src="js/order-manager.js" defer></script>
   <script src="js/cart-manager.js" defer></script>
+  <script src="js/cookie-manager.js" defer></script>
+  <link rel="stylesheet" href="css/cookie-consent.css">
   <script src="js/navigation.js" defer></script>
   <script src="js/dollar-font.js" defer></script>
   <script src="js/checkout.js"></script>
@@ -1509,7 +1511,6 @@
     body.dark-mode .profile-modal-close-btn:hover {
       background: rgba(0, 0, 0, 1);
     }
-    
   </style>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -1620,7 +1621,7 @@
                   <span>Purchases & Reviews</span>
                 </a>
               </li>
-              
+
               <li>
                 <a href="account.html" class="profile-dropdown-item">
                   <i class="fa-solid fa-toggle-off"></i>
@@ -1873,8 +1874,9 @@
       <!-- Welcome Header -->
       <div style="display: flex; align-items: center; margin-bottom: 20px; gap:15px;">
         <div class="profile-pic-container"
-         style="width: 150px;height: 150px;object-fit: cover;overflow: hidden;align-content: center;border-radius: 3284px;background: #80808029;">
-          <img src="" id="dashboardProfilePic" class="profile-pic-img" style="display: none; width:100%; object-fit:contain;">
+          style="width: 150px;height: 150px;object-fit: cover;overflow: hidden;align-content: center;border-radius: 3284px;background: #80808029;">
+          <img src="" id="dashboardProfilePic" class="profile-pic-img"
+            style="display: none; width:100%; object-fit:contain;">
           <div class="profile-pic-placeholder" style="font-size: 32px;"><i class="bx bx-user"></i></div>
         </div>
         <div>
@@ -2232,11 +2234,11 @@
       <div class="header-brand">
         <button class="icon-btn" id="emberSidebarToggle"><i class='bx bx-menu'></i></button>
         <div class="header-brand">
-          <!-- From Uiverse.io by dexter-st --> 
-<div class="loader-wrapper-chatbot-avatar">
-<span STYLE="FONT-FAMILY:'FontAwesome';z-index:1">E</span>
-  <div class="loader-chatbot-avatar"></div>
-</div>
+          <!-- From Uiverse.io by dexter-st -->
+          <div class="loader-wrapper-chatbot-avatar">
+            <span STYLE="FONT-FAMILY:'FontAwesome';z-index:1">E</span>
+            <div class="loader-chatbot-avatar"></div>
+          </div>
 
           <span class="header-title">Chatbase AI Agent</span>
         </div>

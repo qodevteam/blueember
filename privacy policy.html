@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="universal.css">
     <link href="darkmode.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/cookie-consent.css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="js/finisher-header.es5.min.js"></script>
     <script src="js/darkmode.js" defer></script>
+    <script src="js/cookie-manager.js" defer></script>
     <title>About Blue Ember Store - Smart Living, Simplified</title>
     <style>
         /* Reset and Base Styles */
@@ -17,6 +22,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -37,6 +43,7 @@
             padding: 2rem 0;
             text-align: center;
         }
+
         .header::before {
             content: '';
             position: absolute;
@@ -48,6 +55,7 @@
             opacity: 0.3;
             background-size: 100px 100px;
         }
+
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
@@ -57,7 +65,7 @@
             position: relative;
         }
 
-       
+
         /* Main Container */
         .container {
             max-width: 1200px;
@@ -67,7 +75,7 @@
             margin-top: -10rem;
             margin-bottom: 2rem;
             border-radius: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         /* Section Styles */
@@ -168,7 +176,7 @@
             margin: 1.5rem 0;
             border-radius: 5px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .data-table th,
@@ -216,78 +224,78 @@
 
 
         .magic-back-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  color: #2cd1ff;
-  text-decoration: none;
-  font-weight: 600;
-  z-index: 1000;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  gap: 8px;
-}
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            color: #2cd1ff;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 1000;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            gap: 8px;
+        }
 
-.magic-back-btn i {
-    position: absolute;
-    font-size: 1.1rem;
-    transition: all 0.7s ease;
-}
+        .magic-back-btn i {
+            position: absolute;
+            font-size: 1.1rem;
+            transition: all 0.7s ease;
+        }
 
-.idle-icon { 
-  opacity: 1;
-  transition: all 0.1s ease !important;
-  transform: translateX(0);
-}
+        .idle-icon {
+            opacity: 1;
+            transition: all 0.1s ease !important;
+            transform: translateX(0);
+        }
 
-.active-icon {
-    opacity: 0;
-    transition: all 0.1s ease !important;
-    transform: translateX(-8px);
-}
+        .active-icon {
+            opacity: 0;
+            transition: all 0.1s ease !important;
+            transform: translateX(-8px);
+        }
 
-.magic-back-btn span {
-  white-space: nowrap;
-  opacity: 0;
-  margin-left: 15px;
-  color: #000000;
-  margin-bottom: 4px;
-  transform: translateX(-8px);
-  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-}
+        .magic-back-btn span {
+            white-space: nowrap;
+            opacity: 0;
+            margin-left: 15px;
+            color: #000000;
+            margin-bottom: 4px;
+            transform: translateX(-8px);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
 
-.magic-back-btn:hover,
-.magic-back-btn:focus {
-  width: 160px;
-  border-radius: 30px;
-  padding: 0 20px;
-}
+        .magic-back-btn:hover,
+        .magic-back-btn:focus {
+            width: 160px;
+            border-radius: 30px;
+            padding: 0 20px;
+        }
 
-.magic-back-btn:hover .idle-icon,
-.magic-back-btn:focus .idle-icon {
-  opacity: 0;
-  transform: translateX(8px);
-}
+        .magic-back-btn:hover .idle-icon,
+        .magic-back-btn:focus .idle-icon {
+            opacity: 0;
+            transform: translateX(8px);
+        }
 
-.magic-back-btn:hover .active-icon,
-.magic-back-btn:focus .active-icon {
-  opacity: 1;
-  transform: translateX(-60px);
-}
+        .magic-back-btn:hover .active-icon,
+        .magic-back-btn:focus .active-icon {
+            opacity: 1;
+            transform: translateX(-60px);
+        }
 
-.magic-back-btn:hover span,
-.magic-back-btn:focus span {
-  opacity: 1;
-  transform: translateX(0);
-}
+        .magic-back-btn:hover span,
+        .magic-back-btn:focus span {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
 
 
@@ -432,52 +440,72 @@
         }
 
         /* Dark Mode Toggle Icons */
-        #moon-icon { display: block; }
-        body.dark-mode #moon-icon { display: none; }
-        body.dark-mode #sun-icon { display: block; }
-        #sun-icon { display: none; }
+        #moon-icon {
+            display: block;
+        }
+
+        body.dark-mode #moon-icon {
+            display: none;
+        }
+
+        body.dark-mode #sun-icon {
+            display: block;
+        }
+
+        #sun-icon {
+            display: none;
+        }
     </style>
 </head>
+
 <body>
 
     <a href="index.html" class="magic-back-btn" aria-label="Back to Home">
-   <i class="idle-icon fa-solid fa-chevron-left"></i>
-   <i class="active-icon fa-solid fa-chevron-left"></i>
-   <span>Back to Home</span>
- </a>
- <button id="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
-   <i class='bx bx-moon' id="moon-icon"></i>
-   <i class='bx bx-sun' id="sun-icon" style="display: none;"></i>
- </button>
+        <i class="idle-icon fa-solid fa-chevron-left"></i>
+        <i class="active-icon fa-solid fa-chevron-left"></i>
+        <span>Back to Home</span>
+    </a>
+    <button id="dark-mode-toggle"
+        style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
+        <i class='bx bx-moon' id="moon-icon"></i>
+        <i class='bx bx-sun' id="sun-icon" style="display: none;"></i>
+    </button>
     <header class="header">
         <div class="header finisher-header" style="width: 100%; height: 300px;"></div>
         <h1>Blue Ember Store</h1>
         <h2 style="position: relative; top: -254px;">Privacy Policy</h2>
-    </div>
+        </div>
     </header>
 
     <!-- Main Content -->
     <main class="container">
         <div class="section">
-            <p>At Blue Ember Store, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website (www.Blue Ember.com), make a purchase, create an account, or interact with our products and services. By using our website or services, you consent to the data practices described in this policy.</p>
+            <p>At Blue Ember Store, we are committed to protecting your privacy. This Privacy Policy explains how we
+                collect, use, disclose, and safeguard your information when you visit our website (www.Blue Ember.com),
+                make a purchase, create an account, or interact with our products and services. By using our website or
+                services, you consent to the data practices described in this policy.</p>
         </div>
 
         <div class="section">
             <h2>1. Information We Collect</h2>
-            <p>We collect various types of information to provide, maintain, and improve our services, personalize your experience, and communicate with you effectively.</p>
-            
+            <p>We collect various types of information to provide, maintain, and improve our services, personalize your
+                experience, and communicate with you effectively.</p>
+
             <h3>1.1 Personal Information</h3>
-            <p>We may collect personal information that identifies, relates to, describes, or is capable of being associated with you, including:</p>
+            <p>We may collect personal information that identifies, relates to, describes, or is capable of being
+                associated with you, including:</p>
             <ul>
                 <li>Name, email address, mailing address, and phone number</li>
-                <li>Payment information (credit/debit card details processed securely via third-party payment processors)</li>
+                <li>Payment information (credit/debit card details processed securely via third-party payment
+                    processors)</li>
                 <li>Shipping and billing addresses</li>
                 <li>Account credentials (username and password)</li>
                 <li>Customer service communications</li>
             </ul>
 
             <h3>1.2 Usage and Technical Information</h3>
-            <p>When you visit our website, we automatically collect certain information about your device and usage patterns:</p>
+            <p>When you visit our website, we automatically collect certain information about your device and usage
+                patterns:</p>
             <ul>
                 <li>IP address, browser type, and operating system</li>
                 <li>Pages visited, time spent on pages, and clickstream data</li>
@@ -493,7 +521,8 @@
                 <li>Personalize your experience and deliver targeted advertising</li>
                 <li>Improve website performance and security</li>
             </ul>
-            <p>You can manage your cookie preferences through your browser settings. Please note that disabling cookies may affect the functionality of our website.</p>
+            <p>You can manage your cookie preferences through your browser settings. Please note that disabling cookies
+                may affect the functionality of our website.</p>
         </div>
 
         <div class="section">
@@ -516,17 +545,22 @@
             <h2>3. Legal Basis for Processing</h2>
             <p>We process your personal information based on one or more of the following legal bases:</p>
             <ul>
-                <li><strong>Performance of a contract:</strong> To fulfill your order or provide services you've requested.</li>
-                <li><strong>Legitimate interests:</strong> To improve our services, ensure website security, and communicate about products you may find valuable.</li>
-                <li><strong>Consent:</strong> For marketing communications and certain tracking technologies, where required by law.</li>
-                <li><strong>Legal obligation:</strong> To comply with applicable laws, regulations, or legal processes.</li>
+                <li><strong>Performance of a contract:</strong> To fulfill your order or provide services you've
+                    requested.</li>
+                <li><strong>Legitimate interests:</strong> To improve our services, ensure website security, and
+                    communicate about products you may find valuable.</li>
+                <li><strong>Consent:</strong> For marketing communications and certain tracking technologies, where
+                    required by law.</li>
+                <li><strong>Legal obligation:</strong> To comply with applicable laws, regulations, or legal processes.
+                </li>
             </ul>
         </div>
 
         <div class="section">
             <h2>4. Sharing Your Information</h2>
-            <p>We do not sell your personal information. We may share your information only in the following circumstances:</p>
-            
+            <p>We do not sell your personal information. We may share your information only in the following
+                circumstances:</p>
+
             <h3>4.1 Service Providers</h3>
             <p>We engage third-party service providers to perform functions on our behalf, such as:</p>
             <ul>
@@ -536,16 +570,22 @@
                 <li>Email marketing platforms</li>
                 <li>Website hosting and analytics (e.g., Google Analytics)</li>
             </ul>
-            <p>These providers are contractually obligated to protect your information and may only use it to perform the services we request.</p>
+            <p>These providers are contractually obligated to protect your information and may only use it to perform
+                the services we request.</p>
 
             <h3>4.2 Business Transfers</h3>
-            <p>If we are involved in a merger, acquisition, asset sale, or bankruptcy, your personal information may be transferred as part of the transaction. We will notify you via email and/or a prominent notice on our website before your information becomes subject to a different privacy policy.</p>
+            <p>If we are involved in a merger, acquisition, asset sale, or bankruptcy, your personal information may be
+                transferred as part of the transaction. We will notify you via email and/or a prominent notice on our
+                website before your information becomes subject to a different privacy policy.</p>
 
             <h3>4.3 Legal Compliance</h3>
-            <p>We may disclose your information if required by law, regulation, legal process, or governmental request, or when we believe disclosure is necessary to protect our rights, property, or safety, or that of our customers or the public.</p>
+            <p>We may disclose your information if required by law, regulation, legal process, or governmental request,
+                or when we believe disclosure is necessary to protect our rights, property, or safety, or that of our
+                customers or the public.</p>
 
             <h3>4.4 Aggregated and Anonymized Data</h3>
-            <p>We may share aggregated, anonymized information that does not identify you personally with third parties for marketing, advertising, or research purposes.</p>
+            <p>We may share aggregated, anonymized information that does not identify you personally with third parties
+                for marketing, advertising, or research purposes.</p>
         </div>
 
         <div class="section">
@@ -557,57 +597,76 @@
                 <li>Regular security audits and vulnerability assessments</li>
                 <li>Access controls and employee training on data protection</li>
             </ul>
-            <p>While we use reasonable efforts to protect your information, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security.</p>
+            <p>While we use reasonable efforts to protect your information, no method of transmission over the internet
+                or electronic storage is 100% secure. We cannot guarantee absolute security.</p>
         </div>
 
         <div class="section">
             <h2>6. Your Rights and Choices</h2>
-            <p>Depending on your location and applicable laws, you may have the following rights regarding your personal information:</p>
-            
+            <p>Depending on your location and applicable laws, you may have the following rights regarding your personal
+                information:</p>
+
             <h3>6.1 Access and Portability</h3>
-            <p>You may request access to the personal information we hold about you and receive a copy in a structured, commonly used, and machine-readable format.</p>
+            <p>You may request access to the personal information we hold about you and receive a copy in a structured,
+                commonly used, and machine-readable format.</p>
 
             <h3>6.2 Correction and Deletion</h3>
-            <p>You may request to correct inaccurate information or request deletion of your personal information, subject to certain legal exceptions.</p>
+            <p>You may request to correct inaccurate information or request deletion of your personal information,
+                subject to certain legal exceptions.</p>
 
             <h3>6.3 Opt-Out of Marketing</h3>
-            <p>You may opt out of receiving marketing communications from us at any time by clicking the "unsubscribe" link in our emails or contacting us directly.</p>
+            <p>You may opt out of receiving marketing communications from us at any time by clicking the "unsubscribe"
+                link in our emails or contacting us directly.</p>
 
             <h3>6.4 Do Not Sell My Personal Information</h3>
-            <p>Under the California Consumer Privacy Act (CCPA), California residents have the right to opt out of the "sale" of their personal information. We do not sell personal information as defined by the CCPA.</p>
+            <p>Under the California Consumer Privacy Act (CCPA), California residents have the right to opt out of the
+                "sale" of their personal information. We do not sell personal information as defined by the CCPA.</p>
 
             <h3>6.5 Cookie Preferences</h3>
-            <p>You can manage your cookie preferences through your browser settings or by using our cookie consent manager if available on our website.</p>
+            <p>You can manage your cookie preferences through your browser settings or by using our cookie consent
+                manager if available on our website.</p>
 
             <h3>6.6 Limiting Use and Disclosure</h3>
-            <p>You may request to limit the use or disclosure of your personal information. We will respond to your request within 30 days.</p>
+            <p>You may request to limit the use or disclosure of your personal information. We will respond to your
+                request within 30 days.</p>
 
             <div class="important-notice">
-                <strong>To exercise any of these rights, please contact us at support@Blue Ember.com. We may require verification of your identity before fulfilling your request.</strong>
+                <strong>To exercise any of these rights, please contact us at support@Blue Ember.com. We may require
+                    verification of your identity before fulfilling your request.</strong>
             </div>
         </div>
 
         <div class="section">
             <h2>7. Children's Privacy</h2>
-            <p>Our website and services are not intended for individuals under the age of 18. We do not knowingly collect personal information from children under 18. If we become aware that we have collected personal information from a child under 18 without parental consent, we will take steps to delete that information.</p>
+            <p>Our website and services are not intended for individuals under the age of 18. We do not knowingly
+                collect personal information from children under 18. If we become aware that we have collected personal
+                information from a child under 18 without parental consent, we will take steps to delete that
+                information.</p>
         </div>
 
         <div class="section">
             <h2>8. International Transfers</h2>
-            <p>Your information may be transferred to and maintained on servers located outside your country of residence, including the United States. We will take appropriate safeguards to ensure your information receives the same level of protection as required by applicable data protection laws, including using standard contractual clauses approved by data protection authorities.</p>
+            <p>Your information may be transferred to and maintained on servers located outside your country of
+                residence, including the United States. We will take appropriate safeguards to ensure your information
+                receives the same level of protection as required by applicable data protection laws, including using
+                standard contractual clauses approved by data protection authorities.</p>
         </div>
 
         <div class="section">
             <h2>9. Third-Party Links</h2>
-            <p>Our website may contain links to third-party websites. This Privacy Policy applies only to our website. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit.</p>
+            <p>Our website may contain links to third-party websites. This Privacy Policy applies only to our website.
+                We are not responsible for the privacy practices or content of these external sites. We encourage you to
+                review the privacy policies of any third-party sites you visit.</p>
         </div>
 
         <div class="section">
             <h2>10. Data Retention</h2>
-            <p>We retain your personal information only as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law. For example:</p>
+            <p>We retain your personal information only as long as necessary to fulfill the purposes outlined in this
+                Privacy Policy, unless a longer retention period is required or permitted by law. For example:</p>
             <ul>
                 <li>Order records: Retained for 7 years for tax and legal compliance</li>
-                <li>Account information: Retained while your account is active and for a reasonable period thereafter</li>
+                <li>Account information: Retained while your account is active and for a reasonable period thereafter
+                </li>
                 <li>Marketing preferences: Retained until you unsubscribe or request deletion</li>
                 <li>Website usage data: Retained for 24 months for analytics purposes</li>
             </ul>
@@ -615,113 +674,127 @@
 
         <div class="section">
             <h2>11. Changes to This Privacy Policy</h2>
-            <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the updated policy on this page with a new "Last Updated" date. We encourage you to review this policy periodically for any changes. Your continued use of our website after any changes constitutes your acceptance of the revised policy.</p>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by
+                posting the updated policy on this page with a new "Last Updated" date. We encourage you to review this
+                policy periodically for any changes. Your continued use of our website after any changes constitutes
+                your acceptance of the revised policy.</p>
         </div>
 
         <div class="section">
             <h2>12. Contact Us</h2>
-            <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact our Data Protection Officer:</p>
-            
+            <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please
+                contact our Data Protection Officer:</p>
+
             <div class="contact-info">
-  <h3>Blue Ember Store</h3>
-  <address>
-    <ul>
-      <li>
-        <strong>Data Protection Officer:</strong> 
-        <a href="mailto:privacy@Blue Ember.com" >privacy@Blue Ember.com</a>
-      </li>
-      <li>
-        <strong>Customer Support:</strong> 
-        <a href="mailto:support@Blue Ember.com">support@Blue Ember.com</a>
-      </li>
-      <li>
-        <strong>Phone:</strong> 
-        <a href="tel:+18003867227" aria-label="Call Blue Ember Store at 1-800-386-7227">1-800-Blue Ember-AP (1-800-386-7227)</a>
-      </li>
-      <li>
-        <strong>Mailing Address:</strong> Blue Ember Store Inc, 123 Innovation Drive, San Francisco, CA 94105, United States.
-      </li>
-    </ul>
-  </address>
-</div>
+                <h3>Blue Ember Store</h3>
+                <address>
+                    <ul>
+                        <li>
+                            <strong>Data Protection Officer:</strong>
+                            <a href="mailto:privacy@Blue Ember.com">privacy@Blue Ember.com</a>
+                        </li>
+                        <li>
+                            <strong>Customer Support:</strong>
+                            <a href="mailto:support@Blue Ember.com">support@Blue Ember.com</a>
+                        </li>
+                        <li>
+                            <strong>Phone:</strong>
+                            <a href="tel:+18003867227" aria-label="Call Blue Ember Store at 1-800-386-7227">1-800-Blue
+                                Ember-AP (1-800-386-7227)</a>
+                        </li>
+                        <li>
+                            <strong>Mailing Address:</strong> Blue Ember Store Inc, 123 Innovation Drive, San Francisco,
+                            CA 94105, United States.
+                        </li>
+                    </ul>
+                </address>
+            </div>
 
             <h3>California Residents</h3>
-            <p>Under the California Consumer Privacy Act (CCPA), California residents may request information about our disclosure of personal information to third parties for direct marketing purposes. To make such a request, please contact us at privacy@Blue Ember.com.</p>
+            <p>Under the California Consumer Privacy Act (CCPA), California residents may request information about our
+                disclosure of personal information to third parties for direct marketing purposes. To make such a
+                request, please contact us at privacy@Blue Ember.com.</p>
 
             <h3>European Economic Area (EEA) and UK Residents</h3>
-            <p>If you are located in the EEA or UK, you have the right to lodge a complaint with your local data protection authority if you believe our processing of your personal information violates applicable data protection laws.</p>
+            <p>If you are located in the EEA or UK, you have the right to lodge a complaint with your local data
+                protection authority if you believe our processing of your personal information violates applicable data
+                protection laws.</p>
         </div>
 
         <div class="section">
-            <p><strong>Thank you for trusting Blue Ember Store with your information.</strong> We are committed to protecting your privacy and providing you with exceptional Store and service.</p>
+            <p><strong>Thank you for trusting Blue Ember Store with your information.</strong> We are committed to
+                protecting your privacy and providing you with exceptional Store and service.</p>
             <p>© 2025 Blue Ember Store, Inc. All rights reserved.</p>
         </div>
     </main>
-<footer class="site-footer">
-  <div class="footer-container">
-    <!-- Brand Section -->
-    <div class="footer-section">
-      <div class="footer-logo"><a href="index.html">
-          <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-            <SPAN>
-              <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-              <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-            </SPAN>
-          </div>
-        </a></div>
-      <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
-    </div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Brand Section -->
+            <div class="footer-section">
+                <div class="footer-logo"><a href="index.html">
+                        <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif"
+                                style="width: 30px;">
+                            <SPAN>
+                                <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+                                <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+                            </SPAN>
+                        </div>
+                    </a></div>
+                <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
+            </div>
 
-    <!-- Quick Links -->
-    <div class="footer-section">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="terms and services.html">Terms & Services</a></li>
-        <li><a href="privacy policy.html">Privacy Policy</a></li>
-        <li><a href="Contact.html">Contact</a></li>
-        <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
-        <li><a href="About us .html">About Us</a></li>
-      </ul>
-    </div>
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="terms and services.html">Terms & Services</a></li>
+                    <li><a href="privacy policy.html">Privacy Policy</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                    <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+                    <li><a href="About us .html">About Us</a></li>
+                </ul>
+            </div>
 
-    <!-- Categories -->
-    <div class="footer-section">
-      <h4>Categories</h4>
-      <ul>
-        <li><a href="product2.html">Toys</a></li>
-        <li><a href="product2.html">Supplyments</a></li>
-        <li><a href="product2.html">Beauty</a></li>
-        <li><a href="product2.html">HomeGoods</a></li>
-      </ul>
-    </div>
+            <!-- Categories -->
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="product2.html">Toys</a></li>
+                    <li><a href="product2.html">Supplyments</a></li>
+                    <li><a href="product2.html">Beauty</a></li>
+                    <li><a href="product2.html">HomeGoods</a></li>
+                </ul>
+            </div>
 
-    <!-- Contact Info -->
-    <div class="footer-section">
-      <h4>Contact Us</h4>
-      <ul>
-        <li>
-          <a>
-            <address>
-              <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
-              </p>
-              <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
-              <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
-                href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
-            </address>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>
+                        <a>
+                            <address>
+                                <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604
+                                        USA</a>
+                                </p>
+                                <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800)
+                                123-4567<br>
+                                <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                                    href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+                            </address>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-  <div class="footer-bottom">
-    <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
-    <div class="footer-legal">
-      <a href="privacy policy.html">Privacy Policy</a> •
-      <a href="terms and services.html">Terms of Service</a> •
-    </div>
-  </div>
-</footer>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="privacy policy.html">Privacy Policy</a> •
+                <a href="terms and services.html">Terms of Service</a> •
+            </div>
+        </div>
+    </footer>
 
 
     <!-- Scroll to Top Button -->
@@ -737,7 +810,7 @@
         }
 
         // Add event listener for scroll to top button
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const scrollTopBtn = document.getElementById('scrollTopBtn');
             if (scrollTopBtn) {
                 scrollTopBtn.addEventListener('click', scrollToTop);
@@ -758,42 +831,41 @@
         });
 
         new FinisherHeader({
-  "count": 12,
-  "size": {
-    "min": 1300,
-    "max": 1500,
-    "pulse": 1.6
-  },
-  "speed": {
-    "x": {
-      "min": 1.4,
-      "max": 5
-    },
-    "y": {
-      "min": 1.4,
-      "max": 5
-    }
-  },
-  "colors": {
-    "background": "#373333",
-    "particles": [
-      "#14a394",
-      "#10a2da"
-    ]
-  },
-  "blending": "none",
-  "opacity": {
-    "center": 0.6,
-    "edge": 0
-  },
-  "skew": 0,
-  "shapes": [
-    "c"
-  ]
-});
+            "count": 12,
+            "size": {
+                "min": 1300,
+                "max": 1500,
+                "pulse": 1.6
+            },
+            "speed": {
+                "x": {
+                    "min": 1.4,
+                    "max": 5
+                },
+                "y": {
+                    "min": 1.4,
+                    "max": 5
+                }
+            },
+            "colors": {
+                "background": "#373333",
+                "particles": [
+                    "#14a394",
+                    "#10a2da"
+                ]
+            },
+            "blending": "none",
+            "opacity": {
+                "center": 0.6,
+                "edge": 0
+            },
+            "skew": 0,
+            "shapes": [
+                "c"
+            ]
+        });
 
     </script>
 </body>
+
 </html>
-
-

@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="universal.css">
     <link href="darkmode.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/cookie-consent.css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="js/finisher-header.es5.min.js"></script>
     <script src="js/darkmode.js" defer></script>
+    <script src="js/cookie-manager.js" defer></script>
     <title>About Blue Store - Smart Living, Simplified</title>
     <style>
         /* Reset and Base Styles */
@@ -17,6 +22,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -94,7 +100,7 @@
             padding: 2rem;
             border-radius: 20px;
             background-color: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .section h2 {
@@ -170,7 +176,8 @@
             min-width: 300px;
             font-family: 'rubik', sans-serif;
         }
-        .hero-text p{
+
+        .hero-text p {
             font-family: 'rubik', sans-serif;
             font-size: 15px;
         }
@@ -206,7 +213,7 @@
 
         .value-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
         .value-icon {
@@ -327,7 +334,7 @@
             background-color: white;
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             border-left: 4px solid #00c1cd;
         }
 
@@ -349,7 +356,7 @@
             text-align: center;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
 
@@ -462,7 +469,7 @@
             padding: 2rem;
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .sustainability-icon {
@@ -516,7 +523,7 @@
             font-weight: 600;
             font-size: 1.2rem;
             text-decoration: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
@@ -524,84 +531,84 @@
 
         .btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
 
-        
-.magic-back-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  color: #2cd1ff;
-  text-decoration: none;
-  font-weight: 600;
-  z-index: 1000;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  gap: 8px;
-}
 
-.magic-back-btn i {
-    position: absolute;
-    font-size: 1.1rem;
-    transition: all 0.7s ease;
-}
+        .magic-back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            color: #2cd1ff;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 1000;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            gap: 8px;
+        }
 
-.idle-icon { 
-  opacity: 1;
-  transition: all 0.1s ease !important;
-  transform: translateX(0);
-}
+        .magic-back-btn i {
+            position: absolute;
+            font-size: 1.1rem;
+            transition: all 0.7s ease;
+        }
 
-.active-icon {
-    opacity: 0;
-    transition: all 0.1s ease !important;
-    transform: translateX(-8px);
-}
+        .idle-icon {
+            opacity: 1;
+            transition: all 0.1s ease !important;
+            transform: translateX(0);
+        }
 
-.magic-back-btn span {
-  white-space: nowrap;
-  opacity: 0;
-  margin-left: 15px;
-  color: #000000;
-  margin-bottom: 4px;
-  transform: translateX(-8px);
-  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-}
+        .active-icon {
+            opacity: 0;
+            transition: all 0.1s ease !important;
+            transform: translateX(-8px);
+        }
 
-.magic-back-btn:hover,
-.magic-back-btn:focus {
-  width: 160px;
-  border-radius: 30px;
-  padding: 0 20px;
-}
+        .magic-back-btn span {
+            white-space: nowrap;
+            opacity: 0;
+            margin-left: 15px;
+            color: #000000;
+            margin-bottom: 4px;
+            transform: translateX(-8px);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
 
-.magic-back-btn:hover .idle-icon,
-.magic-back-btn:focus .idle-icon {
-  opacity: 0;
-  transform: translateX(8px);
-}
+        .magic-back-btn:hover,
+        .magic-back-btn:focus {
+            width: 160px;
+            border-radius: 30px;
+            padding: 0 20px;
+        }
 
-.magic-back-btn:hover .active-icon,
-.magic-back-btn:focus .active-icon {
-  opacity: 1;
-  transform: translateX(-60px);
-}
+        .magic-back-btn:hover .idle-icon,
+        .magic-back-btn:focus .idle-icon {
+            opacity: 0;
+            transform: translateX(8px);
+        }
 
-.magic-back-btn:hover span,
-.magic-back-btn:focus span {
-  opacity: 1;
-  transform: translateX(0);
-}
+        .magic-back-btn:hover .active-icon,
+        .magic-back-btn:focus .active-icon {
+            opacity: 1;
+            transform: translateX(-60px);
+        }
+
+        .magic-back-btn:hover span,
+        .magic-back-btn:focus span {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
         /* Footer */
         .footer {
@@ -636,26 +643,26 @@
 
         @media (max-width: 480px) {
             .header h1 {
-            font-family: 'momo trust display', sans-serif;
-            font-size: 33px;
-            margin-top: 3rem !important;
-            margin-bottom: -0.5rem !important;
-            font-weight: 400;
-            letter-spacing: -0.5px;
-        }
+                font-family: 'momo trust display', sans-serif;
+                font-size: 33px;
+                margin-top: 3rem !important;
+                margin-bottom: -0.5rem !important;
+                font-weight: 400;
+                letter-spacing: -0.5px;
+            }
         }
 
 
         @media (max-width: 768px) {
             .header h1 {
-            font-family: 'momo trust display', sans-serif;
-            font-size: 33px;
-            margin-top: 1rem;
-            margin-bottom: -0.5rem;
-            font-weight: 400;
-            letter-spacing: -0.5px;
-        }
-            
+                font-family: 'momo trust display', sans-serif;
+                font-size: 33px;
+                margin-top: 1rem;
+                margin-bottom: -0.5rem;
+                font-weight: 400;
+                letter-spacing: -0.5px;
+            }
+
             .header h2 {
                 font-size: 1.5rem;
                 margin-top: 30px;
@@ -713,21 +720,23 @@
                 font-size: 1.1rem;
             }
         }
-         @media (max-width: 480px) {
-            .header{
+
+        @media (max-width: 480px) {
+            .header {
                 padding: 0.5rem;
             }
-            .HEADER H1{
-                
+
+            .HEADER H1 {
+
                 font-family: 'momo trust display', sans-serif;
-    font-size: 3rem;
-    margin-top: 30px;
-    line-height: 41.5px;
-    margin-bottom: -1.5rem;
-    font-weight: 400;
-    letter-spacing: -0.5px;
+                font-size: 3rem;
+                margin-top: 30px;
+                line-height: 41.5px;
+                margin-bottom: -1.5rem;
+                font-weight: 400;
+                letter-spacing: -0.5px;
             }
-         }
+        }
 
         /* Scroll to Top Button */
         .scroll-to-top {
@@ -871,27 +880,42 @@
         }
 
         /* Dark Mode Toggle Icons */
-        #moon-icon { display: block; }
-        body.dark-mode #moon-icon { display: none; }
-        body.dark-mode #sun-icon { display: block; }
-        #sun-icon { display: none; }
+        #moon-icon {
+            display: block;
+        }
+
+        body.dark-mode #moon-icon {
+            display: none;
+        }
+
+        body.dark-mode #sun-icon {
+            display: block;
+        }
+
+        #sun-icon {
+            display: none;
+        }
     </style>
 </head>
+
 <body>
     <a href="index.html" class="magic-back-btn" aria-label="Back to Home">
-   <i class="idle-icon fa-solid fa-chevron-left"></i>
-   <i class="active-icon fa-solid fa-chevron-left"></i>
-   <span>Back to Home</span>
- </a>
- <button id="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
-   <i class='bx bx-moon' id="moon-icon"></i>
-   <i class='bx bx-sun' id="sun-icon" style="display: none;"></i>
- </button>
-<div class="header finisher-header" style="width: 100%; height: 300px;">
-        <a href="index.html"><h1 style="position: relative; z-index: 1000;">Blue Ember Store</h1></a>
+        <i class="idle-icon fa-solid fa-chevron-left"></i>
+        <i class="active-icon fa-solid fa-chevron-left"></i>
+        <span>Back to Home</span>
+    </a>
+    <button id="dark-mode-toggle"
+        style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
+        <i class='bx bx-moon' id="moon-icon"></i>
+        <i class='bx bx-sun' id="sun-icon" style="display: none;"></i>
+    </button>
+    <div class="header finisher-header" style="width: 100%; height: 300px;">
+        <a href="index.html">
+            <h1 style="position: relative; z-index: 1000;">Blue Ember Store</h1>
+        </a>
         <h2 id="hero-text">Where Innovation Meets Everyday Living</h2>
         <p class="tagline">Designing smarter, more sustainable Store for the modern household</p>
-</div>
+    </div>
 
 
 
@@ -900,16 +924,29 @@
 
         <div class="section">
             <h2>Our Story</h2>
-            <p>Founded in 2018, Blue Ember Store began with a simple yet powerful vision: to transform the mundane into the magnificent. What started as a small team of engineers and designers in San Francisco has grown into a global leader in smart home technology, dedicated to creating appliances that don't just function—but elevate your daily life.</p>
-            <p>Our journey  began when our founders noticed how traditional Store often added complexity rather than convenience. They asked: "What if appliances could anticipate your needs, adapt to your lifestyle, and reduce your environmental footprint?" This question became our mission.</p>
-            <p>Today, Blue Ember combines cutting-edge technology with timeless design to create appliances that are as beautiful as they are intelligent. From our award-winning smart refrigerators to our energy-efficient washing systems, every product is engineered with one goal: to make your home smarter, simpler, and more beautiful.</p>
+            <p>Founded in 2018, Blue Ember Store began with a simple yet powerful vision: to transform the mundane into
+                the magnificent. What started as a small team of engineers and designers in San Francisco has grown into
+                a global leader in smart home technology, dedicated to creating appliances that don't just function—but
+                elevate your daily life.</p>
+            <p>Our journey began when our founders noticed how traditional Store often added complexity rather than
+                convenience. They asked: "What if appliances could anticipate your needs, adapt to your lifestyle, and
+                reduce your environmental footprint?" This question became our mission.</p>
+            <p>Today, Blue Ember combines cutting-edge technology with timeless design to create appliances that are as
+                beautiful as they are intelligent. From our award-winning smart refrigerators to our energy-efficient
+                washing systems, every product is engineered with one goal: to make your home smarter, simpler, and more
+                beautiful.</p>
         </div>
 
         <div class="hero-image">
             <img src="assets/ajhjksjjwedf-removebg-preview.png" alt="Blue Ember Smart Store">
             <div class="hero-text">
-                <p>At Blue Ember, we believe that great design should be intuitive, not complicated. Our appliances are engineered to seamlessly integrate into your life—learning your habits, anticipating your needs, and simplifying your routine. We don't just build appliances; we create intelligent companions for your home.</p>
-                <p>Every Blue Ember product undergoes rigorous testing in real-world conditions to ensure durability, efficiency, and performance. Our commitment to quality means you can trust your Blue Ember appliance to serve you reliably for years to come.</p>
+                <p>At Blue Ember, we believe that great design should be intuitive, not complicated. Our appliances are
+                    engineered to seamlessly integrate into your life—learning your habits, anticipating your needs, and
+                    simplifying your routine. We don't just build appliances; we create intelligent companions for your
+                    home.</p>
+                <p>Every Blue Ember product undergoes rigorous testing in real-world conditions to ensure durability,
+                    efficiency, and performance. Our commitment to quality means you can trust your Blue Ember appliance
+                    to serve you reliably for years to come.</p>
             </div>
         </div>
 
@@ -920,22 +957,26 @@
                 <div class="value-card">
                     <div class="value-icon">💡</div>
                     <h3>Innovation</h3>
-                    <p>We relentlessly pursue new technologies and smarter solutions that transform everyday tasks into effortless experiences.</p>
+                    <p>We relentlessly pursue new technologies and smarter solutions that transform everyday tasks into
+                        effortless experiences.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">🌱</div>
                     <h3>Sustainability</h3>
-                    <p>Every product is designed with environmental responsibility in mind—from energy efficiency to recyclable materials.</p>
+                    <p>Every product is designed with environmental responsibility in mind—from energy efficiency to
+                        recyclable materials.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">✨</div>
                     <h3>Design Excellence</h3>
-                    <p>We believe beautiful design enhances daily life. Our appliances are as visually stunning as they are functionally superior.</p>
+                    <p>We believe beautiful design enhances daily life. Our appliances are as visually stunning as they
+                        are functionally superior.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">🤝</div>
                     <h3>Customer First</h3>
-                    <p>Your satisfaction is our ultimate measure of success. We listen, adapt, and go above and beyond for every customer.</p>
+                    <p>Your satisfaction is our ultimate measure of success. We listen, adapt, and go above and beyond
+                        for every customer.</p>
                 </div>
             </div>
         </div>
@@ -945,11 +986,14 @@
             <div class="mission-vision">
                 <div class="mission-card">
                     <h3>Our Mission</h3>
-                    <p>To empower households worldwide with intelligent, sustainable, and beautifully designed appliances that simplify daily routines, reduce environmental impact, and enhance the quality of everyday life.</p>
+                    <p>To empower households worldwide with intelligent, sustainable, and beautifully designed
+                        appliances that simplify daily routines, reduce environmental impact, and enhance the quality of
+                        everyday life.</p>
                 </div>
                 <div class="vision-card">
                     <h3>Our Vision</h3>
-                    <p>A world where every home is a sanctuary of effortless living—where technology anticipates needs, sustainability is seamless, and design elevates the human experience.</p>
+                    <p>A world where every home is a sanctuary of effortless living—where technology anticipates needs,
+                        sustainability is seamless, and design elevates the human experience.</p>
                 </div>
             </div>
         </div>
@@ -961,161 +1005,171 @@
                     <div class="timeline-date">2018</div>
                     <div class="timeline-content">
                         <h3>Founding</h3>
-                        <p>Blue Ember Store was founded by a team of engineers and designers passionate about creating smarter home solutions. Our first prototype, the Blue Ember Smart Refrigerator, was developed in our San Francisco garage.</p>
+                        <p>Blue Ember Store was founded by a team of engineers and designers passionate about creating
+                            smarter home solutions. Our first prototype, the Blue Ember Smart Refrigerator, was
+                            developed in our San Francisco garage.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2020</div>
                     <div class="timeline-content">
                         <h3>Product Launch</h3>
-                        <p>We launched our first commercial products: the Blue Ember Smart Refrigerator and Blue Ember Energy-Smart Washer. Both received industry awards for innovation and design.</p>
+                        <p>We launched our first commercial products: the Blue Ember Smart Refrigerator and Blue Ember
+                            Energy-Smart Washer. Both received industry awards for innovation and design.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2021</div>
                     <div class="timeline-content">
                         <h3>Global Expansion</h3>
-                        <p>Blue Ember expanded to Canada and Europe, establishing our first international distribution centers and beginning partnerships with major retailers.</p>
+                        <p>Blue Ember expanded to Canada and Europe, establishing our first international distribution
+                            centers and beginning partnerships with major retailers.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2022</div>
                     <div class="timeline-content">
                         <h3>Smart Ecosystem</h3>
-                        <p>We launched the Blue Ember Home App, creating a unified ecosystem that connects all our appliances for seamless control and intelligent automation.</p>
+                        <p>We launched the Blue Ember Home App, creating a unified ecosystem that connects all our
+                            appliances for seamless control and intelligent automation.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2023</div>
                     <div class="timeline-content">
                         <h3>Carbon Neutral Operations</h3>
-                        <p>Blue Ember became a certified carbon-neutral company, offsetting 100% of our operational emissions and implementing sustainable manufacturing practices across all facilities.</p>
+                        <p>Blue Ember became a certified carbon-neutral company, offsetting 100% of our operational
+                            emissions and implementing sustainable manufacturing practices across all facilities.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2025</div>
                     <div class="timeline-content">
                         <h3>1 Million Homes</h3>
-                        <p>Over 1 million households worldwide now trust Blue Ember appliances to make their daily lives smarter, simpler, and more beautiful.</p>
+                        <p>Over 1 million households worldwide now trust Blue Ember appliances to make their daily lives
+                            smarter, simpler, and more beautiful.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        
-                </main>
+
+    </main>
 
 
-<footer class="site-footer">
-  <div class="footer-container">
-    <!-- Brand Section -->
-    <div class="footer-section">
-      <div class="footer-logo"><a href="index.html">
-          <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-            <SPAN>
-              <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-              <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-            </SPAN>
-          </div>
-        </a></div>
-      <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
-    </div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Brand Section -->
+            <div class="footer-section">
+                <div class="footer-logo"><a href="index.html">
+                        <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif"
+                                style="width: 30px;">
+                            <SPAN>
+                                <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
+                                <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
+                            </SPAN>
+                        </div>
+                    </a></div>
+                <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
+            </div>
 
-    <!-- Quick Links -->
-    <div class="footer-section">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="terms and services.html">Terms & Services</a></li>
-        <li><a href="privacy policy.html">Privacy Policy</a></li>
-        <li><a href="Contact.html">Contact</a></li>
-        <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
-        <li><a href="About us .html">About Us</a></li>
-      </ul>
-    </div>
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="terms and services.html">Terms & Services</a></li>
+                    <li><a href="privacy policy.html">Privacy Policy</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                    <li><a href="Refund and Exchange.html">Refund & Exchange</a></li>
+                    <li><a href="About us .html">About Us</a></li>
+                </ul>
+            </div>
 
-    <!-- Categories -->
-    <div class="footer-section">
-      <h4>Categories</h4>
-      <ul>
-        <li><a href="product2.html">Toys</a></li>
-        <li><a href="product2.html">Supplyments</a></li>
-        <li><a href="product2.html">Beauty</a></li>
-        <li><a href="product2.html">HomeGoods</a></li>
-      </ul>
-    </div>
+            <!-- Categories -->
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="product2.html">Toys</a></li>
+                    <li><a href="product2.html">Supplyments</a></li>
+                    <li><a href="product2.html">Beauty</a></li>
+                    <li><a href="product2.html">HomeGoods</a></li>
+                </ul>
+            </div>
 
-    <!-- Contact Info -->
-    <div class="footer-section">
-      <h4>Contact Us</h4>
-      <ul>
-        <li>
-          <a>
-            <address>
-              <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604 USA</a>
-              </p>
-              <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800) 123-4567<br>
-              <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
-                href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
-            </address>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>
+                        <a>
+                            <address>
+                                <p><a href="https://maps.app.goo.gl/BGBAUvaKPHLhTqvh6">Hasbrouck Heights NJ 07604
+                                        USA</a>
+                                </p>
+                                <i class="fa-solid fa-phone-volume" style="color:rgb(0, 89, 255)"></i> +1 (800)
+                                123-4567<br>
+                                <i class="fa-solid fa-envelope" style="color:rgb(0, 89, 255)"></i> <a
+                                    href="mailto:info.blueember@gmail.com">info.blueember@gmail.com</a>
+                            </address>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-  <div class="footer-bottom">
-    <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
-    <div class="footer-legal">
-      <a href="privacy policy.html">Privacy Policy</a> •
-      <a href="terms and services.html">Terms of Service</a> •
-    </div>
-  </div>
-</footer>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Blue Ember Store. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="privacy policy.html">Privacy Policy</a> •
+                <a href="terms and services.html">Terms of Service</a> •
+            </div>
+        </div>
+    </footer>
 
 
 
-<!-- Scroll to Top Button -->
+    <!-- Scroll to Top Button -->
     <button class="scroll-to-top" id="scrollTopBtn" title="Go to top">↑</button>
-        
 
 
-<script type="text/javascript">
-new FinisherHeader({
-  "count": 12,
-  "size": {
-    "min": 1300,
-    "max": 1500,
-    "pulse": 1.6
-  },
-  "speed": {
-    "x": {
-      "min": 1.4,
-      "max": 5
-    },
-    "y": {
-      "min": 1.4,
-      "max": 5
-    }
-  },
-  "colors": {
-    "background": "#373333",
-    "particles": [
-      "#14a394",
-      "#10a2da"
-    ]
-  },
-  "blending": "none",
-  "opacity": {
-    "center": 0.6,
-    "edge": 0
-  },
-  "skew": 0,
-  "shapes": [
-    "c"
-  ]
-});
 
-// Scroll to top functionality
+    <script type="text/javascript">
+        new FinisherHeader({
+            "count": 12,
+            "size": {
+                "min": 1300,
+                "max": 1500,
+                "pulse": 1.6
+            },
+            "speed": {
+                "x": {
+                    "min": 1.4,
+                    "max": 5
+                },
+                "y": {
+                    "min": 1.4,
+                    "max": 5
+                }
+            },
+            "colors": {
+                "background": "#373333",
+                "particles": [
+                    "#14a394",
+                    "#10a2da"
+                ]
+            },
+            "blending": "none",
+            "opacity": {
+                "center": 0.6,
+                "edge": 0
+            },
+            "skew": 0,
+            "shapes": [
+                "c"
+            ]
+        });
+
+        // Scroll to top functionality
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
@@ -1124,14 +1178,13 @@ new FinisherHeader({
         }
 
         // Add event listener for scroll to top button
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const scrollTopBtn = document.getElementById('scrollTopBtn');
             if (scrollTopBtn) {
                 scrollTopBtn.addEventListener('click', scrollToTop);
             }
         });
-</script>
+    </script>
 </body>
+
 </html>
-
-

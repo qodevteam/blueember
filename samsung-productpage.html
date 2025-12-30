@@ -21,6 +21,7 @@
   <link href="mobile-sidebar.css" rel="stylesheet">
   <script src="js/finisher-header.es5.min.js"></script>
   <link rel="stylesheet" href="product.css">
+  <link rel="stylesheet" href="css/cookie-consent.css">
 
   <script src="js/cart.js" defer></script>
   <script src="js/order-manager.js" defer></script>
@@ -32,6 +33,7 @@
   <script src="js/darkmode.js" defer></script>
   <script src="js/app.js" defer></script>
   <script src="js/db-client.js"></script>
+  <script src="js/cookie-manager.js" defer></script>
 
   <!-- Logout Modal Script (MUST load first to avoid conflicts) -->
   <script src="js/logout-modal.js"></script>
@@ -53,569 +55,586 @@
     });
   </script>
   <link href="RESPONSIVENESS.css" rel="stylesheet">
-  <link rel="preload" href="https://cdn.boxicons.com/3.0.6/fonts/boxicons.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.boxicons.com/3.0.6/fonts/boxicons.woff2" as="font" type="font/woff2"
+    crossorigin>
   <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-  <style>
-    /* Media query for max-width: 700px - Space for manual editing */
-    @media (max-width: 700px) {
-      .hero-images .hero-img {
-        height: 285PX;
-        POSITION: RELATIVE;
-        TOP: -13PX;
-      }
+<style>
+  /* Media query for max-width: 700px - Space for manual editing */
+  @media (max-width: 700px) {
+    .hero-images .hero-img {
+      height: 285PX;
+      POSITION: RELATIVE;
+      TOP: -13PX;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-images .hero-img {
+      height: 270PX;
+      POSITION: RELATIVE;
+      TOP: -30PX;
     }
 
-    @media (max-width: 480px) {
-      .hero-images .hero-img {
-        height: 270PX;
-        POSITION: RELATIVE;
-        TOP: -30PX;
-      }
-
-      body {
-        padding: 0px;
-      }
-
-      .search-container::before,
-      .search-container::after {
-        inset: -2px !important;
-      }
-
-      .search-input {
-        margin: 0px -35px 0px 0px !important;
-      }
-
-      .search-button {
-        right: -8px !important;
-      }
-
-      .search-button i {
-        padding: 8px 19px 8px 19px !important;
-      }
+    body {
+      padding: 0px;
     }
 
-    /* --- Animated Search Bar Styles --- */
-    /* Define the Angle Property for smooth rotation */
-    @property --angle {
-      syntax: '<angle>';
-      initial-value: 0deg;
-      inherits: false;
-    }
-
-    /* The Animated RGB Border & Glow */
     .search-container::before,
     .search-container::after {
-      content: '';
-      position: absolute;
-      /* Negative inset controls border thickness */
-      inset: -3px;
-      border-radius: 50px;
-      z-index: -1;
-      /* YOUR SPECIFIC COLORS */
-      background: conic-gradient(from var(--angle), #0099ff, #0099ff, #01e8bc, #01e8bc, #0099ff);
-      /* Start Hidden */
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      inset: -2px !important;
     }
 
-    /* Special Blur for the Shadow (::after) */
-    .search-container::after {
-      filter: blur(25px);
-      z-index: -2;
-    }
-
-    /* Animation Triggers (Hover AND Click/Focus) */
-    /* When Hovering OR When Input is Focused (Clicked) */
-    .search-container:hover::before,
-    .search-container:hover::after,
-    .search-container:focus-within::before,
-    .search-container:focus-within::after {
-      opacity: 1;
-      animation: spin-clockwise 10s linear infinite;
-    }
-
-    /* The Input Field */
     .search-input {
-      height: 100%;
-      border: none;
-      outline: none;
-      position: relative;
-      z-index: 501;
-      background: #ffffff;
-      border-radius: 50px;
-      margin: 0px -30px 0px 0px;
-      padding: 0 15px 0 15px;
-      font-size: 18px;
-      color: #000000;
-      box-shadow: inset 0 0 0 1px #000000;
-      transition: box-shadow 0.3s ease;
-
-
+      margin: 0px -35px 0px 0px !important;
     }
 
-    .search-input::placeholder {
-      color: #008080;
-      /* Teal Placeholder */
-      opacity: 0.7;
-    }
-
-    /* Hide the static Teal border when the animated border is active */
-    .search-container:hover .search-input,
-    .search-container:focus-within .search-input {
-      box-shadow: inset 0 0 0 0 transparent;
-    }
-
-    /* Search Icon */
     .search-button {
-      position: relative;
-      right: -6px;
-      width: 103px;
-      height: 65px;
-      pointer-events: auto;
-      background: #0099ff;
-      border: none;
-      padding: 16px 19px 15px 40px;
+      right: -8px !important;
     }
 
     .search-button i {
-      fill: #008080;
-      margin: 16px;
-      padding: 11px 22px 11px 22px;
-      align-self: center;
-      border-radius: 25px;
-      display: table;
-      background: #ffffff8a;
-      transition: color 0.3s ease;
+      padding: 8px 19px 8px 19px !important;
+    }
+  }
+
+  /* --- Animated Search Bar Styles --- */
+  /* Define the Angle Property for smooth rotation */
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  /* The Animated RGB Border & Glow */
+  .search-container::before,
+  .search-container::after {
+    content: '';
+    position: absolute;
+    /* Negative inset controls border thickness */
+    inset: -3px;
+    border-radius: 50px;
+    z-index: -1;
+    /* YOUR SPECIFIC COLORS */
+    background: conic-gradient(from var(--angle), #0099ff, #0099ff, #01e8bc, #01e8bc, #0099ff);
+    /* Start Hidden */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Special Blur for the Shadow (::after) */
+  .search-container::after {
+    filter: blur(25px);
+    z-index: -2;
+  }
+
+  /* Animation Triggers (Hover AND Click/Focus) */
+  /* When Hovering OR When Input is Focused (Clicked) */
+  .search-container:hover::before,
+  .search-container:hover::after,
+  .search-container:focus-within::before,
+  .search-container:focus-within::after {
+    opacity: 1;
+    animation: spin-clockwise 10s linear infinite;
+  }
+
+  /* The Input Field */
+  .search-input {
+    height: 100%;
+    border: none;
+    outline: none;
+    position: relative;
+    z-index: 501;
+    background: #ffffff;
+    border-radius: 50px;
+    margin: 0px -30px 0px 0px;
+    padding: 0 15px 0 15px;
+    font-size: 18px;
+    color: #000000;
+    box-shadow: inset 0 0 0 1px #000000;
+    transition: box-shadow 0.3s ease;
+
+
+  }
+
+  .search-input::placeholder {
+    color: #008080;
+    /* Teal Placeholder */
+    opacity: 0.7;
+  }
+
+  /* Hide the static Teal border when the animated border is active */
+  .search-container:hover .search-input,
+  .search-container:focus-within .search-input {
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+
+  /* Search Icon */
+  .search-button {
+    position: relative;
+    right: -6px;
+    width: 103px;
+    height: 65px;
+    pointer-events: auto;
+    background: #0099ff;
+    border: none;
+    padding: 16px 19px 15px 40px;
+  }
+
+  .search-button i {
+    fill: #008080;
+    margin: 16px;
+    padding: 11px 22px 11px 22px;
+    align-self: center;
+    border-radius: 25px;
+    display: table;
+    background: #ffffff8a;
+    transition: color 0.3s ease;
+  }
+
+  /* Make icon black when typing */
+  .search-container:focus-within .search-button i {
+    color: #000000;
+  }
+
+  /* The Animation Keyframes */
+  @keyframes spin-clockwise {
+    0% {
+      --angle: 0deg;
     }
 
-    /* Make icon black when typing */
-    .search-container:focus-within .search-button i {
-      color: #000000;
+    100% {
+      --angle: 360deg;
+    }
+  }
+
+  /* Override existing search-container styles */
+  .search-container {
+    position: relative;
+    width: 400px;
+    min-width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    padding: 0;
+    /* Remove existing padding */
+  }
+
+  .search-container form {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  @media (max-width: 480px) {
+    .navbar-logo {
+      width: 57px !important;
+      height: 5px !important;
+      scale: 0.6 !important;
     }
 
-    /* The Animation Keyframes */
-    @keyframes spin-clockwise {
-      0% {
-        --angle: 0deg;
-      }
-
-      100% {
-        --angle: 360deg;
-      }
-    }
-
-    /* Override existing search-container styles */
     .search-container {
-      position: relative;
-      width: 400px;
-      min-width: 200px;
-      height: 50px;
-      border-radius: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
-      padding: 0;
-      /* Remove existing padding */
-    }
-
-    .search-container form {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    @media (max-width: 480px) {
-      .navbar-logo {
-        width: 57px !important;
-        height: 5px !important;
-        scale: 0.6 !important;
-      }
-
-      .search-container {
-        height: 44px !important;
-        width: 220px;
-        display: none;
-      }
-
-      .search-input {
-        padding: 0 15px 0 10px !important;
-      }
-    }
-
-    /* Mobile Dropdown */
-    .mobile-dropdown-item {
-      position: relative;
-
-      &::after {
-        box-shadow: inset 0 0 0 1px red !important;
-      }
-
-      &::before {
-        background: red;
-        box-shadow: inset 0 0 0 1px #ffffff !important;
-      }
-
-      &:hover::before {
-        box-shadow: inset 0 0 0 1px #ffffff !important;
-      }
-    }
-
-    .mobile-dropdown {
+      height: 44px !important;
+      width: 220px;
       display: none;
-      list-style: none;
-      padding-left: 0;
-      margin: 8px 0 0;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.9s ease-in-out;
     }
 
-    .mobile-dropdown-item.active .mobile-dropdown {
-      display: block;
-      transition: max-height 0.9s ease-in-out;
-      max-height: 500px;
+    .search-input {
+      padding: 0 15px 0 10px !important;
+    }
+  }
+
+  /* Mobile Dropdown */
+  .mobile-dropdown-item {
+    position: relative;
+
+    &::after {
+      box-shadow: inset 0 0 0 1px red !important;
     }
 
-    /* Enhanced Split Button & Dropdown Theme */
-    .split-button {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
+    &::before {
+      background: red;
+      box-shadow: inset 0 0 0 1px #ffffff !important;
     }
 
-    .split-button.single-toggle-action:before {
-      transform: scaleX(1.015) scaleY(1.035) perspective(1px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
-      transition: transform .2s cubic-bezier(.345, .115, .135, 1.42), opacity .15s ease-out;
+    &:hover::before {
+      box-shadow: inset 0 0 0 1px #ffffff !important;
     }
+  }
 
-    .split-button:hover {
-      box-shadow: 0 8px 15px rgba(0, 153, 255, 0.15) !important;
-      border-color: rgba(0, 153, 255, 0.3);
-      transform: translateY(-1px);
+  .mobile-dropdown {
+    display: none;
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.9s ease-in-out;
+  }
 
-      .split-button-content {
-        color: #0064e7 !important;
-      }
+  .mobile-dropdown-item.active .mobile-dropdown {
+    display: block;
+    transition: max-height 0.9s ease-in-out;
+    max-height: 500px;
+  }
 
-      .split-button-content i {
-        color: #0099ff !important;
-      }
-    }
+  /* Enhanced Split Button & Dropdown Theme */
+  .split-button {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    .split-button-right {
-      border-left: 1px solid rgba(0, 0, 0, 0.06);
-      position: relative;
-      overflow: hidden;
-      color: #1e293b;
-    }
+  }
 
-    .split-button-right::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #0099ff, #00c11b);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 0;
-    }
+  .split-button.single-toggle-action:before {
+    transform: scaleX(1.015) scaleY(1.035) perspective(1px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    transition: transform .2s cubic-bezier(.345, .115, .135, 1.42), opacity .15s ease-out;
+  }
 
-    .split-button-right:hover::before {
-      opacity: 0.1;
-    }
-
-    .split-button-right i {
-      z-index: 1;
-      position: relative;
-      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    }
-
-    .split-button-right:hover i {
-      color: #0099ff;
-    }
-
-    /* Update for Single Toggle Button */
-    .split-button.single-toggle-action {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0;
-    }
-
-    .split-button.single-toggle-action:active {
-      transform: scale(0.98);
-    }
+  .split-button:hover {
+    box-shadow: 0 8px 15px rgba(0, 153, 255, 0.15) !important;
+    border-color: rgba(0, 153, 255, 0.3);
+    transform: translateY(-1px);
 
     .split-button-content {
-      display: flex;
-      align-items: center;
-      padding: 10px 0px 10px 6px;
-      flex-grow: 1;
-      font-weight: bold;
-      color: #1e293b;
-      gap: 0px;
+      color: #0064e7 !important;
     }
 
     .split-button-content i {
-      color: #8f8e8e;
-      font-size: 13px;
+      color: #0099ff !important;
     }
+  }
 
-    .split-button-icon {
-      padding: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease;
-    }
+  .split-button-right {
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+    color: #1e293b;
+  }
 
-    /* Remove the split border */
-    .split-button.single-toggle-action .split-button-right,
-    .split-button.single-toggle-action .split-button-icon {
-      border-left: none;
-      background: transparent;
-    }
+  .split-button-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0099ff, #00c11b);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+  }
 
-    /* Hover effect for the whole button */
-    .split-button.single-toggle-action:hover {
-      background: rgba(255, 255, 255, 0.95);
-    }
+  .split-button-right:hover::before {
+    opacity: 0.1;
+  }
 
-    /* Rotate icon when expanded */
-    .split-button.single-toggle-action[aria-expanded="true"] .split-button-icon i {
-      transform: rotate(180deg);
-    }
+  .split-button-right i {
+    z-index: 1;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
 
-    /* Ensure existing split-button styles don't conflict */
-    .split-button.single-toggle-action .split-button-content {
-      cursor: pointer;
-    }
+  .split-button-right:hover i {
+    color: #0099ff;
+  }
 
-    /* Desktop Dropdown Specifics */
-    @media (min-width: 993px) {
-      .navbar .mobile-dropdown {
-        position: absolute;
-        top: 56px;
-        left: 50%;
-        transform: translateX(-50%) translateY(10px);
-        width: 200px;
-        background: rgb(255 255 255);
-        backdrop-filter: blur(20px);
-        border-radius: 19px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
-        padding: 10px;
-        opacity: 0;
-        visibility: hidden;
-        overflow: visible;
-        display: block !important;
-        max-height: none !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1100;
-      }
+  /* Update for Single Toggle Button */
+  .split-button.single-toggle-action {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+  }
 
-      .navbar .mobile-dropdown-item.active .mobile-dropdown {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
-      }
+  .split-button.single-toggle-action:active {
+    transform: scale(0.98);
+  }
 
-      .navbar .mobile-dropdown::before {
-        content: '';
-        position: absolute;
-        top: -16px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 32px;
-        height: 32px;
-        background-color: #ffffff;
-        /* Curved 4-point star (Sparkle) shape using SVG mask */
-        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
-        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
-        -webkit-mask-size: contain;
-        mask-size: contain;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        /* Use drop-shadow filter since mask clips box-shadow */
-        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-        clip-path: none;
-        mix-blend-mode: darken;
-        box-shadow: none;
-      }
+  .split-button-content {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px 10px 6px;
+    flex-grow: 1;
+    font-weight: bold;
+    color: #1e293b;
+    gap: 0px;
+  }
 
-      .navbar .mobile-dropdown li {
-        margin: 0;
-      }
+  .split-button-content i {
+    color: #8f8e8e;
+    font-size: 13px;
+  }
 
-      .navbar .mobile-dropdown a {
-        background: transparent;
-        color: #334155;
-        font-weight: 500;
-        padding: 10px 15px;
-        border-radius: 10px;
-        text-align: left;
-        border: none;
-        display: block;
-      }
+  .split-button-icon {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
 
-      .navbar .mobile-dropdown a:hover {
-        background: rgba(0, 153, 255, 0.08);
-        color: #0099ff;
-        padding-left: 20px;
-      }
-    }
+  /* Remove the split border */
+  .split-button.single-toggle-action .split-button-right,
+  .split-button.single-toggle-action .split-button-icon {
+    border-left: none;
+    background: transparent;
+  }
 
-    .profile-dropdown-container {
-      list-style: none;
-      position: absolute !important;
-      top: 10vh;
-      right: 72px;
-      z-index: 1000;
-      background: white;
-      border-radius: 20px;
-      padding: 0px;
-      box-shadow: 0px 24px 25px -2px rgba(0, 0, 0, 0.1);
-      display: none;
+  /* Hover effect for the whole button */
+  .split-button.single-toggle-action:hover {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Rotate icon when expanded */
+  .split-button.single-toggle-action[aria-expanded="true"] .split-button-icon i {
+    transform: rotate(180deg);
+  }
+
+  /* Ensure existing split-button styles don't conflict */
+  .split-button.single-toggle-action .split-button-content {
+    cursor: pointer;
+  }
+
+  /* Desktop Dropdown Specifics */
+  @media (min-width: 993px) {
+    .navbar .mobile-dropdown {
+      position: absolute;
+      top: 56px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      width: 200px;
+      background: rgb(255 255 255);
+      backdrop-filter: blur(20px);
+      border-radius: 19px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+      padding: 10px;
       opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      visibility: hidden;
+      overflow: visible;
+      display: block !important;
+      max-height: none !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1100;
     }
 
-    .profile-dropdown-container.active {
+    .navbar .mobile-dropdown-item.active .mobile-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .navbar .mobile-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      background-color: #ffffff;
+      /* Curved 4-point star (Sparkle) shape using SVG mask */
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      /* Use drop-shadow filter since mask clips box-shadow */
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+      clip-path: none;
+      mix-blend-mode: darken;
+      box-shadow: none;
+    }
+
+    .navbar .mobile-dropdown li {
+      margin: 0;
+    }
+
+    .navbar .mobile-dropdown a {
+      background: transparent;
+      color: #334155;
+      font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 10px;
+      text-align: left;
+      border: none;
       display: block;
     }
 
-    .profile-dropdown-container.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .navbar .mobile-dropdown a:hover {
+      background: rgba(0, 153, 255, 0.08);
+      color: #0099ff;
+      padding-left: 20px;
     }
+  }
 
-    /* Force inner dropdown to be visible and static within the container */
-    .profile-dropdown-container .profile-dropdown {
-      position: static;
-      opacity: 1;
-      border-radius: 20px;
-      visibility: visible;
-      transform: none;
-      box-shadow: none;
-      overflow: hidden;
-      background: transparent;
-      padding: 0;
-      width: 100%;
-      min-width: 260px;
-    }
+  .profile-dropdown-container {
+    list-style: none;
+    position: absolute !important;
+    top: 10vh;
+    right: 72px;
+    z-index: 1000;
+    background: white;
+    border-radius: 20px;
+    padding: 0px;
+    box-shadow: 0px 24px 25px -2px rgba(0, 0, 0, 0.1);
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
 
-    .profile-dropdown-list {
-      justify-items: flex-start;
-      padding-top: 5px;
-    }
+  .profile-dropdown-container.active {
+    display: block;
+  }
 
-    .profile-dropdown-divider {
-      border: 1px solid #80808038;
-    }
+  .profile-dropdown-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    .profile-icon-btn {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid #33333367;
-      background: grey;
+  /* Force inner dropdown to be visible and static within the container */
+  .profile-dropdown-container .profile-dropdown {
+    position: static;
+    opacity: 1;
+    border-radius: 20px;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    overflow: hidden;
+    background: transparent;
+    padding: 0;
+    width: 100%;
+    min-width: 260px;
+  }
 
-    }
+  .profile-dropdown-list {
+    justify-items: flex-start;
+    padding-top: 5px;
+  }
 
-    .profile-icon-placeholder {
-      color: #ffffff;
-      font-size: 20px;
-      margin: 10px;
-    }
+  .profile-dropdown-divider {
+    border: 1px solid #80808038;
+  }
 
-    .profile-icon-img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 120%;
-    }
+  .profile-icon-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #33333367;
+    background: grey;
 
-    /* Profile Dropdown Header Styles */
-    .profile-header {
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+  }
 
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-    }
+  .profile-icon-placeholder {
+    color: #ffffff;
+    font-size: 20px;
+    margin: 10px;
+  }
 
-    .profile-name {
-      font-weight: 600;
-      color: #333;
-      margin: 0;
-      font-size: 16px;
-      line-height: 1.2;
-    }
+  .profile-icon-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 120%;
+  }
 
-    .profile-email {
-      color: #666;
-      font-size: 13px;
-      margin: 4px 0 0 0;
-      line-height: 1.2;
-    }
+  /* Profile Dropdown Header Styles */
+  .profile-header {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-    /* Dark Mode Overrides */
-    body.dark-mode .profile-header {
-      border-bottom-color: var(--dm-border, #444);
-    }
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
 
-    body.dark-mode .profile-name {
-      color: var(--dm-text-primary, #fff);
-    }
+  .profile-name {
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.2;
+  }
 
-    /* Dark Mode Overrides */
-    body.dark-mode .profile-header {
-      border-bottom-color: var(--dm-border, #444);
-    }
+  .profile-email {
+    color: #666;
+    font-size: 13px;
+    margin: 4px 0 0 0;
+    line-height: 1.2;
+  }
 
-    body.dark-mode .profile-name {
-      color: var(--dm-text-primary, #fff);
-    }
+  /* Dark Mode Overrides */
+  body.dark-mode .profile-header {
+    border-bottom-color: var(--dm-border, #444);
+  }
 
-    body.dark-mode .profile-email {
-      color: var(--dm-text-secondary, #aaa);
-    }
+  body.dark-mode .profile-name {
+    color: var(--dm-text-primary, #fff);
+  }
 
-    /* Profile Image Modal Styles */
-    .profile-modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(10px);
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-      visibility: hidden;
-      opacity: 0;
+  /* Dark Mode Overrides */
+  body.dark-mode .profile-header {
+    border-bottom-color: var(--dm-border, #444);
+  }
 
-      transition: opacity 1s ease;
-    }
+  body.dark-mode .profile-name {
+    color: var(--dm-text-primary, #fff);
+  }
 
-    .profile-modal-overlay.show {
-      visibility: visible;
-      opacity: 1;
-    }
+  body.dark-mode .profile-email {
+    color: var(--dm-text-secondary, #aaa);
+  }
 
+  /* Profile Image Modal Styles */
+  .profile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+
+    transition: opacity 1s ease;
+  }
+
+  .profile-modal-overlay.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .profile-image-displaying-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 1001;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    width: 90%;
+    height: 90%;
+    border-radius: 12px;
+  }
+
+
+  @media (max-width: 768px) {
     .profile-image-displaying-window {
       position: fixed;
       top: 50%;
@@ -625,915 +644,902 @@
       visibility: hidden;
       opacity: 0;
       transition: opacity 1s ease, transform 1s ease;
-      width: 90%;
-      height: 90%;
-      border-radius: 12px;
-    }
-
-
-    @media (max-width: 768px) {
-      .profile-image-displaying-window {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        z-index: 1001;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 1s ease, transform 1s ease;
-        width: 100%;
-      }
-    }
-
-    .profile-image-displaying-window.show {
-      visibility: visible;
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .profile-modal-image {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      transition: transform 0.2s ease;
-      transform-origin: center center;
-    }
-
-    /* Prevent body scroll when modal is open */
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    /* Profile Modal Close Button */
-    .profile-modal-close-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      color: #333;
-      cursor: pointer;
-      z-index: 1003;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .profile-modal-close-btn:hover {
-      background: rgba(255, 255, 255, 1);
-    }
-
-    /* Dark mode for close button */
-    body.dark-mode .profile-modal-close-btn {
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-    }
-
-    body.dark-mode .profile-modal-close-btn:hover {
-      background: rgba(0, 0, 0, 1);
-    }
-
-    /* Added for Profile Image in Dropdown Header */
-    #dropdownHeaderImg {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid #ddd;
-    }
-
-    /* Mobile Sidebar Profile Styles */
-    .header-profile {
-      display: none;
-      /* Hidden by default */
-      align-items: center;
-      gap: 6px;
-      padding: 15px 0px 15px 4px;
-      cursor: pointer;
-      scale: 1.05;
-      border-radius: 8px;
-      transition: background-color 0.2s;
       width: 100%;
     }
+  }
+
+  .profile-image-displaying-window.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .profile-modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.2s ease;
+    transform-origin: center center;
+  }
+
+  /* Prevent body scroll when modal is open */
+  body.modal-open {
+    overflow: hidden;
+  }
+
+  /* Profile Modal Close Button */
+  .profile-modal-close-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    z-index: 1003;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-modal-close-btn:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  /* Dark mode for close button */
+  body.dark-mode .profile-modal-close-btn {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+  }
+
+  body.dark-mode .profile-modal-close-btn:hover {
+    background: rgba(0, 0, 0, 1);
+  }
+
+  /* Added for Profile Image in Dropdown Header */
+  #dropdownHeaderImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+  }
+
+  /* Mobile Sidebar Profile Styles */
+  .header-profile {
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    gap: 6px;
+    padding: 15px 0px 15px 4px;
+    cursor: pointer;
+    scale: 1.05;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    width: 100%;
+  }
 
 
-    .header-profile:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      /* Subtle hover */
-    }
+  .header-profile:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    /* Subtle hover */
+  }
 
-    body.dark-mode .header-profile:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
+  body.dark-mode .header-profile:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
 
-    #navbar-avatar-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #0099ff;
-      /* Branded border */
-    }
+  #navbar-avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #0099ff;
+    /* Branded border */
+  }
 
-    .header-profile .user-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+  .header-profile .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-    .header-profile .user-name {
-      font-weight: 600;
-      font-size: 16px;
-      color: #333;
-      line-height: 1.2;
-    }
+  .header-profile .user-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.2;
+  }
 
-    body.dark-mode .header-profile .user-name {
-      color: #fff;
-    }
+  body.dark-mode .header-profile .user-name {
+    color: #fff;
+  }
 
-    .header-profile .user-email {
-      font-size: 13px;
-      color: #666;
-      line-height: 1.2;
-    }
+  .header-profile .user-email {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.2;
+  }
 
-    body.dark-mode .header-profile .user-email {
-      color: #bbb;
-    }
+  body.dark-mode .header-profile .user-email {
+    color: #bbb;
+  }
 
-    /* Ensure Dropdown is above sidebar */
-    .profile-dropdown-container {
-      z-index: 2100 !important;
-      /* Higher than typical mobile menu z-index */
-    }
+  /* Ensure Dropdown is above sidebar */
+  .profile-dropdown-container {
+    z-index: 2100 !important;
+    /* Higher than typical mobile menu z-index */
+  }
 
-    .thebigthree-btns-wrapper {
-      display: flex;
-      align-items: center;
-      border-radius: 50px;
-      border: 1px solid #414141;
-      padding: 0px 4px 0px 0px;
-    }
+  .thebigthree-btns-wrapper {
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    border: 1px solid #414141;
+    padding: 0px 4px 0px 0px;
+  }
 
-    .profile-dropdown-container::before {
-      content: '';
-      position: absolute;
-      top: -16px;
-      left: 88%;
-      transform: translateX(-50%);
-      width: 32px;
-      height: 32px;
+  .profile-dropdown-container::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 88%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    background-color: #ffffff;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    clip-path: none;
+    mix-blend-mode: darken;
+    box-shadow: none;
+  }
+
+  /* Newsletter Container Styles - Original Design from home.css */
+  .newsletter-form {
+    display: flex;
+    max-width: 500px;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 16px 16px;
+    border: none;
+    width: 200px;
+    border-radius: 50px 0 0 50px;
+    font-size: 16px;
+  }
+
+  .newsletter-form button {
+    background: linear-gradient(90deg, #0099ff, #1f6ed6);
+    color: white;
+    border: none;
+    padding: 18px 9px;
+    border-radius: 0 50px 50px 0;
+    font-weight: 600;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .newsletter-form button .btn-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.3s ease;
+  }
+
+  .newsletter-form button .custom-spinner {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .newsletter-form button.loading .btn-text {
+    opacity: 0;
+  }
+
+  .newsletter-form button.loading .custom-spinner {
+    display: block;
+  }
+
+  /* Spinner Animation */
+  .custom-spinner .spinner {
+    font-size: 28px;
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+  }
+
+  .custom-spinner .spinner.center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  .custom-spinner .spinner .spinner-blade {
+    position: absolute;
+    left: 0.4629em;
+    bottom: 0;
+    width: 0.074em;
+    height: 0.2777em;
+    border-radius: 0.0555em;
+    background-color: transparent;
+    -webkit-transform-origin: center -0.2222em;
+    -ms-transform-origin: center -0.2222em;
+    transform-origin: center -0.2222em;
+    animation: spinner-fade9234 1s infinite linear;
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(1) {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(2) {
+    -webkit-animation-delay: 0.083s;
+    animation-delay: 0.083s;
+    -webkit-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(3) {
+    -webkit-animation-delay: 0.166s;
+    animation-delay: 0.166s;
+    -webkit-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    transform: rotate(60deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(4) {
+    -webkit-animation-delay: 0.249s;
+    animation-delay: 0.249s;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(5) {
+    -webkit-animation-delay: 0.332s;
+    animation-delay: 0.332s;
+    -webkit-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    transform: rotate(120deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(6) {
+    -webkit-animation-delay: 0.415s;
+    animation-delay: 0.415s;
+    -webkit-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    transform: rotate(150deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(7) {
+    -webkit-animation-delay: 0.498s;
+    animation-delay: 0.498s;
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(8) {
+    -webkit-animation-delay: 0.581s;
+    animation-delay: 0.581s;
+    -webkit-transform: rotate(210deg);
+    -ms-transform: rotate(210deg);
+    transform: rotate(210deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(9) {
+    -webkit-animation-delay: 0.664s;
+    animation-delay: 0.664s;
+    -webkit-transform: rotate(240deg);
+    -ms-transform: rotate(240deg);
+    transform: rotate(240deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(10) {
+    -webkit-animation-delay: 0.747s;
+    animation-delay: 0.747s;
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(11) {
+    -webkit-animation-delay: 0.83s;
+    animation-delay: 0.83s;
+    -webkit-transform: rotate(300deg);
+    -ms-transform: rotate(300deg);
+    transform: rotate(300deg);
+  }
+
+  .custom-spinner .spinner .spinner-blade:nth-child(12) {
+    -webkit-animation-delay: 0.913s;
+    animation-delay: 0.913s;
+    -webkit-transform: rotate(330deg);
+    -ms-transform: rotate(330deg);
+    transform: rotate(330deg);
+  }
+
+  @keyframes spinner-fade9234 {
+    0% {
       background-color: #ffffff;
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
-      -webkit-mask-size: contain;
-      mask-size: contain;
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-      clip-path: none;
-      mix-blend-mode: darken;
-      box-shadow: none;
     }
 
-    /* Newsletter Container Styles - Original Design from home.css */
-    .newsletter-form {
-      display: flex;
-      max-width: 500px;
-      align-items: center;
-      margin: 0 auto;
+    100% {
+      background-color: transparent;
     }
+  }
 
-    .newsletter-form input {
-      flex: 1;
-      padding: 16px 16px;
-      border: none;
-      width: 200px;
-      border-radius: 50px 0 0 50px;
-      font-size: 16px;
-    }
+  /* Dark mode styles for newsletter */
+  body.dark-mode .form-control,
+  body.dark-mode input,
+  body.dark-mode select,
+  body.dark-mode textarea {
+    background: var(--dm-bg-tertiary);
+    border-color: var(--dm-border);
+    color: var(--dm-text-primary);
+  }
 
-    .newsletter-form button {
-      background: linear-gradient(90deg, #0099ff, #1f6ed6);
-      color: white;
-      border: none;
-      padding: 18px 9px;
-      border-radius: 0 50px 50px 0;
-      font-weight: 600;
-      font-family: 'Rubik', sans-serif;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
 
-    .newsletter-form button .btn-text {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: opacity 0.3s ease;
-    }
 
-    .newsletter-form button .custom-spinner {
-      display: none;
-      position: absolute;
-      top: 50%;
+  /* Animated Signup Button Styles */
+  .button {
+    all: unset;
+    position: relative;
+    display: inline-flex;
+    height: 2.5rem;
+    align-items: center;
+    border-radius: 9999px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-family: Segoe UI;
+    font-size: 1.2rem;
+    font-weight: 640;
+    color: #ffffff;
+    letter-spacing: -0.06em;
+    cursor: pointer;
+  }
+
+  .button-item {
+    background-color: transparent;
+    color: #000000;
+  }
+
+  .button-item .button-bg {
+    border-color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+  }
+
+  .button-inner,
+  .button-inner-hover,
+  .button-inner-static {
+    pointer-events: none;
+    display: block;
+  }
+
+  .button-inner {
+    position: relative;
+  }
+
+  .button-inner-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(70%);
+  }
+
+  .button-inner-static {
+    position: relative;
+  }
+
+  .button-bg {
+    overflow: hidden;
+    border-radius: 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1);
+    transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .button-bg,
+  .button-bg-layer,
+  .button-bg-layers {
+    display: block;
+  }
+
+  .button-bg-layers {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: -60%;
+    aspect-ratio: 1 / 1;
+    width: max(200%, 10rem);
+  }
+
+  .button-bg-layer {
+    border-radius: 9999px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(0);
+  }
+
+  .button-bg-layer.-purple {
+    background-color: rgb(26, 80, 255);
+  }
+
+  .button-bg-layer.-turquoise {
+    background-color: rgb(9, 255, 218);
+  }
+
+  .button-bg-layer.-yellow {
+    --tw-bg-opacity: 1;
+    background: linear-gradient(45deg, rgb(3, 226, 255), rgb(0, 89, 255));
+  }
+
+  .button:hover .button-inner-static {
+    opacity: 0;
+    transform: translateY(-70%);
+    transition:
+      transform 1.4s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 0.3s linear;
+  }
+
+  .button:hover .button-inner-hover {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      transform 1.4s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .button:hover .button-bg-layer {
+    transition:
+      transform 1.3s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 0.3s linear;
+  }
+
+  .button:hover .button-bg-layer-1 {
+    transform: scale(1);
+  }
+
+  .button:hover .button-bg-layer-2 {
+    transition-delay: 0.1s;
+    transform: scale(1);
+  }
+
+  .button:hover .button-bg-layer-3 {
+    transition-delay: 0.2s;
+    transform: scale(1);
+  }
+
+
+
+  .logout-confirm-btn::before {
+    content: '';
+    width: -webkit-fill-available !important;
+    height: -webkit-fill-available;
+    border-radius: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #b70000 0%, #ff3333 100%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+  }
+
+  .logout-confirm-btn:hover::before {
+    width: 11em;
+  }
+
+
+  .viewbrands {
+    width: 175px;
+    height: 50px;
+    margin-top: 35px;
+    place-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    background: linear-gradient(45deg, #00ceff, #00ff5b);
+    border-radius: 30px;
+    color: rgb(19, 19, 19);
+    font-weight: 600;
+    border: none;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+    transition-duration: .2s;
+    box-shadow: 0px 5px 10px rgb(0 0 0 / 22%);
+    padding-left: 4px;
+    transition-duration: .5s;
+  }
+
+  .viewbrands:hover {
+    scale: 1.1;
+  }
+
+  .svgIcon {
+    height: 42px;
+    transition-duration: 1.5s;
+  }
+
+  .bell path {
+    fill: rgb(19, 19, 19);
+  }
+
+  .viewbrands:hover {
+    background-color: rgb(192, 255, 20);
+    transition-duration: .5s;
+  }
+
+  .viewbrands:active {
+    transform: scale(0.97);
+    transition-duration: .2s;
+  }
+
+  .viewbrands:hover .svgIcon {
+    transform: rotate(250deg);
+    transition-duration: 1.5s;
+  }
+
+  /* Navigation Links Hover Effect - Radial Expanding Background */
+  .split-button.single-toggle-action,
+  .navbar a {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .split-button.single-toggle-action::before,
+  .navbar a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: #ccebff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: -1;
+  }
+
+  .split-button.single-toggle-action:hover::before,
+  .navbar a:hover::before {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 1;
+  }
+
+  /* Dark mode - same color for expanding background */
+  body.dark-mode .split-button.single-toggle-action::before,
+  body.dark-mode .navbar a::before {
+    background-color: #ccebff;
+    transition: all 1.1s cubic-bezier(0.04, 0.86, 0, 1.08);
+  }
+
+  /* Ensure text and icons stay above the background */
+  .split-button-content,
+  .split-button-icon,
+  .navbar a {
+    position: relative;
+    z-index: 1;
+  }
+
+  #main-nav-link {
+    background-color: transparent !important;
+    padding: 3px !important;
+  }
+
+  /* --- MOBILE PILL NAVBAR INTEGRATION --- */
+  @media (max-width: 768px) {
+
+    /* --- SEARCH BAR OVERLAY --- */
+    #mobilePillSearchBar {
+      position: fixed;
+      bottom: 90px;
+      /* Adjusted to be above navbar */
       left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .newsletter-form button.loading .btn-text {
-      opacity: 0;
-    }
-
-    .newsletter-form button.loading .custom-spinner {
-      display: block;
-    }
-
-    /* Spinner Animation */
-    .custom-spinner .spinner {
-      font-size: 28px;
-      position: relative;
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-    }
-
-    .custom-spinner .spinner.center {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-    }
-
-    .custom-spinner .spinner .spinner-blade {
-      position: absolute;
-      left: 0.4629em;
-      bottom: 0;
-      width: 0.074em;
-      height: 0.2777em;
-      border-radius: 0.0555em;
-      background-color: transparent;
-      -webkit-transform-origin: center -0.2222em;
-      -ms-transform-origin: center -0.2222em;
-      transform-origin: center -0.2222em;
-      animation: spinner-fade9234 1s infinite linear;
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(1) {
-      -webkit-animation-delay: 0s;
-      animation-delay: 0s;
-      -webkit-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(2) {
-      -webkit-animation-delay: 0.083s;
-      animation-delay: 0.083s;
-      -webkit-transform: rotate(30deg);
-      -ms-transform: rotate(30deg);
-      transform: rotate(30deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(3) {
-      -webkit-animation-delay: 0.166s;
-      animation-delay: 0.166s;
-      -webkit-transform: rotate(60deg);
-      -ms-transform: rotate(60deg);
-      transform: rotate(60deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(4) {
-      -webkit-animation-delay: 0.249s;
-      animation-delay: 0.249s;
-      -webkit-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-      transform: rotate(90deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(5) {
-      -webkit-animation-delay: 0.332s;
-      animation-delay: 0.332s;
-      -webkit-transform: rotate(120deg);
-      -ms-transform: rotate(120deg);
-      transform: rotate(120deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(6) {
-      -webkit-animation-delay: 0.415s;
-      animation-delay: 0.415s;
-      -webkit-transform: rotate(150deg);
-      -ms-transform: rotate(150deg);
-      transform: rotate(150deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(7) {
-      -webkit-animation-delay: 0.498s;
-      animation-delay: 0.498s;
-      -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-      transform: rotate(180deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(8) {
-      -webkit-animation-delay: 0.581s;
-      animation-delay: 0.581s;
-      -webkit-transform: rotate(210deg);
-      -ms-transform: rotate(210deg);
-      transform: rotate(210deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(9) {
-      -webkit-animation-delay: 0.664s;
-      animation-delay: 0.664s;
-      -webkit-transform: rotate(240deg);
-      -ms-transform: rotate(240deg);
-      transform: rotate(240deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(10) {
-      -webkit-animation-delay: 0.747s;
-      animation-delay: 0.747s;
-      -webkit-transform: rotate(270deg);
-      -ms-transform: rotate(270deg);
-      transform: rotate(270deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(11) {
-      -webkit-animation-delay: 0.83s;
-      animation-delay: 0.83s;
-      -webkit-transform: rotate(300deg);
-      -ms-transform: rotate(300deg);
-      transform: rotate(300deg);
-    }
-
-    .custom-spinner .spinner .spinner-blade:nth-child(12) {
-      -webkit-animation-delay: 0.913s;
-      animation-delay: 0.913s;
-      -webkit-transform: rotate(330deg);
-      -ms-transform: rotate(330deg);
-      transform: rotate(330deg);
-    }
-
-    @keyframes spinner-fade9234 {
-      0% {
-        background-color: #ffffff;
-      }
-
-      100% {
-        background-color: transparent;
-      }
-    }
-
-    /* Dark mode styles for newsletter */
-    body.dark-mode .form-control,
-    body.dark-mode input,
-    body.dark-mode select,
-    body.dark-mode textarea {
-      background: var(--dm-bg-tertiary) ;
-      border-color: var(--dm-border) ;
-      color: var(--dm-text-primary);
-    }
-
-
-
-    /* Animated Signup Button Styles */
-    .button {
-      all: unset;
-      position: relative;
-      display: inline-flex;
-      height: 2.5rem;
+      transform: translateX(-50%) translateY(20px);
+      width: 85%;
+      background: rgb(39, 39, 39);
+      border-radius: 50px;
+      padding: 6px 6px 6px 20px;
+      display: flex;
       align-items: center;
-      border-radius: 9999px;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      font-family: Segoe UI;
-      font-size: 1.2rem;
-      font-weight: 640;
-      color: #ffffff;
-      letter-spacing: -0.06em;
-      cursor: pointer;
-    }
-
-    .button-item {
-      background-color: transparent;
-      color: #000000;
-    }
-
-    .button-item .button-bg {
-      border-color: rgb(255, 255, 255);
-      background-color: rgb(255, 255, 255);
-    }
-
-    .button-inner,
-    .button-inner-hover,
-    .button-inner-static {
+      gap: 10px;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      opacity: 0;
       pointer-events: none;
-      display: block;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 999;
     }
 
-    .button-inner {
-      position: relative;
-    }
-
-    .button-inner-hover {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transform: translateY(70%);
-    }
-
-    .button-inner-static {
-      position: relative;
-    }
-
-    .button-bg {
-      overflow: hidden;
-      border-radius: 2rem;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transform: scale(1);
-      transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .button-bg,
-    .button-bg-layer,
-    .button-bg-layers {
-      display: block;
-    }
-
-    .button-bg-layers {
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
-      top: -60%;
-      aspect-ratio: 1 / 1;
-      width: max(200%, 10rem);
-    }
-
-    .button-bg-layer {
-      border-radius: 9999px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transform: scale(0);
-    }
-
-    .button-bg-layer.-purple {
-      background-color: rgb(26, 80, 255);
-    }
-
-    .button-bg-layer.-turquoise {
-      background-color: rgb(9, 255, 218);
-    }
-
-    .button-bg-layer.-yellow {
-      --tw-bg-opacity: 1;
-      background: linear-gradient(45deg, rgb(3, 226, 255), rgb(0, 89, 255));
-    }
-
-    .button:hover .button-inner-static {
-      opacity: 0;
-      transform: translateY(-70%);
-      transition:
-        transform 1.4s cubic-bezier(0.19, 1, 0.22, 1),
-        opacity 0.3s linear;
-    }
-
-    .button:hover .button-inner-hover {
+    #mobilePillSearchBar.active {
       opacity: 1;
-      transform: translateY(0);
-      transition:
-        transform 1.4s cubic-bezier(0.19, 1, 0.22, 1),
-        opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+      transform: translateX(-50%) translateY(0);
+      pointer-events: all;
     }
 
-    .button:hover .button-bg-layer {
-      transition:
-        transform 1.3s cubic-bezier(0.19, 1, 0.22, 1),
-        opacity 0.3s linear;
+    #mobilePillSearchBar input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      border-radius: 30px;
+      padding: 15px 0px 15px 10px;
+      background: transparent;
     }
 
-    .button:hover .button-bg-layer-1 {
-      transform: scale(1);
+    /* --- THE NAVBAR --- */
+    #mobilePillNavbar {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffffff;
+      padding: 5px;
+      border-radius: 50px;
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      align-items: center;
+      gap: 0px;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      /* Higher priority */
     }
 
-    .button:hover .button-bg-layer-2 {
-      transition-delay: 0.1s;
-      transform: scale(1);
-    }
-
-    .button:hover .button-bg-layer-3 {
-      transition-delay: 0.2s;
-      transform: scale(1);
-    }
-
-
-
-    .logout-confirm-btn::before {
-      content: '';
-      width: -webkit-fill-available !important;
-      height: -webkit-fill-available;
-      border-radius: inherit;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-image: linear-gradient(to right, #b70000 0%, #ff3333 100%);
-      transition: .5s ease;
-      display: block;
-      z-index: -1;
-    }
-
-    .logout-confirm-btn:hover::before {
-      width: 11em;
-    }
-
-
-    .viewbrands {
-      width: 175px;
-      height: 50px;
-      margin-top: 35px;
-      place-self: center;
+    #mobilePillNavbar .nav-item {
+      position: relative;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 4px;
-      background: linear-gradient(45deg, #00ceff, #00ff5b);
+      justify-content: center;
+      height: 45px;
+      padding: 0 15px;
       border-radius: 30px;
-      color: rgb(19, 19, 19);
-      font-weight: 600;
-      border: none;
-      font-size: 16px;
-      position: relative;
       cursor: pointer;
-      transition-duration: .2s;
-      box-shadow: 0px 5px 10px rgb(0 0 0 / 22%);
-      padding-left: 4px;
-      transition-duration: .5s;
-    }
-
-    .viewbrands:hover {
-      scale: 1.1;
-    }
-
-    .svgIcon {
-      height: 42px;
-      transition-duration: 1.5s;
-    }
-
-    .bell path {
-      fill: rgb(19, 19, 19);
-    }
-
-    .viewbrands:hover {
-      background-color: rgb(192, 255, 20);
-      transition-duration: .5s;
-    }
-
-    .viewbrands:active {
-      transform: scale(0.97);
-      transition-duration: .2s;
-    }
-
-    .viewbrands:hover .svgIcon {
-      transform: rotate(250deg);
-      transition-duration: 1.5s;
-    }
-
-    /* Navigation Links Hover Effect - Radial Expanding Background */
-    .split-button.single-toggle-action,
-    .navbar a {
-      position: relative;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      color: #888;
       overflow: hidden;
-      z-index: 1;
     }
 
-    .split-button.single-toggle-action::before,
-    .navbar a::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      height: 100%;
-      background-color: #ccebff;
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
+    #mobilePillNavbar .nav-item ion-icon {
+      font-size: 22px;
+      min-width: 22px;
+      transition: color 0.3s;
+      color: #232323;
+    }
+
+    #mobilePillNavbar .nav-text {
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      max-width: 0;
       opacity: 0;
-      transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-      z-index: -1;
+      margin-left: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      transition: all 0.4s ease;
     }
 
-    .split-button.single-toggle-action:hover::before,
-    .navbar a:hover::before {
-      transform: translate(-50%, -50%) scale(2);
+    #mobilePillNavbar .nav-item.active {
+      background-color: #232323;
+      color: #ffffff;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      padding: 22px 0px 22px 12px;
+    }
+
+    #mobilePillNavbar .nav-item.active ion-icon {
+      color: #ffffff;
+    }
+
+    #mobilePillNavbar .nav-item.active .nav-text {
+      max-width: 100px;
       opacity: 1;
+      margin-left: 10px;
     }
+  }
 
-    /* Dark mode - same color for expanding background */
-    body.dark-mode .split-button.single-toggle-action::before,
-    body.dark-mode .navbar a::before {
-      background-color: #ccebff;
-      transition: all 1.1s cubic-bezier(0.04, 0.86, 0, 1.08);
+  .mobnav {
+    display: none;
+  }
+
+  /* Hide on Desktop */
+  @media (min-width: 769px) {
+
+    #mobilePillNavbar,
+    #mobilePillSearchBar {
+      display: none !important;
     }
+  }
 
-    /* Ensure text and icons stay above the background */
-    .split-button-content,
-    .split-button-icon,
-    .navbar a {
-      position: relative;
-      z-index: 1;
-    }
+  /* Product Grid Masonry Layout */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: masonry;
+    gap: 1.5rem;
+    align-items: start;
+  }
 
-    #main-nav-link {
-      background-color: transparent !important;
-      padding: 3px !important;
-    }
-
-    /* --- MOBILE PILL NAVBAR INTEGRATION --- */
-    @media (max-width: 768px) {
-
-      /* --- SEARCH BAR OVERLAY --- */
-      #mobilePillSearchBar {
-        position: fixed;
-        bottom: 90px;
-        /* Adjusted to be above navbar */
-        left: 50%;
-        transform: translateX(-50%) translateY(20px);
-        width: 85%;
-        background: rgb(39, 39, 39);
-        border-radius: 50px;
-        padding: 6px 6px 6px 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        z-index: 999;
-      }
-
-      #mobilePillSearchBar.active {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-        pointer-events: all;
-      }
-
-      #mobilePillSearchBar input {
-        border: none;
-        outline: none;
-        width: 100%;
-        font-size: 14px;
-        border-radius: 30px;
-        padding: 15px 0px 15px 10px;
-        background: transparent;
-      }
-
-      /* --- THE NAVBAR --- */
-      #mobilePillNavbar {
-        position: fixed;
-        bottom: 25px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #ffffff;
-        padding: 5px;
-        border-radius: 50px;
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        align-items: center;
-        gap: 0px;
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        z-index: 999;
-        /* Higher priority */
-      }
-
-      #mobilePillNavbar .nav-item {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 45px;
-        padding: 0 15px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        color: #888;
-        overflow: hidden;
-      }
-
-      #mobilePillNavbar .nav-item ion-icon {
-        font-size: 22px;
-        min-width: 22px;
-        transition: color 0.3s;
-        color: #232323;
-      }
-
-      #mobilePillNavbar .nav-text {
-        font-size: 14px;
-        font-weight: 600;
-        white-space: nowrap;
-        max-width: 0;
-        opacity: 0;
-        margin-left: 0;
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        transition: all 0.4s ease;
-      }
-
-      #mobilePillNavbar .nav-item.active {
-        background-color: #232323;
-        color: #ffffff;
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        padding: 22px 0px 22px 12px;
-      }
-
-      #mobilePillNavbar .nav-item.active ion-icon {
-        color: #ffffff;
-      }
-
-      #mobilePillNavbar .nav-item.active .nav-text {
-        max-width: 100px;
-        opacity: 1;
-        margin-left: 10px;
-      }
-    }
-
-    .mobnav{
-        display: none;
-    }
-    /* Hide on Desktop */
-    @media (min-width: 769px) {
-
-      #mobilePillNavbar,
-      #mobilePillSearchBar {
-        display: none !important;
-      }
-    }
-
-    /* Product Grid Masonry Layout */
+  /* Fallback for browsers that don't support masonry */
+  @supports not (grid-template-rows: masonry) {
     .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: masonry;
-      gap: 1.5rem;
-      align-items: start;
+      column-count: 2;
+      column-gap: 0.5rem;
+      column-fill: balance;
+      display: block;
+    }
+  }
+
+  @media (min-width: 480px) {
+    .products-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
 
-    /* Fallback for browsers that don't support masonry */
     @supports not (grid-template-rows: masonry) {
       .products-grid {
-        column-count: 2;
-        column-gap: 0.5rem;
-        column-fill: balance;
-        display: block;
+        column-count: 3;
       }
     }
+  }
 
-    @media (min-width: 480px) {
-      .products-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      @supports not (grid-template-rows: masonry) {
-        .products-grid {
-          column-count: 3;
-        }
-      }
+  @media (min-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(4, 1fr);
     }
 
-    @media (min-width: 1024px) {
-      .products-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      @supports not (grid-template-rows: masonry) {
-        .products-grid {
-          column-count: 4;
-        }
-      }
-    }
-
-    /* Ensure product cards work in both grid and column layouts */
-    .product-card {
-      width: 100%;
-      margin-bottom: 0;
-    }
-
-    /* For column fallback */
     @supports not (grid-template-rows: masonry) {
-      .product-card {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        display: inline-block;
-        vertical-align: top;
-        margin-bottom: 1.5rem;
+      .products-grid {
+        column-count: 4;
       }
     }
+  }
 
+  /* Ensure product cards work in both grid and column layouts */
+  .product-card {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  /* For column fallback */
+  @supports not (grid-template-rows: masonry) {
     .product-card {
-      background: white;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin-bottom: 0;
-      display: flex;
-      flex-direction: column;
-      height: min-content;
-      width: 100%;
-      margin: 0 0 9px;
-      justify-content: flex-start;
-      align-items: stretch;
+      break-inside: avoid;
+      page-break-inside: avoid;
+      display: inline-block;
+      vertical-align: top;
+      margin-bottom: 1.5rem;
     }
+  }
 
-    .product-card:hover {
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
+  .product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    width: 100%;
+    margin: 0 0 9px;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
 
-    .product-img {
-      width: 100%;
-      height: auto;
-      max-height: 200px;
-      background: white;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 8px;
-    }
+  .product-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
 
+  .product-img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    background: white;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .product-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #333;
+  }
+
+  @media (max-width:480px) {
     .product-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin: 0 0 4px 0;
-      color: #333;
+      font-size: 14px !important;
     }
 
-    @media (max-width:480px){
-      .product-title{
-        font-size: 14px !important;
-      }
-      .product-desc{
-        font-size: 12px !important;
-      }
-    }
     .product-desc {
-      font-size: 0.9rem;
-      color: #666;
-      margin: 0 0 8px 0;
-      line-height: 1.3;
+      font-size: 12px !important;
     }
+  }
 
-    .product-price {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #0099ff;
-      margin: 0 0 8px 0;
-    }
+  .product-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
 
-    .add-to-cart-btn {
-      background: #0099ff;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      width: 100%;
-      margin-top: 4px;
-    }
+  .product-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #0099ff;
+    margin: 0 0 8px 0;
+  }
 
-    .add-to-cart-btn:hover {
-      transform: scale(1.02);
-    }
-  </style>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  .add-to-cart-btn {
+    background: #0099ff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .add-to-cart-btn:hover {
+    transform: scale(1.02);
+  }
+</style>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
-    <nav>
+  <nav>
     <div class="navbar-container">
       <a href="index.html" aria-label="Navigate to home page">
         <div class="navbar-logo">
@@ -1637,7 +1643,7 @@
                   <span>Purchases & Reviews</span>
                 </a>
               </li>
-              
+
               <li>
                 <a href="account.html" class="profile-dropdown-item">
                   <i class="fa-solid fa-toggle-off"></i>
@@ -1795,7 +1801,7 @@
       <div class="sidebar-collapsible" id="col-categories">
         <button class="collapsible-trigger">
           <div style="display:flex; align-items:center;">
-            <i class='bx  bx-categories'></i> 
+            <i class='bx  bx-categories'></i>
             <span>Categories</span>
           </div>
           <i class="fa-solid fa-chevron-down chevron"></i>
@@ -1870,544 +1876,540 @@
 
   </div>
 
-    <!-- Products Section -->
-    <section class="py-5">
-        <div class="container">
-           <h2 class=" mb-4 fw-bold" style="text-align: center;"><img
-                        src="assets/download__1_-removebg-preview.png"></h2>
-            <!-- <h2 class="text-center mb-4 fw-bold">Top Store for You!</h2> -->
-            <div class="products-grid">
-
-
-               
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-01.jpg" class="product-img" alt="Samsung Refrigerator">
-                    <div class="product-title">RT6300C Top Mount Freezer with Optimal Fresh+, 411L</div>
-                    <div class="product-desc">411L top mount freezer refrigerator with Optimal Fresh+ technology.
-                    </div>
-                    <div class="product-price">$1099.99</div>
-                    <button class="add-to-cart-btn" data-product-id="9"
-                        data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L"
-                        data-product-price="1099.99" data-product-image="./assets/samsung-refrigerator-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
+  <!-- Products Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class=" mb-4 fw-bold" style="text-align: center;"><img src="assets/download__1_-removebg-preview.png"></h2>
+      <!-- <h2 class="text-center mb-4 fw-bold">Top Store for You!</h2> -->
+      <div class="products-grid">
 
 
 
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-02.jpg" class="product-img" alt="Samsung Refrigerator">
-                    <div class="product-title">RS50N3913BC/EU with Home Bar and All-around Cooling, 501L</div>
-                    <div class="product-desc">Home Bar access and All-around Cooling technology.</div>
-                    <div class="product-price">$1079.99</div>
-                    <button class="add-to-cart-btn" data-product-id="10"
-                        data-product-name="RS50N3913BC/EU with Home Bar and All-around Cooling, 501L"
-                        data-product-price="1099.99" data-product-image="./assets/samsung-refrigerator-02.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-03.jpg" class="product-img" alt="Samsung Refrigerator">
-                    <div class="product-title">635L SBS No-Frost Refrigerator with Water Dispenser</div>
-                    <div class="product-desc">Side-by-Side No-Frost Refrigerator with Water Dispenser.</div>
-                    <div class="product-price">$1799.99</div>
-                    <button class="add-to-cart-btn" data-product-id="11"
-                        data-product-name="635L SBS No-Frost Refrigerator with Water Dispenser"
-                        data-product-price="1799.99" data-product-image="./assets/samsung-refrigerator-03.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-04.jpg" class="product-img" alt="Samsung Refrigerator">
-                    <div class="product-title">655L SBS No-Frost Refrigerator with All-around Cooling</div>
-                    <div class="product-desc">Side-by-Side No-Frost Refrigerator with All-around Cooling.</div>
-                    <div class="product-price">$1687.60</div>
-                    <button class="add-to-cart-btn" data-product-id="12"
-                        data-product-name="655L SBS No-Frost Refrigerator with All-around Cooling"
-                        data-product-price="1687.60" data-product-image="./assets/samsung-refrigerator-04.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-                <div class="product-card">
-                    <img src="assets/samsung-AC-01.jpg" class="product-img" alt="Samsung Air Conditioner">
-                    <div class="product-title">AR9500T Wall-mount AC with Fast Cooling</div>
-                    <div class="product-desc">Wall-mount air conditioner with Fast Cooling technology.</div>
-                    <div class="product-price">$869.99</div>
-                    <button class="add-to-cart-btn" data-product-id="13"
-                        data-product-name="AR9500T Wall-mount AC with Fast Cooling" data-product-price="869.99"
-                        data-product-image="./assets/samsung-AC-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-
-                <div class="product-card">
-                    <img src="assets/samsung-AC-02.jpg" class="product-img" alt="Samsung Air Conditioner">
-                    <div class="product-title">18,000 BTU - Wall-mount AC with DIT, Wind-Free™ , T3 Climate Class
-                    </div>
-                    <div class="product-desc">Wall-mount AC with Digital Inverter Technology, Wind-Free™ Cooling,
-                        and T3 Climate Class.</div>
-                    <div class="product-price">$819.99</div>
-                    <button class="add-to-cart-btn" data-product-id="14"
-                        data-product-name="18,000 BTU - Wall-mount AC with DIT, Wind-Free™ , T3 Climate Class"
-                        data-product-price="819.99" data-product-image="./assets/samsung-AC-02.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-AC-03.jpg" class="product-img" alt="Samsung Air Conditioner">
-                    <div class="product-title">24,000 BTU - Wall-mount AC with DIT , T3 Climate Class</div>
-                    <div class="product-desc">2-ton inverter AC with Digital Inverter Technology for efficient
-                        cooling in high-temperature climates up to 45m².</div>
-                    <div class="product-price">$1238.28</div>
-                    <button class="add-to-cart-btn" data-product-id="15"
-                        data-product-name="24,000 BTU - Wall-mount AC with DIT , T3 Climate Class"
-                        data-product-price="1238.28" data-product-image="./assets/samsung-AC-03.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-AC-04.jpg" class="product-img" alt="Samsung Air Conditioner">
-                    <div class="product-title">12,000 BTU - Wall-mount AC with DIT , T3 Climate Class</div>
-                    <div class="product-desc">12,000 BTU wall-mount AC with Digital Inverter Technology and T3
-                        Climate Class for high-temperature environments.</div>
-                    <div class="product-price">$742.97</div>
-                    <button class="add-to-cart-btn" data-product-id="16"
-                        data-product-name="24,000 BTU - Wall-mount AC with DIT , T3 Climate Class"
-                        data-product-price="601.45" data-product-image="./assets/samsung-AC-04.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-laundry-04.jpg" class="product-img" alt="Espresso Machine">
-                    <div class="product-title">WA80CK4240BWRT with DIT, 8 Kg</div>
-                    <div class="product-desc">8 kg top-load washing machine with Digital Inverter Technology and Eco
-                        Bubble™.</div>
-                    <div class="product-price">$389.17</div>
-                    <button class="add-to-cart-btn" data-product-id="17"
-                        data-product-name="WA80CK4240BWRT with DIT, 8 Kg" data-product-price="389.17"
-                        data-product-image="./assets/samsung-washing-machine-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-laundry-01.jpg" class="product-img" alt="Espresso Machine">
-                    <div class="product-title">WW70T4020EE/NQ with Eco Bubble and Hygiene Steam, 7 Kg</div>
-                    <div class="product-desc">7 Kg washing machine with Eco Bubble and Hygiene Steam.</div>
-                    <div class="product-price">$689.90</div>
-                    <button class="add-to-cart-btn" data-product-id="18"
-                        data-product-name="WW70T4020EE/NQ with Eco Bubble and Hygiene Steam, 7 Kg"
-                        data-product-price="689.90" data-product-image="./assets/samsung-laundry-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-
-                <div class="product-card">
-                    <img src="assets/samsung-laundry-02.jpg" class="product-img" alt="Espresso Machine">
-                    <div class="product-title">WD70TA046BX/FA with Eco Bubble™ and AirWash, 7+5 Kg</div>
-                    <div class="product-desc">7+5 Kg washer-dryer with Eco Bubble™ and AirWash technology.</div>
-                    <div class="product-price">$1171.06</div>
-                    <button class="add-to-cart-btn" data-product-id="19"
-                        data-product-name="WD70TA046BX/FA with Eco Bubble™ and AirWash, 7+5 Kg"
-                        data-product-price="1171.06" data-product-image="./assets/samsung-laundry-02.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-
-                <div class="product-card">
-                    <img src="assets/samsung-laundry-03.jpg" class="product-img" alt="Espresso Machine">
-                    <div class="product-title">WA17CK6745BDRT with Ecobubble™, 17 Kg</div>
-                    <div class="product-desc">17 Kg washing machine with Ecobubble™ technology.</div>
-                    <div class="product-price">$742.97</div>
-                    <button class="add-to-cart-btn" data-product-id="20"
-                        data-product-name="WA17CK6745BDRT with Ecobubble™, 17 Kg" data-product-price="742.97"
-                        data-product-image="./assets/samsung-laundry-03.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-
-
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-05.jpg" class="product-img" alt="Samsung RF28T5001SR">
-                    <div class="product-title">RF28T5001SR 28 cu. ft. French Door Refrigerator with All-Around
-                        Cooling</div>
-                    <div class="product-desc">28.2 cu. ft. capacity with adjustable tempered glass shelves, internal
-                        ice maker, and Sabbath mode.</div>
-                    <div class="product-price">$1,400.00</div>
-                    <button class="add-to-cart-btn" data-product-id="67"
-                        data-product-name="RF28T5001SR 28 cu. ft. French Door Refrigerator with All-Around Cooling"
-                        data-product-price="1400.00" data-product-image="./assets/samsung-refrigerator-05.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-washing-machine-01.jpg" class="product-img" alt="Samsung WW9800T">
-                    <div class="product-title">WW9800T 9kg AI Washing Machine with QuickDrive™ and Eco Bubble™</div>
-                    <div class="product-desc">9kg capacity with AI Control, QuickDrive™ technology reducing wash
-                        time by up to 50%, and energy usage by 20%.</div>
-                    <div class="product-price">$999.99</div>
-                    <button class="add-to-cart-btn" data-product-id="68"
-                        data-product-name="WW9800T 9kg AI Washing Machine with QuickDrive™ and Eco Bubble™"
-                        data-product-price="999.99" data-product-image="./assets/samsung-washing-machine-02.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-
-                <div class="product-card">
-                    <img src="assets/samsung-dryer-01.jpg" class="product-img" alt="Samsung DV90T8440">
-                    <div class="product-title">DV90T8440 9kg Heat Pump Smart Dryer with AI Personalised Dry</div>
-                    <div class="product-desc">9kg heat pump dryer with 9-star energy rating, AI Personalised Dry,
-                        and 35-mins Quick Dry cycle.</div>
-                    <div class="product-price">$1,299.99</div>
-                    <button class="add-to-cart-btn" data-product-id="69"
-                        data-product-name="DV90T8440 9kg Heat Pump Smart Dryer with AI Personalised Dry"
-                        data-product-price="1299.99" data-product-image="./assets/samsung-dryer-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-dishwasher-01.jpg" class="product-img" alt="Samsung DW80R9950UG">
-                    <div class="product-title">DW80R9950UG 24 Inch Built-in Smart Dishwasher with AquaBlast™</div>
-                    <div class="product-desc">15 place settings with AquaBlast™ jets, Zone Booster™, and ultra-quiet
-                        39 dBA operation.</div>
-                    <div class="product-price">$1,199.99</div>
-                    <button class="add-to-cart-btn" data-product-id="70"
-                        data-product-name="DW80R9950UG 24 Inch Built-in Smart Dishwasher with AquaBlast™"
-                        data-product-price="1199.99" data-product-image="./assets/samsung-dishwasher-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-microwave-01.jpg" class="product-img" alt="Samsung ME83M">
-                    <div class="product-title">ME83M 23L Stainless Steel Microwave Oven with 800W Power</div>
-                    <div class="product-desc">23L capacity with 800W power, push-button controls, and stainless
-                        steel finish.</div>
-                    <div class="product-price">$149.99</div>
-                    <button class="add-to-cart-btn" data-product-id="71"
-                        data-product-name="ME83M 23L Stainless Steel Microwave Oven with 800W Power"
-                        data-product-price="149.99" data-product-image="./assets/samsung-microwave-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-range-01.jpg" class="product-img" alt="Samsung NX58M6630SS">
-                    <div class="product-title">NX58M6630SS 30" Freestanding Gas Range with 5.8 cu. ft. Capacity
-                    </div>
-                    <div class="product-desc">5.8 cu. ft. true convection oven with blue LED illuminated knobs and
-                        powerful 5-burner cooktop.</div>
-                    <div class="product-price">$799.99</div>
-                    <button class="add-to-cart-btn" data-product-id="72"
-                        data-product-name="NX58M6630SS 30\" Freestanding Gas Range with 5.8 cu. ft. Capacity"
-                        data-product-price="799.99" data-product-image="./assets/samsung-range-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-06.jpg" class="product-img" alt="Samsung RQ32S7741SR">
-                    <div class="product-title">RQ32S7741SR 653L Bespoke AI Refrigerator with Glass Door</div>
-                    <div class="product-desc">653L capacity with Bespoke AI technology that personalizes settings
-                        based on your preferences and habits.</div>
-                    <div class="product-price">$3,499.99</div>
-                    <button class="add-to-cart-btn" data-product-id="73"
-                        data-product-name="RQ32S7741SR 653L Bespoke AI Refrigerator with Glass Door"
-                        data-product-price="3499.99" data-product-image="./assets/samsung-refrigerator-06.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-07.jpg" class="product-img" alt="Samsung RF24BB6600QL">
-                    <div class="product-title">RF24BB6600QL 24 cu. ft. Family Hub™ Refrigerator with Wi-Fi</div>
-                    <div class="product-desc">24 cu. ft. capacity with Family Hub™ touchscreen, Wi-Fi connectivity,
-                        and internal camera system.</div>
-                    <div class="product-price">$2,799.99</div>
-                    <button class="add-to-cart-btn" data-product-id="74"
-                        data-product-name="RF24BB6600QL 24 cu. ft. Family Hub™ Refrigerator with Wi-Fi"
-                        data-product-price="2799.99" data-product-image="./assets/samsung-refrigerator-07.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-washing-machine-02.jpg" class="product-img" alt="Samsung WW90T604DLN">
-                    <div class="product-title">WW90T604DLN 9kg EcoBubble™ Washing Machine with Hygiene Steam</div>
-                    <div class="product-desc">9kg capacity with EcoBubble™ technology, Hygiene Steam function, and
-                        energy-saving performance.</div>
-                    <div class="product-price">$749.99</div>
-                    <button class="add-to-cart-btn" data-product-id="75"
-                        data-product-name="WW90T604DLN 9kg EcoBubble™ Washing Machine with Hygiene Steam"
-                        data-product-price="749.99" data-product-image="./assets/samsung-washing-machine-03.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-ac-06.jpg" class="product-img" alt="Samsung AR18CVFAMWK">
-                    <div class="product-title">AR18CVFAMWK 1.5 Ton Wind-Free™ Air Conditioner with AI & Digital
-                        Inverter</div>
-                    <div class="product-desc">1.5 ton capacity with Wind-Free™ cooling, AI Auto Cooling, and R32
-                        refrigerant for energy efficiency.</div>
-                    <div class="product-price">$999.99</div>
-                    <button class="add-to-cart-btn" data-product-id="76"
-                        data-product-name="AR18CVFAMWK 1.5 Ton Wind-Free™ Air Conditioner with AI & Digital Inverter"
-                        data-product-price="999.99" data-product-image="./assets/samsung-ac-05.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-dryer-02.jpg" class="product-img" alt="Samsung DV80T5200AE">
-                    <div class="product-title">DV80T5200AE 8kg Ventless Condenser Dryer with Sensor Dry</div>
-                    <div class="product-desc">8kg capacity ventless condenser dryer with Sensor Dry technology and
-                        multiple drying cycles.</div>
-                    <div class="product-price">$699.99</div>
-                    <button class="add-to-cart-btn" data-product-id="77"
-                        data-product-name="DV80T5200AE 8kg Ventless Condenser Dryer with Sensor Dry"
-                        data-product-price="699.99" data-product-image="./assets/samsung-dryer-02.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-dishwasher-02.jpg" class="product-img" alt="Samsung DW80R5060US">
-                    <div class="product-title">DW80R5060US 24 Inch Built-in Dishwasher with StormWash™</div>
-                    <div class="product-desc">15 place settings with StormWash™ technology for tough food residue
-                        and quiet 42 dBA operation.</div>
-                    <div class="product-price">$899.99</div>
-                    <button class="add-to-cart-btn" data-product-id="78"
-                        data-product-name="DW80R5060US 24 Inch Built-in Dishwasher with StormWash™"
-                        data-product-price="899.99" data-product-image="./assets/samsung-dishwasher-02.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-microwave-02.jpg" class="product-img" alt="Samsung MS23F301TQK">
-                    <div class="product-title">MS23F301TQK 23L Solo Microwave with Ceramic Enamel Interior</div>
-                    <div class="product-desc">23L capacity with ceramic enamel interior for easy cleaning and 6
-                        power levels for versatile cooking.</div>
-                    <div class="product-price">$129.99</div>
-                    <button class="add-to-cart-btn" data-product-id="79"
-                        data-product-name="MS23F301TQK 23L Solo Microwave with Ceramic Enamel Interior"
-                        data-product-price="129.99" data-product-image="./assets/samsung-microwave-02.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-range-02.jpg" class="product-img" alt="Samsung NZ80K8610AK">
-                    <div class="product-title">NZ80K8610AK 30" Slide-in Gas Range with Flex Duo™ Oven</div>
-                    <div class="product-desc">Flex Duo™ oven with removable divider allows you to cook two different
-                        dishes at different temperatures simultaneously.</div>
-                    <div class="product-price">$1,599.99</div>
-                    <button class="add-to-cart-btn" data-product-id="80"
-                        data-product-name="NZ80K8610AK 30\" Slide-in Gas Range with Flex Duo™ Oven"
-                        data-product-price="1599.99" data-product-image="./assets/samsung-range-02.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-08.jpg" class="product-img" alt="Samsung RR20D2825HV">
-                    <div class="product-title">RR20D2825HV 183L Single Door Refrigerator with Digital Inverter</div>
-                    <div class="product-desc">183L capacity with 5-star energy rating, Digital Inverter technology,
-                        and base stand drawer for extra storage.</div>
-                    <div class="product-price">$349.99</div>
-                    <button class="add-to-cart-btn" data-product-id="81"
-                        data-product-name="RR20D2825HV 183L Single Door Refrigerator with Digital Inverter"
-                        data-product-price="349.99" data-product-image="./assets/samsung-refrigerator-08.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-washing-machine-03.jpg" class="product-img" alt="Samsung WA80T5262BW">
-                    <div class="product-title">WA80T5262BW 8kg Top Load Washing Machine with Wobble Technology</div>
-                    <div class="product-desc">8kg capacity top load washer with Wobble technology for powerful
-                        cleaning and water-saving features.</div>
-                    <div class="product-price">$499.99</div>
-                    <button class="add-to-cart-btn" data-product-id="82"
-                        data-product-name="WA80T5262BW 8kg Top Load Washing Machine with Wobble Technology"
-                        data-product-price="499.99" data-product-image="./assets/samsung-washing-machine-04.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-ac-07.jpg" class="product-img" alt="Samsung AR09TYFYAWK">
-                    <div class="product-title">AR09TYFYAWK 9,000 BTU Wall Mount AC with Triple Protector Plus</div>
-                    <div class="product-desc">9,000 BTU capacity with Triple Protector Plus technology for
-                        durability in harsh conditions and T3 Climate Class.</div>
-                    <div class="product-price">$599.99</div>
-                    <button class="add-to-cart-btn" data-product-id="83"
-                        data-product-name="AR09TYFYAWK 9,000 BTU Wall Mount AC with Triple Protector Plus"
-                        data-product-price="599.99" data-product-image="./assets/samsung-ac-06.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-09.jpg" class="product-img" alt="Samsung RS64R5304B4">
-                    <div class="product-title">RS64R5304B4 647L Side-by-Side Refrigerator with Water & Ice Dispenser
-                    </div>
-                    <div class="product-desc">647L capacity side-by-side refrigerator with water and ice dispenser,
-                        All-around Cooling, and Metal Cooling technology.</div>
-                    <div class="product-price">$1,899.99</div>
-                    <button class="add-to-cart-btn" data-product-id="84"
-                        data-product-name="RS64R5304B4 647L Side-by-Side Refrigerator with Water & Ice Dispenser"
-                        data-product-price="1899.99" data-product-image="./assets/samsung-refrigerator-09.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-washing-machine-04.jpg" class="product-img" alt="Samsung WW70T4040CE">
-                    <div class="product-title">WW70T4040CE 7kg Front Load Washing Machine with Eco Bubble</div>
-                    <div class="product-desc">7kg capacity with Eco Bubble technology for deep cleaning at lower
-                        temperatures and energy efficiency.</div>
-                    <div class="product-price">$549.99</div>
-                    <button class="add-to-cart-btn" data-product-id="85"
-                        data-product-name="WW70T4040CE 7kg Front Load Washing Machine with Eco Bubble"
-                        data-product-price="549.99" data-product-image="./assets/samsung-washing-machine-05.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-ac-08.jpg" class="product-img" alt="Samsung AR12TYHYAWK">
-                    <div class="product-title">AR12TYHYAWK 12,000 BTU Wall Mount AC with Wind-Free™ Comfort</div>
-                    <div class="product-desc">12,000 BTU capacity with Wind-Free™ Comfort mode for energy-efficient
-                        cooling without direct airflow.</div>
-                    <div class="product-price">$749.99</div>
-                    <button class="add-to-cart-btn" data-product-id="86"
-                        data-product-name="AR12TYHYAWK 12,000 BTU Wall Mount AC with Wind-Free™ Comfort"
-                        data-product-price="749.99" data-product-image="./assets/samsung-ac-07.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-dryer-03.jpg" class="product-img" alt="Samsung DV70T5200AE">
-                    <div class="product-title">DV70T5200AE 7kg Ventless Condenser Dryer with Smart Dry</div>
-                    <div class="product-desc">7kg capacity with Smart Dry technology that automatically adjusts
-                        drying time based on moisture levels.</div>
-                    <div class="product-price">$599.99</div>
-                    <button class="add-to-cart-btn" data-product-id="87"
-                        data-product-name="DV70T5200AE 7kg Ventless Condenser Dryer with Smart Dry"
-                        data-product-price="599.99" data-product-image="./assets/samsung-dryer-03.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-microwave-03.jpg" class="product-img" alt="Samsung ME731K">
-                    <div class="product-title">ME731K 20L Solo Microwave with 700W Power</div>
-                    <div class="product-desc">20L capacity with 700W power, 6 power levels, and child safety lock
-                        for family use.</div>
-                    <div class="product-price">$99.99</div>
-                    <button class="add-to-cart-btn" data-product-id="88"
-                        data-product-name="ME731K 20L Solo Microwave with 700W Power" data-product-price="99.99"
-                        data-product-image="./assets/samsung-microwave-03.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-refrigerator-10.jpg" class="product-img" alt="Samsung RB38A7020SA">
-                    <div class="product-title">RB38A7020SA 375L Bottom Mount Freezer Refrigerator with Digital
-                        Inverter</div>
-                    <div class="product-desc">375L capacity with Digital Inverter technology, Power Freeze function,
-                        and adjustable shelves for flexible storage.</div>
-                    <div class="product-price">$799.99</div>
-                    <button class="add-to-cart-btn" data-product-id="89"
-                        data-product-name="RB38A7020SA 375L Bottom Mount Freezer Refrigerator with Digital Inverter"
-                        data-product-price="799.99" data-product-image="./assets/samsung-refrigerator-10.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-washing-machine-05.jpg" class="product-img" alt="Samsung WW10T684DLN">
-                    <div class="product-title">WW10T684DLN 10kg AI Washing Machine with BubbleStorm</div>
-                    <div class="product-desc">10kg capacity with AI Control, BubbleStorm technology for deep
-                        cleaning, and Super Speed wash cycle.</div>
-                    <div class="product-price">$899.99</div>
-                    <button class="add-to-cart-btn" data-product-id="90"
-                        data-product-name="WW10T684DLN 10kg AI Washing Machine with BubbleStorm"
-                        data-product-price="899.99" data-product-image="./assets/samsung-washing-machine-01.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-ac-09.jpg" class="product-img" alt="Samsung AR24CVFAMWK">
-                    <div class="product-title">AR24CVFAMWK 2 Ton Wind-Free™ Air Conditioner with AI Auto Cooling
-                    </div>
-                    <div class="product-desc">2 ton capacity with Wind-Free™ technology, AI Auto Cooling, and energy
-                        efficiency with Digital Inverter technology.</div>
-                    <div class="product-price">$1,299.99</div>
-                    <button class="add-to-cart-btn" data-product-id="91"
-                        data-product-name="AR24CVFAMWK 2 Ton Wind-Free™ Air Conditioner with AI Auto Cooling"
-                        data-product-price="1299.99" data-product-image="./assets/samsung-ac-08.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-dishwasher-03.jpg" class="product-img" alt="Samsung DW60R30010W">
-                    <div class="product-title">DW60R30010W 60cm Compact Dishwasher with 6 Place Settings</div>
-                    <div class="product-desc">6 place settings compact dishwasher perfect for small spaces, with 6
-                        wash programs and quiet operation.</div>
-                    <div class="product-price">$499.99</div>
-                    <button class="add-to-cart-btn" data-product-id="92"
-                        data-product-name="DW60R30010W 60cm Compact Dishwasher with 6 Place Settings"
-                        data-product-price="499.99" data-product-image="./assets/samsung-dishwasher-03.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <div class="product-card">
-                    <img src="assets/samsung-range-03.jpg" class="product-img" alt="Samsung NZ64K7511BK">
-                    <div class="product-title">NZ64K7511BK 60cm Gas Cooktop with 5 Burners and Wi-Fi Connectivity
-                    </div>
-                    <div class="product-desc">5-burner gas cooktop with powerful burners, Wi-Fi connectivity for
-                        remote monitoring, and premium stainless steel design.</div>
-                    <div class="product-price">$1,199.99</div>
-                    <button class="add-to-cart-btn" data-product-id="93"
-                        data-product-name="NZ64K7511BK 60cm Gas Cooktop with 5 Burners and Wi-Fi Connectivity"
-                        data-product-price="1199.99" data-product-image="./assets/samsung-range-03.jpg">
-                        Add to Cart
-                    </button>
-                </div>
-
-
-            </div>
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-01.jpg" class="product-img" alt="Samsung Refrigerator">
+          <div class="product-title">RT6300C Top Mount Freezer with Optimal Fresh+, 411L</div>
+          <div class="product-desc">411L top mount freezer refrigerator with Optimal Fresh+ technology.
+          </div>
+          <div class="product-price">$1099.99</div>
+          <button class="add-to-cart-btn" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="./assets/samsung-refrigerator-01.jpg">
+            Add to Cart
+          </button>
         </div>
-    </section>
+
+
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-02.jpg" class="product-img" alt="Samsung Refrigerator">
+          <div class="product-title">RS50N3913BC/EU with Home Bar and All-around Cooling, 501L</div>
+          <div class="product-desc">Home Bar access and All-around Cooling technology.</div>
+          <div class="product-price">$1079.99</div>
+          <button class="add-to-cart-btn" data-product-id="10"
+            data-product-name="RS50N3913BC/EU with Home Bar and All-around Cooling, 501L" data-product-price="1099.99"
+            data-product-image="./assets/samsung-refrigerator-02.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-03.jpg" class="product-img" alt="Samsung Refrigerator">
+          <div class="product-title">635L SBS No-Frost Refrigerator with Water Dispenser</div>
+          <div class="product-desc">Side-by-Side No-Frost Refrigerator with Water Dispenser.</div>
+          <div class="product-price">$1799.99</div>
+          <button class="add-to-cart-btn" data-product-id="11"
+            data-product-name="635L SBS No-Frost Refrigerator with Water Dispenser" data-product-price="1799.99"
+            data-product-image="./assets/samsung-refrigerator-03.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-04.jpg" class="product-img" alt="Samsung Refrigerator">
+          <div class="product-title">655L SBS No-Frost Refrigerator with All-around Cooling</div>
+          <div class="product-desc">Side-by-Side No-Frost Refrigerator with All-around Cooling.</div>
+          <div class="product-price">$1687.60</div>
+          <button class="add-to-cart-btn" data-product-id="12"
+            data-product-name="655L SBS No-Frost Refrigerator with All-around Cooling" data-product-price="1687.60"
+            data-product-image="./assets/samsung-refrigerator-04.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+        <div class="product-card">
+          <img src="assets/samsung-AC-01.jpg" class="product-img" alt="Samsung Air Conditioner">
+          <div class="product-title">AR9500T Wall-mount AC with Fast Cooling</div>
+          <div class="product-desc">Wall-mount air conditioner with Fast Cooling technology.</div>
+          <div class="product-price">$869.99</div>
+          <button class="add-to-cart-btn" data-product-id="13"
+            data-product-name="AR9500T Wall-mount AC with Fast Cooling" data-product-price="869.99"
+            data-product-image="./assets/samsung-AC-01.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+
+        <div class="product-card">
+          <img src="assets/samsung-AC-02.jpg" class="product-img" alt="Samsung Air Conditioner">
+          <div class="product-title">18,000 BTU - Wall-mount AC with DIT, Wind-Free™ , T3 Climate Class
+          </div>
+          <div class="product-desc">Wall-mount AC with Digital Inverter Technology, Wind-Free™ Cooling,
+            and T3 Climate Class.</div>
+          <div class="product-price">$819.99</div>
+          <button class="add-to-cart-btn" data-product-id="14"
+            data-product-name="18,000 BTU - Wall-mount AC with DIT, Wind-Free™ , T3 Climate Class"
+            data-product-price="819.99" data-product-image="./assets/samsung-AC-02.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-AC-03.jpg" class="product-img" alt="Samsung Air Conditioner">
+          <div class="product-title">24,000 BTU - Wall-mount AC with DIT , T3 Climate Class</div>
+          <div class="product-desc">2-ton inverter AC with Digital Inverter Technology for efficient
+            cooling in high-temperature climates up to 45m².</div>
+          <div class="product-price">$1238.28</div>
+          <button class="add-to-cart-btn" data-product-id="15"
+            data-product-name="24,000 BTU - Wall-mount AC with DIT , T3 Climate Class" data-product-price="1238.28"
+            data-product-image="./assets/samsung-AC-03.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-AC-04.jpg" class="product-img" alt="Samsung Air Conditioner">
+          <div class="product-title">12,000 BTU - Wall-mount AC with DIT , T3 Climate Class</div>
+          <div class="product-desc">12,000 BTU wall-mount AC with Digital Inverter Technology and T3
+            Climate Class for high-temperature environments.</div>
+          <div class="product-price">$742.97</div>
+          <button class="add-to-cart-btn" data-product-id="16"
+            data-product-name="24,000 BTU - Wall-mount AC with DIT , T3 Climate Class" data-product-price="601.45"
+            data-product-image="./assets/samsung-AC-04.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-laundry-04.jpg" class="product-img" alt="Espresso Machine">
+          <div class="product-title">WA80CK4240BWRT with DIT, 8 Kg</div>
+          <div class="product-desc">8 kg top-load washing machine with Digital Inverter Technology and Eco
+            Bubble™.</div>
+          <div class="product-price">$389.17</div>
+          <button class="add-to-cart-btn" data-product-id="17" data-product-name="WA80CK4240BWRT with DIT, 8 Kg"
+            data-product-price="389.17" data-product-image="./assets/samsung-washing-machine-01.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-laundry-01.jpg" class="product-img" alt="Espresso Machine">
+          <div class="product-title">WW70T4020EE/NQ with Eco Bubble and Hygiene Steam, 7 Kg</div>
+          <div class="product-desc">7 Kg washing machine with Eco Bubble and Hygiene Steam.</div>
+          <div class="product-price">$689.90</div>
+          <button class="add-to-cart-btn" data-product-id="18"
+            data-product-name="WW70T4020EE/NQ with Eco Bubble and Hygiene Steam, 7 Kg" data-product-price="689.90"
+            data-product-image="./assets/samsung-laundry-01.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+
+        <div class="product-card">
+          <img src="assets/samsung-laundry-02.jpg" class="product-img" alt="Espresso Machine">
+          <div class="product-title">WD70TA046BX/FA with Eco Bubble™ and AirWash, 7+5 Kg</div>
+          <div class="product-desc">7+5 Kg washer-dryer with Eco Bubble™ and AirWash technology.</div>
+          <div class="product-price">$1171.06</div>
+          <button class="add-to-cart-btn" data-product-id="19"
+            data-product-name="WD70TA046BX/FA with Eco Bubble™ and AirWash, 7+5 Kg" data-product-price="1171.06"
+            data-product-image="./assets/samsung-laundry-02.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+
+        <div class="product-card">
+          <img src="assets/samsung-laundry-03.jpg" class="product-img" alt="Espresso Machine">
+          <div class="product-title">WA17CK6745BDRT with Ecobubble™, 17 Kg</div>
+          <div class="product-desc">17 Kg washing machine with Ecobubble™ technology.</div>
+          <div class="product-price">$742.97</div>
+          <button class="add-to-cart-btn" data-product-id="20" data-product-name="WA17CK6745BDRT with Ecobubble™, 17 Kg"
+            data-product-price="742.97" data-product-image="./assets/samsung-laundry-03.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-05.jpg" class="product-img" alt="Samsung RF28T5001SR">
+          <div class="product-title">RF28T5001SR 28 cu. ft. French Door Refrigerator with All-Around
+            Cooling</div>
+          <div class="product-desc">28.2 cu. ft. capacity with adjustable tempered glass shelves, internal
+            ice maker, and Sabbath mode.</div>
+          <div class="product-price">$1,400.00</div>
+          <button class="add-to-cart-btn" data-product-id="67"
+            data-product-name="RF28T5001SR 28 cu. ft. French Door Refrigerator with All-Around Cooling"
+            data-product-price="1400.00" data-product-image="./assets/samsung-refrigerator-05.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-washing-machine-01.jpg" class="product-img" alt="Samsung WW9800T">
+          <div class="product-title">WW9800T 9kg AI Washing Machine with QuickDrive™ and Eco Bubble™</div>
+          <div class="product-desc">9kg capacity with AI Control, QuickDrive™ technology reducing wash
+            time by up to 50%, and energy usage by 20%.</div>
+          <div class="product-price">$999.99</div>
+          <button class="add-to-cart-btn" data-product-id="68"
+            data-product-name="WW9800T 9kg AI Washing Machine with QuickDrive™ and Eco Bubble™"
+            data-product-price="999.99" data-product-image="./assets/samsung-washing-machine-02.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+
+        <div class="product-card">
+          <img src="assets/samsung-dryer-01.jpg" class="product-img" alt="Samsung DV90T8440">
+          <div class="product-title">DV90T8440 9kg Heat Pump Smart Dryer with AI Personalised Dry</div>
+          <div class="product-desc">9kg heat pump dryer with 9-star energy rating, AI Personalised Dry,
+            and 35-mins Quick Dry cycle.</div>
+          <div class="product-price">$1,299.99</div>
+          <button class="add-to-cart-btn" data-product-id="69"
+            data-product-name="DV90T8440 9kg Heat Pump Smart Dryer with AI Personalised Dry"
+            data-product-price="1299.99" data-product-image="./assets/samsung-dryer-01.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-dishwasher-01.jpg" class="product-img" alt="Samsung DW80R9950UG">
+          <div class="product-title">DW80R9950UG 24 Inch Built-in Smart Dishwasher with AquaBlast™</div>
+          <div class="product-desc">15 place settings with AquaBlast™ jets, Zone Booster™, and ultra-quiet
+            39 dBA operation.</div>
+          <div class="product-price">$1,199.99</div>
+          <button class="add-to-cart-btn" data-product-id="70"
+            data-product-name="DW80R9950UG 24 Inch Built-in Smart Dishwasher with AquaBlast™"
+            data-product-price="1199.99" data-product-image="./assets/samsung-dishwasher-01.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-microwave-01.jpg" class="product-img" alt="Samsung ME83M">
+          <div class="product-title">ME83M 23L Stainless Steel Microwave Oven with 800W Power</div>
+          <div class="product-desc">23L capacity with 800W power, push-button controls, and stainless
+            steel finish.</div>
+          <div class="product-price">$149.99</div>
+          <button class="add-to-cart-btn" data-product-id="71"
+            data-product-name="ME83M 23L Stainless Steel Microwave Oven with 800W Power" data-product-price="149.99"
+            data-product-image="./assets/samsung-microwave-01.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-range-01.jpg" class="product-img" alt="Samsung NX58M6630SS">
+          <div class="product-title">NX58M6630SS 30" Freestanding Gas Range with 5.8 cu. ft. Capacity
+          </div>
+          <div class="product-desc">5.8 cu. ft. true convection oven with blue LED illuminated knobs and
+            powerful 5-burner cooktop.</div>
+          <div class="product-price">$799.99</div>
+          <button class="add-to-cart-btn" data-product-id="72" data-product-name="NX58M6630SS 30\" Freestanding Gas
+            Range with 5.8 cu. ft. Capacity" data-product-price="799.99"
+            data-product-image="./assets/samsung-range-01.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-06.jpg" class="product-img" alt="Samsung RQ32S7741SR">
+          <div class="product-title">RQ32S7741SR 653L Bespoke AI Refrigerator with Glass Door</div>
+          <div class="product-desc">653L capacity with Bespoke AI technology that personalizes settings
+            based on your preferences and habits.</div>
+          <div class="product-price">$3,499.99</div>
+          <button class="add-to-cart-btn" data-product-id="73"
+            data-product-name="RQ32S7741SR 653L Bespoke AI Refrigerator with Glass Door" data-product-price="3499.99"
+            data-product-image="./assets/samsung-refrigerator-06.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-07.jpg" class="product-img" alt="Samsung RF24BB6600QL">
+          <div class="product-title">RF24BB6600QL 24 cu. ft. Family Hub™ Refrigerator with Wi-Fi</div>
+          <div class="product-desc">24 cu. ft. capacity with Family Hub™ touchscreen, Wi-Fi connectivity,
+            and internal camera system.</div>
+          <div class="product-price">$2,799.99</div>
+          <button class="add-to-cart-btn" data-product-id="74"
+            data-product-name="RF24BB6600QL 24 cu. ft. Family Hub™ Refrigerator with Wi-Fi" data-product-price="2799.99"
+            data-product-image="./assets/samsung-refrigerator-07.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-washing-machine-02.jpg" class="product-img" alt="Samsung WW90T604DLN">
+          <div class="product-title">WW90T604DLN 9kg EcoBubble™ Washing Machine with Hygiene Steam</div>
+          <div class="product-desc">9kg capacity with EcoBubble™ technology, Hygiene Steam function, and
+            energy-saving performance.</div>
+          <div class="product-price">$749.99</div>
+          <button class="add-to-cart-btn" data-product-id="75"
+            data-product-name="WW90T604DLN 9kg EcoBubble™ Washing Machine with Hygiene Steam"
+            data-product-price="749.99" data-product-image="./assets/samsung-washing-machine-03.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-ac-06.jpg" class="product-img" alt="Samsung AR18CVFAMWK">
+          <div class="product-title">AR18CVFAMWK 1.5 Ton Wind-Free™ Air Conditioner with AI & Digital
+            Inverter</div>
+          <div class="product-desc">1.5 ton capacity with Wind-Free™ cooling, AI Auto Cooling, and R32
+            refrigerant for energy efficiency.</div>
+          <div class="product-price">$999.99</div>
+          <button class="add-to-cart-btn" data-product-id="76"
+            data-product-name="AR18CVFAMWK 1.5 Ton Wind-Free™ Air Conditioner with AI & Digital Inverter"
+            data-product-price="999.99" data-product-image="./assets/samsung-ac-05.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-dryer-02.jpg" class="product-img" alt="Samsung DV80T5200AE">
+          <div class="product-title">DV80T5200AE 8kg Ventless Condenser Dryer with Sensor Dry</div>
+          <div class="product-desc">8kg capacity ventless condenser dryer with Sensor Dry technology and
+            multiple drying cycles.</div>
+          <div class="product-price">$699.99</div>
+          <button class="add-to-cart-btn" data-product-id="77"
+            data-product-name="DV80T5200AE 8kg Ventless Condenser Dryer with Sensor Dry" data-product-price="699.99"
+            data-product-image="./assets/samsung-dryer-02.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-dishwasher-02.jpg" class="product-img" alt="Samsung DW80R5060US">
+          <div class="product-title">DW80R5060US 24 Inch Built-in Dishwasher with StormWash™</div>
+          <div class="product-desc">15 place settings with StormWash™ technology for tough food residue
+            and quiet 42 dBA operation.</div>
+          <div class="product-price">$899.99</div>
+          <button class="add-to-cart-btn" data-product-id="78"
+            data-product-name="DW80R5060US 24 Inch Built-in Dishwasher with StormWash™" data-product-price="899.99"
+            data-product-image="./assets/samsung-dishwasher-02.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-microwave-02.jpg" class="product-img" alt="Samsung MS23F301TQK">
+          <div class="product-title">MS23F301TQK 23L Solo Microwave with Ceramic Enamel Interior</div>
+          <div class="product-desc">23L capacity with ceramic enamel interior for easy cleaning and 6
+            power levels for versatile cooking.</div>
+          <div class="product-price">$129.99</div>
+          <button class="add-to-cart-btn" data-product-id="79"
+            data-product-name="MS23F301TQK 23L Solo Microwave with Ceramic Enamel Interior" data-product-price="129.99"
+            data-product-image="./assets/samsung-microwave-02.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-range-02.jpg" class="product-img" alt="Samsung NZ80K8610AK">
+          <div class="product-title">NZ80K8610AK 30" Slide-in Gas Range with Flex Duo™ Oven</div>
+          <div class="product-desc">Flex Duo™ oven with removable divider allows you to cook two different
+            dishes at different temperatures simultaneously.</div>
+          <div class="product-price">$1,599.99</div>
+          <button class="add-to-cart-btn" data-product-id="80" data-product-name="NZ80K8610AK 30\" Slide-in Gas Range
+            with Flex Duo™ Oven" data-product-price="1599.99" data-product-image="./assets/samsung-range-02.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-08.jpg" class="product-img" alt="Samsung RR20D2825HV">
+          <div class="product-title">RR20D2825HV 183L Single Door Refrigerator with Digital Inverter</div>
+          <div class="product-desc">183L capacity with 5-star energy rating, Digital Inverter technology,
+            and base stand drawer for extra storage.</div>
+          <div class="product-price">$349.99</div>
+          <button class="add-to-cart-btn" data-product-id="81"
+            data-product-name="RR20D2825HV 183L Single Door Refrigerator with Digital Inverter"
+            data-product-price="349.99" data-product-image="./assets/samsung-refrigerator-08.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-washing-machine-03.jpg" class="product-img" alt="Samsung WA80T5262BW">
+          <div class="product-title">WA80T5262BW 8kg Top Load Washing Machine with Wobble Technology</div>
+          <div class="product-desc">8kg capacity top load washer with Wobble technology for powerful
+            cleaning and water-saving features.</div>
+          <div class="product-price">$499.99</div>
+          <button class="add-to-cart-btn" data-product-id="82"
+            data-product-name="WA80T5262BW 8kg Top Load Washing Machine with Wobble Technology"
+            data-product-price="499.99" data-product-image="./assets/samsung-washing-machine-04.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-ac-07.jpg" class="product-img" alt="Samsung AR09TYFYAWK">
+          <div class="product-title">AR09TYFYAWK 9,000 BTU Wall Mount AC with Triple Protector Plus</div>
+          <div class="product-desc">9,000 BTU capacity with Triple Protector Plus technology for
+            durability in harsh conditions and T3 Climate Class.</div>
+          <div class="product-price">$599.99</div>
+          <button class="add-to-cart-btn" data-product-id="83"
+            data-product-name="AR09TYFYAWK 9,000 BTU Wall Mount AC with Triple Protector Plus"
+            data-product-price="599.99" data-product-image="./assets/samsung-ac-06.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-09.jpg" class="product-img" alt="Samsung RS64R5304B4">
+          <div class="product-title">RS64R5304B4 647L Side-by-Side Refrigerator with Water & Ice Dispenser
+          </div>
+          <div class="product-desc">647L capacity side-by-side refrigerator with water and ice dispenser,
+            All-around Cooling, and Metal Cooling technology.</div>
+          <div class="product-price">$1,899.99</div>
+          <button class="add-to-cart-btn" data-product-id="84"
+            data-product-name="RS64R5304B4 647L Side-by-Side Refrigerator with Water & Ice Dispenser"
+            data-product-price="1899.99" data-product-image="./assets/samsung-refrigerator-09.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-washing-machine-04.jpg" class="product-img" alt="Samsung WW70T4040CE">
+          <div class="product-title">WW70T4040CE 7kg Front Load Washing Machine with Eco Bubble</div>
+          <div class="product-desc">7kg capacity with Eco Bubble technology for deep cleaning at lower
+            temperatures and energy efficiency.</div>
+          <div class="product-price">$549.99</div>
+          <button class="add-to-cart-btn" data-product-id="85"
+            data-product-name="WW70T4040CE 7kg Front Load Washing Machine with Eco Bubble" data-product-price="549.99"
+            data-product-image="./assets/samsung-washing-machine-05.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-ac-08.jpg" class="product-img" alt="Samsung AR12TYHYAWK">
+          <div class="product-title">AR12TYHYAWK 12,000 BTU Wall Mount AC with Wind-Free™ Comfort</div>
+          <div class="product-desc">12,000 BTU capacity with Wind-Free™ Comfort mode for energy-efficient
+            cooling without direct airflow.</div>
+          <div class="product-price">$749.99</div>
+          <button class="add-to-cart-btn" data-product-id="86"
+            data-product-name="AR12TYHYAWK 12,000 BTU Wall Mount AC with Wind-Free™ Comfort" data-product-price="749.99"
+            data-product-image="./assets/samsung-ac-07.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-dryer-03.jpg" class="product-img" alt="Samsung DV70T5200AE">
+          <div class="product-title">DV70T5200AE 7kg Ventless Condenser Dryer with Smart Dry</div>
+          <div class="product-desc">7kg capacity with Smart Dry technology that automatically adjusts
+            drying time based on moisture levels.</div>
+          <div class="product-price">$599.99</div>
+          <button class="add-to-cart-btn" data-product-id="87"
+            data-product-name="DV70T5200AE 7kg Ventless Condenser Dryer with Smart Dry" data-product-price="599.99"
+            data-product-image="./assets/samsung-dryer-03.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-microwave-03.jpg" class="product-img" alt="Samsung ME731K">
+          <div class="product-title">ME731K 20L Solo Microwave with 700W Power</div>
+          <div class="product-desc">20L capacity with 700W power, 6 power levels, and child safety lock
+            for family use.</div>
+          <div class="product-price">$99.99</div>
+          <button class="add-to-cart-btn" data-product-id="88"
+            data-product-name="ME731K 20L Solo Microwave with 700W Power" data-product-price="99.99"
+            data-product-image="./assets/samsung-microwave-03.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-refrigerator-10.jpg" class="product-img" alt="Samsung RB38A7020SA">
+          <div class="product-title">RB38A7020SA 375L Bottom Mount Freezer Refrigerator with Digital
+            Inverter</div>
+          <div class="product-desc">375L capacity with Digital Inverter technology, Power Freeze function,
+            and adjustable shelves for flexible storage.</div>
+          <div class="product-price">$799.99</div>
+          <button class="add-to-cart-btn" data-product-id="89"
+            data-product-name="RB38A7020SA 375L Bottom Mount Freezer Refrigerator with Digital Inverter"
+            data-product-price="799.99" data-product-image="./assets/samsung-refrigerator-10.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-washing-machine-05.jpg" class="product-img" alt="Samsung WW10T684DLN">
+          <div class="product-title">WW10T684DLN 10kg AI Washing Machine with BubbleStorm</div>
+          <div class="product-desc">10kg capacity with AI Control, BubbleStorm technology for deep
+            cleaning, and Super Speed wash cycle.</div>
+          <div class="product-price">$899.99</div>
+          <button class="add-to-cart-btn" data-product-id="90"
+            data-product-name="WW10T684DLN 10kg AI Washing Machine with BubbleStorm" data-product-price="899.99"
+            data-product-image="./assets/samsung-washing-machine-01.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-ac-09.jpg" class="product-img" alt="Samsung AR24CVFAMWK">
+          <div class="product-title">AR24CVFAMWK 2 Ton Wind-Free™ Air Conditioner with AI Auto Cooling
+          </div>
+          <div class="product-desc">2 ton capacity with Wind-Free™ technology, AI Auto Cooling, and energy
+            efficiency with Digital Inverter technology.</div>
+          <div class="product-price">$1,299.99</div>
+          <button class="add-to-cart-btn" data-product-id="91"
+            data-product-name="AR24CVFAMWK 2 Ton Wind-Free™ Air Conditioner with AI Auto Cooling"
+            data-product-price="1299.99" data-product-image="./assets/samsung-ac-08.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-dishwasher-03.jpg" class="product-img" alt="Samsung DW60R30010W">
+          <div class="product-title">DW60R30010W 60cm Compact Dishwasher with 6 Place Settings</div>
+          <div class="product-desc">6 place settings compact dishwasher perfect for small spaces, with 6
+            wash programs and quiet operation.</div>
+          <div class="product-price">$499.99</div>
+          <button class="add-to-cart-btn" data-product-id="92"
+            data-product-name="DW60R30010W 60cm Compact Dishwasher with 6 Place Settings" data-product-price="499.99"
+            data-product-image="./assets/samsung-dishwasher-03.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="product-card">
+          <img src="assets/samsung-range-03.jpg" class="product-img" alt="Samsung NZ64K7511BK">
+          <div class="product-title">NZ64K7511BK 60cm Gas Cooktop with 5 Burners and Wi-Fi Connectivity
+          </div>
+          <div class="product-desc">5-burner gas cooktop with powerful burners, Wi-Fi connectivity for
+            remote monitoring, and premium stainless steel design.</div>
+          <div class="product-price">$1,199.99</div>
+          <button class="add-to-cart-btn" data-product-id="93"
+            data-product-name="NZ64K7511BK 60cm Gas Cooktop with 5 Burners and Wi-Fi Connectivity"
+            data-product-price="1199.99" data-product-image="./assets/samsung-range-03.jpg">
+            Add to Cart
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
 
 
 
@@ -2416,7 +2418,7 @@
 
 
 
-<!-- FOOTER -->
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-container">
       <!-- Brand Section -->
@@ -2577,10 +2579,10 @@
         <button class="icon-btn" id="emberSidebarToggle"><i class='bx bx-menu'></i></button>
         <div class="header-brand">
           <!-- From Uiverse.io by dexter-st -->
-<div class="loader-wrapper-chatbot-avatar">
-<span STYLE="FONT-FAMILY:'FontAwesome';z-index:1">E</span>
-  <div class="loader-chatbot-avatar"></div>
-</div>
+          <div class="loader-wrapper-chatbot-avatar">
+            <span STYLE="FONT-FAMILY:'FontAwesome';z-index:1">E</span>
+            <div class="loader-chatbot-avatar"></div>
+          </div>
 
           <span class="header-title">Chatbase AI Agent</span>
         </div>
@@ -2902,274 +2904,190 @@
       });
 
 
-    // Function to toggle user icon visibility
-    function toggleUserIcon(show) {
-      const icon = document.getElementById('Hide/UnhideUserIcon');
-      if (icon) {
-        icon.style.display = show ? 'flex' : 'none';
+      // Function to toggle user icon visibility
+      function toggleUserIcon(show) {
+        const icon = document.getElementById('Hide/UnhideUserIcon');
+        if (icon) {
+          icon.style.display = show ? 'flex' : 'none';
+        }
       }
-    }
 
-    // Function to toggle signup button visibility
-    function toggleSignupBtn(show) {
-      const btn = document.getElementById('Hide/UnhideSignupBtn');
-      if (btn) {
-        btn.style.display = show ? 'flex' : 'none';
+      // Function to toggle signup button visibility
+      function toggleSignupBtn(show) {
+        const btn = document.getElementById('Hide/UnhideSignupBtn');
+        if (btn) {
+          btn.style.display = show ? 'flex' : 'none';
+        }
       }
-    }
 
-    // Auth & Dropdown Logic
-    const initAuthUI = async () => {
-      if (!window.DB) return;
+      // Auth & Dropdown Logic
+      const initAuthUI = async () => {
+        if (!window.DB) return;
 
-      const { data: { user } } = await DB.getUser();
+        const { data: { user } } = await DB.getUser();
 
-      // Toggle user icon based on login status
-      toggleUserIcon(!!user);
-      toggleSignupBtn(!user);
+        // Toggle user icon based on login status
+        toggleUserIcon(!!user);
+        toggleSignupBtn(!user);
 
-      if (user) {
-        const loginLink = document.querySelector('a[href="login.html"]');
-        if (loginLink && loginLink.parentElement) {
-          const li = loginLink.parentElement;
-          const name = user.user_metadata.full_name || 'User';
-          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+        if (user) {
+          const loginLink = document.querySelector('a[href="login.html"]');
+          if (loginLink && loginLink.parentElement) {
+            const li = loginLink.parentElement;
+            const name = user.user_metadata.full_name || 'User';
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
 
-          // Replace Login Link with Simple Dark Dropdown
-          li.innerHTML = `
+            // Replace Login Link with Simple Dark Dropdown
+            li.innerHTML = `
 
 
                 `;
 
 
-          // Load Custom Profile Picture if exists
-          const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
-          if (storedAvatar) {
-            const avatarImg = li.querySelector('#navbar-avatar-img');
-            if (avatarImg) avatarImg.src = storedAvatar;
-          }
-
-          // Logout Handler
-          document.getElementById('nav-dropdown-logout', 'mobile-logout-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-
-            // Create the actual logout function
-            const performLogout = async () => {
-              await DB.signOut();
-              window.location.reload();
-            };
-
-            // Use custom modal if available, otherwise fallback to native confirm
-            if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
-              window.LogoutModal.confirm(performLogout);
-            } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
-              window.showLogoutConfirmation(performLogout);
-            } else {
-              // Fallback to native confirm
-              if (confirm('Are you sure you want to logout?')) {
-                await performLogout();
-              }
+            // Load Custom Profile Picture if exists
+            const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+            if (storedAvatar) {
+              const avatarImg = li.querySelector('#navbar-avatar-img');
+              if (avatarImg) avatarImg.src = storedAvatar;
             }
-          });
 
-          // Dropdown Toggle
-          // Dropdown Toggle (Desktop)
-          const trigger = li.querySelector('.nav-profile-trigger');
-          const menu = li.querySelector('.nav-profile-menu');
+            // Logout Handler
+            document.getElementById('nav-dropdown-logout', 'mobile-logout-btn').addEventListener('click', async (e) => {
+              e.preventDefault();
 
-          if (trigger && menu) {
-            trigger.addEventListener('click', (e) => {
-              e.stopPropagation();
-              menu.classList.toggle('active');
-            });
+              // Create the actual logout function
+              const performLogout = async () => {
+                await DB.signOut();
+                window.location.reload();
+              };
 
-            document.addEventListener('click', (e) => {
-              if (!li.contains(e.target)) {
-                menu.classList.remove('active');
+              // Use custom modal if available, otherwise fallback to native confirm
+              if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
+                window.LogoutModal.confirm(performLogout);
+              } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
+                window.showLogoutConfirmation(performLogout);
+              } else {
+                // Fallback to native confirm
+                if (confirm('Are you sure you want to logout?')) {
+                  await performLogout();
+                }
               }
             });
+
+            // Dropdown Toggle
+            // Dropdown Toggle (Desktop)
+            const trigger = li.querySelector('.nav-profile-trigger');
+            const menu = li.querySelector('.nav-profile-menu');
+
+            if (trigger && menu) {
+              trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menu.classList.toggle('active');
+              });
+
+              document.addEventListener('click', (e) => {
+                if (!li.contains(e.target)) {
+                  menu.classList.remove('active');
+                }
+              });
+            }
           }
-        }
 
-        // --- Mobile Sidebar Injection (Redesigned) ---
-        const sidebarHeader = document.querySelector('.sidebar-header');
-        const sidebarFooter = document.querySelector('.sidebar-footer');
-        const sidebarLoginLink = document.getElementById('sidebar-login-link');
+          // --- Mobile Sidebar Injection (Redesigned) ---
+          const sidebarHeader = document.querySelector('.sidebar-header');
+          const sidebarFooter = document.querySelector('.sidebar-footer');
+          const sidebarLoginLink = document.getElementById('sidebar-login-link');
 
-        if (sidebarHeader && sidebarFooter) {
-          // 1. Update Header with User Info
-          const name = user.user_metadata.full_name || 'User';
-          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+          if (sidebarHeader && sidebarFooter) {
+            // 1. Update Header with User Info
+            const name = user.user_metadata.full_name || 'User';
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
 
-          // Replace the "default-brand" part with User Profile
-          const brandContainer = sidebarHeader.querySelector('.header-brand');
-          if (brandContainer) {
-            brandContainer.innerHTML = `
+            // Replace the "default-brand" part with User Profile
+            const brandContainer = sidebarHeader.querySelector('.header-brand');
+            if (brandContainer) {
+              brandContainer.innerHTML = `
               <img src="${avatarUrl}" class="sidebar-avatar" alt="Profile" id="mobile-avatar-img">
               <div class="user-info">
                   <span class="user-name">Hello, ${name}</span>
                   <span class="user-status">Member</span>
               </div>
             `;
-          }
+            }
 
-          // 2. Hide "Login" Wrapper
-          const loginWrapper = document.getElementById('sidebar-login-container');
-          if (loginWrapper) loginWrapper.style.display = 'none';
+            // 2. Hide "Login" Wrapper
+            const loginWrapper = document.getElementById('sidebar-login-container');
+            if (loginWrapper) loginWrapper.style.display = 'none';
 
 
-          // Sync Custom Avatar
-          const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
-          if (storedAvatar) {
-            const mAvatar = sidebarHeader.querySelector('#mobile-avatar-img');
-            if (mAvatar) mAvatar.src = storedAvatar;
+            // Sync Custom Avatar
+            const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
+            if (storedAvatar) {
+              const mAvatar = sidebarHeader.querySelector('#mobile-avatar-img');
+              if (mAvatar) mAvatar.src = storedAvatar;
+            }
           }
         }
+      };
+
+      // Run Immediately or Wait
+      if (window.DB) {
+        initAuthUI();
+      } else {
+        document.addEventListener('dbReady', initAuthUI);
       }
-    };
-
-    // Run Immediately or Wait
-    if (window.DB) {
-      initAuthUI();
-    } else {
-      document.addEventListener('dbReady', initAuthUI);
-    }
   </script>
-<script>
-</script>
-<script>
+  <script>
+  </script>
+  <script>
       document.addEventListener('DOMContentLoaded', function () {
-    const splitButtons = document.querySelectorAll('.split-button');
+        const splitButtons = document.querySelectorAll('.split-button');
 
-    splitButtons.forEach(button => {
-        // Check if this is a single-toggle action button
-        if (button.classList.contains('single-toggle-action')) {
+        splitButtons.forEach(button => {
+          // Check if this is a single-toggle action button
+          if (button.classList.contains('single-toggle-action')) {
             button.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
+              e.preventDefault();
+              e.stopPropagation();
 
-                const parentItem = button.parentElement; // The list item wrapping the button
-                const dropdown = parentItem.querySelector('.mobile-dropdown');
-                const isExpanded = parentItem.classList.contains('active');
+              const parentItem = button.parentElement; // The list item wrapping the button
+              const dropdown = parentItem.querySelector('.mobile-dropdown');
+              const isExpanded = parentItem.classList.contains('active');
 
-                // Optional: Close other open dropdowns on desktop
-                if (window.innerWidth > 992) {
-                    document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
-                        if (item !== parentItem) {
-                            item.classList.remove('active');
-                            const btn = item.querySelector('.split-button');
-                            if (btn) btn.setAttribute('aria-expanded', 'false');
-                            const otherDropdown = item.querySelector('.mobile-dropdown');
-                            if (otherDropdown) otherDropdown.style.maxHeight = '0';
-                        }
-                    });
+              // Optional: Close other open dropdowns on desktop
+              if (window.innerWidth > 992) {
+                document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
+                  if (item !== parentItem) {
+                    item.classList.remove('active');
+                    const btn = item.querySelector('.split-button');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                    const otherDropdown = item.querySelector('.mobile-dropdown');
+                    if (otherDropdown) otherDropdown.style.maxHeight = '0';
+                  }
+                });
+              }
+
+              // Toggle current state
+              parentItem.classList.toggle('active');
+              button.setAttribute('aria-expanded', !isExpanded);
+
+              // Handle dropdown animation (if using max-height transition)
+              if (dropdown) {
+                if (!isExpanded) {
+                  dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
+                } else {
+                  dropdown.style.maxHeight = '0';
                 }
-
-                // Toggle current state
-                parentItem.classList.toggle('active');
-                button.setAttribute('aria-expanded', !isExpanded);
-
-                // Handle dropdown animation (if using max-height transition)
-                if (dropdown) {
-                    if (!isExpanded) {
-                        dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
-                    } else {
-                        dropdown.style.maxHeight = '0';
-                    }
-                }
+              }
             });
-        }
-    });
+          }
+        });
 
 
-});
-</script>
+      });
+  </script>
 
   <script>
-    // Dropdown toggle functionality for Categories and Brands
-const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
-dropdownItems.forEach(item => {
-  const toggleBtn = item.querySelector('.split-button.single-toggle-action');
-  const dropdown = item.querySelector('.mobile-dropdown');
-
-  if (toggleBtn && dropdown) {
-    toggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-
-      // Close other dropdowns
-      dropdownItems.forEach(otherItem => {
-        if (otherItem !== item) {
-          otherItem.classList.remove('active');
-        }
-      });
-
-      // Toggle current dropdown
-      item.classList.toggle('active');
-    });
-  }
-});
-
-// Close dropdowns when clicking outside
-document.addEventListener('click', (e) => {
-  dropdownItems.forEach(item => {
-    if (!item.contains(e.target)) {
-      item.classList.remove('active');
-    }
-  });
-});
-
-    // Initialize FinisherHeader for background animation
-    new FinisherHeader({
-      "count": 12,
-      "size": {
-        "min": 1300,
-        "max": 1500,
-        "pulse": 1.6
-      },
-      "speed": {
-        "x": {
-          "min": 1.4,
-          "max": 5
-        },
-        "y": {
-          "min": 1.4,
-          "max": 5
-        }
-      },
-      "colors": {
-        "background": "#373333",
-        "particles": [
-          "#14a394",
-          "#10a2da"
-        ]
-      },
-      "blending": "none",
-      "opacity": {
-        "center": 0.6,
-        "edge": 0
-      },
-      "skew": 0,
-      "shapes": [
-        "c"
-      ]
-    });
-
-
-
-
-    document.addEventListener('DOMContentLoaded', function () {
-      // New Collapsible Logic for Sidebar
-      const collapsibles = document.querySelectorAll('.sidebar-collapsible');
-      collapsibles.forEach(col => {
-        const btn = col.querySelector('.collapsible-trigger');
-        btn.addEventListener('click', () => {
-          // Close others (accordion style - optional)
-          // collapsibles.forEach(c => { if(c !== col) c.classList.remove('open'); });
-
-          col.classList.toggle('open');
-        });
-      });
-
       // Dropdown toggle functionality for Categories and Brands
       const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
       dropdownItems.forEach(item => {
@@ -3202,119 +3120,203 @@ document.addEventListener('click', (e) => {
         });
       });
 
-      // Mobile Menu Toggle (Hamburger)
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const closeBtn = document.getElementById('closeBtn');
-
-      if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', () => {
-          mobileMenu.classList.add('active');
-        });
-      }
-
-      if (closeBtn && mobileMenu) {
-        closeBtn.addEventListener('click', () => {
-          mobileMenu.classList.remove('active');
-        });
-      }
-
-      // Close on Outside Click
-      document.addEventListener('click', (e) => {
-        if (mobileMenu && mobileMenu.classList.contains('active')) {
-          if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-            mobileMenu.classList.remove('active');
+      // Initialize FinisherHeader for background animation
+      new FinisherHeader({
+        "count": 12,
+        "size": {
+          "min": 1300,
+          "max": 1500,
+          "pulse": 1.6
+        },
+        "speed": {
+          "x": {
+            "min": 1.4,
+            "max": 5
+          },
+          "y": {
+            "min": 1.4,
+            "max": 5
           }
-        }
+        },
+        "colors": {
+          "background": "#373333",
+          "particles": [
+            "#14a394",
+            "#10a2da"
+          ]
+        },
+        "blending": "none",
+        "opacity": {
+          "center": 0.6,
+          "edge": 0
+        },
+        "skew": 0,
+        "shapes": [
+          "c"
+        ]
       });
 
-      // Newsletter Form Functionality
-      const newsletterForm = document.querySelector('.newsletter-form');
-      const emailInput = newsletterForm?.querySelector('input[type="email"]');
-      const submitBtn = newsletterForm?.querySelector('button');
 
-      if (newsletterForm && emailInput && submitBtn) {
-        newsletterForm.addEventListener('submit', async function (e) {
-          e.preventDefault();
 
-          const email = emailInput.value.trim();
 
-          // Basic email validation
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      document.addEventListener('DOMContentLoaded', function () {
+        // New Collapsible Logic for Sidebar
+        const collapsibles = document.querySelectorAll('.sidebar-collapsible');
+        collapsibles.forEach(col => {
+          const btn = col.querySelector('.collapsible-trigger');
+          btn.addEventListener('click', () => {
+            // Close others (accordion style - optional)
+            // collapsibles.forEach(c => { if(c !== col) c.classList.remove('open'); });
 
-          if (!email) {
-            showToast('Please enter your email address', 'error');
-            emailInput.focus();
-            return;
-          }
+            col.classList.toggle('open');
+          });
+        });
 
-          if (!emailRegex.test(email)) {
-            showToast('Please enter a valid email address', 'error');
-            emailInput.focus();
-            return;
-          }
+        // Dropdown toggle functionality for Categories and Brands
+        const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
+        dropdownItems.forEach(item => {
+          const toggleBtn = item.querySelector('.split-button.single-toggle-action');
+          const dropdown = item.querySelector('.mobile-dropdown');
 
-          // Show loading state with spinner
-          submitBtn.classList.add('loading');
-          submitBtn.disabled = true;
+          if (toggleBtn && dropdown) {
+            toggleBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
 
-          try {
-            // Simulate API call with 2.8 second delay
-            await new Promise(resolve => setTimeout(resolve, 2800));
-
-            // Success
-            showToast('Subscribed successfully!', 'success');
-            emailInput.value = '';
-
-            // Optional: Track subscription event
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'newsletter_signup', {
-                event_category: 'engagement',
-                event_label: 'newsletter_subscription'
+              // Close other dropdowns
+              dropdownItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('active');
+                }
               });
+
+              // Toggle current dropdown
+              item.classList.toggle('active');
+            });
+          }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+          dropdownItems.forEach(item => {
+            if (!item.contains(e.target)) {
+              item.classList.remove('active');
+            }
+          });
+        });
+
+        // Mobile Menu Toggle (Hamburger)
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeBtn = document.getElementById('closeBtn');
+
+        if (hamburger && mobileMenu) {
+          hamburger.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+          });
+        }
+
+        if (closeBtn && mobileMenu) {
+          closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+          });
+        }
+
+        // Close on Outside Click
+        document.addEventListener('click', (e) => {
+          if (mobileMenu && mobileMenu.classList.contains('active')) {
+            if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+              mobileMenu.classList.remove('active');
+            }
+          }
+        });
+
+        // Newsletter Form Functionality
+        const newsletterForm = document.querySelector('.newsletter-form');
+        const emailInput = newsletterForm?.querySelector('input[type="email"]');
+        const submitBtn = newsletterForm?.querySelector('button');
+
+        if (newsletterForm && emailInput && submitBtn) {
+          newsletterForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!email) {
+              showToast('Please enter your email address', 'error');
+              emailInput.focus();
+              return;
             }
 
-          } catch (error) {
-            showToast('Something went wrong. Please try again.', 'error');
-          } finally {
-            // Restore button state
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
-          }
-        });
+            if (!emailRegex.test(email)) {
+              showToast('Please enter a valid email address', 'error');
+              emailInput.focus();
+              return;
+            }
 
-        // Real-time email validation
-        emailInput.addEventListener('input', function () {
-          const email = this.value.trim();
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // Show loading state with spinner
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
 
-          if (email && !emailRegex.test(email)) {
-            this.style.borderColor = '#ef4444';
-          } else {
-            this.style.borderColor = '';
-          }
-        });
-      }
+            try {
+              // Simulate API call with 2.8 second delay
+              await new Promise(resolve => setTimeout(resolve, 2800));
 
-      // Toast notification function
-      function showToast(message, type = 'info') {
-        const toastContainer = document.getElementById('toast-container');
-        if (!toastContainer) return;
+              // Success
+              showToast('Subscribed successfully!', 'success');
+              emailInput.value = '';
 
-        const toast = document.createElement('div');
-        toast.className = `toast toast-${type}`;
-        toast.innerHTML = `
+              // Optional: Track subscription event
+              if (typeof gtag !== 'undefined') {
+                gtag('event', 'newsletter_signup', {
+                  event_category: 'engagement',
+                  event_label: 'newsletter_subscription'
+                });
+              }
+
+            } catch (error) {
+              showToast('Something went wrong. Please try again.', 'error');
+            } finally {
+              // Restore button state
+              submitBtn.classList.remove('loading');
+              submitBtn.disabled = false;
+            }
+          });
+
+          // Real-time email validation
+          emailInput.addEventListener('input', function () {
+            const email = this.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email && !emailRegex.test(email)) {
+              this.style.borderColor = '#ef4444';
+            } else {
+              this.style.borderColor = '';
+            }
+          });
+        }
+
+        // Toast notification function
+        function showToast(message, type = 'info') {
+          const toastContainer = document.getElementById('toast-container');
+          if (!toastContainer) return;
+
+          const toast = document.createElement('div');
+          toast.className = `toast toast-${type}`;
+          toast.innerHTML = `
           <div class="toast-content">
             <span class="toast-message">${message}</span>
             <button class="toast-close" aria-label="Close">&times;</button>
           </div>
         `;
 
-        // Add toast styles if not already present
-        if (!document.querySelector('#toast-styles')) {
-          const style = document.createElement('style');
-          style.id = 'toast-styles';
-          style.textContent = `
+          // Add toast styles if not already present
+          if (!document.querySelector('#toast-styles')) {
+            const style = document.createElement('style');
+            style.id = 'toast-styles';
+            style.textContent = `
             .toast {
               background: white;
               border-radius: 8px;
@@ -3352,66 +3354,64 @@ document.addEventListener('click', (e) => {
               margin-left: 12px;
             }
           `;
-          document.head.appendChild(style);
-        }
+            document.head.appendChild(style);
+          }
 
-        toastContainer.appendChild(toast);
+          toastContainer.appendChild(toast);
 
-        // Show toast
-        setTimeout(() => toast.classList.add('show'), 100);
+          // Show toast
+          setTimeout(() => toast.classList.add('show'), 100);
 
-        // Auto remove after 5 seconds
-        const autoRemove = setTimeout(() => removeToast(toast), 5000);
+          // Auto remove after 5 seconds
+          const autoRemove = setTimeout(() => removeToast(toast), 5000);
 
-        // Manual close
-        toast.querySelector('.toast-close').addEventListener('click', () => {
-          clearTimeout(autoRemove);
-          removeToast(toast);
-        });
-
-        function removeToast(toastElement) {
-          toastElement.classList.remove('show');
-          setTimeout(() => {
-            if (toastElement.parentNode) {
-              toastElement.parentNode.removeChild(toastElement);
-            }
-          }, 300);
-        }
-      }
-
-      // Product search functionality for Samsung page
-      const searchInput = document.getElementById('searchInput');
-      const searchForm = document.getElementById('searchForm');
-
-      if (searchForm) {
-        // Prevent form submit for page filtering
-        searchForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-        });
-      }
-
-      if (searchInput) {
-        // Real-time filtering
-        searchInput.addEventListener('input', () => {
-          const query = searchInput.value.toLowerCase();
-          const productCards = document.querySelectorAll('.product-card');
-
-          productCards.forEach(card => {
-            const title = card.querySelector('.product-title').textContent.toLowerCase();
-            const desc = card.querySelector('.product-desc').textContent.toLowerCase();
-
-            if (title.includes(query) || desc.includes(query)) {
-              card.style.display = '';
-            } else {
-              card.style.display = 'none';
-            }
+          // Manual close
+          toast.querySelector('.toast-close').addEventListener('click', () => {
+            clearTimeout(autoRemove);
+            removeToast(toast);
           });
-        });
-      }
-    });
+
+          function removeToast(toastElement) {
+            toastElement.classList.remove('show');
+            setTimeout(() => {
+              if (toastElement.parentNode) {
+                toastElement.parentNode.removeChild(toastElement);
+              }
+            }, 300);
+          }
+        }
+
+        // Product search functionality for Samsung page
+        const searchInput = document.getElementById('searchInput');
+        const searchForm = document.getElementById('searchForm');
+
+        if (searchForm) {
+          // Prevent form submit for page filtering
+          searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+          });
+        }
+
+        if (searchInput) {
+          // Real-time filtering
+          searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const productCards = document.querySelectorAll('.product-card');
+
+            productCards.forEach(card => {
+              const title = card.querySelector('.product-title').textContent.toLowerCase();
+              const desc = card.querySelector('.product-desc').textContent.toLowerCase();
+
+              if (title.includes(query) || desc.includes(query)) {
+                card.style.display = '';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        }
+      });
   </script>
 </body>
 
 </html>
-
-

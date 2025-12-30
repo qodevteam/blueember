@@ -23,11 +23,14 @@
   <link rel="stylesheet" href="product.css">
 
   <!-- Preload Boxicons font for faster loading -->
-  <link rel="preload" href="https://cdn.boxicons.com/3.0.6/fonts/boxicons.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.boxicons.com/3.0.6/fonts/boxicons.woff2" as="font" type="font/woff2"
+    crossorigin>
 
   <script src="js/cart.js" defer></script>
   <script src="js/order-manager.js" defer></script>
   <script src="js/cart-manager.js" defer></script>
+  <script src="js/cookie-manager.js" defer></script>
+  <link rel="stylesheet" href="css/cookie-consent.css">
   <script src="js/navigation.js" defer></script>
   <script src="js/dollar-font.js" defer></script>
   <script src="js/checkout.js"></script>
@@ -62,10 +65,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-
     ::ROOT {
       --fade-amount: 40%;
     }
+
     /* Media query for max-width: 700px - Space for manual editing */
     @media (max-width: 700px) {
       .hero-images .hero-img {
@@ -813,16 +816,16 @@
     /* --- Main Card Container --- */
     .newsletter {
       width: 100%;
-    max-width: 1101px;
-    background: var(--card-bg);
-    border-radius: 40px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    place-self: center;
-    scale: 0.9;
-    top: -35px;
+      max-width: 1101px;
+      background: var(--card-bg);
+      border-radius: 40px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      place-self: center;
+      scale: 0.9;
+      top: -35px;
     }
 
     /* --- Left Side (Visuals) --- */
@@ -873,7 +876,8 @@
     /* --- Form Styling --- */
     .newsletter-form {
       display: flex;
-      flex-direction: row; /* Default stacked matching the screenshot */
+      flex-direction: row;
+      /* Default stacked matching the screenshot */
       gap: 12px;
       width: 100%;
     }
@@ -894,13 +898,14 @@
 
     .newsletter-form input {
       width: 100%;
-      padding: 16px 20px 16px 50px; /* Space for icon */
+      padding: 16px 20px 16px 50px;
+      /* Space for icon */
       border: none;
       border-radius: 50px;
       background-color: var(--input-bg);
       font-size: 1rem;
       outline: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
       transition: box-shadow 0.3s ease;
     }
 
@@ -984,44 +989,52 @@
         flex-direction: row;
         max-width: fit-content;
       }
+
       .newsletter-visual {
         min-height: 250px;
       }
+
       .newsletter-container {
         padding: 50px;
       }
     }
 
-    @media (max-width: 768px){
-      .newsletter-container{
+    @media (max-width: 768px) {
+      .newsletter-container {
         padding: 25px;
       }
-      .newsletter{
+
+      .newsletter {
         scale: 0.9;
         top: -10px;
       }
     }
+
     @media (max-width: 480px) {
       .newsletter-form {
         flex-direction: row;
         align-items: center;
         gap: 12px;
       }
-      .newsletter-visual img{
+
+      .newsletter-visual img {
         width: 50%;
       }
 
-      .newsletter{
+      .newsletter {
         flex-direction: column;
         scale: 0.9;
         top: -50px;
       }
+
       .input-group {
-        flex: 1; /* Input takes available space */
+        flex: 1;
+        /* Input takes available space */
       }
 
       .newsletter-form button {
-        width: auto; /* Button shrinks to content */
+        width: auto;
+        /* Button shrinks to content */
         padding: 16px 20px;
       }
 
@@ -1034,11 +1047,13 @@
 
     @media (max-width: 401px) {
       .newsletter-form {
-        flex-direction: column; /* Back to stacked */
+        flex-direction: column;
+        /* Back to stacked */
       }
 
       .newsletter-form button {
-        width: 100%; /* Full width again */
+        width: 100%;
+        /* Full width again */
       }
     }
 
@@ -1047,7 +1062,8 @@
     /* Hiding the spinner container by default, toggle via JS typically.
        For this demo, we layout it inside the button but hidden or overlayed. */
     .custom-spinner {
-      display: none; /* Set to block when loading */
+      display: none;
+      /* Set to block when loading */
       margin-left: 10px;
     }
 
@@ -1074,22 +1090,86 @@
       animation: spinner-fade 1s infinite linear;
     }
 
-    .spinner-blade:nth-child(1) { animation-delay: 0s; transform: rotate(0deg); background-color: white; }
-    .spinner-blade:nth-child(2) { animation-delay: 0.083s; transform: rotate(30deg); background-color: white; }
-    .spinner-blade:nth-child(3) { animation-delay: 0.166s; transform: rotate(60deg); background-color: white; }
-    .spinner-blade:nth-child(4) { animation-delay: 0.249s; transform: rotate(90deg); background-color: white; }
-    .spinner-blade:nth-child(5) { animation-delay: 0.332s; transform: rotate(120deg); background-color: white; }
-    .spinner-blade:nth-child(6) { animation-delay: 0.415s; transform: rotate(150deg); background-color: white; }
-    .spinner-blade:nth-child(7) { animation-delay: 0.498s; transform: rotate(180deg); background-color: white; }
-    .spinner-blade:nth-child(8) { animation-delay: 0.581s; transform: rotate(210deg); background-color: white; }
-    .spinner-blade:nth-child(9) { animation-delay: 0.664s; transform: rotate(240deg); background-color: white; }
-    .spinner-blade:nth-child(10) { animation-delay: 0.747s; transform: rotate(270deg); background-color: white; }
-    .spinner-blade:nth-child(11) { animation-delay: 0.83s; transform: rotate(300deg); background-color: white; }
-    .spinner-blade:nth-child(12) { animation-delay: 0.913s; transform: rotate(330deg); background-color: white; }
+    .spinner-blade:nth-child(1) {
+      animation-delay: 0s;
+      transform: rotate(0deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(2) {
+      animation-delay: 0.083s;
+      transform: rotate(30deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(3) {
+      animation-delay: 0.166s;
+      transform: rotate(60deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(4) {
+      animation-delay: 0.249s;
+      transform: rotate(90deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(5) {
+      animation-delay: 0.332s;
+      transform: rotate(120deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(6) {
+      animation-delay: 0.415s;
+      transform: rotate(150deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(7) {
+      animation-delay: 0.498s;
+      transform: rotate(180deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(8) {
+      animation-delay: 0.581s;
+      transform: rotate(210deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(9) {
+      animation-delay: 0.664s;
+      transform: rotate(240deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(10) {
+      animation-delay: 0.747s;
+      transform: rotate(270deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(11) {
+      animation-delay: 0.83s;
+      transform: rotate(300deg);
+      background-color: white;
+    }
+
+    .spinner-blade:nth-child(12) {
+      animation-delay: 0.913s;
+      transform: rotate(330deg);
+      background-color: white;
+    }
 
     @keyframes spinner-fade {
-      0% { opacity: 1; }
-      100% { opacity: 0.25; }
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.25;
+      }
     }
 
     /* Dark mode styles for newsletter */
@@ -1483,100 +1563,109 @@
 
 
     .partner-logo-slider {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  box-sizing: border-box;
-  position: relative;
-  
-}
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      position: relative;
+
+    }
 
 
-body.dark-mode .partner-logo-slider:before {
-  background: linear-gradient(to right, #121212 0%, rgba(255, 255, 255, 0) 100%);
-}
-body.dark-mode .partner-logo-slider:after {
-  background: linear-gradient(to left, #121212 0%, rgba(255, 255, 255, 0) 100%);
-}
-.partner-logo-slider:before {
-  content: "";
-  background: linear-gradient(to right, #f6f6f6 0%, rgba(255, 255, 255, 0) 100%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120px;
-  height: 100%;
-  z-index: 9;
-}
-.partner-logo-slider:after {
-  content: "";
-  background: linear-gradient(to left, #f6f6f6 0%, rgba(255, 255, 255, 0) 100%);
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 120px;
-  height: 100%;
-  z-index: 9;
-}
-.partner-logo-slide {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  animation: partner-logo 30s linear infinite;
-}
-.partner-logo-slide:hover {
-  animation-play-state: paused;
-}
+    body.dark-mode .partner-logo-slider:before {
+      background: linear-gradient(to right, #121212 0%, rgba(255, 255, 255, 0) 100%);
+    }
 
-.partner-logo-slide img {
-    width: 190px;
-    border: 1px solid #b2b2b2;
-    padding: 10px;
-    border-radius: 10px;
-    aspect-ratio: 3 / 2;
-    object-fit: contain;
-    background: #efefef;
-}
-@keyframes partner-logo {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
+    body.dark-mode .partner-logo-slider:after {
+      background: linear-gradient(to left, #121212 0%, rgba(255, 255, 255, 0) 100%);
+    }
 
-@media only screen and (max-width: 1025px) {
-  .partner-logo-slide {
-    gap: 5px;
-  }
-  
-  .partner-logo-slide img {
-    height: 90px;
-  }
-}
-@media only screen and (max-width: 768px){
-  .partner-logo-slide img {
-    height: 90px;
-    width: auto;
-  }
-  .viewbrands{
-    scale: 0.8;
-  }
-}
-.input-group .input {
-  font-size: 1rem;
-  border: 1.5px solid #000;
-  border-radius: 14px;
-  box-shadow: 2.5px 3px 0 #000;
-  outline: none;
-  transition: ease 0.25s;
-}
+    .partner-logo-slider:before {
+      content: "";
+      background: linear-gradient(to right, #f6f6f6 0%, rgba(255, 255, 255, 0) 100%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 120px;
+      height: 100%;
+      z-index: 9;
+    }
 
-.input-group .input:focus {
-  box-shadow: 5.5px 7px 0 black;
-}
+    .partner-logo-slider:after {
+      content: "";
+      background: linear-gradient(to left, #f6f6f6 0%, rgba(255, 255, 255, 0) 100%);
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 100%;
+      z-index: 9;
+    }
 
+    .partner-logo-slide {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      animation: partner-logo 30s linear infinite;
+    }
+
+    .partner-logo-slide:hover {
+      animation-play-state: paused;
+    }
+
+    .partner-logo-slide img {
+      width: 190px;
+      border: 1px solid #b2b2b2;
+      padding: 10px;
+      border-radius: 10px;
+      aspect-ratio: 3 / 2;
+      object-fit: contain;
+      background: #efefef;
+    }
+
+    @keyframes partner-logo {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @media only screen and (max-width: 1025px) {
+      .partner-logo-slide {
+        gap: 5px;
+      }
+
+      .partner-logo-slide img {
+        height: 90px;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      .partner-logo-slide img {
+        height: 90px;
+        width: auto;
+      }
+
+      .viewbrands {
+        scale: 0.8;
+      }
+    }
+
+    .input-group .input {
+      font-size: 1rem;
+      border: 1.5px solid #000;
+      border-radius: 14px;
+      box-shadow: 2.5px 3px 0 #000;
+      outline: none;
+      transition: ease 0.25s;
+    }
+
+    .input-group .input:focus {
+      box-shadow: 5.5px 7px 0 black;
+    }
   </style>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -2276,34 +2365,34 @@ body.dark-mode .partner-logo-slider:after {
       <p class="section-subtitle">We partner with the world's leading appliance manufacturers to bring you cutting-edge
         technology, reliability, and innovative design.</p>
 
-      
-        <div class="partner-logo-slider">
-  <div class="partner-logo-slide">
-    <img src="assets/Revlon_Logo_1989.png"/>
-    <a href="BOSCH-productpage.html"><img src="assets/download__5_-removebg-preview.png"/></a>
-    <a href="Whirlpool-productpage.html"><img src="assets/download__4_-removebg-preview.png"/></a>
-    <a href="samsung-productpage.html"><img src="assets/download__1_-removebg-preview.png"/></a>
-    <img src="assets/Toys-R-Us-Logo-1997.png"/>
-    <a href="LG-productpage.html"><img src="assets/download-removebg-preview.png"/></a>
-    <img src="assets/Revlon_Logo_1989.png"/>
-    <a href="BOSCH-productpage.html"><img src="assets/download__5_-removebg-preview.png"/></a>
-    <a href="Whirlpool-productpage.html"><img src="assets/download__4_-removebg-preview.png"/></a>
-    <a href="samsung-productpage.html"><img src="assets/download__1_-removebg-preview.png"/></a>
-    <img src="assets/Toys-R-Us-Logo-1997.png"/>
-    <a href="LG-productpage.html"><img src="assets/download-removebg-preview.png"/></a>
-  </div>
-</div>
+
+      <div class="partner-logo-slider">
+        <div class="partner-logo-slide">
+          <img src="assets/Revlon_Logo_1989.png" />
+          <a href="BOSCH-productpage.html"><img src="assets/download__5_-removebg-preview.png" /></a>
+          <a href="Whirlpool-productpage.html"><img src="assets/download__4_-removebg-preview.png" /></a>
+          <a href="samsung-productpage.html"><img src="assets/download__1_-removebg-preview.png" /></a>
+          <img src="assets/Toys-R-Us-Logo-1997.png" />
+          <a href="LG-productpage.html"><img src="assets/download-removebg-preview.png" /></a>
+          <img src="assets/Revlon_Logo_1989.png" />
+          <a href="BOSCH-productpage.html"><img src="assets/download__5_-removebg-preview.png" /></a>
+          <a href="Whirlpool-productpage.html"><img src="assets/download__4_-removebg-preview.png" /></a>
+          <a href="samsung-productpage.html"><img src="assets/download__1_-removebg-preview.png" /></a>
+          <img src="assets/Toys-R-Us-Logo-1997.png" />
+          <a href="LG-productpage.html"><img src="assets/download-removebg-preview.png" /></a>
+        </div>
       </div>
+    </div>
 
 
-      <button class="viewbrands">
-        <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z">
-          </path>
-        </svg>
-        <a href="BRANDS.HTML">Explore Brands</a>
-      </button>
+    <button class="viewbrands">
+      <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z">
+        </path>
+      </svg>
+      <a href="BRANDS.HTML">Explore Brands</a>
+    </button>
 
     </div>
   </section>
@@ -2531,58 +2620,59 @@ body.dark-mode .partner-logo-slider:after {
 
 
 
- <section class="newsletter" aria-labelledby="newsletter-heading">
+  <section class="newsletter" aria-labelledby="newsletter-heading">
 
-   <!-- Left Side Visual (Matches the image placement) -->
-   <div class="newsletter-visual">
-     <!-- Using the src from your snippet, or a placeholder if that path is local -->
-     <img src="assets/Newsletter-AdobeStock_602634440-c-darkovujic-transparent-01.webp" alt="3D Newsletter Illustration">
-   </div>
+    <!-- Left Side Visual (Matches the image placement) -->
+    <div class="newsletter-visual">
+      <!-- Using the src from your snippet, or a placeholder if that path is local -->
+      <img src="assets/Newsletter-AdobeStock_602634440-c-darkovujic-transparent-01.webp"
+        alt="3D Newsletter Illustration">
+    </div>
 
-   <!-- Right Side Content -->
-   <div class="newsletter-container">
-     <h2 id="newsletter-heading">Subscribe to Our Newsletter!</h2>
-     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque.</p>
+    <!-- Right Side Content -->
+    <div class="newsletter-container">
+      <h2 id="newsletter-heading">Subscribe to Our Newsletter!</h2>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque.</p>
 
-     <form class="newsletter-form" aria-label="Newsletter signup">
-       <!-- Added wrapper for input to handle icon positioning -->
-       <div class="input-group">
+      <form class="newsletter-form" aria-label="Newsletter signup">
+        <!-- Added wrapper for input to handle icon positioning -->
+        <div class="input-group">
 
-         <i class="far fa-envelope"></i>
-         <input class="input" type="email" placeholder="Enter your email" required>
-       </div>
+          <i class="far fa-envelope"></i>
+          <input class="input" type="email" placeholder="Enter your email" required>
+        </div>
 
-       <div class="btn-container">
-       <div class="btn-container">
-         <button type="submit" class="submit">
-           <span class="btn-text">
-             SUBSCRIBE
-           </span>
-           <!-- Spinner Intact -->
-           <div class="custom-spinner">
-             <div class="spinner center">
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-               <div class="spinner-blade"></div>
-             </div>
-           </div>
-         </button>
-       </div>
-       </div>
-     </form>
+        <div class="btn-container">
+          <div class="btn-container">
+            <button type="submit" class="submit">
+              <span class="btn-text">
+                SUBSCRIBE
+              </span>
+              <!-- Spinner Intact -->
+              <div class="custom-spinner">
+                <div class="spinner center">
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                  <div class="spinner-blade"></div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </form>
 
-     <p class="privacy-note">We respect your privacy. Unsubscribe anytime.</p>
-   </div>
- </section>
+      <p class="privacy-note">We respect your privacy. Unsubscribe anytime.</p>
+    </div>
+  </section>
   </div>
 
 
@@ -2665,14 +2755,14 @@ body.dark-mode .partner-logo-slider:after {
 
 
   <script>
-$(document).ready(function () {
-  const $slides = $(".partner-logo-slide");
-  const cloneCount = 3;
+    $(document).ready(function () {
+      const $slides = $(".partner-logo-slide");
+      const cloneCount = 3;
 
-  for (let i = 0; i < cloneCount; i++) {
-    $slides.children().clone(true).appendTo($slides);
-  }
-});
+      for (let i = 0; i < cloneCount; i++) {
+        $slides.children().clone(true).appendTo($slides);
+      }
+    });
 
 
 

@@ -130,7 +130,7 @@ const DB = {
         if (!user) return null;
 
         const allWishlists = JSON.parse(localStorage.getItem(DB.WISHLISTS_KEY) || '[]');
-        
+
         // Check if item already exists in wishlist
         const existingItem = allWishlists.find(w => w.user_id === user.id && w.product_id === productData.product_id);
         if (existingItem) {
@@ -146,7 +146,7 @@ const DB = {
             product_price: productData.product_price,
             added_at: new Date().toISOString()
         };
-        
+
         allWishlists.unshift(newWishlistItem);
         localStorage.setItem(DB.WISHLISTS_KEY, JSON.stringify(allWishlists));
         return newWishlistItem;
@@ -185,7 +185,7 @@ const DB = {
         if (!user) return null;
 
         const allReviews = JSON.parse(localStorage.getItem(DB.REVIEWS_KEY) || '[]');
-        
+
         const newReview = {
             id: 'rev_' + Date.now(),
             user_id: user.id,
@@ -195,7 +195,7 @@ const DB = {
             comment: reviewData.comment,
             created_at: new Date().toISOString()
         };
-        
+
         allReviews.unshift(newReview);
         localStorage.setItem(DB.REVIEWS_KEY, JSON.stringify(allReviews));
         return newReview;
@@ -219,10 +219,10 @@ const DB = {
         const orders = DB.getMyOrders();
         const reviews = DB.getMyReviews();
         const wishlist = DB.getMyWishlist();
-        
+
         const totalSpent = orders.reduce((sum, order) => sum + (order.total || 0), 0);
         const recentOrders = orders.slice(0, 5); // Get 5 most recent orders
-        
+
         return {
             totalOrders: orders.length,
             totalReviews: reviews.length,
@@ -230,6 +230,30 @@ const DB = {
             totalSpent: totalSpent,
             recentOrders: recentOrders
         };
+    },
+
+    // --- Metadata & Consent ---
+
+    // Update User Metadata (e.g., cookie consent)
+    updateUserMetadata: async (metadata) => {
+        const userStr = localStorage.getItem(DB.SESSION_KEY);
+        if (!userStr) return { error: { message: 'No active session' } };
+
+        let user = JSON.parse(userStr);
+        user.user_metadata = { ...user.user_metadata, ...metadata };
+
+        // Update in session
+        localStorage.setItem(DB.SESSION_KEY, JSON.stringify(user));
+
+        // Update in permanent users list
+        const users = DB.getUsers();
+        const index = users.findIndex(u => u.id === user.id);
+        if (index !== -1) {
+            users[index] = user;
+            DB.saveUsers(users);
+        }
+
+        return { data: { user }, error: null };
     }
 };
 
