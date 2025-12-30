@@ -788,7 +788,7 @@ address {
     }
     .newsletter-form button:hover {
     transition: all 0.3s ease;
-    box-shadow: 5px 10px 0  #000;
+    box-shadow: 7px 10px 0 #000;
     background: linear-gradient(90deg,  #145fff, #05ffe5);
     }
     .privacy-note {
