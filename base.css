@@ -49,7 +49,7 @@ address {
 }
 
 .hamburger {
-  display: visible !important;
+  display: flex;
   flex-direction: column;
   cursor: pointer;
   gap: 5px;

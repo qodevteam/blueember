@@ -14,7 +14,7 @@
 
 /* Newsletter Variables */
 :root {
-  --card-bg: #ffffff;
+  --card-bg: #e4e4e7;
   --text-main: #333333;
   --text-muted: #666666;
   --input-bg: #f8f9fa;
@@ -23,7 +23,6 @@
 }
 
 body {
-  background: linear-gradient(135deg, #f5f7fa 0%, #98ccfa 100%);
   min-height: 100vh;
   transition: all 0.3s ease-in-out;
 }
@@ -500,4 +499,44 @@ th {
   animation: float 3s ease-in-out infinite;
 }
 
+/* ===== VIEWPORT EDGE FADE (5%) (Bottom Only) ===== */
+body::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5vh;
+  z-index: 9999;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(to top, #ffffff, rgba(255, 255, 255, 0));
+}
 
+body.dark-mode::after {
+  background: linear-gradient(to top, #18181b, rgba(24, 24, 27, 0));
+}
+
+/* ===== SCROLL REVEAL UTILITIES ===== */
+.reveal {
+  opacity: 0;
+  transition: all 0.41s cubic-bezier(0.5, 0, 0, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-up {
+  transform: translateY(30px);
+}
+
+.reveal-down {
+  transform: translateY(-30px);
+}
+
+.reveal-scale {
+  transform: scale(0.95);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}

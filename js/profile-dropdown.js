@@ -59,7 +59,11 @@
 
         // Prevent dropdown from closing when clicking inside it
         profileDropdownContainer.addEventListener('click', function (e) {
-            e.stopPropagation();
+            // Allow logout buttons to bubble up so they can be handled by the global listener
+            const isLogoutBtn = e.target.closest('#nav-dropdown-logout, .sign-out-btn, #signOutBtn, #mobile-logout-btn, .mobile-logout-btn, #mobileDropdownLogoutBtn');
+            if (!isLogoutBtn) {
+                e.stopPropagation();
+            }
         });
     }
 
@@ -165,8 +169,8 @@
             btn = e.target.closest('.sign-out-btn, #signOutBtn, #nav-dropdown-logout, #mobile-logout-btn, .mobile-logout-btn, #mobileDropdownLogoutBtn');
         }
 
-        const performLogout = async () => {
-            if (btn) {
+        const performLogout = async (isModal = false) => {
+            if (!isModal && btn) {
                 // Ensure button is relative
                 const computedStyle = window.getComputedStyle(btn);
                 if (computedStyle.position === 'static') {
@@ -192,7 +196,10 @@
                 btn.insertAdjacentHTML('beforeend', spinnerHtml);
             }
 
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            // Only show spinner/delay if NOT coming from the custom modal (which has its own delay and spinner)
+            if (!isModal) {
+                await new Promise(resolve => setTimeout(resolve, 3000));
+            }
 
             localStorage.removeItem('be_session');
 
@@ -208,7 +215,7 @@
         };
 
         if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
-            window.LogoutModal.confirm(performLogout);
+            window.LogoutModal.confirm(() => performLogout(true));
         } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
             window.showLogoutConfirmation(performLogout);
         } else {
@@ -220,9 +227,18 @@
 
     // Event Delegation for Sign Out
     document.addEventListener('click', async function (e) {
-        const btn = e.target.closest('.sign-out-btn, #signOutBtn, #nav-dropdown-logout, #mobile-logout-btn, .mobile-logout-btn, #mobileDropdownLogoutBtn');
+        const btn = e.target.closest('.sign-out-btn, #signOutBtn, #nav-dropdown-logout, #mobile-logout-btn, .mobile-logout-btn, #mobileDropdownLogoutBtn, #sidebar-logout-btn');
         if (btn) await handleLogout(e);
     });
+
+    // Handle case where sidebar Menu stops propagation (found in navigation.js)
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', async function (e) {
+            const btn = e.target.closest('.sign-out-btn, #signOutBtn, #mobile-logout-btn, #sidebar-logout-btn, #nav-dropdown-logout');
+            if (btn) await handleLogout(e);
+        });
+    }
 
     // Update Dropdown UI based on Auth State
     async function updateAuthUI() {
@@ -245,7 +261,7 @@
                 if (profileIconBtn) profileIconBtn.style.display = 'flex';
                 if (signupBtn) signupBtn.style.display = 'none';
 
-                // Mobile Sidebar: Show Profile, Hide Brand
+                // Desktop Sidebar logic (if exists)
                 if (sidebarBrand) sidebarBrand.style.display = 'none';
                 if (sidebarProfileContainer) sidebarProfileContainer.style.display = 'flex';
 
@@ -258,12 +274,52 @@
                 if (profileIconBtn) profileIconBtn.style.display = 'none';
                 if (signupBtn) signupBtn.style.display = 'flex';
 
-                // Mobile Sidebar: Show Brand, Hide Profile
+                // Desktop Sidebar logic (if exists)
                 if (sidebarBrand) sidebarBrand.style.display = 'block';
                 if (sidebarProfileContainer) sidebarProfileContainer.style.display = 'none';
 
                 // Also ensure mobile dropdown is closed/hidden
                 if (mobileProfileDropdown) mobileProfileDropdown.style.display = 'none';
+            }
+        }
+
+        // Mobile Sidebar Specific (Redesigned Menu in account.html)
+        const sidebarLoginContainer = document.getElementById('sidebar-login-container');
+        const sidebarFooter = document.getElementById('sidebarFooter');
+
+        if (sidebarLoginContainer && sidebarFooter) {
+            if (user) {
+                // User Logged In: Hide Login, Show Logout in footer
+                sidebarLoginContainer.style.display = 'none';
+
+                // Check if logout button already exists in footer
+                let logoutBtn = document.getElementById('sidebar-logout-btn');
+                if (!logoutBtn) {
+                    logoutBtn = document.createElement('button');
+                    logoutBtn.id = 'sidebar-logout-btn';
+                    logoutBtn.className = 'footer-btn sign-out-btn';
+                    logoutBtn.innerHTML = `
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    `;
+                    sidebarFooter.appendChild(logoutBtn);
+                } else {
+                    logoutBtn.style.display = 'flex';
+                }
+
+                // Header state
+                if (sidebarBrand) sidebarBrand.style.display = 'none';
+                if (sidebarProfileContainer) sidebarProfileContainer.style.display = 'flex';
+            } else {
+                // User Logged Out: Show Login, Hide Logout
+                sidebarLoginContainer.style.display = 'block';
+
+                const logoutBtn = document.getElementById('sidebar-logout-btn');
+                if (logoutBtn) logoutBtn.style.display = 'none';
+
+                // Header state
+                if (sidebarBrand) sidebarBrand.style.display = 'block';
+                if (sidebarProfileContainer) sidebarProfileContainer.style.display = 'none';
             }
         }
     }
@@ -281,6 +337,12 @@
                 updateAuthUI();
             });
         }
+
+        // Listen for internal auth state changes
+        window.addEventListener('authStateChanged', () => {
+            loadUserInfo();
+            updateAuthUI();
+        });
 
         const signupBtn = document.getElementById('signupNavBtn');
         if (signupBtn) {

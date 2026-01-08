@@ -1,4 +1,9 @@
 /* Chat Bubble Button */
+html{
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scrollbar-color: #077be3 #131316;
+}
 .chat-bubble-btn {
     position: fixed;
     width: 40px;
@@ -333,7 +338,7 @@ body.dark-mode .chat-window {
 }
 
 body.dark-mode .chat-body {
-    background: #121212;
+    background: #18181b;
 }
 
 body.dark-mode .message.bot {
@@ -412,7 +417,8 @@ body.dark-mode {
 body {
     font-family: 'JetBrains Mono', monospace;
     margin: 0;
-    background-color: #efefef;
+    scrollbar-color: auto;
+    background-color: #f8f8f8;
     /* Page Background */
 }
 
@@ -470,7 +476,7 @@ body {
     transform: translateY(20px) scale(0.98);
     transform-origin: bottom right;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid #d3d3d3;
 }
 
 .chat-window.active {
@@ -620,6 +626,7 @@ body.dark-mode .drop-overlay {
 .view-container {
     display: none;
     height: 85%;
+    scrollbar-color: auto;
     flex-direction: column;
 }
 
@@ -636,7 +643,7 @@ body.dark-mode .drop-overlay {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background: var(--bg-color);
+    background: #f4f4f5;
 }
 
 /* Message Bubbles */
@@ -685,10 +692,20 @@ body.dark-mode .drop-overlay {
 /* Bot Styling */
 .msg-group.bot .msg-bubble {
     align-self: flex-start;
-    background: var(--bubble-bot);
+    background: #e6e6e9;
     color: var(--text-main);
     border-radius: 8px 16px 16px 16px;
 }
+
+body.dark-mode {
+    .msg-group.bot .msg-bubble {
+        background: #242529;
+    }
+    .msg-group.user .msg-bubble {
+        background: #e3e2e6;
+    }
+}
+
 
 .msg-group.user .msg-bubble {
     background: var(--bubble-user);
@@ -975,7 +992,7 @@ body.dark-mode #preview-window-2A-active {
 .input-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
 }
 
 .action-btn {
@@ -985,13 +1002,28 @@ body.dark-mode #preview-window-2A-active {
     background: transparent;
     border: none;
     padding: 4px;
+    border-radius: 30px;
+    padding: 10px 10px 8px 8px;
     transition: color 0.2s;
     display: flex;
+    transition: 1s cubic-bezier(0, 0.92, 0.55, 1.26);
 }
-
+#emberSendBtn:hover{
+transform: rotate(45deg) scale(1.025);
+}
+#emberSendBtn:active{
+    background: rgb(8, 248, 156);
+    color: rgb(0, 0, 0) !important;
+}
 .action-btn:hover {
     color: var(--text-main);
-    transform: scale(1.1);
+    transform: scale(1.025);
+    
+    animation: 0.5s ease 0s 1 normal none running hover-lighten;
+    background: #80808033;
+    border-radius: 30px;
+    padding: 10px 10px 8px 8px;
+    transition: 1s cubic-bezier(0, 0.92, 0.55, 1.26);
 }
 
 /* Generic List View (Settings, Recent, Notifications) */
@@ -2149,8 +2181,7 @@ body.dark-mode .message-context-menu{
 
 .menu-item {
     display: flex;
-    gap: 12px;
-    position: sticky;
+    gap: 3px;
     bottom: 0;
     width: 100%;
     padding: 10px 16px;
@@ -2539,9 +2570,9 @@ body.dark-mode .message-context-menu{
     0% {
         transform: rotate(90deg);
         box-shadow:
-            0 10px 20px 0 #fff inset,
-            0 20px 30px 0 #ad5fff inset,
-            0 60px 60px 0 #471eec inset;
+            0 10px 20px 0 #8fdbff inset,
+            0 20px 30px 0 #0077ff inset,
+            0 60px 60px 0 #00c2fd inset;
 
     }
 
@@ -2549,15 +2580,147 @@ body.dark-mode .message-context-menu{
         transform: rotate(270deg);
         box-shadow:
             0 10px 20px 0 #fff inset,
-            0 20px 10px 0 #d60a47 inset,
-            0 40px 60px 0 #311e80 inset;
+            0 20px 10px 0 #510ad6 inset,
+            0 40px 60px 0 #0400f7 inset;
     }
 
     100% {
         transform: rotate(450deg);
         box-shadow:
-            0 10px 20px 0 #fff inset,
-            0 20px 30px 0 #ad5fff inset,
-            0 60px 60px 0 #471eec inset;
+            0 10px 20px 0 #8fdbff inset,
+             0 20px 30px 0 #0077ff inset,
+            0 60px 60px 0 #00c2fd inset;
     }
+}
+
+.button {
+  all: unset;
+  position: relative;
+  display: inline-flex;
+  height: 2.5rem;
+  align-items: center;
+  border-radius: 9999px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-family: Segoe UI;
+  font-size: 1.2rem;
+  font-weight: 640;
+  color: #ffffff;
+  letter-spacing: -0.06em;
+  cursor: pointer;
+}
+
+.button-item {
+  background-color: transparent;
+  color: #000000;
+}
+
+.button-item .button-bg {
+  border-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+}
+
+.button-inner,
+.button-inner-hover,
+.button-inner-static {
+  pointer-events: none;
+  display: block;
+}
+
+.button-inner {
+  position: relative;
+}
+
+.button-inner-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(70%);
+}
+
+.button-bg {
+  overflow: hidden;
+  border-radius: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+  transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.button-bg,
+.button-bg-layer,
+.button-bg-layers {
+  display: block;
+}
+
+.button-bg-layers {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: -60%;
+  aspect-ratio: 1 / 1;
+  width: max(200%, 10rem);
+}
+
+.button-bg-layer {
+  border-radius: 9999px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(0);
+}
+
+.button-bg-layer.-purple {
+  background-color: rgb(26, 80, 255);
+}
+
+.button-bg-layer.-turquoise {
+  background-color: rgb(9, 255, 218);
+}
+
+.button-bg-layer.-yellow {
+  --tw-bg-opacity: 1;
+  background: linear-gradient(45deg, rgb(3, 226, 255), rgb(0, 89, 255));
+}
+
+.button:hover .button-inner-static {
+  opacity: 0;
+  transform: translateY(-70%);
+  transition:
+    transform 1.4s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.3s linear;
+}
+
+.button:hover .button-inner-hover {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    transform 1.4s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.button:hover .button-bg-layer {
+  transition:
+    transform 1.3s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.3s linear;
+}
+
+.button:hover .button-bg-layer-1 {
+  transform: scale(1);
+}
+
+.button:hover .button-bg-layer-2 {
+  transition-delay: 0.1s;
+  transform: scale(1);
+}
+
+.button:hover .button-bg-layer-3 {
+  transition-delay: 0.2s;
+  transform: scale(1);
 }

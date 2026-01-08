@@ -17,6 +17,7 @@
     <script src="js/app.js" defer></script>
     <script src="js/cookie-manager.js" defer></script>
     <script src="js/mobile-sidebar.js" defer></script>
+    <script src="js/scroll-reveal.js" defer></script>
     <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
@@ -28,6 +29,10 @@
             overflow-x: hidden;
             color: #212529;
             position: relative;
+            }
+
+        img {
+            width: 100%;
         }
 
         /* Enhanced particle background */
@@ -71,7 +76,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 70px 0px;
             position: relative;
             z-index: 2;
         }
@@ -139,7 +144,6 @@
         }
 
         .form-card:hover {
-            transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08),
                 inset 0 0 20px rgba(0, 185, 255, 0.1);
         }
@@ -577,7 +581,9 @@
             }
 
             .form-card {
-                padding: 30px 20px;
+                padding: 30px 12px;
+                width: 95%;
+                place-self: anchor-center;
             }
 
             .form-title {
@@ -723,7 +729,6 @@
         .nav-action-btn:hover {
             background: #0099ff;
             color: white;
-            transform: translateY(-2px) rotate(5deg);
             box-shadow: 0 5px 15px rgba(0, 153, 255, 0.3);
         }
 
@@ -759,6 +764,11 @@
         }
 
 
+        @media (max-width:480px) {
+            .premium-nav {
+                padding: 0 12px;
+            }
+        }
     </style>
 </head>
 
@@ -874,10 +884,10 @@
             <div class="header-brand default-brand" id="sidebarBrand">
                 <div class="navbar-logo">
                     <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
-                        style="width: 30px; height: auto;">
+                        style="width: 45px;height: auto;">
                     <span>
-                        <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-                        <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+                        <h6 style="color: #0099ff;font-size: x-large;margin: 0px 0px -6px 0px;">BLUE</h6>
+                        <h6 style="color: #000000;font-size: x-large;margin: 0px 0px -6px 0px;">EMBER</h6>
                     </span>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 /* Dark Mode Variables */
 :root {
-    --dm-bg-primary: #121212;
-    --dm-bg-secondary: #1e1e1e;
+    --dm-bg-primary: #18181b;
+    --dm-bg-secondary: #202024;
     --dm-bg-tertiary: #2d2d2d;
     --dm-text-primary: #e0e0e0;
     --dm-text-secondary: #b0b0b0;
@@ -43,11 +43,21 @@ body.dark-mode .navbar a {
     border: none;
 }
 
+#main-nav-link {
+    background-color: transparent !important;
+    padding: 3px !important;
+}
+body.dark-mode .profile-dropdown-container::before{
+    background-color: white;
+    mix-blend-mode: darken  ;
+}
 body.dark-mode .navbar li {
     color: var(--dm-text-primary) !important;
 
 }
-
+.profile-dropdown-container .profile-dropdown {
+    border: 1px solid;
+}
 body.dark-mode .navbar a:hover {
     color: #0064e7 !important;
 }
@@ -83,7 +93,7 @@ body.dark-mode .mobile-menu a,
 body.dark-mode .mobile-dropdown a {
     color: var(--dm-text-primary) !important;
     background-color: #2d2d2d !important;
-    border: 1px solid var(--dm-border);
+    border: none !important;
 }
 
 body.dark-mode .close-btn {
@@ -386,15 +396,20 @@ body.dark-mode .profile-dropdown a {
     font-size: 25px;
     z-index: auto;
 }
-
-
+@media (min-width: 992px){
+.mobile-wishlist-container{
+display: none !important;
+}
+}
 /* Profile Dropdown Container Dark Mode */
 body.dark-mode .profile-dropdown-container {
     background-color: var(--dm-bg-secondary);
     box-shadow: 0 8px 25px var(--dm-shadow);
     top: 8vh;
 }
-
+.profile-dropdown-container{
+    top: 8vh !important;
+}
 body.dark-mode .profile-dropdown-container.visible {
     background-color: var(--dm-bg-secondary);
     border-color: var(--dm-border);

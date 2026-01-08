@@ -23,8 +23,7 @@
   <link rel="stylesheet" href="product.css">
 
   <!-- Preload Boxicons font for faster loading -->
-  <link rel="preload" href="https://cdn.boxicons.com/3.0.6/fonts/boxicons.woff2" as="font" type="font/woff2"
-    crossorigin>
+  <link rel="preload" href="https://cdn.boxicons.com/3.0.6/fonts/boxicons.woff2" as="font" type="font/woff2" crossorigin>
 
   <script src="js/cart.js" defer></script>
   <script src="js/order-manager.js" defer></script>
@@ -44,6 +43,9 @@
 
   <script src="js/profile-dropdown.js" defer></script>
   <script src="js/logout-injector.js" defer></script>
+  <script src="js/scroll-reveal.js" defer></script>
+  <!-- Universal Navbar Script -->
+  <script src="js/navbar-universal.js"></script>
   <script>
     // Simple Auth Check for Navbar
     document.addEventListener('dbReady', async () => {
@@ -240,9 +242,9 @@
 
     @media (max-width: 480px) {
       .navbar-logo {
-        width: 57px !important;
+        width: 75px !important;
         height: 5px !important;
-        scale: 0.6 !important;
+        scale: 1 !important;
       }
 
       .search-container {
@@ -792,27 +794,7 @@
       padding: 0px 4px 0px 0px;
     }
 
-    .profile-dropdown-container::before {
-      content: '';
-      position: absolute;
-      top: -16px;
-      left: 88%;
-      transform: translateX(-50%);
-      width: 32px;
-      height: 32px;
-      background-color: #ffffff;
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
-      -webkit-mask-size: contain;
-      mask-size: contain;
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-      clip-path: none;
-      mix-blend-mode: darken;
-      box-shadow: none;
-    }
-
+   
     /* --- Main Card Container --- */
     .newsletter {
       width: 100%;
@@ -826,6 +808,7 @@
       place-self: center;
       scale: 0.9;
       top: -35px;
+      box-shadow: 21px 41px 46px #18181b36, -21px -41px 46px 0px #fff;
     }
 
     /* --- Left Side (Visuals) --- */
@@ -968,7 +951,7 @@
     .btn-container:has(.submit:active) {
       .submit {
         transform: scale(0.95);
-        box-shadow:0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
         filter: drop-shadow(0 10px 4px #0002);
         -webkit-filter: drop-shadow(0 10px 4px #0002);
       }
@@ -992,7 +975,7 @@
       }
 
       .newsletter-visual {
-        min-height: 250px;
+        min-height: 200px;
       }
 
       .newsletter-container {
@@ -1002,7 +985,7 @@
 
     @media (max-width: 768px) {
       .newsletter-container {
-        padding: 25px;
+        padding: 14px;
       }
 
       .newsletter {
@@ -1569,16 +1552,15 @@
       white-space: nowrap;
       box-sizing: border-box;
       position: relative;
-
+      padding: 20px 0;
     }
 
-
     body.dark-mode .partner-logo-slider:before {
-      background: linear-gradient(to right, #121212 0%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(to right, #18181b 0%, rgba(255, 255, 255, 0) 100%);
     }
 
     body.dark-mode .partner-logo-slider:after {
-      background: linear-gradient(to left, #121212 0%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(to left, #18181b 0%, rgba(255, 255, 255, 0) 100%);
     }
 
     .partner-logo-slider:before {
@@ -1606,8 +1588,26 @@
     .partner-logo-slide {
       display: flex;
       align-items: center;
-      gap: 20px;
-      animation: partner-logo 30s linear infinite;
+      gap: 8px;
+      animation: partner-logo-scroll-desktop 60s linear infinite;
+      width: fit-content;
+    }
+
+    /* Ensure wrapper doesn't break layout */
+    .logo-slide-wrapper {
+      display: flex;
+      align-items: center;
+      gap: inherit;
+    }
+
+    @keyframes partner-logo-scroll-desktop {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        /* Use the same dynamic distance for desktop */
+        transform: translateX(var(--move-distance, -50%));
+      }
     }
 
     .partner-logo-slide:hover {
@@ -1615,22 +1615,77 @@
     }
 
     .partner-logo-slide img {
-      width: 190px;
+      width: 180px;
+      height: 120px;
       border: 1px solid #b2b2b2;
-      padding: 10px;
+      padding: 15px;
       border-radius: 10px;
-      aspect-ratio: 3 / 2;
       object-fit: contain;
-      background: #efefef;
+      background: #ffffff;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    @keyframes partner-logo {
-      from {
+    .partner-logo-slide img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes partner-logo-scroll {
+      0% {
         transform: translateX(0);
       }
+      100% {
+        /* Move by one original content width for seamless loop */
+        transform: translateX(var(--move-distance, -50%));
+      }
+    }
 
-      to {
-        transform: translateX(-50%);
+    /* Mobile optimizations */
+    @media (max-width: 480px) {
+      .partner-logo-slide {
+        animation: partner-logo-scroll-mobile 20s linear infinite; /* 1.25x speed (60s / 1.25 = 48s) */
+        gap: 20px;
+      }
+
+      .partner-logo-slide img {
+        width: 140px;
+        height: 90px;
+        padding: 10px;
+      }
+    }
+
+    @keyframes partner-logo-scroll-mobile {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        /* Use the same dynamic distance for mobile */
+        transform: translateX(var(--move-distance, -50%));
+      }
+    }
+
+    /* Tablet optimization (481px to 768px) */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .partner-logo-slide {
+        animation: partner-logo-scroll-tablet 60s linear infinite; /* 1x speed */
+        gap: 30px;
+      }
+
+      .partner-logo-slide img {
+        width: 160px;
+        height: 100px;
+        padding: 12px;
+      }
+    }
+
+    @keyframes partner-logo-scroll-tablet {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        /* Use the same dynamic distance for tablet */
+        transform: translateX(var(--move-distance, -50%));
       }
     }
 
@@ -1647,7 +1702,6 @@
     @media only screen and (max-width: 768px) {
       .partner-logo-slide img {
         height: 90px;
-        width: auto;
       }
 
       .viewbrands {
@@ -1667,6 +1721,10 @@
     .input-group .input:focus {
       box-shadow: 5.5px 7px 0 black;
     }
+
+    body.dark-mode .newsletter {
+      box-shadow: none;
+    }
   </style>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -1679,10 +1737,10 @@
       <a href="index.html" aria-label="Navigate to home page">
         <div class="navbar-logo">
           <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
-            style="width: 30px; height: auto;">
+            style="width: 30px;height: auto;">
           <span>
-            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+            <h6 style="color: #0099ff;font-size: large;margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #000000;font-size: large;margin: 0px 0px -6px 0px;">EMBER</h6>
           </span>
         </div>
       </a>
@@ -1698,9 +1756,11 @@
         </form>
       </div>
 
+      
       <div class="hamburger" id="hamburger">
         <i class="fa-solid fa-bars"></i>
       </div>
+      
       <div class="cart-icon-cont-0">
         <div class="cart-link">
           <i class="fa-solid fa-cart-shopping"></i>
@@ -1803,6 +1863,13 @@
         </li>
         <div class="thebigthree-btns-wrapper" style="display: flex; align-items: center;">
           <li id="dark-mode-li" style="display: flex; align-items: center; margin:0 !important;"></li>
+          <!-- Wishlist Button -->
+          <div class="wishlist-icon-container" id="wishlist-toggle">
+            <div class="wishlist-link">
+              <i class='bx bx-heart'></i>
+              <span class="wishlist-count">0</span>
+            </div>
+          </div>
           <!-- Cart icon moved OUTSIDE the main navbar list, the profile button is by default stays displayed none until signed up, when client log out, the profile button will be displayed none -->
           <button class="profile-icon-btn" id="profileIconBtn" aria-label="Open profile menu"
             style="display: none; align-items: center;">
@@ -1864,6 +1931,24 @@
     </div>
   </div>
 
+  <!-- Wishlist Popup Overlay -->
+  <div class="wishlist-overlay" id="wishlist-overlay"></div>
+
+  <!-- Wishlist Popup -->
+  <div class="wishlist-popup" id="wishlist-popup">
+    <div class="cart-header" style="background: linear-gradient(150deg, #ff4b2b, #ff416c);">
+      <h3><i class='bx bxs-heart me-2'></i> My Wishlist</h3>
+      <button class="cart-close" id="wishlist-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="wishlist-items-container">
+      <!-- Wishlist items will be populated here dynamically -->
+    </div>
+    <div class="cart-footer">
+      <button class="continue-btn" id="wishlist-continue" style="background-color: #ff4b2b;"><i
+          class="fa-solid fa-arrow-left me-2"></i>Continue Shopping</button>
+    </div>
+  </div>
+
   <!-- Mobile Sidebar Menu (Redesigned) -->
   <div class="mobile-menu" id="mobileMenu">
 
@@ -1873,10 +1958,10 @@
       <div class="header-brand default-brand" id="sidebarBrand">
         <div class="navbar-logo">
           <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
-            style="width: 30px; height: auto;">
+            style="width: 30px;height: auto;">
           <span>
-            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
+            <h6 style="color: #0099ff;font-size: large;margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #000000;font-size: large;margin: 0px 0px -6px 0px;">EMBER</h6>
           </span>
         </div>
       </div>
@@ -1979,6 +2064,13 @@
         </a>
       </li>
 
+      <!-- Mobile Wishlist Link -->
+      <li>
+        <a href="#" id="mobile-wishlist-link" class="mobile-wishlist-link">
+          <i class="fa-solid fa-heart"></i>Wishlist <span class="wishlist-count">(0)</span>
+        </a>
+      </li>
+
       <!-- Login Link (Hidden if logged in) -->
       <div id="sidebar-login-container">
         <a href="login.html" class="sidebar-nav-item" id="sidebar-login-link">
@@ -2033,6 +2125,31 @@
             <img src="assets/home-product-01.jpg" alt="Blue Ember FrostShield Refrigerator" loading="lazy"
               style="width: 65%;">
           </a>
+          <!-- Wishlist Heart -->
+          <div class="heart-container" title="Wishlist" data-product-id="1" data-product-name="Haier FrostShield 400L"
+            data-product-price="749" data-product-image="./assets/home-product-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-body">
             <h4 itemprop="name">Haier FrostShield 400L</h4>
             <div class="product-meta">
@@ -2045,8 +2162,8 @@
               </div>
             </div>
             <p class="short-desc">Smart inverter refrigerator with multi-airflow, humidity control and energy A++.</p>
-            
-            
+
+
           </div>
         </article>
 
@@ -2055,6 +2172,31 @@
           <a href="#" class="product-media modal-trigger" data-target="washer-modal">
             <img src="assets/home-product-02.jpg" alt="Blue Ember QuickWash Washer" loading="lazy" style="width: 45%;">
           </a>
+          <!-- Wishlist Heart -->
+          <div class="heart-container" title="Wishlist" data-product-id="58" data-product-name="Panasonic 7 Kg Washer"
+            data-product-price="399" data-product-image="./assets/home-product-02.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-body">
             <h4 itemprop="name">Panasonic 7 Kg Front Load Inverter Washing Machine</h4>
             <div class="product-meta">
@@ -2067,8 +2209,8 @@
               </div>
             </div>
             <p class="short-desc">High-efficiency front-load washer with steam refresh and 15-minute quick cycles.</p>
-            
-            
+
+
           </div>
         </article>
 
@@ -2078,6 +2220,32 @@
             <img src="assets/home-product-04.jpg" alt="Blue Ember ClimatePro 1.5T" loading="lazy"
               style="width: 40%; scale: 0.9;">
           </a>
+          <!-- Wishlist Heart -->
+          <div class="heart-container" title="Wishlist" data-product-id="59"
+            data-product-name="Blue Ember ClimatePro 1.5T" data-product-price="599"
+            data-product-image="./assets/home-product-04.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-body">
             <h4 itemprop="name">Blue Ember ClimatePro 1.5T</h4>
             <div class="product-meta">
@@ -2090,8 +2258,8 @@
               </div>
             </div>
             <p class="short-desc">Fast-cool inverter AC with low-noise operation and smart scheduling.</p>
-            
-            
+
+
           </div>
         </article>
 
@@ -2101,6 +2269,32 @@
             <img src="assets/home-product-03.jpg" alt="Blue Ember MicroChef Microwave" loading="lazy"
               style="width: 70%;">
           </a>
+          <!-- Wishlist Heart -->
+          <div class="heart-container" title="Wishlist" data-product-id="60"
+            data-product-name="Blue Ember MicroChef 30L" data-product-price="229"
+            data-product-image="./assets/home-product-03.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-body">
             <h4 itemprop="name">Blue Ember MicroChef 30L</h4>
             <div class="product-meta">
@@ -2113,8 +2307,8 @@
               </div>
             </div>
             <p class="short-desc">Multi-function convection microwave with auto-cook menus and easy-clean enamel.</p>
-            
-            
+
+
           </div>
         </article>
       </div>
@@ -2668,11 +2862,13 @@
       <!-- Brand Section -->
       <div class="footer-section">
         <div class="footer-logo"><a href="index.html">
-            <div class="navbar-logo"><img src="assets/BlueEmber-ezgif.com-gif-maker.gif" style="width: 30px;">
-              <SPAN>
-                <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-                <H6 style="color: #000000; font-size: large; margin: 0px 0px -6px 0px;">EMBER</H6>
-              </SPAN>
+            <div class="navbar-logo">
+              <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
+                style="width: 45px;height: auto;">
+              <span>
+                <h6 style="color: #0099ff;font-size: large;margin: 0px 0px -6px 0px;">BLUE</h6>
+                <h6 style="color: #000000;font-size: large;margin: 0px 0px -6px 0px;">EMBER</h6>
+              </span>
             </div>
           </a></div>
         <p class="footer-tagline">Premium Store from trusted global brands. Serving customers since 2005.</p>
@@ -2734,49 +2930,94 @@
 
 
   <script>
+    // Enhanced Partner Logo Slider with True Infinite Scroll
     $(document).ready(function () {
-      const $slides = $(".partner-logo-slide");
-      const cloneCount = 3;
+      const $slider = $(".partner-logo-slider");
+      const $slideContainer = $(".partner-logo-slide");
 
-      for (let i = 0; i < cloneCount; i++) {
-        $slides.children().clone(true).appendTo($slides);
-      }
-    });
+      // Create wrapper for original content to maintain structure
+      const $originalWrapper = $('<div class="logo-slide-wrapper"></div>');
+      $slideContainer.children().wrapAll($originalWrapper);
 
-
-
-
-    // Dropdown toggle functionality for Categories and Brands
-    const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
-    dropdownItems.forEach(item => {
-      const toggleBtn = item.querySelector('.split-button.single-toggle-action');
-      const dropdown = item.querySelector('.mobile-dropdown');
-
-      if (toggleBtn && dropdown) {
-        toggleBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-
-          // Close other dropdowns
-          dropdownItems.forEach(otherItem => {
-            if (otherItem !== item) {
-              otherItem.classList.remove('active');
-            }
-          });
-
-          // Toggle current dropdown
-          item.classList.toggle('active');
-        });
-      }
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-      dropdownItems.forEach(item => {
-        if (!item.contains(e.target)) {
-          item.classList.remove('active');
+      // Calculate optimal clone count based on screen size for smooth scrolling
+      function getOptimalCloneCount() {
+        const screenWidth = $(window).width();
+        if (screenWidth <= 480) {
+          return 4; // More clones on mobile for smoother 1.25x speed scroll
+        } else if (screenWidth <= 768) {
+          return 3; // Medium clones for tablet 1x speed
+        } else {
+          return 2; // Fewer clones on desktop for 1x speed
         }
+      }
+
+      // Create seamless infinite scroll by cloning content
+      function createInfiniteScroll() {
+        // Remove existing clones to prevent accumulation
+        $slideContainer.find('.logo-slide-wrapper.clone').remove();
+
+        const cloneCount = getOptimalCloneCount();
+        const $original = $slideContainer.find('.logo-slide-wrapper').first();
+
+        // Create clones and append them
+        for (let i = 0; i < cloneCount; i++) {
+          const $clone = $original.clone(true).addClass('clone clone-' + (i + 1));
+          $slideContainer.append($clone);
+        }
+
+        // Update CSS custom property for animation distance
+        const moveDistance = (100 / (cloneCount + 1));
+        $slideContainer.css('--move-distance', moveDistance + '%');
+
+        // Reset position for seamless loop
+        $slideContainer.css('transform', 'translateX(0)');
+      }
+
+      // Initialize the slider
+      createInfiniteScroll();
+
+      // Recreate clones on window resize with debouncing for performance
+      let resizeTimeout;
+      $(window).on('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          createInfiniteScroll();
+        }, 250);
       });
+
+      // Pause animation on hover for better user experience
+      $slider.on('mouseenter', function() {
+        $slideContainer.css('animation-play-state', 'paused');
+      }).on('mouseleave', function() {
+        $slideContainer.css('animation-play-state', 'running');
+      });
+
+      // Enhanced error handling for missing images
+      $slideContainer.find('img').on('error', function() {
+        $(this).css({
+          'opacity': '0.3',
+          'filter': 'grayscale(100%)'
+        });
+      }).on('load', function() {
+        $(this).css({
+          'opacity': '1',
+          'filter': 'none'
+        });
+      });
+
+      // Performance optimization: reduce clones on slower devices
+      if ('connection' in navigator && navigator.connection.effectiveType === 'slow-2g') {
+        // Reduce clone count for slow connections
+        function getOptimalCloneCount() {
+          return 2; // Minimum clones for slow connections
+        }
+      }
     });
+
+
+
+
+
 
     // Initialize FinisherHeader for background animation
     new FinisherHeader({
@@ -2857,8 +3098,20 @@
       // Close dropdowns when clicking outside
       document.addEventListener('click', (e) => {
         dropdownItems.forEach(item => {
-          if (!item.contains(e.target)) {
+          // Only close if click is outside both the button and the dropdown
+          const button = item.querySelector('.split-button.single-toggle-action');
+          const dropdown = item.querySelector('.mobile-dropdown');
+          
+          if (button && dropdown && 
+              !button.contains(e.target) && 
+              !dropdown.contains(e.target)) {
             item.classList.remove('active');
+            // Reset ARIA attribute for accessibility
+            button.setAttribute('aria-expanded', 'false');
+            // Reset dropdown max-height for animation
+            if (dropdown.style.maxHeight) {
+              dropdown.style.maxHeight = '0';
+            }
           }
         });
       });
@@ -2977,18 +3230,35 @@
           style.id = 'toast-styles';
           style.textContent = `
             .toast {
-              background: white;
-              border-radius: 8px;
+              position: fixed;
+              top: 68px;
+              background: #ff4b2b;
+              color: white;
+              padding: 12px 20px;
+              border-radius: 12px;
               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-              margin-bottom: 8px;
-              min-width: 300px;
+              z-index: 10000;
+              animation: slideInRight 0.3s ease;
+              width: 63%;
+              justify-self: right;
+              scale: 0.9;
               opacity: 0;
               transform: translateX(100%);
               transition: all 0.3s ease;
             }
             .toast.show {
-              opacity: : translateX(1;
-              transform0);
+              opacity: 1;
+              transform: translateX(0);
+            }
+            @keyframes slideInRight {
+              from {
+                transform: translateX(100%);
+                opacity: 0;
+              }
+              to {
+                transform: translateX(0);
+                opacity: 1;
+              }
             }
             .toast-success { border-left: 4px solid #10b981; }
             .toast-error { border-left: 4px solid #ef4444; }
@@ -2997,16 +3267,16 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
-              padding: 12px 16px;
+              padding: 0;
             }
             .toast-message {
-              color: #374151;
+              color: white;
               font-size: 14px;
             }
             .toast-close {
               background: none;
               border: none;
-              color: #6b7280;
+              color: white;
               cursor: pointer;
               font-size: 18px;
               padding: 0;
@@ -3061,7 +3331,7 @@
     <abbr title="Home">
       <div class="nav-item" data-target="home">
         <ion-icon name="home-outline"></ion-icon>
-        <span class="nav-text"><a href="index.html">Home</a></span>
+        <span class="nav-text"><a href="index.html"><i class='bx  bx-rotate-cw' title="Reload page"></i></a></span>
       </div>
     </abbr>
     <abbr title="Search">
@@ -3651,89 +3921,13 @@
   <script>
   </script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const splitButtons = document.querySelectorAll('.split-button');
-
-      splitButtons.forEach(button => {
-        // Check if this is a single-toggle action button
-        if (button.classList.contains('single-toggle-action')) {
-          button.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const parentItem = button.parentElement; // The list item wrapping the button
-            const dropdown = parentItem.querySelector('.mobile-dropdown');
-            const isExpanded = parentItem.classList.contains('active');
-
-            // Optional: Close other open dropdowns on desktop
-            if (window.innerWidth > 992) {
-              document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
-                if (item !== parentItem) {
-                  item.classList.remove('active');
-                  const btn = item.querySelector('.split-button');
-                  if (btn) btn.setAttribute('aria-expanded', 'false');
-                  const otherDropdown = item.querySelector('.mobile-dropdown');
-                  if (otherDropdown) otherDropdown.style.maxHeight = '0';
-                }
-              });
-            }
-
-            // Toggle current state
-            parentItem.classList.toggle('active');
-            button.setAttribute('aria-expanded', !isExpanded);
-
-            // Handle dropdown animation (if using max-height transition)
-            if (dropdown) {
-              if (!isExpanded) {
-                dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
-              } else {
-                dropdown.style.maxHeight = '0';
-              }
-            }
-          });
-        }
-      });
-
-
-    });
+    // REMOVED DUPLICATE DOMContentLoaded LISTENER - CONSOLIDATED INTO FIRST LISTENER
 
 
 
-    
+
   </script>
-  <script>
- 
-// New Collapsible Logic for Sidebar with Accordion Behavior
-const collapsibles = document.querySelectorAll('.sidebar-collapsible');
-collapsibles.forEach(col => {
-  const btn = col.querySelector('.collapsible-trigger');
-  const content = col.querySelector('.collapsible-content');
   
-  btn.addEventListener('click', () => {
-    // Close all other collapsibles first
-    collapsibles.forEach(otherCol => {
-      if (otherCol !== col) {
-        otherCol.classList.remove('open');
-        const otherContent = otherCol.querySelector('.collapsible-content');
-        if (otherContent) {
-          otherContent.style.maxHeight = '0';
-        }
-      }
-    });
-    
-    // Toggle current collapsible
-    const isOpen = col.classList.contains('open');
-    col.classList.toggle('open');
-    
-    if (col.classList.contains('open')) {
-      // Calculate and set dynamic height
-      content.style.maxHeight = content.scrollHeight + 'px';
-    } else {
-      content.style.maxHeight = '0';
-    }
-  });
-});
-</script>
 
 </body>
 

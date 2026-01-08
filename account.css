@@ -1592,11 +1592,6 @@ body.dark-mode .action-btn {
     color: var(--dm-text-secondary);
 }
 
-body.dark-mode .action-btn:hover {
-    background: rgba(0, 153, 255, 0.15);
-    color: var(--dm-accent);
-}
-
 /* Logout Modal Styles */
 .logout-modal-overlay {
   background-color: rgba(0, 0, 0, 0.6);

@@ -50,8 +50,73 @@
   <script src="js/logout-modal.js" defer></script>
   <script src="js/account-settings.js" defer></script>
   <script src="js/cookie-manager.js" defer></script>
+
+
 </head>
 <style>
+  .navbar li {
+    position: relative;
+    margin: 0;
+}
+
+  .sidebar-content {
+    flex-grow: 1;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: visible;
+    gap: 8px;
+  }
+
+  .collapsible-content {
+    height: auto;
+    max-height: 100%;
+    overflow-y: scroll !important;
+    overflow-x: hidden;
+    border-radius: 12px;
+    padding: 0 10px 0 6px;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .profile-dropdown-container {
+    top: 4vh !important;
+  }
+
+  .action-btn {
+    color: #9ca3af;
+    font-size: 20px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 4px;
+    border-radius: 30px;
+    padding: 10px !important;
+    transition: color 0.2s;
+    display: flex;
+    transition: 1s cubic-bezier(0, 0.92, 0.55, 1.26);
+  }
+
+  .profile-dropdown-container::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 88%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    background-color: #ffffff;
+    display: none;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    clip-path: none;
+    mix-blend-mode: darken;
+    box-shadow: none;
+  }
+
   .sidebar-header {
     padding: 15px;
   }
@@ -344,6 +409,143 @@
 </style>
 
 <body>
+  <!-- Mobile Sidebar Menu (Redesigned) -->
+  <div class="mobile-menu" id="mobileMenu">
+
+    <!-- 1. Header: Brand or User Profile -->
+    <div class="sidebar-header" id="sidebarHeader">
+      <!-- Default State: Brand Logo -->
+      <div class="header-brand default-brand" id="sidebarBrand">
+        <div class="navbar-logo">
+          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
+            style="width: 30px;height: auto;">
+          <span>
+            <h6 style="color: #0099ff;font-size: large;margin: 0px 0px -6px 0px;">BLUE</h6>
+            <h6 style="color: #000000;font-size: large;margin: 0px 0px -6px 0px;">EMBER</h6>
+          </span>
+        </div>
+      </div>
+
+      <!-- User State (Logged In) -->
+      <div class="header-profile" id="sidebarProfileContainer">
+        <img src="assets/profilepreview.jpg" alt="Profile" id="navbar-avatar-img">
+        <div class="user-info">
+          <span class="user-name" id="sidebarUserName">User Name</span>
+          <span class="user-email" id="sidebarUserEmail">email@example.com</span>
+        </div>
+        <i class='bx  bx-chevron-down'></i>
+      </div>
+
+      <!-- Close Button -->
+      <button class="close-btn" id="closeBtn" aria-label="Close menu"
+        style="right: -19px;padding: inherit;display: flex;position: relative;">
+        <i class='bx  bx-caret-big-left'></i>
+      </button>
+
+
+      <!-- Mobile Specific Profile Dropdown (Floating) -->
+      <div class="mobile-profile-dropdown" id="mobileProfileDropdown" style="display: none;">
+
+        <div class="mobile-dropdown-items">
+          <a href="profile.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-user"></i> Profile
+          </a>
+          <a href="account.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-solid fa-toggle-off"></i> Account Settings
+          </a>
+          <a href="purchases.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-comments"></i> Purchases & Reviews
+          </a>
+          <a href="Contact.html" class="mobile-dropdown-item mobile-item-links">
+            <i class="fa-regular fa-circle-question"></i> Help Center
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Content: Navigation Links -->
+    <div class="sidebar-content">
+
+      <a href="index.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+
+      <!-- Collapsible: Categories -->
+      <div class="sidebar-collapsible" id="col-categories">
+        <button class="collapsible-trigger" data-accordion-id="col-categories">
+          <div style="display:flex; align-items:center;">
+            <i class='bx  bx-categories'></i>
+            <span>Categories</span>
+          </div>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="collapsible-content" data-accordion-content="col-categories">
+          <a href="product2.html" class="sub-link">Toys</a>
+          <a href="product2.html" class="sub-link">Supplyments</a>
+          <a href="product2.html" class="sub-link">Beauty</a>
+          <a href="product2.html" class="sub-link">HomeGoods</a>
+        </div>
+      </div>
+
+      <!-- Collapsible: Brands -->
+      <div class="sidebar-collapsible" id="col-brands">
+        <button class="collapsible-trigger" data-accordion-id="col-brands">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-solid fa-building trigger-icon"></i>
+            <span>Brands</span>
+          </div>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="collapsible-content" data-accordion-content="col-brands">
+          <a href="samsung-productpage.html" class="sub-link">Samsung</a>
+          <a href="LG-productpage.html" class="sub-link">LG</a>
+          <a href="Whirlpool-productpage.html" class="sub-link">Whirlpool</a>
+          <a href="BOSCH-productpage.html" class="sub-link">Bosch</a>
+          <a href="Electrolux-productpage.html" class="sub-link">Revlon</a>
+          <a href="Apple-productpage.html" class="sub-link">Toys R Us</a>
+        </div>
+      </div>
+
+      <a href="product2.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-tags"></i>
+        <span>Products</span>
+      </a>
+
+      <a href="Contact.html" class="sidebar-nav-item">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Contact Us</span>
+      </a>
+
+      <!-- Dynamic Cart Link -->
+      <li>
+        <a href="#" id="mobile-cart-link" class="mobile-cart-link">
+          <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
+        </a>
+      </li>
+
+      <!-- Login Link (Hidden if logged in) -->
+      <div id="sidebar-login-container">
+        <a href="login.html" class="sidebar-nav-item" id="sidebar-login-link">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Login</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 3. Footer: Settings / Logout -->
+    <div class="sidebar-footer" id="sidebarFooter">
+      <button id="mobile-theme-toggle" class="footer-btn">
+        <i class="fa-solid fa-moon"></i>
+        <span>Toggle Theme</span>
+      </button>
+
+      <!-- Logout will be injected here -->
+    </div>
+
+  </div>
+
   <!-- Navbar -->
   <nav>
     <div class="navbar-container">
@@ -438,141 +640,7 @@
     </div>
   </div>
 
-  <!-- Mobile Sidebar Menu (Redesigned) -->
-  <div class="mobile-menu" id="mobileMenu">
 
-    <!-- 1. Header: Brand or User Profile -->
-    <div class="sidebar-header" id="sidebarHeader">
-      <!-- Default State: Brand Logo -->
-      <div class="header-brand default-brand" id="sidebarBrand">
-        <div class="navbar-logo">
-          <img src="assets/BlueEmber-ezgif.com-gif-maker.gif" alt="Blue Ember animated logo"
-            style="width: 30px; height: auto;">
-          <span>
-            <h6 style="color: #0099ff; font-size: large; margin: 0px 0px -6px 0px;">BLUE</h6>
-            <h6 style="color: #ffffff; font-size: large; margin: 0px 0px -6px 0px;">EMBER</h6>
-          </span>
-        </div>
-      </div>
-
-      <!-- User State (Logged In) -->
-      <div class="header-profile" id="sidebarProfileContainer">
-        <img src="assets/profilepreview.jpg" alt="Profile" id="navbar-avatar-img">
-        <div class="user-info">
-          <span class="user-name" id="sidebarUserName">User Name</span>
-          <span class="user-email" id="sidebarUserEmail">email@example.com</span>
-        </div>
-        <i class='bx  bx-chevron-down'></i>
-      </div>
-
-      <!-- Close Button -->
-      <button class="close-btn" id="closeBtn" aria-label="Close menu"
-        style="right: -30px;padding: inherit;display: flex;position: relative;border: none;">
-        <i class='bx  bx-caret-big-left'></i>
-      </button>
-
-      <!-- Mobile Specific Profile Dropdown (Floating) -->
-      <div class="mobile-profile-dropdown" id="mobileProfileDropdown" style="display: none;">
-
-        <div class="mobile-dropdown-items">
-          <a href="profile.html" class="mobile-dropdown-item mobile-item-links">
-            <i class="fa-regular fa-user"></i> Profile
-          </a>
-          <a href="account.html" class="mobile-dropdown-item mobile-item-links">
-            <i class="fa-solid fa-toggle-off"></i> Account Settings
-          </a>
-          <a href="purchases.html" class="mobile-dropdown-item mobile-item-links">
-            <i class="fa-regular fa-comments"></i> Purchases & Reviews
-          </a>
-          <a href="Contact.html" class="mobile-dropdown-item mobile-item-links">
-            <i class="fa-regular fa-circle-question"></i> Help Center
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. Content: Navigation Links -->
-    <div class="sidebar-content">
-
-      <a href="index.html" class="sidebar-nav-item">
-        <i class="fa-solid fa-house"></i>
-        <span>Home</span>
-      </a>
-
-      <!-- Collapsible: Categories -->
-      <div class="sidebar-collapsible" id="col-categories">
-        <button class="collapsible-trigger">
-          <div style="display:flex; align-items:center;">
-            <i class="fa-solid fa-blender trigger-icon"></i>
-            <span>Categories</span>
-          </div>
-          <i class="fa-solid fa-chevron-down chevron"></i>
-        </button>
-        <div class="collapsible-content">
-          <a href="product2.html" class="sub-link">Toys</a>
-          <a href="product2.html" class="sub-link">Supplyments</a>
-          <a href="product2.html" class="sub-link">Beauty</a>
-          <a href="product2.html" class="sub-link">HomeGoods</a>
-        </div>
-      </div>
-
-      <!-- Collapsible: Brands -->
-      <div class="sidebar-collapsible" id="col-brands">
-        <button class="collapsible-trigger">
-          <div style="display:flex; align-items:center;">
-            <i class="fa-solid fa-building trigger-icon"></i>
-            <span>Brands</span>
-          </div>
-          <i class="fa-solid fa-chevron-down chevron"></i>
-        </button>
-        <div class="collapsible-content">
-          <a href="samsung-productpage.html" class="sub-link">Samsung</a>
-          <a href="LG-productpage.html" class="sub-link">LG</a>
-          <a href="Whirlpool-productpage.html" class="sub-link">Whirlpool</a>
-          <a href="BOSCH-productpage.html" class="sub-link">Bosch</a>
-          <a href="Electrolux-productpage.html" class="sub-link">Revlon</a>
-          <a href="Apple-productpage.html" class="sub-link">Toys R Us</a>
-        </div>
-      </div>
-
-      <a href="product2.html" class="sidebar-nav-item">
-        <i class="fa-solid fa-tags"></i>
-        <span>Products</span>
-      </a>
-
-      <a href="Contact.html" class="sidebar-nav-item">
-        <i class="fa-solid fa-envelope"></i>
-        <span>Contact Us</span>
-      </a>
-
-      <!-- Dynamic Cart Link -->
-      <li>
-        <a href="#" id="mobile-cart-link" class="mobile-cart-link">
-          <i class="fa-solid fa-cart-shopping me-2"></i>Shopping Cart
-        </a>
-      </li>
-
-      <!-- Login Link (Hidden if logged in) -->
-      <div id="sidebar-login-container">
-        <a href="login.html" class="sidebar-nav-item" id="sidebar-login-link">
-          <i class="fa-solid fa-right-to-bracket"></i>
-          <span>Login</span>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- 3. Footer: Settings / Logout -->
-    <div class="sidebar-footer" id="sidebarFooter">
-      <button id="mobile-theme-toggle" class="footer-btn">
-        <i class="fa-solid fa-moon"></i>
-        <span>Toggle Theme</span>
-      </button>
-
-      <!-- Logout will be injected here -->
-    </div>
-
-  </div>
 
 
   <!-- Main Content -->
@@ -1990,8 +2058,9 @@
               </button>
 
               <!-- Send -->
-              <button id="emberSendBtn" class="action-btn" style="color:var(--text-main);">
-                <i class='bx bx-send'></i>
+              <button id="emberSendBtn" class="action-btn" style="transform: rotate(
+315deg);">
+                <i class='bx bx-send' style="position: relative;top: -1px;right: -2px;"></i>
               </button>
             </div>
           </div>
@@ -2156,265 +2225,405 @@
         </div>
       </div>
     </div>
-    <script>
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const collapsibles = document.querySelectorAll('.sidebar-collapsible');
-        collapsibles.forEach(col => {
-          const btn = col.querySelector('.collapsible-trigger');
-          btn.addEventListener('click', () => {
-            // Close all other collapsibles
-            document.querySelectorAll('.sidebar-collapsible').forEach(other => {
-              if (other !== col) {
-                other.classList.remove('open');
+    <script>
+      /*
+       * Enhanced Accordion System for Mobile Sidebar
+       * Version: 2.0.0
+       * Author: Blue Ember Development Team
+       * Description: Isolated accordion functionality with auto-recovery and performance monitoring
+       */
+
+      (function () {
+        'use strict';
+
+        // Configuration
+        const CONFIG = {
+          version: '2.0.0',
+          maxRetries: 5,
+          retryDelay: 100,
+          performanceThreshold: 16, // 60fps threshold
+          clickThrottle: 50, // Minimum time between clicks
+          lastClickTime: 0,
+          recoveryCheckInterval: 1000,
+          eventNamespace: 'blueEmberAccordion'
+        };
+
+        // State Management
+        let state = {
+          initialized: false,
+          activeAccordions: new Set(),
+          performanceMetrics: {
+            totalClicks: 0,
+            failedClicks: 0,
+            avgResponseTime: 0
+          },
+          version: CONFIG.version,
+          backupData: null
+        };
+
+        // Auto-Recovery System
+        class AccordionRecovery {
+          static checkFunctionality() {
+            const triggers = document.querySelectorAll('[data-accordion-id]');
+            let failedCount = 0;
+
+            triggers.forEach(trigger => {
+              const content = document.querySelector(`[data-accordion-content="${trigger.dataset.accordionId}"]`);
+              if (!content || !trigger.addEventListener) {
+                failedCount++;
               }
             });
-            // Toggle current
-            col.classList.toggle('open');
-          });
-        });
-      });
 
-
-
-
-      // Auth Integration
-      // Function to toggle user icon visibility
-      function toggleUserIcon(show) {
-        const icon = document.getElementById('Hide/UnhideUserIcon');
-        if (icon) {
-          icon.style.display = show ? 'flex' : 'none';
-        }
-      }
-
-      // Function to toggle signup button visibility
-      function toggleSignupBtn(show) {
-        const btn = document.getElementById('Hide/UnhideSignupBtn');
-        if (btn) {
-          btn.style.display = show ? 'flex' : 'none';
-        }
-      }
-
-      // Separate logout function
-      function performLogout() {
-        if (!window.DB) return;
-
-        // Use custom modal if available, otherwise fallback to native confirm
-        if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
-          window.LogoutModal.confirm(async () => {
-            await window.DB.signOut();
-            window.location.reload();
-          });
-        } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
-          window.showLogoutConfirmation(async () => {
-            await window.DB.signOut();
-            window.location.reload();
-          });
-        } else {
-          // Fallback to native confirm
-          if (confirm('Are you sure you want to logout?')) {
-            window.DB.signOut().then(() => {
-              window.location.reload();
-            });
-          }
-        }
-      }
-
-      // Auth & Dropdown Logic
-      const initAuthUI = async () => {
-        if (!window.DB) return;
-
-        const { data: { user } } = await DB.getUser();
-
-        // Toggle user icon based on login status
-        toggleUserIcon(!!user);
-        toggleSignupBtn(!user);
-
-        // Toggle account content based on login status
-        const authPrompt = document.getElementById('auth-prompt');
-        const mainContent = document.getElementById('account-main-content');
-        if (user) {
-          // User is logged in - show main content, hide auth prompt
-          if (authPrompt) authPrompt.style.display = 'none';
-          if (mainContent) mainContent.style.display = 'block';
-
-          // Populate user information in form fields
-          const fullName = user.user_metadata?.full_name || '';
-          const email = user.email || '';
-          const firstName = fullName.split(' ')[0] || '';
-          const lastName = fullName.split(' ').slice(1).join(' ') || '';
-
-          // Populate form fields
-          const firstNameField = document.getElementById('firstName');
-          const lastNameField = document.getElementById('lastName');
-          const currentEmailField = document.getElementById('currentEmail');
-          const newEmailField = document.getElementById('newEmail');
-
-          if (firstNameField) firstNameField.value = firstName;
-          if (lastNameField) lastNameField.value = lastName;
-          if (currentEmailField) currentEmailField.value = email;
-          if (newEmailField) newEmailField.placeholder = email; // Keep placeholder for new email
-
-          // Show sidebar logout button
-          const sidebarLogoutBtn = document.getElementById('sidebar-logout-btn');
-          if (sidebarLogoutBtn) {
-            sidebarLogoutBtn.style.display = 'flex';
-            sidebarLogoutBtn.addEventListener('click', performLogout);
+            return failedCount === 0;
           }
 
-        } else {
-          // User is not logged in - hide main content, show auth prompt
-          if (authPrompt) authPrompt.style.display = 'flex';
-          if (mainContent) mainContent.style.display = 'none';
+          static restoreFunctionality() {
+            if (!this.checkFunctionality()) {
+              console.log('[Accordion Recovery] Restoring functionality...');
+              initializeAccordionSystem();
+              return true;
+            }
+            return false;
+          }
+
+          static startMonitoring() {
+            setInterval(() => {
+              if (!this.checkFunctionality()) {
+                console.warn('[Accordion Recovery] Functionality degraded, attempting recovery...');
+                this.restoreFunctionality();
+              }
+            }, CONFIG.recoveryCheckInterval);
+          }
         }
 
-        if (user) {
-          const loginLink = document.querySelector('a[href="login.html"]');
-          if (loginLink && loginLink.parentElement) {
-            const li = loginLink.parentElement;
-            const name = user.user_metadata.full_name || 'User';
-            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
+        // Performance Monitor
+        class PerformanceMonitor {
+          static recordClick(startTime) {
+            const responseTime = performance.now() - startTime;
+            state.performanceMetrics.totalClicks++;
 
-            // Replace Login Link with Simple Dark Dropdown
-            li.innerHTML = `
-
-                `;
-
-
-            // Load Custom Profile Picture if exists
-            const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
-            if (storedAvatar) {
-              const avatarImg = li.querySelector('#navbar-avatar-img');
-              if (avatarImg) avatarImg.src = storedAvatar;
+            if (responseTime > CONFIG.performanceThreshold) {
+              console.warn(`[Performance] Slow accordion response: ${responseTime.toFixed(2)}ms`);
             }
 
-            // Logout Handler
-            document.getElementById('nav-dropdown-logout').addEventListener('click', (e) => {
-              e.preventDefault();
-              performLogout();
+            // Calculate rolling average
+            const total = state.performanceMetrics.avgResponseTime * (state.performanceMetrics.totalClicks - 1) + responseTime;
+            state.performanceMetrics.avgResponseTime = total / state.performanceMetrics.totalClicks;
+          }
+
+          static recordFailure() {
+            state.performanceMetrics.failedClicks++;
+          }
+
+          static getMetrics() {
+            return { ...state.performanceMetrics };
+          }
+        }
+
+        // Event Delegation System
+        class EventDelegator {
+          static attach() {
+            // Use event delegation for maximum efficiency and scalability
+            document.addEventListener('click', this.handleClick.bind(this), { passive: false });
+
+            // Keyboard support
+            document.addEventListener('keydown', this.handleKeydown.bind(this), { passive: false });
+          }
+
+          static handleClick(event) {
+            // Throttle rapid clicks
+            const now = Date.now();
+            if (now - CONFIG.lastClickTime < CONFIG.clickThrottle) {
+              return;
+            }
+            CONFIG.lastClickTime = now;
+
+            const startTime = performance.now();
+
+            try {
+              const trigger = event.target.closest('[data-accordion-id]');
+              if (!trigger || !trigger.dataset.accordionId) {
+                return;
+              }
+
+              event.preventDefault();
+              event.stopPropagation();
+
+              const accordionId = trigger.dataset.accordionId;
+              this.toggleAccordion(accordionId, trigger);
+
+              PerformanceMonitor.recordClick(startTime);
+            } catch (error) {
+              console.error('[Accordion] Click handling failed:', error);
+              PerformanceMonitor.recordFailure();
+              AccordionRecovery.restoreFunctionality();
+            }
+          }
+
+          static handleKeydown(event) {
+            if (event.key !== 'Enter' && event.key !== ' ') {
+              return;
+            }
+
+            const trigger = event.target.closest('[data-accordion-id]');
+            if (trigger) {
+              event.preventDefault();
+              trigger.click();
+            }
+          }
+
+          static toggleAccordion(accordionId, trigger) {
+            const content = document.querySelector(`[data-accordion-content="${accordionId}"]`);
+            if (!content) {
+              console.error(`[Accordion] Content not found for ${accordionId}`);
+              return;
+            }
+
+            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+            const wasActive = state.activeAccordions.has(accordionId);
+
+            // Close all other accordions
+            if (!isExpanded) {
+              this.closeAllAccordions();
+            }
+
+            // Toggle current accordion
+            if (isExpanded) {
+              this.closeAccordion(accordionId, trigger, content);
+            } else {
+              this.openAccordion(accordionId, trigger, content);
+            }
+          }
+
+          static openAccordion(accordionId, trigger, content) {
+            content.style.display = 'block';
+            content.offsetHeight; // Force reflow
+            trigger.setAttribute('aria-expanded', 'true');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            state.activeAccordions.add(accordionId);
+
+            // Animate chevron
+            const chevron = trigger.querySelector('.chevron');
+            if (chevron) {
+              chevron.style.transform = 'rotate(0deg)';
+            }
+
+            // Dispatch custom event
+            trigger.dispatchEvent(new CustomEvent(`${CONFIG.eventNamespace}:opened`, {
+              detail: { accordionId, trigger, content }
+            }));
+          }
+
+          static closeAccordion(accordionId, trigger, content) {
+            trigger.setAttribute('aria-expanded', 'false');
+            content.style.maxHeight = '100%';
+            state.activeAccordions.delete(accordionId);
+
+            // Animate chevron
+            const chevron = trigger.querySelector('.chevron');
+            if (chevron) {
+              chevron.style.transform = 'rotate(180deg)';
+            }
+
+            // Set display: none after transition
+            const handleTransitionEnd = () => {
+              if (trigger.getAttribute('aria-expanded') === 'false') {
+                content.style.display = 'none';
+              }
+              content.removeEventListener('transitionend', handleTransitionEnd);
+            };
+            content.addEventListener('transitionend', handleTransitionEnd);
+
+            // Dispatch custom event
+            trigger.dispatchEvent(new CustomEvent(`${CONFIG.eventNamespace}:closed`, {
+              detail: { accordionId, trigger, content }
+            }));
+          }
+
+          static closeAllAccordions() {
+            state.activeAccordions.forEach(accordionId => {
+              const trigger = document.querySelector(`[data-accordion-id="${accordionId}"]`);
+              const content = document.querySelector(`[data-accordion-content="${accordionId}"]`);
+
+              if (trigger && content) {
+                this.closeAccordion(accordionId, trigger, content);
+              }
             });
+          }
+        }
 
-            // Dropdown Toggle
-            // Dropdown Toggle (Desktop)
-            const trigger = li.querySelector('.nav-profile-trigger');
-            const menu = li.querySelector('.nav-profile-menu');
+        // Backup System
+        class BackupSystem {
+          static createBackup() {
+            state.backupData = {
+              version: CONFIG.version,
+              timestamp: Date.now(),
+              activeAccordions: Array.from(state.activeAccordions),
+              triggers: Array.from(document.querySelectorAll('[data-accordion-id]')).map(trigger => ({
+                id: trigger.dataset.accordionId,
+                expanded: trigger.getAttribute('aria-expanded') === 'true'
+              }))
+            };
 
-            if (trigger && menu) {
-              trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                menu.classList.toggle('active');
-              });
+            // Store in multiple locations for redundancy
+            try {
+              localStorage.setItem(`${CONFIG.eventNamespace}_backup`, JSON.stringify(state.backupData));
+              sessionStorage.setItem(`${CONFIG.eventNamespace}_backup`, JSON.stringify(state.backupData));
+            } catch (error) {
+              console.warn('[Backup] Failed to store backup:', error);
+            }
+          }
 
-              document.addEventListener('click', (e) => {
-                if (!li.contains(e.target)) {
-                  menu.classList.remove('active');
+          static restoreBackup() {
+            if (!state.backupData) {
+              try {
+                const stored = localStorage.getItem(`${CONFIG.eventNamespace}_backup`) ||
+                  sessionStorage.getItem(`${CONFIG.eventNamespace}_backup`);
+                if (stored) {
+                  state.backupData = JSON.parse(stored);
+                }
+              } catch (error) {
+                console.warn('[Backup] Failed to restore backup:', error);
+              }
+            }
+
+            if (state.backupData && state.backupData.triggers) {
+              state.backupData.triggers.forEach(triggerData => {
+                const trigger = document.querySelector(`[data-accordion-id="${triggerData.id}"]`);
+                const content = document.querySelector(`[data-accordion-content="${triggerData.id}"]`);
+
+                if (trigger && content) {
+                  if (triggerData.expanded) {
+                    EventDelegator.openAccordion(triggerData.id, trigger, content);
+                  } else {
+                    EventDelegator.closeAccordion(triggerData.id, trigger, content);
+                  }
                 }
               });
             }
           }
+        }
 
-          // --- Mobile Sidebar Injection (Redesigned) ---
-          const sidebarHeader = document.querySelector('.sidebar-header');
-          const sidebarFooter = document.querySelector('.sidebar-footer');
-          const sidebarLoginLink = document.getElementById('sidebar-login-link');
+        // Main Initialization
+        function initializeAccordionSystem() {
+          try {
+            console.log(`[Accordion] Initializing system version ${CONFIG.version}`);
 
-          if (sidebarHeader && sidebarFooter) {
-            // 1. Update Header with User Info
-            const name = user.user_metadata.full_name || 'User';
-            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
-
-            // Replace the "default-brand" part with User Profile
-            const brandContainer = sidebarHeader.querySelector('.header-brand');
-            if (brandContainer) {
-              brandContainer.innerHTML = `
-                            <img src="${avatarUrl}" class="sidebar-avatar" alt="Profile" id="mobile-avatar-img">
-                            <div class="user-info">
-                                <span class="user-name">Hello, ${name}</span>
-                                <span class="user-status">Member</span>
-                            </div>
-                        `;
+            // Validate required elements
+            const triggers = document.querySelectorAll('[data-accordion-id]');
+            if (triggers.length === 0) {
+              console.warn('[Accordion] No accordion triggers found');
+              return false;
             }
 
-            // 2. Hide "Login" Wrapper
-            const loginWrapper = document.getElementById('sidebar-login-container');
-            if (loginWrapper) loginWrapper.style.display = 'none';
+            // Initialize state
+            state.initialized = true;
+            state.activeAccordions.clear();
 
+            // Set initial state: Hidden
+            document.querySelectorAll('[data-accordion-content]').forEach(content => {
+              content.style.maxHeight = '0';
+              content.style.overflow = 'hidden';
+              content.style.display = 'none';
+            });
 
-            // Sync Custom Avatar
-            const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
-            if (storedAvatar) {
-              const mAvatar = sidebarHeader.querySelector('#mobile-avatar-img');
-              if (mAvatar) mAvatar.src = storedAvatar;
-            }
+            // Set up event delegation
+            EventDelegator.attach();
+
+            // Start monitoring
+            AccordionRecovery.startMonitoring();
+
+            // Create backup
+            BackupSystem.createBackup();
+
+            // Restore previous state if available
+            BackupSystem.restoreBackup();
+
+            // Set up resize handler for dynamic content
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+              clearTimeout(resizeTimeout);
+              resizeTimeout = setTimeout(() => {
+                // Update heights for open accordions
+                state.activeAccordions.forEach(accordionId => {
+                  const content = document.querySelector(`[data-accordion-content="${accordionId}"]`);
+                  if (content && content.style.maxHeight !== '100%') {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                  }
+                });
+              }, 250);
+            });
+
+            console.log(`[Accordion] System initialized successfully with ${triggers.length} triggers`);
+            return true;
+
+          } catch (error) {
+            console.error('[Accordion] Initialization failed:', error);
+            state.initialized = false;
+            return false;
           }
         }
-      };
 
-      // Run Immediately or Wait
-      if (window.DB) {
-        initAuthUI();
-      } else {
-        document.addEventListener('dbReady', initAuthUI);
-      }
+        // Public API
+        window.BlueEmberAccordion = {
+          version: CONFIG.version,
+          initialize: initializeAccordionSystem,
+          getMetrics: () => PerformanceMonitor.getMetrics(),
+          getState: () => ({ ...state }),
+          closeAll: () => EventDelegator.closeAllAccordions(),
+          restore: () => AccordionRecovery.restoreFunctionality()
+        };
+
+        // Auto-initialize when DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initializeAccordionSystem);
+        } else {
+          // DOM is already ready
+          setTimeout(initializeAccordionSystem, 0);
+        }
+
+      })();
     </script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const splitButtons = document.querySelectorAll('.split-button');
-
-    splitButtons.forEach(button => {
-      // Check if this is a single-toggle action button
-      if (button.classList.contains('single-toggle-action')) {
-        button.addEventListener('click', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          const parentItem = button.parentElement; // The list item wrapping the button
-          const dropdown = parentItem.querySelector('.mobile-dropdown');
-          const isExpanded = parentItem.classList.contains('active');
-
-          // Optional: Close other open dropdowns on desktop
-          if (window.innerWidth > 992) {
-            document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
-              if (item !== parentItem) {
-                item.classList.remove('active');
-                const btn = item.querySelector('.split-button');
-                if (btn) btn.setAttribute('aria-expanded', 'false');
-                const otherDropdown = item.querySelector('.mobile-dropdown');
-                if (otherDropdown) otherDropdown.style.maxHeight = '0';
-              }
-            });
-          }
-
-          // Toggle current state
-          parentItem.classList.toggle('active');
-          button.setAttribute('aria-expanded', !isExpanded);
-
-          // Handle dropdown animation (if using max-height transition)
-          if (dropdown) {
-            if (!isExpanded) {
-              dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
-            } else {
-              dropdown.style.maxHeight = '0';
-            }
-          }
-        });
-      }
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.mobile-dropdown-item')) {
-        document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
-          item.classList.remove('active');
-          const btn = item.querySelector('.split-button');
-          if (btn) btn.setAttribute('aria-expanded', 'false');
-          const dropdown = item.querySelector('.mobile-dropdown');
-          if (dropdown) dropdown.style.maxHeight = '0';
-        });
-      }
-    });
-  });
-</script>
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="modal logout-modal" style="display: none;" aria-hidden="true" role="dialog"
+      aria-labelledby="logoutModalTitle">
+      <div class="modal-overlay logout-modal-overlay"></div>
+      <div class="modal-content logout-modal-content">
+        <div class="logout-modal-header">
+          <div class="logout-icon">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+          <h3 id="logoutModalTitle">Confirm Logout</h3>
+        </div>
+        <div class="logout-modal-body">
+          <p>Are you sure you want to log out of your Blue Ember account? You will need to sign in again to access your
+            profile.</p>
+        </div>
+        <div class="logout-modal-actions">
+          <button id="logoutCancelBtn" class="logout-cancel-btn" type="button">Stay Logged In</button>
+          <button id="logoutConfirmBtn" class="logout-confirm-btn" type="button">
+            <span class="btn-text"><i class="fas fa-sign-out-alt"></i> Logout</span>
+            <div class="custom-spinner">
+              <div class="spinner">
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
 </body>
 
 </html>

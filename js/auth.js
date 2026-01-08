@@ -57,7 +57,7 @@ function initializeAuth() {
             setLoading(btn, true);
 
             try {
-                // Create User
+                // Create User (DB.signUp internally calls setSession which now dispatches authStateChanged)
                 const { data, error } = await DB.signUp(email, password, fullName);
 
                 if (error) throw error;
@@ -88,7 +88,7 @@ function setLoading(btn, isLoading) {
     if (isLoading) {
         // Store original content
         btn.dataset.originalText = btn.innerHTML;
-        
+
         // Create spinner element
         const spinner = document.createElement('div');
         spinner.className = 'spinner center';
@@ -106,7 +106,7 @@ function setLoading(btn, isLoading) {
             <div class="spinner-blade"></div>
             <div class="spinner-blade"></div>
         `;
-        
+
         // Replace button content with spinner
         btn.innerHTML = spinner.outerHTML;
         btn.disabled = true;

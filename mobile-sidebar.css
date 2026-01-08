@@ -183,8 +183,8 @@
 
 .collapsible-content {
     max-height: 0;
-    height: 250px;
-    overflow-y: scroll;
+    height: 220px;
+    overflow-y: scroll !important;
     overflow-x: hidden;
     border-radius: 12px;
     padding:0 10px 0 6px;
@@ -406,6 +406,25 @@ body.dark-mode .footer-btn:hover {
     animation: dropdownSlideDown 0.3s cubic-bezier(0.08, 1.68, 0.58, 1);
 }
 
+
+.profile-dropdown-container::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 88%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    background-color: #313131;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 8 20 12 24 12C20 12 12 20 12 24C12 20 4 12 0 12C4 12 12 8 12 0Z'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    clip-path: none;
+    mix-blend-mode: color-dodge;
+    box-shadow: none;
+}
+
 @keyframes dropdownSlideDown {
     from {
         opacity: 0;
@@ -488,3 +507,49 @@ body.dark-mode .footer-btn:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
+/* Mobile Wishlist Link */
+.mobile-wishlist-link {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    gap: 16px;
+    position: relative;
+}
+
+.mobile-wishlist-link i {
+    width: 20px;
+    text-align: center;
+    color: #ff4b2b;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.mobile-wishlist-link .wishlist-count {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: #ff4b2b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+body.dark-mode .mobile-wishlist-link {
+    color: var(--text-inverse);
+}
+
+body.dark-mode .mobile-wishlist-link i {
+    color: #ff6b6b;
+}
+
+body.dark-mode .mobile-wishlist-link .wishlist-count {
+    background: #ff6b6b;
+}

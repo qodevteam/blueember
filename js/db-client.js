@@ -55,6 +55,7 @@ const DB = {
     // Sign Out: Clear session
     signOut: async () => {
         localStorage.removeItem(DB.SESSION_KEY);
+        window.dispatchEvent(new CustomEvent('authStateChanged', { detail: { user: null } }));
         return { error: null };
     },
 
@@ -84,6 +85,7 @@ const DB = {
 
     setSession: (user) => {
         localStorage.setItem(DB.SESSION_KEY, JSON.stringify(user));
+        window.dispatchEvent(new CustomEvent('authStateChanged', { detail: { user } }));
     },
 
     // --- Order Methods ---

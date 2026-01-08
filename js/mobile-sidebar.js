@@ -102,15 +102,9 @@ class MobileSidebar {
     }
 
     setupCollapsibleSections() {
-        const collapsibleTriggers = document.querySelectorAll('.collapsible-trigger');
-        
-        collapsibleTriggers.forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
-                e.preventDefault();
-                const section = trigger.parentElement;
-                this.toggleCollapsible(section);
-            });
-        });
+        // Collapsible functionality is now handled by the enhanced accordion system in account.html
+        // This method is disabled to prevent conflicts with the new isolated implementation
+        console.log('MobileSidebar: Collapsible sections handled by BlueEmberAccordion system');
     }
 
     setupKeyboardNavigation() {
@@ -223,17 +217,8 @@ class MobileSidebar {
     }
 
     toggleCollapsible(section) {
-        const isOpen = section.classList.contains('open');
-        
-        // Close all other collapsible sections
-        document.querySelectorAll('.sidebar-collapsible').forEach(otherSection => {
-            if (otherSection !== section) {
-                otherSection.classList.remove('open');
-            }
-        });
-
-        // Toggle current section
-        section.classList.toggle('open', !isOpen);
+        // This method is disabled - accordion functionality moved to BlueEmberAccordion system
+        console.log('MobileSidebar: Accordion toggle handled by BlueEmberAccordion system');
     }
 
     toggle() {
@@ -246,10 +231,7 @@ class MobileSidebar {
         this.isOpen = true;
         this.sidebar?.classList.add('active');
 
-        // Hide hamburger when sidebar is open
-        if (this.hamburger) {
-            this.hamburger.style.display = 'none';
-        }
+        // Hamburger is now CSS-controlled, no JavaScript needed
 
         // Add overlay to prevent body scroll
         document.body.style.overflow = 'hidden';
@@ -272,10 +254,7 @@ class MobileSidebar {
         this.isOpen = false;
         this.sidebar?.classList.remove('active');
 
-        // Show hamburger when sidebar is closed
-        if (this.hamburger) {
-            this.hamburger.style.display = 'flex';
-        }
+        // Hamburger is now CSS-controlled, no JavaScript needed
 
         // Restore body scroll
         document.body.style.overflow = '';
@@ -286,10 +265,8 @@ class MobileSidebar {
         // Animate hamburger icon
         this.animateHamburger(false);
 
-        // Close all collapsible sections
-        document.querySelectorAll('.sidebar-collapsible').forEach(section => {
-            section.classList.remove('open');
-        });
+        // Note: Collapsible sections are now managed by BlueEmberAccordion system
+        // Don't interfere with accordion state here to prevent conflicts
 
         // Dispatch close event
         this.dispatchEvent('sidebarClosed');
@@ -359,33 +336,5 @@ window.initMobileSidebar = initMobileSidebar;
 
 
  
-// New Collapsible Logic for Sidebar with Accordion Behavior
-const collapsibles = document.querySelectorAll('.sidebar-collapsible');
-collapsibles.forEach(col => {
-  const btn = col.querySelector('.collapsible-trigger');
-  const content = col.querySelector('.collapsible-content');
-  
-  btn.addEventListener('click', () => {
-    // Close all other collapsibles first
-    collapsibles.forEach(otherCol => {
-      if (otherCol !== col) {
-        otherCol.classList.remove('open');
-        const otherContent = otherCol.querySelector('.collapsible-content');
-        if (otherContent) {
-          otherContent.style.maxHeight = '0';
-        }
-      }
-    });
-    
-    // Toggle current collapsible
-    const isOpen = col.classList.contains('open');
-    col.classList.toggle('open');
-    
-    if (col.classList.contains('open')) {
-      // Calculate and set dynamic height
-      content.style.maxHeight = content.scrollHeight + 'px';
-    } else {
-      content.style.maxHeight = '0';
-    }
-  });
-});
+// Collapsible functionality moved to enhanced accordion system in account.html
+// This prevents conflicts with the new isolated accordion implementation

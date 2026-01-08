@@ -39,7 +39,7 @@
   <script src="js/logout-modal.js"></script>
 
   <script src="js/profile-dropdown.js" defer></script>
-  <script src="js/logout-injector.js" defer></script>
+  <script src="js/scroll-reveal.js" defer></script>
   <script>
     // Simple Auth Check for Navbar
     document.addEventListener('dbReady', async () => {
@@ -1618,7 +1618,7 @@
         <li><a href="Contact.html">Contact</a></li>
         <!-- Profile Dropdown -->
 
-        <div class="profile-dropdown-container" id="profileDropdownContainer" style="display: none;">
+        <div class="profile-dropdown-container" id="profileDropdownContainer">
           <div class="profile-dropdown" id="profileDropdown">
             <!-- Profile Header Added by Fix -->
             <div class="profile-header">
@@ -1671,6 +1671,12 @@
         </li>
         <div class="thebigthree-btns-wrapper" style="display: flex; align-items: center;">
           <li id="dark-mode-li" style="display: flex; align-items: center; margin:0 !important;"></li>
+          <div class="wishlist-icon-container" id="wishlist-toggle">
+            <div class="wishlist-link">
+              <i class='bx bx-heart'></i>
+              <span class="wishlist-count">0</span>
+            </div>
+          </div>
           <!-- Cart icon moved OUTSIDE the main navbar list, the profile button is by default stays displayed none until signed up, when client log out, the profile button will be displayed none -->
           <button class="profile-icon-btn" id="profileIconBtn" aria-label="Open profile menu"
             style="display: none; align-items: center;">
@@ -1701,6 +1707,7 @@
               <span class="cart-count">0</span>
             </div>
           </div>
+
         </div>
 
 
@@ -1729,6 +1736,24 @@
         <span class="payment-icon"></span>Proceed to Checkout</button>
       <button class="continue-btn" id="continue-btn"><i class="fa-solid fa-arrow-left me-2"></i>Continue
         Shopping</button>
+    </div>
+  </div>
+
+  <!-- Wishlist Popup Overlay -->
+  <div class="wishlist-overlay" id="wishlist-overlay"></div>
+  <!-- Wishlist Popup Window -->
+  <div class="wishlist-popup" id="wishlist-popup">
+    <div class="cart-header" style="background: linear-gradient(150deg, #ff4b2b, #ff416c);">
+      <h3><i class='bx bxs-heart me-2'></i> My Wishlist</h3>
+      <button class="cart-close" id="wishlist-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="wishlist-items-container">
+      <!-- populated by cart-manager.js -->
+    </div>
+    <div class="cart-footer">
+      <button class="continue-btn" id="wishlist-continue" style="background-color: #ff4b2b;">
+        <i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping
+      </button>
     </div>
   </div>
 
@@ -1761,7 +1786,7 @@
 
       <!-- Close Button -->
       <button class="close-btn" id="closeBtn" aria-label="Close menu"
-        style="right: -35px;padding: inherit;display: flex;position: relative;">
+        style="right: -20px;padding: inherit;display: flex;position: relative;">
         <i class='bx  bx-caret-big-left'></i>
       </button>
 
@@ -1804,13 +1829,10 @@
           <i class="fa-solid fa-chevron-down chevron"></i>
         </button>
         <div class="collapsible-content">
-          <a href="product2.html" class="sub-link">Washers & Dryers</a>
-          <a href="product2.html" class="sub-link">Refrigerators</a>
-          <a href="product2.html" class="sub-link">Microwaves</a>
-          <a href="product2.html" class="sub-link">Air Conditioners</a>
-          <a href="product2.html" class="sub-link">Dishwashers</a>
-          <a href="product2.html" class="sub-link">Cooktops</a>
-          <a href="product2.html" class="sub-link">Vacuums</a>
+          <a href="product2.html" class="sub-link">Toys</a>
+          <a href="product2.html" class="sub-link">Supplyments</a>
+          <a href="product2.html" class="sub-link">Beauty</a>
+          <a href="product2.html" class="sub-link">HomeGoods</a>
         </div>
       </div>
 
@@ -1824,13 +1846,12 @@
           <i class="fa-solid fa-chevron-down chevron"></i>
         </button>
         <div class="collapsible-content">
-          <a href="Haier-productpage.html" class="sub-link">Haier</a>
           <a href="samsung-productpage.html" class="sub-link">Samsung</a>
           <a href="LG-productpage.html" class="sub-link">LG</a>
           <a href="Whirlpool-productpage.html" class="sub-link">Whirlpool</a>
           <a href="BOSCH-productpage.html" class="sub-link">Bosch</a>
-          <a href="Electrolux-productpage.html" class="sub-link">Electrolux</a>
-          <a href="Apple-productpage.html" class="sub-link">Apple</a>
+          <a href="Electrolux-productpage.html" class="sub-link">Revlon</a>
+          <a href="Apple-productpage.html" class="sub-link">Toys R Us</a>
         </div>
       </div>
 
@@ -1884,6 +1905,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-01.jpg" class="product-img" alt="Samsung Refrigerator">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">RT6300C Top Mount Freezer with Optimal Fresh+, 411L</div>
           <div class="product-desc">411L top mount freezer refrigerator with Optimal Fresh+ technology.
           </div>
@@ -1899,6 +1945,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-02.jpg" class="product-img" alt="Samsung Refrigerator">
+          <div class="heart-container" title="Wishlist" data-product-id="10"
+            data-product-name="RS50N3913BC/EU with Home Bar and All-around Cooling, 501L" data-product-price="1079.99"
+            data-product-image="assets/samsung-refrigerator-02.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">RS50N3913BC/EU with Home Bar and All-around Cooling, 501L</div>
           <div class="product-desc">Home Bar access and All-around Cooling technology.</div>
           <div class="product-price">$1079.99</div>
@@ -1912,6 +1983,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-03.jpg" class="product-img" alt="Samsung Refrigerator">
+          <div class="heart-container" title="Wishlist" data-product-id="11"
+            data-product-name="635L SBS No-Frost Refrigerator with Water Dispenser" data-product-price="1799.99"
+            data-product-image="assets/samsung-refrigerator-03.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">635L SBS No-Frost Refrigerator with Water Dispenser</div>
           <div class="product-desc">Side-by-Side No-Frost Refrigerator with Water Dispenser.</div>
           <div class="product-price">$1799.99</div>
@@ -1925,6 +2021,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-04.jpg" class="product-img" alt="Samsung Refrigerator">
+          <div class="heart-container" title="Wishlist" data-product-id="12"
+            data-product-name="655L SBS No-Frost Refrigerator with All-around Cooling" data-product-price="1687.60"
+            data-product-image="assets/samsung-refrigerator-04.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">655L SBS No-Frost Refrigerator with All-around Cooling</div>
           <div class="product-desc">Side-by-Side No-Frost Refrigerator with All-around Cooling.</div>
           <div class="product-price">$1687.60</div>
@@ -1938,6 +2059,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-AC-01.jpg" class="product-img" alt="Samsung Air Conditioner">
+          <div class="heart-container" title="Wishlist" data-product-id="13"
+            data-product-name="AR9500T Wall-mount AC with Fast Cooling" data-product-price="869.99"
+            data-product-image="assets/samsung-AC-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">AR9500T Wall-mount AC with Fast Cooling</div>
           <div class="product-desc">Wall-mount air conditioner with Fast Cooling technology.</div>
           <div class="product-price">$869.99</div>
@@ -1952,6 +2098,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-AC-02.jpg" class="product-img" alt="Samsung Air Conditioner">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">18,000 BTU - Wall-mount AC with DIT, Wind-Free™ , T3 Climate Class
           </div>
           <div class="product-desc">Wall-mount AC with Digital Inverter Technology, Wind-Free™ Cooling,
@@ -1966,6 +2137,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-AC-03.jpg" class="product-img" alt="Samsung Air Conditioner">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">24,000 BTU - Wall-mount AC with DIT , T3 Climate Class</div>
           <div class="product-desc">2-ton inverter AC with Digital Inverter Technology for efficient
             cooling in high-temperature climates up to 45m².</div>
@@ -1979,6 +2175,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-AC-04.jpg" class="product-img" alt="Samsung Air Conditioner">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">12,000 BTU - Wall-mount AC with DIT , T3 Climate Class</div>
           <div class="product-desc">12,000 BTU wall-mount AC with Digital Inverter Technology and T3
             Climate Class for high-temperature environments.</div>
@@ -1992,6 +2213,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-laundry-04.jpg" class="product-img" alt="Espresso Machine">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WA80CK4240BWRT with DIT, 8 Kg</div>
           <div class="product-desc">8 kg top-load washing machine with Digital Inverter Technology and Eco
             Bubble™.</div>
@@ -2004,6 +2250,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-laundry-01.jpg" class="product-img" alt="Espresso Machine">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WW70T4020EE/NQ with Eco Bubble and Hygiene Steam, 7 Kg</div>
           <div class="product-desc">7 Kg washing machine with Eco Bubble and Hygiene Steam.</div>
           <div class="product-price">$689.90</div>
@@ -2018,6 +2289,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-laundry-02.jpg" class="product-img" alt="Espresso Machine">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WD70TA046BX/FA with Eco Bubble™ and AirWash, 7+5 Kg</div>
           <div class="product-desc">7+5 Kg washer-dryer with Eco Bubble™ and AirWash technology.</div>
           <div class="product-price">$1171.06</div>
@@ -2032,6 +2328,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-laundry-03.jpg" class="product-img" alt="Espresso Machine">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WA17CK6745BDRT with Ecobubble™, 17 Kg</div>
           <div class="product-desc">17 Kg washing machine with Ecobubble™ technology.</div>
           <div class="product-price">$742.97</div>
@@ -2046,6 +2367,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-05.jpg" class="product-img" alt="Samsung RF28T5001SR">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">RF28T5001SR 28 cu. ft. French Door Refrigerator with All-Around
             Cooling</div>
           <div class="product-desc">28.2 cu. ft. capacity with adjustable tempered glass shelves, internal
@@ -2060,6 +2406,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-washing-machine-01.jpg" class="product-img" alt="Samsung WW9800T">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WW9800T 9kg AI Washing Machine with QuickDrive™ and Eco Bubble™</div>
           <div class="product-desc">9kg capacity with AI Control, QuickDrive™ technology reducing wash
             time by up to 50%, and energy usage by 20%.</div>
@@ -2075,6 +2446,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-dryer-01.jpg" class="product-img" alt="Samsung DV90T8440">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">DV90T8440 9kg Heat Pump Smart Dryer with AI Personalised Dry</div>
           <div class="product-desc">9kg heat pump dryer with 9-star energy rating, AI Personalised Dry,
             and 35-mins Quick Dry cycle.</div>
@@ -2088,6 +2484,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-dishwasher-01.jpg" class="product-img" alt="Samsung DW80R9950UG">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">DW80R9950UG 24 Inch Built-in Smart Dishwasher with AquaBlast™</div>
           <div class="product-desc">15 place settings with AquaBlast™ jets, Zone Booster™, and ultra-quiet
             39 dBA operation.</div>
@@ -2101,6 +2522,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-microwave-01.jpg" class="product-img" alt="Samsung ME83M">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">ME83M 23L Stainless Steel Microwave Oven with 800W Power</div>
           <div class="product-desc">23L capacity with 800W power, push-button controls, and stainless
             steel finish.</div>
@@ -2114,6 +2560,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-range-01.jpg" class="product-img" alt="Samsung NX58M6630SS">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">NX58M6630SS 30" Freestanding Gas Range with 5.8 cu. ft. Capacity
           </div>
           <div class="product-desc">5.8 cu. ft. true convection oven with blue LED illuminated knobs and
@@ -2128,6 +2599,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-06.jpg" class="product-img" alt="Samsung RQ32S7741SR">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">RQ32S7741SR 653L Bespoke AI Refrigerator with Glass Door</div>
           <div class="product-desc">653L capacity with Bespoke AI technology that personalizes settings
             based on your preferences and habits.</div>
@@ -2141,6 +2637,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-07.jpg" class="product-img" alt="Samsung RF24BB6600QL">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">RF24BB6600QL 24 cu. ft. Family Hub™ Refrigerator with Wi-Fi</div>
           <div class="product-desc">24 cu. ft. capacity with Family Hub™ touchscreen, Wi-Fi connectivity,
             and internal camera system.</div>
@@ -2154,6 +2675,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-washing-machine-02.jpg" class="product-img" alt="Samsung WW90T604DLN">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WW90T604DLN 9kg EcoBubble™ Washing Machine with Hygiene Steam</div>
           <div class="product-desc">9kg capacity with EcoBubble™ technology, Hygiene Steam function, and
             energy-saving performance.</div>
@@ -2167,6 +2713,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-ac-06.jpg" class="product-img" alt="Samsung AR18CVFAMWK">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">AR18CVFAMWK 1.5 Ton Wind-Free™ Air Conditioner with AI & Digital
             Inverter</div>
           <div class="product-desc">1.5 ton capacity with Wind-Free™ cooling, AI Auto Cooling, and R32
@@ -2181,6 +2752,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-dryer-02.jpg" class="product-img" alt="Samsung DV80T5200AE">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">DV80T5200AE 8kg Ventless Condenser Dryer with Sensor Dry</div>
           <div class="product-desc">8kg capacity ventless condenser dryer with Sensor Dry technology and
             multiple drying cycles.</div>
@@ -2194,6 +2790,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-dishwasher-02.jpg" class="product-img" alt="Samsung DW80R5060US">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">DW80R5060US 24 Inch Built-in Dishwasher with StormWash™</div>
           <div class="product-desc">15 place settings with StormWash™ technology for tough food residue
             and quiet 42 dBA operation.</div>
@@ -2207,6 +2828,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-microwave-02.jpg" class="product-img" alt="Samsung MS23F301TQK">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">MS23F301TQK 23L Solo Microwave with Ceramic Enamel Interior</div>
           <div class="product-desc">23L capacity with ceramic enamel interior for easy cleaning and 6
             power levels for versatile cooking.</div>
@@ -2220,6 +2866,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-range-02.jpg" class="product-img" alt="Samsung NZ80K8610AK">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">NZ80K8610AK 30" Slide-in Gas Range with Flex Duo™ Oven</div>
           <div class="product-desc">Flex Duo™ oven with removable divider allows you to cook two different
             dishes at different temperatures simultaneously.</div>
@@ -2232,6 +2903,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-08.jpg" class="product-img" alt="Samsung RR20D2825HV">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">RR20D2825HV 183L Single Door Refrigerator with Digital Inverter</div>
           <div class="product-desc">183L capacity with 5-star energy rating, Digital Inverter technology,
             and base stand drawer for extra storage.</div>
@@ -2245,6 +2941,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-washing-machine-03.jpg" class="product-img" alt="Samsung WA80T5262BW">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WA80T5262BW 8kg Top Load Washing Machine with Wobble Technology</div>
           <div class="product-desc">8kg capacity top load washer with Wobble technology for powerful
             cleaning and water-saving features.</div>
@@ -2258,6 +2979,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-ac-07.jpg" class="product-img" alt="Samsung AR09TYFYAWK">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">AR09TYFYAWK 9,000 BTU Wall Mount AC with Triple Protector Plus</div>
           <div class="product-desc">9,000 BTU capacity with Triple Protector Plus technology for
             durability in harsh conditions and T3 Climate Class.</div>
@@ -2271,6 +3017,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-09.jpg" class="product-img" alt="Samsung RS64R5304B4">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">RS64R5304B4 647L Side-by-Side Refrigerator with Water & Ice Dispenser
           </div>
           <div class="product-desc">647L capacity side-by-side refrigerator with water and ice dispenser,
@@ -2285,6 +3056,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-washing-machine-04.jpg" class="product-img" alt="Samsung WW70T4040CE">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WW70T4040CE 7kg Front Load Washing Machine with Eco Bubble</div>
           <div class="product-desc">7kg capacity with Eco Bubble technology for deep cleaning at lower
             temperatures and energy efficiency.</div>
@@ -2298,6 +3094,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-ac-08.jpg" class="product-img" alt="Samsung AR12TYHYAWK">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">AR12TYHYAWK 12,000 BTU Wall Mount AC with Wind-Free™ Comfort</div>
           <div class="product-desc">12,000 BTU capacity with Wind-Free™ Comfort mode for energy-efficient
             cooling without direct airflow.</div>
@@ -2311,6 +3132,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-dryer-03.jpg" class="product-img" alt="Samsung DV70T5200AE">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">DV70T5200AE 7kg Ventless Condenser Dryer with Smart Dry</div>
           <div class="product-desc">7kg capacity with Smart Dry technology that automatically adjusts
             drying time based on moisture levels.</div>
@@ -2324,6 +3170,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-microwave-03.jpg" class="product-img" alt="Samsung ME731K">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">ME731K 20L Solo Microwave with 700W Power</div>
           <div class="product-desc">20L capacity with 700W power, 6 power levels, and child safety lock
             for family use.</div>
@@ -2337,6 +3208,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-refrigerator-10.jpg" class="product-img" alt="Samsung RB38A7020SA">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">RB38A7020SA 375L Bottom Mount Freezer Refrigerator with Digital
             Inverter</div>
           <div class="product-desc">375L capacity with Digital Inverter technology, Power Freeze function,
@@ -2351,6 +3247,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-washing-machine-05.jpg" class="product-img" alt="Samsung WW10T684DLN">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">WW10T684DLN 10kg AI Washing Machine with BubbleStorm</div>
           <div class="product-desc">10kg capacity with AI Control, BubbleStorm technology for deep
             cleaning, and Super Speed wash cycle.</div>
@@ -2364,6 +3285,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-ac-09.jpg" class="product-img" alt="Samsung AR24CVFAMWK">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">AR24CVFAMWK 2 Ton Wind-Free™ Air Conditioner with AI Auto Cooling
           </div>
           <div class="product-desc">2 ton capacity with Wind-Free™ technology, AI Auto Cooling, and energy
@@ -2378,6 +3324,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-dishwasher-03.jpg" class="product-img" alt="Samsung DW60R30010W">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">DW60R30010W 60cm Compact Dishwasher with 6 Place Settings</div>
           <div class="product-desc">6 place settings compact dishwasher perfect for small spaces, with 6
             wash programs and quiet operation.</div>
@@ -2391,6 +3362,31 @@
 
         <div class="product-card">
           <img src="assets/samsung-range-03.jpg" class="product-img" alt="Samsung NZ64K7511BK">
+          <div class="heart-container" title="Wishlist" data-product-id="9"
+            data-product-name="RT6300C Top Mount Freezer with Optimal Fresh+, 411L" data-product-price="1099.99"
+            data-product-image="assets/samsung-refrigerator-01.jpg">
+            <input type="checkbox" class="checkbox">
+            <div class="svg-container">
+              <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+              </svg>
+              <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,10 20,20"></polygon>
+                <polygon points="10,50 20,50"></polygon>
+                <polygon points="20,80 30,70"></polygon>
+                <polygon points="90,10 80,20"></polygon>
+                <polygon points="90,50 80,50"></polygon>
+                <polygon points="80,80 70,70"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="product-title">NZ64K7511BK 60cm Gas Cooktop with 5 Burners and Wi-Fi Connectivity
           </div>
           <div class="product-desc">5-burner gas cooktop with powerful burners, Wi-Fi connectivity for
@@ -2931,15 +3927,6 @@
           const loginLink = document.querySelector('a[href="login.html"]');
           if (loginLink && loginLink.parentElement) {
             const li = loginLink.parentElement;
-            const name = user.user_metadata.full_name || 'User';
-            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
-
-            // Replace Login Link with Simple Dark Dropdown
-            li.innerHTML = `
-
-
-                `;
-
 
             // Load Custom Profile Picture if exists
             const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
@@ -2948,30 +3935,6 @@
               if (avatarImg) avatarImg.src = storedAvatar;
             }
 
-            // Logout Handler
-            document.getElementById('nav-dropdown-logout', 'mobile-logout-btn').addEventListener('click', async (e) => {
-              e.preventDefault();
-
-              // Create the actual logout function
-              const performLogout = async () => {
-                await DB.signOut();
-                window.location.reload();
-              };
-
-              // Use custom modal if available, otherwise fallback to native confirm
-              if (window.LogoutModal && typeof window.LogoutModal.confirm === 'function') {
-                window.LogoutModal.confirm(performLogout);
-              } else if (window.showLogoutConfirmation && typeof window.showLogoutConfirmation === 'function') {
-                window.showLogoutConfirmation(performLogout);
-              } else {
-                // Fallback to native confirm
-                if (confirm('Are you sure you want to logout?')) {
-                  await performLogout();
-                }
-              }
-            });
-
-            // Dropdown Toggle
             // Dropdown Toggle (Desktop)
             const trigger = li.querySelector('.nav-profile-trigger');
             const menu = li.querySelector('.nav-profile-menu');
@@ -2989,41 +3952,6 @@
               });
             }
           }
-
-          // --- Mobile Sidebar Injection (Redesigned) ---
-          const sidebarHeader = document.querySelector('.sidebar-header');
-          const sidebarFooter = document.querySelector('.sidebar-footer');
-          const sidebarLoginLink = document.getElementById('sidebar-login-link');
-
-          if (sidebarHeader && sidebarFooter) {
-            // 1. Update Header with User Info
-            const name = user.user_metadata.full_name || 'User';
-            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0099ff&color=fff`;
-
-            // Replace the "default-brand" part with User Profile
-            const brandContainer = sidebarHeader.querySelector('.header-brand');
-            if (brandContainer) {
-              brandContainer.innerHTML = `
-              <img src="${avatarUrl}" class="sidebar-avatar" alt="Profile" id="mobile-avatar-img">
-              <div class="user-info">
-                  <span class="user-name">Hello, ${name}</span>
-                  <span class="user-status">Member</span>
-              </div>
-            `;
-            }
-
-            // 2. Hide "Login" Wrapper
-            const loginWrapper = document.getElementById('sidebar-login-container');
-            if (loginWrapper) loginWrapper.style.display = 'none';
-
-
-            // Sync Custom Avatar
-            const storedAvatar = localStorage.getItem('be_avatar_' + user.id);
-            if (storedAvatar) {
-              const mAvatar = sidebarHeader.querySelector('#mobile-avatar-img');
-              if (mAvatar) mAvatar.src = storedAvatar;
-            }
-          }
         }
       };
 
@@ -3033,382 +3961,51 @@
       } else {
         document.addEventListener('dbReady', initAuthUI);
       }
+    });
   </script>
-  <script>
-  </script>
-  <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const splitButtons = document.querySelectorAll('.split-button');
-
-        splitButtons.forEach(button => {
-          // Check if this is a single-toggle action button
-          if (button.classList.contains('single-toggle-action')) {
-            button.addEventListener('click', function (e) {
-              e.preventDefault();
-              e.stopPropagation();
-
-              const parentItem = button.parentElement; // The list item wrapping the button
-              const dropdown = parentItem.querySelector('.mobile-dropdown');
-              const isExpanded = parentItem.classList.contains('active');
-
-              // Optional: Close other open dropdowns on desktop
-              if (window.innerWidth > 992) {
-                document.querySelectorAll('.mobile-dropdown-item.active').forEach(item => {
-                  if (item !== parentItem) {
-                    item.classList.remove('active');
-                    const btn = item.querySelector('.split-button');
-                    if (btn) btn.setAttribute('aria-expanded', 'false');
-                    const otherDropdown = item.querySelector('.mobile-dropdown');
-                    if (otherDropdown) otherDropdown.style.maxHeight = '0';
-                  }
-                });
-              }
-
-              // Toggle current state
-              parentItem.classList.toggle('active');
-              button.setAttribute('aria-expanded', !isExpanded);
-
-              // Handle dropdown animation (if using max-height transition)
-              if (dropdown) {
-                if (!isExpanded) {
-                  dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
-                } else {
-                  dropdown.style.maxHeight = '0';
-                }
-              }
-            });
-          }
-        });
-
-
-      });
-  </script>
-
-  <script>
-      // Dropdown toggle functionality for Categories and Brands
-      const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
-      dropdownItems.forEach(item => {
-        const toggleBtn = item.querySelector('.split-button.single-toggle-action');
-        const dropdown = item.querySelector('.mobile-dropdown');
-
-        if (toggleBtn && dropdown) {
-          toggleBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-
-            // Close other dropdowns
-            dropdownItems.forEach(otherItem => {
-              if (otherItem !== item) {
-                otherItem.classList.remove('active');
-              }
-            });
-
-            // Toggle current dropdown
-            item.classList.toggle('active');
-          });
-        }
-      });
-
-      // Close dropdowns when clicking outside
-      document.addEventListener('click', (e) => {
-        dropdownItems.forEach(item => {
-          if (!item.contains(e.target)) {
-            item.classList.remove('active');
-          }
-        });
-      });
-
-      // Initialize FinisherHeader for background animation
-      new FinisherHeader({
-        "count": 12,
-        "size": {
-          "min": 1300,
-          "max": 1500,
-          "pulse": 1.6
-        },
-        "speed": {
-          "x": {
-            "min": 1.4,
-            "max": 5
-          },
-          "y": {
-            "min": 1.4,
-            "max": 5
-          }
-        },
-        "colors": {
-          "background": "#373333",
-          "particles": [
-            "#14a394",
-            "#10a2da"
-          ]
-        },
-        "blending": "none",
-        "opacity": {
-          "center": 0.6,
-          "edge": 0
-        },
-        "skew": 0,
-        "shapes": [
-          "c"
-        ]
-      });
-
-
-
-
-      document.addEventListener('DOMContentLoaded', function () {
-        // New Collapsible Logic for Sidebar
-        const collapsibles = document.querySelectorAll('.sidebar-collapsible');
-        collapsibles.forEach(col => {
-          const btn = col.querySelector('.collapsible-trigger');
-          btn.addEventListener('click', () => {
-            // Close others (accordion style - optional)
-            // collapsibles.forEach(c => { if(c !== col) c.classList.remove('open'); });
-
-            col.classList.toggle('open');
-          });
-        });
-
-        // Dropdown toggle functionality for Categories and Brands
-        const dropdownItems = document.querySelectorAll('.mobile-dropdown-item');
-        dropdownItems.forEach(item => {
-          const toggleBtn = item.querySelector('.split-button.single-toggle-action');
-          const dropdown = item.querySelector('.mobile-dropdown');
-
-          if (toggleBtn && dropdown) {
-            toggleBtn.addEventListener('click', (e) => {
-              e.stopPropagation();
-
-              // Close other dropdowns
-              dropdownItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                  otherItem.classList.remove('active');
-                }
-              });
-
-              // Toggle current dropdown
-              item.classList.toggle('active');
-            });
-          }
-        });
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', (e) => {
-          dropdownItems.forEach(item => {
-            if (!item.contains(e.target)) {
-              item.classList.remove('active');
-            }
-          });
-        });
-
-        // Mobile Menu Toggle (Hamburger)
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeBtn = document.getElementById('closeBtn');
-
-        if (hamburger && mobileMenu) {
-          hamburger.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-          });
-        }
-
-        if (closeBtn && mobileMenu) {
-          closeBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-          });
-        }
-
-        // Close on Outside Click
-        document.addEventListener('click', (e) => {
-          if (mobileMenu && mobileMenu.classList.contains('active')) {
-            if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-              mobileMenu.classList.remove('active');
-            }
-          }
-        });
-
-        // Newsletter Form Functionality
-        const newsletterForm = document.querySelector('.newsletter-form');
-        const emailInput = newsletterForm?.querySelector('input[type="email"]');
-        const submitBtn = newsletterForm?.querySelector('button');
-
-        if (newsletterForm && emailInput && submitBtn) {
-          newsletterForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const email = emailInput.value.trim();
-
-            // Basic email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!email) {
-              showToast('Please enter your email address', 'error');
-              emailInput.focus();
-              return;
-            }
-
-            if (!emailRegex.test(email)) {
-              showToast('Please enter a valid email address', 'error');
-              emailInput.focus();
-              return;
-            }
-
-            // Show loading state with spinner
-            submitBtn.classList.add('loading');
-            submitBtn.disabled = true;
-
-            try {
-              // Simulate API call with 2.8 second delay
-              await new Promise(resolve => setTimeout(resolve, 2800));
-
-              // Success
-              showToast('Subscribed successfully!', 'success');
-              emailInput.value = '';
-
-              // Optional: Track subscription event
-              if (typeof gtag !== 'undefined') {
-                gtag('event', 'newsletter_signup', {
-                  event_category: 'engagement',
-                  event_label: 'newsletter_subscription'
-                });
-              }
-
-            } catch (error) {
-              showToast('Something went wrong. Please try again.', 'error');
-            } finally {
-              // Restore button state
-              submitBtn.classList.remove('loading');
-              submitBtn.disabled = false;
-            }
-          });
-
-          // Real-time email validation
-          emailInput.addEventListener('input', function () {
-            const email = this.value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (email && !emailRegex.test(email)) {
-              this.style.borderColor = '#ef4444';
-            } else {
-              this.style.borderColor = '';
-            }
-          });
-        }
-
-        // Toast notification function
-        function showToast(message, type = 'info') {
-          const toastContainer = document.getElementById('toast-container');
-          if (!toastContainer) return;
-
-          const toast = document.createElement('div');
-          toast.className = `toast toast-${type}`;
-          toast.innerHTML = `
-          <div class="toast-content">
-            <span class="toast-message">${message}</span>
-            <button class="toast-close" aria-label="Close">&times;</button>
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="modal logout-modal" style="display: none;" aria-hidden="true" role="dialog"
+    aria-labelledby="logoutModalTitle">
+    <div class="modal-overlay logout-modal-overlay"></div>
+    <div class="modal-content logout-modal-content">
+      <div class="logout-modal-header">
+        <div class="logout-icon">
+          <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <h3 id="logoutModalTitle">Confirm Logout</h3>
+      </div>
+      <div class="logout-modal-body">
+        <p>Are you sure you want to log out of your Blue Ember account? You will need to sign in again to access your
+          profile.</p>
+      </div>
+      <div class="logout-modal-actions">
+        <button id="logoutCancelBtn" class="logout-cancel-btn" type="button">Stay Logged In</button>
+        <button id="logoutConfirmBtn" class="logout-confirm-btn" type="button">
+          <span class="btn-text"><i class="fas fa-sign-out-alt"></i> Logout</span>
+          <div class="custom-spinner">
+            <div class="spinner">
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+              <div class="spinner-blade"></div>
+            </div>
           </div>
-        `;
+        </button>
+      </div>
+    </div>
+  </div>
 
-          // Add toast styles if not already present
-          if (!document.querySelector('#toast-styles')) {
-            const style = document.createElement('style');
-            style.id = 'toast-styles';
-            style.textContent = `
-            .toast {
-              background: white;
-              border-radius: 8px;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-              margin-bottom: 8px;
-              min-width: 300px;
-              opacity: 0;
-              transform: translateX(100%);
-              transition: all 0.3s ease;
-            }
-            .toast.show {
-              opacity: 1;
-              transform: translateX(0);
-            }
-            .toast-success { border-left: 4px solid #10b981; }
-            .toast-error { border-left: 4px solid #ef4444; }
-            .toast-info { border-left: 4px solid #3b82f6; }
-            .toast-content {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              padding: 12px 16px;
-            }
-            .toast-message {
-              color: #374151;
-              font-size: 14px;
-            }
-            .toast-close {
-              background: none;
-              border: none;
-              color: #6b7280;
-              cursor: pointer;
-              font-size: 18px;
-              padding: 0;
-              margin-left: 12px;
-            }
-          `;
-            document.head.appendChild(style);
-          }
+  <script src="js/navbar-universal.js"></script>
 
-          toastContainer.appendChild(toast);
 
-          // Show toast
-          setTimeout(() => toast.classList.add('show'), 100);
-
-          // Auto remove after 5 seconds
-          const autoRemove = setTimeout(() => removeToast(toast), 5000);
-
-          // Manual close
-          toast.querySelector('.toast-close').addEventListener('click', () => {
-            clearTimeout(autoRemove);
-            removeToast(toast);
-          });
-
-          function removeToast(toastElement) {
-            toastElement.classList.remove('show');
-            setTimeout(() => {
-              if (toastElement.parentNode) {
-                toastElement.parentNode.removeChild(toastElement);
-              }
-            }, 300);
-          }
-        }
-
-        // Product search functionality for Samsung page
-        const searchInput = document.getElementById('searchInput');
-        const searchForm = document.getElementById('searchForm');
-
-        if (searchForm) {
-          // Prevent form submit for page filtering
-          searchForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-          });
-        }
-
-        if (searchInput) {
-          // Real-time filtering
-          searchInput.addEventListener('input', () => {
-            const query = searchInput.value.toLowerCase();
-            const productCards = document.querySelectorAll('.product-card');
-
-            productCards.forEach(card => {
-              const title = card.querySelector('.product-title').textContent.toLowerCase();
-              const desc = card.querySelector('.product-desc').textContent.toLowerCase();
-
-              if (title.includes(query) || desc.includes(query)) {
-                card.style.display = '';
-              } else {
-                card.style.display = 'none';
-              }
-            });
-          });
-        }
-      });
-  </script>
 </body>
 
 </html>
